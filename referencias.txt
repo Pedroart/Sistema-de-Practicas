@@ -5,29 +5,23 @@ sistema de plantillas: TWIG php
 ruteador basico:  https://phprouter.com/
 
 
-///
+/// Definir URL local
 
-c:/ windows / system32 / drives / etc / hots;
+C:\Windows\System32\drivers\etc\hosts
 
-agregar:
-
-127.0.0.1 mvc.test
-
-///
-
-
-c:/ xampp / apache / conf / extra / httpd-vhosts.conf
+Agregar: 
 
 127.0.0.1 practicas.test
 
-activar:
+C:\xampp\apache\conf\extra\httpd-vhosts.conf
 
+Agregar: 
 <VirtualHost *:80>
     DocumentRoot "C:/xampp/htdocs"
     ServerName localhost
 </VirtualHost>
 
 <VirtualHost *:80>
-    DocumentRoot "C:/xampp/htdocs/[carpeta]/public"
+    DocumentRoot "C:\xampp\htdocs\Sistema-de-Practicas\public"
     ServerName practicas.test
 </VirtualHost>
