@@ -18,6 +18,7 @@ agregar:
 
 c:/ xampp / apache / conf / extra / httpd-vhosts.conf
 
+127.0.0.1 practicas.test
 
 activar:
 
@@ -27,6 +28,6 @@ activar:
 </VirtualHost>
 
 <VirtualHost *:80>
-    DocumentRoot "C:/xampp/htdocs/baseweb"
-    ServerName mvc.test
+    DocumentRoot "C:/xampp/htdocs/[carpeta]/public"
+    ServerName practicas.test
 </VirtualHost>
