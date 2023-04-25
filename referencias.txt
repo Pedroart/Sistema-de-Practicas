@@ -3,3 +3,30 @@ Extructura de apoyo: https://github.com/daveh/php-mvc
 sistema de plantillas: TWIG php
 
 ruteador basico:  https://phprouter.com/
+
+
+///
+
+c:/ windows / system32 / drives / etc / hots;
+
+agregar:
+
+127.0.0.1 mvc.test
+
+///
+
+
+c:/ xampp / apache / conf / extra / httpd-vhosts.conf
+
+
+activar:
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs"
+    ServerName localhost
+</VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/baseweb"
+    ServerName mvc.test
+</VirtualHost>
