@@ -3,3 +3,25 @@ Extructura de apoyo: https://github.com/daveh/php-mvc
 sistema de plantillas: TWIG php
 
 ruteador basico:  https://phprouter.com/
+
+
+/// Definir URL local
+
+C:\Windows\System32\drivers\etc\hosts
+
+Agregar: 
+
+127.0.0.1 practicas.test
+
+C:\xampp\apache\conf\extra\httpd-vhosts.conf
+
+Agregar: 
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs"
+    ServerName localhost
+</VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot "C:\xampp\htdocs\Sistema-de-Practicas\public"
+    ServerName practicas.test
+</VirtualHost>
