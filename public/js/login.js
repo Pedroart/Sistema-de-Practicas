@@ -1,4 +1,5 @@
 var formulario  = document.getElementById('input1ogin');
+var respuesta   = document.getElementById('respuesta');
 
 formulario.addEventListener('submit',function(e){
             e.preventDefault();
@@ -9,6 +10,9 @@ formulario.addEventListener('submit',function(e){
                 body: datos
             })  .then(res => res.json())
                 .then(data=> {
-                    if( data.resultado === true){ location.reload()}
+                    if( data.resultado === true){ location.reload();}
+                    else{
+                        respuesta.innerHTML=`<div class="alert alert-warning" role="alert">Credenciales incorrectas</div>`;
+                    }
                 })
         });
