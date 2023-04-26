@@ -6,3 +6,5 @@ include __DIRC__."\core\autoloader.php";
 
 $A =new app\controllers\user();
 $A->indexlogin();
+
+
