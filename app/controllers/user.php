@@ -2,21 +2,22 @@
 namespace app\controllers;
 
 include _core_."/view.php";
+include __DIREC__."/app/models/user_model.php";;
 
 use core;
+use app\models;
 
 class user extends core\controller{
     
     static public function verificarLogin()
     {
-        // Resivir los datos json
+        
+        $base = new \app\models\user_model();
+        $base->loginUsario("","");
 
-
-        //
-        $_SESSION['user_id']=1;
 
         header('Content-Type: application/json');
-        echo json_encode(["resultado" => true]);
+        echo json_encode(["resultado" => false]);
     }
     static public function cerrarSesion(){
         session_destroy();

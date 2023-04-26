@@ -8,10 +8,12 @@ class modelo{
     protected $db_host = "localhost";
     protected $db_user = "root";
     protected $db_pass = "";
-    protected $db_name = "moke";
+    protected $db_name = "practicas";
 
     protected $coneccion;
     protected $query;
+
+    public $table="";
 
     public function __construct(){
         $this->connection();
