@@ -1,10 +1,8 @@
 Extructura de apoyo: https://github.com/daveh/php-mvc
 
-sistema de plantillas: TWIG php
-
 ruteador basico:  https://phprouter.com/
 
-boostrap: css sistema
+boostrap: https://startbootstrap.com/themes/admin-dashboard
 
 /// Definir URL local
 
