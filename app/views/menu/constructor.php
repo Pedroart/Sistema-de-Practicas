@@ -3,9 +3,9 @@
 if ($_SESSION['role'] == "admin"){
     include _view_."/menu/data_admin.php";
 }elseif ($_SESSION['role'] == "docente") {
-    include _view_."/menu/data_admin.php";
+    include _view_."/menu/data_docente.php";
 }elseif ($_SESSION['role'] == "estudiante") {
-    include _view_."/menu/data_admin.php";
+    include _view_."/menu/data_estudiante.php";
 }
 
 ?>

@@ -5,7 +5,7 @@ $menu = [
         [
             'type' => "nav-link",
             'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
+            'title'=> "nav_iten_1HOla",
             "url"  => "/nav_iten_1"
         ],
         [
