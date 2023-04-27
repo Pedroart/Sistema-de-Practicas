@@ -12,12 +12,23 @@ class user extends core\controller{
     static public function verificarLogin()
     {
         
+        $json = file_get_contents('php://input');
+        $datos = json_decode($json);
+
+        if(is_null($datos)){
+            header('Content-Type: application/json');
+            echo json_encode(["resultado" => "datosNoIngresados"]);
+            return;
+        }
+
         $base = new \app\models\user_model();
-        $base->loginUsario("","");
+        $responde = $base->loginUsario($datos->email,$datos->password);
+
 
 
         header('Content-Type: application/json');
-        echo json_encode(["resultado" => false]);
+        echo json_encode(["resultado" => $responde]);
+        
     }
     static public function cerrarSesion(){
         session_destroy();
