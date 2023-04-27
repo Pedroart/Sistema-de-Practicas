@@ -21,7 +21,7 @@ class user extends core\controller{
             return;
         }
 
-        $base = new \app\models\user_model();
+        $base = new \app\models\user_model;
         $responde = $base->loginUsario($datos->email,$datos->password);
 
 

@@ -8,6 +8,14 @@ use core;
 
 class home extends core\controller{
     static public function display(){
-        view_dashboard('index',[]);
+        
+        if ($_SESSION['role'] == "admin"){
+            view_dashboard('index_admin',[]);
+        }elseif ($_SESSION['role'] == "docente") {
+            view_dashboard('index_docente',[]);
+        }elseif ($_SESSION['role'] == "estudiante") {
+            view_dashboard('index_estudiante',[]);
+        }
+
     }
 }

@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 <html lang="en"><head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -36,12 +36,12 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
                                     </div>
-                                    <form class="user" id="input1ogin">
+                                    <form class="user" id="input1ogin" name="loginForm">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Introducir tu correo...">
+                                            <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Introducir tu correo...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword" placeholder="Contraseña">
+                                            <input type="password" class="form-control form-control-user" name="password"  placeholder="Contrasena">
                                         </div>
                                         
                                         <button  type="submit" class="btn btn-primary btn-user btn-block">Login</button>
@@ -67,7 +67,7 @@
 
     </div>
 
-    <script src="js/login.js"></script>
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -76,7 +76,7 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/login.js"></script>
     
 
 
