@@ -7,14 +7,15 @@ class user_model extends core\modelo{
 
     public function loginUsario($correo,$contra){
         $this->table = "usuarios";
-        $data = $this->where("correo", $correo)->get();
+        $data = $this->query("SELECT * FROM usuarios WHERE correo = '".$correo."'");
         
         if( $data === false){
-            return $data;
+            return 1;
         }
-         
-                
-        if(password_verify($contra,$data["contrasena"])){
+        
+        $data = $this->first();
+        
+        if( md5($contra) == $data['contrasena']){
     
                     $_SESSION['role'] = $data["role"];
                     $_SESSION['user_id'] = $data['id_relacion'];

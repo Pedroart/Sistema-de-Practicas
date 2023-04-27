@@ -1,13 +1,13 @@
-var formulario  = document.getElementById('input1ogin');
-var respuesta   = document.getElementById('respuesta');
+var formulario  = document.getElementById("input1ogin");
 
-formulario.addEventListener('submit',function(e){
+
+loginForm.addEventListener('submit',function(e){
             e.preventDefault();
-            var datos = new FormData(formulario);
+            var datos = Object.fromEntries(new FormData(e.target).entries());
             console.log(datos);
             fetch('http://practicas.test/login',{
                 method: 'POST',
-                body: datos
+                body:  JSON.stringify(datos)
             })  .then(res => res.json())
                 .then(data=> {
                     if( data.resultado === true){ location.reload();}

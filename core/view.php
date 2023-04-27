@@ -22,6 +22,10 @@ function view_dashboard($route, $data = []){
         include _view_."/{$route}.php";
         $contenido = ob_get_clean();
         
+        ob_start();
+        include _view_."/menu/constructor.php";
+        $menu = ob_get_clean();
+
         include _view_."/plantilla.php";
         
     }
