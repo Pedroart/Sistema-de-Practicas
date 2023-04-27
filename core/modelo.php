@@ -16,6 +16,7 @@ class modelo{
     public $table="";
 
     public function __construct(){
+        
         $this->connection();
     }
 
@@ -25,11 +26,12 @@ class modelo{
         if($this->coneccion->connect_error) {
             die('Erros de conexion: '.$this->coneccion->connect_error);
         }
+        
     }
 
     public function query($sql){
         $this->query = $this->coneccion->query($sql);
-        return $this;
+        return $this->query;
     }
 
     public function first(){
