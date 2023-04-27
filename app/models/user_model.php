@@ -9,12 +9,13 @@ class user_model extends core\modelo{
         $this->table = "usuarios";
         $data = $this->query("SELECT * FROM usuarios WHERE correo = '".$correo."'");
         
-        if( $data === false){
-            return 1;
-        }
         
         $data = $this->first();
         
+        if (is_null($data)){
+            return false;
+        }
+
         if( md5($contra) == $data['contrasena']){
     
                     $_SESSION['role'] = $data["role"];
