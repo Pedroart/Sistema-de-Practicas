@@ -19,14 +19,14 @@ if ($_SESSION['role'] == "admin"){
         <?php if ($grupo['type']=="grupo-nav-link"): ?>
             
             <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse<?= str_replace(' ', '_', $grupo['title']) ?>" aria-expanded="true" aria-controls="collapse<?= str_replace(' ', '_', $grupo['title']) ?>">
                             <i class="<?=$grupo['icon'] ?>"></i>
                             <span><?=$grupo['title'] ?></span>
                         </a>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+                        <div id="collapse<?= str_replace(' ', '_', $grupo['title']) ?>" class="collapse" aria-labelledby="heading<?= str_replace(' ', '_', $grupo['title']) ?>" data-parent="#accordionSidebar" style="">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 
-                                <?php foreach($grupo as $ttitle => $turl): ?>
+                                <?php foreach($grupo['sub'] as $ttitle => $turl): ?>
                                         <a class="collapse-item" href="<?= $turl ?>"><?= $ttitle ?></a>
                                 <?php endforeach; ?>
 

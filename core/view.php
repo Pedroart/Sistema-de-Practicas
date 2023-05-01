@@ -11,6 +11,7 @@ function view($route, $data = []){
     else {
         echo  "noexiste";
     }
+    return;
 }
 
 function view_dashboard($route, $data = []){
@@ -32,4 +33,5 @@ function view_dashboard($route, $data = []){
     else {
         echo  "noexiste";
     }
+    return;
 }
