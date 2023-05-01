@@ -1,32 +1,54 @@
 <?php
 
 $menu = [
-    "Estudiante" => [
+    "PRACTICAS PRE PROFECIONALES" => [
         [
-            'type' => "nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1HOla",
-            "url"  => "/nav_iten_1"
+            'type' => "grupo-nav-link",
+            'icon' => "fas fa-fw fa-building",
+            'title'=> "Efectivas",
+            'sub'  => [
+                "Bienvenida"=>"/url1",
+                "Historial de cartas"=>"/url2",
+                "Estado"=>"/url3",
+            ]
         ],
         [
             'type' => "grupo-nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
+            'icon' => "fas fa-fw fa-briefcase",
+            'title'=> "Desempeño laboral",
             'sub'  => [
-                "sub_nav1"=>"/url1",
-                "sub_nav2"=>"/url2",
-                "sub_nav3"=>"/url3",
+                "Bienvenida"=>"/desempeno",
+                "Proceso"=>"/desempeno/proceso",
+                "Estado"=>"/desempeno/estado",
             ]
-        ]
-    ],
-    "section_title_2" => [
+        ],
         [
             'type' => "nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
+            'icon' => "fas fa-fw fa-angle-double-up",
+            'title'=> "Emprendimiento",
+            "url"  => "/nav_iten_1"
+        ],
+        [
+            'type' => "nav-link",
+            'icon' => "fas fa-fw fa-circle-notch",
+            'title'=> "Convalidacion",
+            "url"  => "/nav_iten_1"
+        ]
+    ],
+    "OTROS" => [
+        [
+            'type' => "nav-link",
+            'icon' => "fas fa-fw fa-user-plus",
+            'title'=> "Practicas extracurriculares",
+            "url"  => "/nav_iten_1"
+        ],
+        [
+            'type' => "nav-link",
+            'icon' => "fas fa-fw fa-user-graduate",
+            'title'=> "Practicas profecionales ",
             "url"  => "/nav_iten_1"
         ]
     ]
 ];
 
-?>
+

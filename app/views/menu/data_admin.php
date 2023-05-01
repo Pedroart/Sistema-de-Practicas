@@ -1,21 +1,25 @@
 <?php
 
 $menu = [
-    "section_title_1" => [
+    "PRACTICAS PRE PROFECIONALES" => [
         [
-            'type' => "nav-link",
+            'type' => "grupo-nav-link",
             'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
-            "url"  => "/nav_iten_1"
+            'title'=> "Efectivas",
+            'sub'  => [
+                "Bienvenida"=>"/url1",
+                "Historial de cartas"=>"/url2",
+                "Estado"=>"/url3",
+            ]
         ],
         [
             'type' => "grupo-nav-link",
             'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
+            'title'=> "Desempeño laboral",
             'sub'  => [
-                "sub_nav1"=>"/url1",
-                "sub_nav2"=>"/url2",
-                "sub_nav3"=>"/url3",
+                "Bienvenida"=>"/url1",
+                "Proceso"=>"/url2",
+                "Estado"=>"/url3",
             ]
         ]
     ],

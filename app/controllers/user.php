@@ -1,7 +1,6 @@
 <?php
 namespace app\controllers;
 
-include _core_."/view.php";
 include __DIREC__."/app/models/user_model.php";;
 
 use core;
