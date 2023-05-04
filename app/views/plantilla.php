@@ -41,7 +41,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -277,6 +277,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="<?= __URL__ ?>/js/custome.js"></script>
     <script src="<?= __URL__ ?>/vendor/jquery/jquery.min.js"></script>
     <script src="<?= __URL__ ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -292,7 +293,7 @@
     <!-- Page level custom scripts -->
     <script src="<?= __URL__ ?>/js/demo/chart-area-demo.js"></script>
     <script src="<?= __URL__ ?>/js/demo/chart-pie-demo.js"></script>
-    <script src="<?= __URL__ ?>/js/custome.js"></script>
+    
 
 </body>
 

@@ -1,29 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white rounded">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<?php 
+$active = ["","","","active","",""];
+include _view_."/desempeno/submenu.php"?>
 
-  <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Ficha de datos </a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Datos jefe inmediato</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Contrato de trabajo</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link ">Boletas de pago</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Informe final</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<br>
 <h1 class="h3 mb-2 text-gray-800">FICHA DE DATOS</h1>
 <p class="mb-4">
   Rellena la ficha con tus datos personales, estos deben ser auténticos y verídicos de lo contrario podría tener inconvenientes con el proceso.
