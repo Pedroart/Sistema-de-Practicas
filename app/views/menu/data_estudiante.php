@@ -9,9 +9,10 @@ $base = new \app\models\matricula;
                     'icon' => "fas fa-fw fa-building",
                     'title'=> "Efectivas",
                     'sub'  => [
-                        "Bienvenida"=>"/url1",
-                        "Historial de cartas"=>"/url2",
-                        "Estado"=>"/url3",
+                        "Bienvenida"=>"/efectivas",
+                        "Historial de cartas"=>"/efectivas/cartas",
+                        "Proceso"=>"/efectivas/proceso",
+                        "Estado"=>"/efectivas/estado",
                     ]
                 ],
                 [

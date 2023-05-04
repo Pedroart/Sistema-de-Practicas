@@ -24,6 +24,10 @@ post('/logout', function(){ \app\controllers\user::cerrarSesion(); } );
 get('/validacion', function(){\app\controllers\semestre_matricula::display();} );
 post('/validacion', function(){\app\controllers\semestre_matricula::verificar();} );
 
+// Efectivas
+get('/efectivas',  function(){view_dashboard('/efectivas/index',[]);} );
+
+
 // Desempeño Laboral
 get('/desempeno', function(){view_dashboard('desempeno/index',[]);} );
 get('/desempeno/proceso', function(){\app\controllers\desempeno::display();} );
