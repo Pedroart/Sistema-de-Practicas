@@ -25,7 +25,8 @@ get('/validacion', function(){\app\controllers\semestre_matricula::display();} )
 post('/validacion', function(){\app\controllers\semestre_matricula::verificar();} );
 
 // Efectivas
-get('/efectivas',  function(){view_dashboard('/efectivas/index',[]);} );
+get('/efectivas',  function(){view_dashboard('/efectivas/proceso_fichaTecnica',[]);} );
+
 
 
 // Desempeño Laboral
