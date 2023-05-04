@@ -20,9 +20,15 @@ get('/', function(){ \app\controllers\home::display(); } );
 
 post('/logout', function(){ \app\controllers\user::cerrarSesion(); } );
 
+// Validacion Matricula
+get('/validacion', function(){\app\controllers\semestre_matricula::display();} );
+post('/validacion', function(){\app\controllers\semestre_matricula::verificar();} );
+
 // Desempeño Laboral
 get('/desempeno', function(){view_dashboard('desempeno/index',[]);} );
-get('/desempeno/proceso', function(){view_dashboard('desempeno/proceso',[]);} );
+get('/desempeno/proceso', function(){\app\controllers\desempeno::display();} );
+get('/desempeno/proceso/$gender', function(){view_dashboard('desempeno/proceso_fichaTecnica',[]);} );
+
 get('/desempeno/estado', function(){view_dashboard('desempeno/index',[]);} );
 
 
