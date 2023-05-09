@@ -1,12 +1,12 @@
 <?php
 use app\models;
 
-if ($_SESSION['role'] == "3"){
-    include _view_."/menu/data_admin.php";
+if ($_SESSION['role'] == "1"){
+    include _view_."/plantilla/menu/data_admin.php";
 }elseif ($_SESSION['role'] == "2") {
-    include _view_."/menu/data_docente.php";
-}elseif ($_SESSION['role'] == "1") {
-    include _view_."/menu/data_estudiante.php";
+    include _view_."/plantilla/menu/data_docente.php";
+}elseif ($_SESSION['role'] == "3") {
+    include _view_."/plantilla/menu/data_estudiante.php";
     
 }
 

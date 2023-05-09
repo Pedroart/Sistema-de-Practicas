@@ -1,40 +1,35 @@
 <?php
 
+
 define("__DIREC__",str_replace("/public","",$_SERVER['DOCUMENT_ROOT']) );
+include __DIREC__."/core/config.php";
+include __DIREC__."/core/autoloader.php";
 
+$roteador = new core\router;
 
-include "../core/conf.php";
-include "../core/autoloader.php";
-include "../core/router.php";
-include _core_."/view.php";
+// Login
+if (! isset($_SESSION['id_user'])){
+    $roteador->get('/', function(){
+        $controlador = new app\controllers\login();$controlador->index();
+    });
+    $roteador->post('/login',function(){
+        $controlador = new app\controllers\login();$controlador->login();
+    });
 
-// Etapa de Verificacion
-
-if(!isset($_SESSION['user_id'])){
-    get('/','app/views/login.php' );
-    post('/login', function(){ \app\controllers\user::verificarLogin(); } );
-    any('/404','app/views/404.php');
+    $roteador->any('/404','app/views/404.php');
 }
 
-get('/', function(){ \app\controllers\home::display(); } );
+$roteador->post('/logout', function(){
+    $controlador = new app\controllers\login();$controlador->logout();
+});
 
-post('/logout', function(){ \app\controllers\user::cerrarSesion(); } );
+$roteador->get('/', function(){
+    $controlador = new app\controllers\home();$controlador->index();
+});
 
-// Validacion Matricula
-get('/validacion', function(){\app\controllers\semestre_matricula::display();} );
-post('/validacion', function(){\app\controllers\semestre_matricula::verificar();} );
-
-// Efectivas
-get('/efectivas',  function(){view_dashboard('/efectivas/proceso_fichaTecnica',[]);} );
-
-
-
-// Desempeño Laboral
-get('/desempeno', function(){view_dashboard('desempeno/index',[]);} );
-get('/desempeno/proceso', function(){\app\controllers\desempeno::display();} );
-get('/desempeno/proceso/$gender', function(){view_dashboard('desempeno/proceso_fichaTecnica',[]);} );
-
-get('/desempeno/estado', function(){view_dashboard('desempeno/index',[]);} );
+$roteador->get('/validacion', function(){
+    $controlador = new app\controllers\vali_matri();$controlador->index();
+});
 
 
-any('/404','app/views/404.php');
+$roteador->any('/404','app/views/404.php');
