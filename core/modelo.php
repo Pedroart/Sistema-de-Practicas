@@ -34,6 +34,10 @@ class modelo{
         return $this->query;
     }
 
+    public function _num_rows(){
+        return mysqli_num_rows($this->query);
+    }
+
     public function first(){
         return $this->query->fetch_assoc();
     }
@@ -63,6 +67,7 @@ class modelo{
         return $this->query($sql);
         
     }
+
 
     public function create($data){
         $columnas = implode(', ',array_keys($data));

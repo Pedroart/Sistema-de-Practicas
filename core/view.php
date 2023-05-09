@@ -1,37 +1,42 @@
 <?php
 
-function view($route, $data = []){
+namespace core;
 
-    extract($data);
-    if ( file_exists(_view_."/{$route}.php") ){
+class view{
+    
+    public static function view_($route, $data = []){
         
-        include _view_."/{$route}.php";
-                
+        extract($data);
+        if ( file_exists(_view_."/{$route}.php") ){
+            
+            include _view_."/{$route}.php";
+                    
+        }
+        else {
+            echo  "noexiste";
+        }
+        return;
     }
-    else {
-        echo  "noexiste";
-    }
-    return;
-}
 
-function view_dashboard($route, $data = []){
+    public static function view_dashboard($route, $data = []){
 
-    extract($data);
-    if ( file_exists(_view_."/{$route}.php") ){
-        
-        ob_start();
-        include _view_."/{$route}.php";
-        $contenido = ob_get_clean();
-        
-        ob_start();
-        include _view_."/menu/constructor.php";
-        $menu = ob_get_clean();
+        extract($data);
+        if ( file_exists(_view_."/{$route}.php") ){
+            
+            ob_start();
+            include _view_."/{$route}.php";
+            $contenido = ob_get_clean();
+            
+            ob_start();
+            include _view_."/plantilla/menu/constructor.php";
+            $menu = ob_get_clean();
 
-        include _view_."/plantilla.php";
-        
+            include _view_."/plantilla/plantilla.php";
+            
+        }
+        else {
+            echo  _view_."/{$route}.php";
+        }
+        return;
     }
-    else {
-        echo  "noexiste";
-    }
-    return;
 }

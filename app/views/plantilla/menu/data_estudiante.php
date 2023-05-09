@@ -1,7 +1,10 @@
 <?php
 
-$base = new \app\models\matricula;
-    if( $base-> estaMatriculado()){
+use app\models;
+
+$base = new app\models\matricula();
+
+if( $base-> vericador()){
         $menu = [
             "PRACTICAS PRE PROFECIONALES" => [
                 [
