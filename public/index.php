@@ -27,9 +27,14 @@ $roteador->get('/', function(){
     $controlador = new app\controllers\home();$controlador->index();
 });
 
+$roteador->post('/validacion', function(){
+    $controlador = new app\controllers\vali_matri();$controlador->create_();
+});
+
 $roteador->get('/validacion', function(){
     $controlador = new app\controllers\vali_matri();$controlador->index();
 });
+
 
 
 $roteador->any('/404','app/views/404.php');
