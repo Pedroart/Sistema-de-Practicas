@@ -52,9 +52,10 @@ class modelo{
         return $this->query($sql)->get();
     }
 
-    public function find($id){
-        $sql = "SELECT * FROM {$this->table} WHERE id = {$id}";
-        return $this->query($sql)->first();
+    public function find($id,$tag){
+        $sql = "SELECT * FROM {$this->table} WHERE {$tag} = {$id}";
+        $this->query($sql);
+        return $this->first();
     }
 
     public function where($columna,$operador, $valor = null){
@@ -98,8 +99,8 @@ class modelo{
         return [true];
     }
 
-    public function delete($id){
-        $sql = "DELETE FROM {$this->table} WHERE id = {$id}";
+    public function delete($id,$tag){
+        $sql = "DELETE FROM {$this->table} WHERE {$tag} = {$id}";
         $this->query($sql);
 
         if ( $this->coneccion->error){

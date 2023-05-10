@@ -1,7 +1,7 @@
 <div class="container">
 <div class="row">
 
-<?php if(!$matricula): ?>
+<?php if($matricula): ?>
 <div class="col-12 mb-4">
   <div class="card">
     <div class="card-body">
