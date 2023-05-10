@@ -1,20 +1,22 @@
 <div class="container">
 <div class="row">
+
+<?php if(!$matricula): ?>
 <div class="col-12 mb-4">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Usuario</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Fecha y hora del comentario</h6>
-      <p class="card-text">Contenido del comentario</p>
+      <h5 class="card-title">SISTEMA</h5>
+      <p class="card-text">ESPERE VALIDACION DEL SISTEMA</p>
     </div>
   </div>
 </div>
+<?php endif ?>
 
 <div class="col-12">  
   <form id="formMatricula">
       <div class="form-group" >
-        <label for="semestre">ID Semestre:</label>
-        <input type="text" class="form-control" id="semestre" name="semestre" required>
+        <label for="semestre">Semestre:</label>
+        <input type="text" class="form-control" id="semestre" name="semestre" placeholder="<?= $Semestre  ?>" disabled>
       </div>
       <div class="form-group">
         <label for="ficha_matricula">Ficha de Matrícula:</label>

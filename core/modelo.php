@@ -72,7 +72,7 @@ class modelo{
     public function create($data){
         $columnas = implode(', ',array_keys($data));
         $valores  = "'".implode("', '",array_values($data)). "'";
-
+        
         $sql = "INSERT INTO {$this->table} ({$columnas}) VALUES ({$valores})";
 
         $this->query($sql);

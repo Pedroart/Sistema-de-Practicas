@@ -4,7 +4,7 @@ use app\models;
 
 $base = new app\models\matricula();
 
-if( $base-> vericador()){
+if( $base-> vericador() && $base-> estado() ){
         $menu = [
             "PRACTICAS PRE PROFECIONALES" => [
                 [
