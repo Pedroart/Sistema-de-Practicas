@@ -35,6 +35,17 @@ $roteador->get('/validacion', function(){
     $controlador = new app\controllers\vali_matri();$controlador->index();
 });
 
+$roteador->get('/efectivas', function(){
+    $controlador = new app\controllers\p_efectiva();$controlador->index();
+});
+
+$roteador->get('/efectivas/proceso', function(){
+    $controlador = new app\controllers\p_efectiva();$controlador->proceso();
+});
+
+$roteador->get('/efectivas/cartas', function(){
+    $controlador = new app\controllers\p_efectiva();$controlador->cartas();
+});
 
 
 $roteador->any('/404','app/views/404.php');

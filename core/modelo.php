@@ -49,7 +49,8 @@ class modelo{
 
     public function all(){
         $sql = "SELECT * FROM {$this->table}";
-        return $this->query($sql)->get();
+        $this->query($sql);
+        return $this->get();
     }
 
     public function find($id,$tag){
