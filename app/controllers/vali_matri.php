@@ -15,7 +15,7 @@ class vali_matri extends core\controller{
     public function create_(){
         header('Content-type: application/json');
         $base = new app\models\matricula();
-        $base->createe();
-        echo json_encode( ['resultado'=>true ] );
+        $id = $base->createe();
+        echo json_encode( ['resultado'=> true] );
     }
 }
