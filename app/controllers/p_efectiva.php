@@ -26,7 +26,7 @@ class p_efectiva extends core\controller {
         $model = new app\models\t_proceso();
         $etapas = $model -> get_etapas($id_proceso);
 
-        core\view::view_dashboard('efectivas/etapas/9',["etapas"=>$etapas]);
+        core\view::view_dashboard('efectivas/etapas/9',["etapas"=>$etapas,"activo"=>$id,"actual"=>9]);
         return;     
     }
 
