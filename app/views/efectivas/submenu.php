@@ -5,11 +5,11 @@
   </button>
 
   <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-    <ul class="navbar-nav <?=$active[0]?>">
+    <ul class="nav nav-tabs nav-justified">
         <?php foreach($etapas as $etapa): ?>
             <?php //echo $etapa['id_etapa'] ?>
-        <li class="nav-item">
-        <a class="nav-link" href="proceso/<?php echo $etapa['id_etapa'] ?>"><?=$etapa['nombre'] ?></a>
+        <li class="nav-item ">
+        <a class="nav-link <?php echo ($activo == $etapa['id_etapa'])? "active" : ""; ?> <?php echo ($actual > $etapa['id_etapa'])? "" : "disabled"; ?>" href="<?php echo $etapa['id_etapa'] ?>"><?=$etapa['nombre'] ?></a>
         </li>
         <?php endforeach; ?>
     </ul>

@@ -10,6 +10,16 @@ class p_efectiva extends core\controller {
         core\view::view_dashboard('efectivas/index',[]);
         return;     
     }
+
+    public function pre_proceso($id_alumno){
+        $model = new app\models\proceso();
+        $data = $model -> buscarProcesos($id_alumno);
+        if($model ->_num_rows() == 0){
+            return false;
+        }
+        return $data;
+    }
+
     public function proceso(){
         $id_proceso = 1;
 
@@ -17,6 +27,15 @@ class p_efectiva extends core\controller {
         $etapas = $model -> get_etapas($id_proceso);
 
         core\view::view_dashboard('efectivas/etapas/9',["etapas"=>$etapas]);
+        return;     
+    }
+
+    public function proceso_id($id){
+        $id_proceso = 1;
+        $model = new app\models\t_proceso();
+        $etapas = $model -> get_etapas($id_proceso);
+
+        core\view::view_dashboard('efectivas/etapas/'.$id,["etapas"=>$etapas,"activo"=>$id,"actual"=>9]);
         return;     
     }
     public function cartas()

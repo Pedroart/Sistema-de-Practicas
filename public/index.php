@@ -40,7 +40,20 @@ $roteador->get('/efectivas', function(){
 });
 
 $roteador->get('/efectivas/proceso', function(){
-    $controlador = new app\controllers\p_efectiva();$controlador->proceso();
+    
+    $controlador = new app\controllers\p_efectiva();
+    $data=$controlador->pre_proceso($_SESSION['id_user']);
+    if($data!=false){
+        if($data==true)
+        $controlador->proceso();
+        return;
+    }
+    // Realizar proceso
+
+});
+
+$roteador->get('/efectivas/proceso/$id', function($id){
+    $controlador = new app\controllers\p_efectiva();$controlador->proceso_id($id);
 });
 
 $roteador->get('/efectivas/cartas', function(){
