@@ -1,48 +1,41 @@
-("Ancón",15),
-("Ate",15),
-("Barranco",15),
-("Breña",15),
-("Carabayllo",15),
-("Chaclacayo",15),
-("Chorrillos",15),
-("Cieneguilla",15),
-("Comas",15),
-("El Agustino",15),
-("Independencia",15),
-("Jesús María",15),
-("La Molina",15),
-("La Victoria",15),
-("Lince",15),
-("Los Olivos",15),
-("Lurigancho-Chosica",15),
-("Lurín",15),
-("Magdalena del Mar",15),
-("Miraflores",15),
-("Pachacamac",15),
-("Pucusana",15),
-("Pueblo Libre",15),
-("Puente Piedra",15),
-("Punta Hermosa",15),
-("Punta Negra",15),
-("Rímac",15),
-("San Bartolo",15),
-("San Borja",15),
-("San Isidro",15),
-("San Juan de Lurigancho",15),
-("San Juan de Miraflores",15),
-("San Luis",15),
-("San Martín de Porres",15),
-("San Miguel",15),
-("Santa Anita",15),
-("Santa María del Mar",15),
-("Santa Rosa",15),
-("Santiago de Surco",15),
-("Surquillo",15),
-("Villa El Salvador",15),
-("Villa María del Triu",15)
-("Bellavista",7),
-("Callao",7),
-("Carmen de La Legua Reynoso",7),
-("La Perla",7),
-("La Punta",7),
-("Ventanilla",7)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Proceso</title>
+  <!-- Incluimos los archivos necesarios de Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Registro de Proceso</h1>
+    <div class="alert alert-warning" role="alert">
+      Aún no se ha registrado ningún proceso.
+    </div>
+    <p>Al presionar el botón "Continuar" se creará un nuevo proceso. Este proceso es irreversible.</p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmacion">Continuar</button>
+
+    <!-- Agregamos el pop-up de confirmación -->
+    <div class="modal fade" id="confirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Confirmar creación de proceso</h4>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro de que deseas crear un nuevo proceso? Esta acción es irreversible.
+          </div>
+          <div class="modal-footer">
+            <!-- Agregamos los botones de confirmación y cancelación -->
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Crear proceso</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
