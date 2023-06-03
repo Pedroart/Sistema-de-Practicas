@@ -4,14 +4,16 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample10">
-    <ul class="nav nav-tabs nav-justified">
+
+  <div class="collapse navbar-collapse justify-content-center" id="navbarsExample10">
+    <ul class="nav nav-tabs">
         <?php foreach($etapas as $etapa): ?>
             <?php //echo $etapa['id_etapa'] ?>
         <li class="nav-item ">
-        <a class="nav-link <?php echo ($activo == $etapa['id_etapa'])? "active" : ""; ?> <?php echo ($actual > $etapa['id_etapa'])? "" : "disabled"; ?>" href="<?php echo $etapa['id_etapa'] ?>"><?=$etapa['nombre'] ?></a>
+        <a class="nav-link <?php echo ($activo == $etapa['id_etapa'])? "active" : ""; ?> <?php echo ($actual >= $etapa['id_etapa'])? "" : "disabled"; ?>" href="http://practicas.test/efectivas/proceso/<?php echo $etapa['id_etapa'] ?>"><?=$etapa['nombre'] ?></a>
         </li>
         <?php endforeach; ?>
     </ul>
   </div>
+
 </nav>

@@ -18,8 +18,20 @@ class user extends core\modelo{
 
             $_SESSION['id_user'] = $resultados['id_user'];
             $_SESSION['role'] = $resultados['id_role'];
+
+            $this->query("SELECT MAX(`id_semestres`), `nombre_semestres` FROM `semestres`");
+            $_SESSION['semestre'] =$this->first()['nombre_semestres'];
+
             return true;
         }
         return false;
+    }
+    
+    public function Datos_Alumno($id_alumno)
+    {
+        $sql = "SELECT `nombre`, `apellido_paterno`, `apellido_materno`, `DNI` FROM `persona` WHERE `id_persona` = (SELECT `id_persona` FROM  `alumno` WHERE `id_alumno` = {$id_alumno} );";
+        $this->query($sql);
+        $data = $this->first();
+        return $data; 
     }
 }

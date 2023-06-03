@@ -1,6 +1,9 @@
 <div class="container-fluid text-center">
     <?php
     include _view_ . "/efectivas/submenu.php";
+
+    $modelo = new app\models\user();
+    $Datos_usuari=$modelo->Datos_Alumno($_SESSION['id_user']);
     ?>
 
     <h1 class="h2 mb-2 text-gray-800">FICHA DE DATOS - carta de presentación</h1>
@@ -36,31 +39,31 @@
                         <div class="form-group row">
                             <label for="staticName" class="col-sm-4 col-form-label">Nombre</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="staticName" value="name" readonly>
+                                <input type="text" class="form-control" id="staticName" value="<?= $Datos_usuari['nombre']?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticAparterno" class="col-sm-4 col-form-label">Apellido Parterno</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="staticAparterno" value="Name" readonly>
+                                <input type="text" class="form-control" id="staticAparterno" value="<?=$Datos_usuari['apellido_paterno']?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticAmarterno" class="col-sm-4 col-form-label">Apellido Marterno</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-user" id="staticAmarterno" value="Name" readonly>
+                                <input type="text" class="form-control form-control-user" id="staticAmarterno" value="<?=$Datos_usuari['apellido_materno']?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticDNI" class="col-sm-4 col-form-label">DNI</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="staticDNI" value="7777777" readonly>
+                                <input type="number" class="form-control" id="staticDNI" value="<?=$Datos_usuari['DNI']?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticCiclo" class="col-sm-4 col-form-label">Ciclo</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="staticCiclo" value="7" readonly>
+                                <input type="text" class="form-control" id="staticCiclo" value="<?=$_SESSION['semestre']?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -71,57 +74,45 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="staticDirec" class="col-sm-4 col-form-label">Dirección*</label>
+                            <label for="staticDirec" class="col-sm-4 col-form-label">Dirección</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="staticDirec" value="Name" required>
+                                <input type="text" class="form-control" id="staticDirec" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticCorreo1" class="col-sm-4 col-form-label">Correo 1*</label>
+                            <label for="staticCorreo1" class="col-sm-4 col-form-label">Correo 1</label>
                             <div class="col-sm-8">
-                                <input type="mail" class="form-control" id="staticCorreo1" value="Name" required>
+                                <input type="mail" class="form-control" id="staticCorreo1" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticCorreo2" class="col-sm-4 col-form-label">Correo 2</label>
+                            <label for="staticCelular" class="col-sm-4 col-form-label">Celular</label>
                             <div class="col-sm-8">
-                                <input type="mail" class="form-control" id="staticCorreo2" value="Name" required>
+                                <input type="number" class="form-control" id="staticCelular"  required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticCelular" class="col-sm-4 col-form-label">Celular*</label>
+                            <label for="staticDepartamento1" class="col-sm-4 col-form-label">Departamento</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="staticCelular" value="7777777" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticOtro" class="col-sm-4 col-form-label">Otro</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" id="staticOtro" value="7" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticDepartamento" class="col-sm-4 col-form-label">Departamento</label>
-                            <div class="col-sm-8">
-                                <select id="staticDepartamento" class="form-control" required>
+                                <select id="staticDepartamento1" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticProvincia" class="col-sm-4 col-form-label">Provincia</label>
+                            <label for="staticProvincia1" class="col-sm-4 col-form-label">Provincia</label>
                             <div class="col-sm-8">
-                                <select id="staticProvincia" class="form-control" required>
+                                <select id="staticProvincia1" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDistrito" class="col-sm-4 col-form-label">Distrito</label>
+                            <label for="staticDistrito1" class="col-sm-4 col-form-label">Distrito</label>
                             <div class="col-sm-8">
-                                <select id="staticDistrito" class="form-control" required>
+                                <select id="staticDistrito1" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
@@ -137,45 +128,45 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="staticOtro" class="col-sm-4 col-form-label">Numero de RUC de la Empresa</label>
+                            <label for="staticRUC" class="col-sm-4 col-form-label">Numero de RUC de la Empresa</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="staticOtro" value="7" required>
+                                <input type="number" class="form-control" id="staticRUC" value="7" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticCorreo1" class="col-sm-4 col-form-label">Nombre de la Empresa*</label>
+                            <label for="staticNombreEmpres" class="col-sm-4 col-form-label">Nombre de la Empresa*</label>
                             <div class="col-sm-8">
-                                <input type="mail" class="form-control" id="staticCorreo1" value="Name" required>
+                                <input type="mail" class="form-control" id="staticNombreEmpres" value="Name" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDirec" class="col-sm-4 col-form-label">Dirección*</label>
+                            <label for="staticDirecLabo" class="col-sm-4 col-form-label">Dirección*</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="staticDirec" value="Name" required>
+                                <input type="text" class="form-control" id="staticDirecLabo" value="Name" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDepartamento" class="col-sm-4 col-form-label">Departamento</label>
+                            <label for="staticDepartamento2" class="col-sm-4 col-form-label">Departamento</label>
                             <div class="col-sm-8">
-                                <select id="staticDepartamento" class="form-control" required>
+                                <select id="staticDepartamento2" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticProvincia" class="col-sm-4 col-form-label">Provincia</label>
+                            <label for="staticProvincia2" class="col-sm-4 col-form-label">Provincia</label>
                             <div class="col-sm-8">
-                                <select id="staticProvincia" class="form-control" required>
+                                <select id="staticProvincia2" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDistrito" class="col-sm-4 col-form-label">Distrito</label>
+                            <label for="staticDistrito2" class="col-sm-4 col-form-label">Distrito</label>
                             <div class="col-sm-8">
-                                <select id="staticDistrito" class="form-control" required>
+                                <select id="staticDistrito2" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
@@ -189,24 +180,24 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="staticDistrito" class="col-sm-4 col-form-label">Genero</label>
+                            <label for="Genero" class="col-sm-4 col-form-label">Genero</label>
                             <div class="col-sm-8">
-                                <select id="staticDistrito" class="form-control" required>
+                                <select id="Genero" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticName" class="col-sm-4 col-form-label">Nombre</label>
+                            <label for="staticNameRepre" class="col-sm-4 col-form-label">Nombre</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="staticName" value="Name" readonly>
+                                <input type="text" class="form-control" id="staticNameRepre" value="Name" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticAparterno" class="col-sm-4 col-form-label">Apellido Parterno</label>
+                            <label for="staticAparternorRepre" class="col-sm-4 col-form-label">Apellido Parterno</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="staticAparterno" value="Name" readonly>
+                                <input type="text" class="form-control" id="staticAparternorRepre" value="Name" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -216,18 +207,18 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDistrito" class="col-sm-4 col-form-label">Grado de Instruccíon</label>
+                            <label for="GradoInstruccion" class="col-sm-4 col-form-label">Grado de Instruccíon</label>
                             <div class="col-sm-8">
-                                <select id="staticDistrito" class="form-control" required>
+                                <select id="GradoInstruccion" class="form-control" required>
                                     <option selected>Choose...</option>
                                     <option>...</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDirec" class="col-sm-4 col-form-label">Cargo*</label>
+                            <label for="Cargo" class="col-sm-4 col-form-label">Cargo</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="staticDirec" value="Name" required>
+                                <input type="text" class="form-control" id="Cargo" value="Name" required>
                             </div>
                         </div>
                     </div>
@@ -237,3 +228,5 @@
 
     </form>
 </div>
+
+<script src="<?= _URL_ ?>/js/selector.js"></script>
