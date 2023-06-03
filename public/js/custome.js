@@ -1,23 +1,8 @@
-var b_confirmacion = document.getElementById('bconfirmacion');
-b_confirmacion.addEventListener('click',function(e){
-    e.preventDefault();
-        var datos = new FormData();
-        datos.append('id', b_confirmacion.dataset.proceso);
-        
-        fetch('http://practicas.test/proceso/create',{
-            method: 'POST',
-            body: datos
-        })  .then(res => res.json())
-            .then(data=> {
-                if( data.resultado === true){ location.reload()}
-            })
-    });
-
-
 var b_logout = document.getElementById('b_logout');
 b_logout.addEventListener('click',function(e){
     e.preventDefault();
-        fetch('http://practicas.test/proceso/create',{
+
+        fetch('http://practicas.test/logout',{
             method: 'POST'
         })  .then(res => res.json())
             .then(data=> {
@@ -25,22 +10,31 @@ b_logout.addEventListener('click',function(e){
             })
     });
 
-
-b_logout.addEventListener('click',function(e){
+var b_confirmacion = document.getElementById('bconfirmacion');
+if(b_confirmacion){
+    b_confirmacion.addEventListener('click',function(e){
         e.preventDefault();
-
-            fetch('http://practicas.test/logout',{
-                method: 'POST'
+            var datos = new FormData();
+            datos.append('id', b_confirmacion.dataset.proceso);
+            
+            fetch('http://practicas.test/proceso/create',{
+                method: 'POST',
+                body: datos
             })  .then(res => res.json())
                 .then(data=> {
                     if( data.resultado === true){ location.reload()}
                 })
         });
+    
+}
+
+
+
 
 var b_matricula = document.getElementById('formMatricula');
 
-
-b_matricula.addEventListener('submit',function(e){
+if(b_matricula){
+    b_matricula.addEventListener('submit',function(e){
     e.preventDefault();
     var datos = new FormData(e.target);
 
@@ -56,3 +50,4 @@ b_matricula.addEventListener('submit',function(e){
                     }
                 })
         });
+}
