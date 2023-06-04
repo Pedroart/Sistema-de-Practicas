@@ -1,10 +1,2 @@
-Pendiente: El proceso ha sido creado pero aún no ha comenzado.
-
-Enviado: El proceso ha sido enviado y se está procesando.
-
-Completado: El proceso ha finalizado con éxito.
-
-Fallido: El proceso ha fallado y no se pudo completar.
-
-
+Base Proyecto:
 
