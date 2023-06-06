@@ -32,13 +32,13 @@ if( $base-> vericador() && $base-> estado() ){
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-angle-double-up",
                     'title'=> "Emprendimiento",
-                    "url"  => "/nav_iten_1"
+                    "url"  => "d"
                 ],
                 [
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-circle-notch",
                     'title'=> "Convalidacion",
-                    "url"  => "/nav_iten_1"
+                    "url"  => "d"
                 ]
             ],
             "OTROS" => [

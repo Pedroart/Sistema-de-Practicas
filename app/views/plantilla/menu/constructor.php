@@ -21,7 +21,7 @@ if ($_SESSION['role'] == "1") {
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
             <li class="nav-item">
-                <a href="" class="nav-link active">
+                <a href="<?= _URL_ ?>" class="nav-link active">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                         Inicio
@@ -36,7 +36,7 @@ if ($_SESSION['role'] == "1") {
 
                     <?php if ($grupo['type'] == "nav-link") : ?>
                         <li class="nav-item">
-                            <a href="pages/kanban.html" class="nav-link d-flex">
+                            <a href="<?= _URL_."/".$grupo['url'] ?>" class="nav-link d-flex">
                                 <i class="nav-icon <?=$grupo['icon'] ?>"></i>
                                 <p>
                                 <?=$grupo['title'] ?>
@@ -57,7 +57,7 @@ if ($_SESSION['role'] == "1") {
                                 
                                 <?php foreach($grupo['sub'] as $ttitle => $turl): ?>
                                     <li class="nav-item">
-                                    <a href="<?= $turl ?>" class="nav-link">
+                                    <a href="<?= _URL_."".$turl ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p><?= $ttitle ?></p>
                                     </a>
