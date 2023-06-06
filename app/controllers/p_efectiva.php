@@ -7,7 +7,7 @@ use app;
 class p_efectiva extends core\controller {
     public function index()
     {
-        core\view::view_dashboard('efectivas/index',[]);
+        core\view::view_dashboard('efectivas/index',["titulo"=>"Practicas Efectivas"]);
         return;     
     }
 
@@ -26,7 +26,7 @@ class p_efectiva extends core\controller {
         $model = new app\models\t_proceso();
         $etapas = $model -> get_etapas($id_proceso);
 
-        core\view::view_dashboard('efectivas/etapas/'.$id_etapa_actual,["etapas"=>$etapas,"activo"=>$id_etapa_actual,"actual"=>$id_etapa_actual]);
+        core\view::view_dashboard('efectivas/etapas/'.$id_etapa_actual,["titulo"=>"","etapas"=>$etapas,"activo"=>$id_etapa_actual,"actual"=>$id_etapa_actual]);
         return;     
     }
 
@@ -36,20 +36,20 @@ class p_efectiva extends core\controller {
         $etapas = $model -> get_etapas($id_proceso);
         if($id<=$actual)
         {
-        core\view::view_dashboard('efectivas/etapas/'.$id,["etapas"=>$etapas,"activo"=>$id,"actual"=>$actual]);
+        core\view::view_dashboard('efectivas/etapas/'.$id,["titulo"=>"","etapas"=>$etapas,"activo"=>$id,"actual"=>$actual]);
         return;
         }
-        core\view::view_dashboard('efectivas/etapas/0',["etapas"=>$etapas,"activo"=>$id,"actual"=>$actual]);
+        core\view::view_dashboard('efectivas/etapas/0',["titulo"=>"","etapas"=>$etapas,"activo"=>$id,"actual"=>$actual]);
     }
     public function cartas()
     {
-        core\view::view_dashboard('efectivas/cartas',[]);
-        return;     
+        core\view::view_dashboard('efectivas/cartas',["titulo"=>" Hisotiral de Cartas"]);
+        
     }
 
     public function estado()
     {
-        core\view::view_dashboard('efectivas/estado',[]);
+        core\view::view_dashboard('efectivas/estado',["titulo"=>" Estado"]);
         return;     
     }
 }

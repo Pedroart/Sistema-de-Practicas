@@ -45,13 +45,13 @@ if( $base-> vericador() && $base-> estado() ){
                 [
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-user-plus",
-                    'title'=> "Practicas extracurriculares",
+                    'title'=> "Practica extracurriculares",
                     "url"  => "/nav_iten_1"
                 ],
                 [
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-user-graduate",
-                    'title'=> "Practicas profecionales ",
+                    'title'=> "Practicas profecionales",
                     "url"  => "/nav_iten_1"
                 ]
             ]
