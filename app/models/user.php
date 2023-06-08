@@ -21,7 +21,7 @@ class user extends core\modelo{
 
             $this->query("SELECT MAX(`id_semestres`), `nombre_semestres` FROM `semestres`");
             $_SESSION['semestre'] =$this->first()['nombre_semestres'];
-
+            $_SESSION['DATA_ALUMNO']=$this->Datos_Alumno($resultados['id_user']);
             return true;
         }
         return false;

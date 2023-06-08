@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="<?= _URL_ ?>/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?= _URL_ ?>/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="<?= _URL_ ?>/dist/css/login.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -77,6 +78,24 @@
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <!-- Notifications User Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-user"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-user mr-2"></i> Gestion de Cuenta
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="<?= _URL_ ?>" id="b_logout" class="dropdown-item">
+            <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+            
+          </a>
+          
         </div>
       </li>
     </ul>
@@ -161,7 +180,8 @@
 <script src="<?= _URL_ ?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= _URL_ ?>/dist/js/adminlte.js"></script>
-
+<!-- Custome App -->
+<script src="<?= _URL_ ?>/dist/js/custome.js"></script>
 
 </body>
 </html>

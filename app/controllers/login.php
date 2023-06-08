@@ -34,7 +34,7 @@ class login extends core\controller {
         // Datos de Usuario
         unset($_SESSION['id_user']);
         unset($_SESSION['role']);
-
+        unset($_SESSION['DATA_ALUMNO']);
 
         session_destroy();
         header('Content-type: application/json');
