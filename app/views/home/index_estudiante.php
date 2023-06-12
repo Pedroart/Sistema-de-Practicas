@@ -58,7 +58,7 @@
                 <h3 class="card-title">
                     <i class="fas fa-fw fa-building"></i>
                     Efectivas
-                    <span class="ml-auto badge badge-info right">2</span>
+                    <span class="ml-auto badge badge-info right"></span>
                 </h3>
             </div>
 
@@ -67,8 +67,9 @@
                 mediante el desempeño en una situación real de trabajo.
                 <br><br>
                 <strong>El proceso inicia con el pago de S/.10.00 por el concepto: Carta de presentación.</strong>
+                <a href="<?= _URL_ ?>/efectivas" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-
+            
         </div>
     
     
@@ -85,6 +86,7 @@
                 actividades afines a su carrera.
                 <br><br>
                 <strong>El proceso inicia con el pago de S/.30.00 por el concepto: Revisión de informe.</strong>
+                <a href="<?= _URL_ ?>/desempeno" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
 
         </div>
@@ -103,6 +105,7 @@
                 formalizada y desarrollen actividades afines a su carrera permanentemente.
                 <br><br>
                 <strong>El proceso inicia con el pago de S/.30.00 por el concepto: Revisión de informe.</strong>
+                <a href="<?= _URL_ ?>/emprendimiento" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
 
         </div>
@@ -120,7 +123,7 @@
                 En este espacio podrás darle seguimiento a tu proceso de prácticas, recuerda que los pasos son
                 secuenciales y no podrás avanzar el siguiente paso hasta que se te revise y apruebe el anterior. Así
                 mismo podrás ver las observaciones realizadas y tendrás 7 días hábiles como máximo para poder subsanar
-                la observación.
+                la observación. <a href="<?= _URL_ ?>/convalidacion" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
 
         </div>

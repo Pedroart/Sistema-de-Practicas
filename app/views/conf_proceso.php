@@ -27,3 +27,22 @@
       </div>
     </div>
 </div>
+
+<script>
+  var b_confirmacion = document.getElementById('bconfirmacion');
+if(b_confirmacion){
+    b_confirmacion.addEventListener('click',function(e){
+        e.preventDefault();
+            var datos = new FormData();
+            datos.append('id', b_confirmacion.dataset.proceso);
+            
+            fetch('http://practicas.test/proceso/create',{
+                method: 'POST',
+                body: datos
+            })  .then(res => res.json())
+                .then(data=> {
+                    if( data.resultado === true){ location.reload()}
+                })
+        });
+}
+</script>

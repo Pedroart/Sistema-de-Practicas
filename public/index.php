@@ -46,6 +46,10 @@ $roteador->post('/validacion', function(){
     $controlador = new app\controllers\vali_matri();$controlador->create_();
 });
 
+$roteador->post('/validacion/put', function(){
+    $controlador = new app\controllers\vali_matri();$controlador->updateFile_();
+});
+
 $roteador->get('/validacion', function(){
     $controlador = new app\controllers\vali_matri();$controlador->index();
 });
@@ -105,5 +109,28 @@ $roteador->get('/efectivas/proceso', function(){
         
 });
 
+$roteador->get('/validaciones', function(){
+    $controlador = new app\controllers\p_validaciones();$controlador->index();
+});
+
+$roteador->get('/validaciones/$id', function($id){
+    $controlador = new app\controllers\p_validaciones();$controlador->edit($id);
+});
+
+$roteador->post('/validaciones/aceptado/$id', function($id){
+    $controlador = new app\models\matricula;$controlador->aceptado($id);
+});
+
+$roteador->post('/validaciones/revisar/$id', function($id){
+    $controlador = new app\controllers\p_validaciones();$controlador->revisar($id);
+});
+
+$roteador->post('/validaciones/rechazar/$id', function($id){
+    $controlador = new app\models\matricula;$controlador->rechazar($id);
+});
+
+$roteador->get('/procesos', function(){
+    $controlador = new app\controllers\p_procesos();$controlador->index();
+});
 
 $roteador->any('/404','app/views/404.php');

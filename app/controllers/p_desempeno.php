@@ -7,6 +7,11 @@ use app;
 class p_desempeno extends core\controller {
     public function index()
     {
+        if(!$this->matricula()){
+            $a =new app\controllers\vali_matri();
+            $a->index();
+        }
+
         core\view::view_dashboard('desempeno/index',["titulo"=>"Desempeño Laboral"]);
         return;     
     }

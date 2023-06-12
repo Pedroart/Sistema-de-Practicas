@@ -1,30 +1,18 @@
 <?php
 
 $menu = [
-    "section_title_1" => [
+    "Enlaces" => [
         [
             'type' => "nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
-            "url"  => "/nav_iten_1"
+            'icon' => "fas fa-check",
+            'title'=> "Validacion",
+            "url"  => "validaciones"
         ],
         [
-            'type' => "grupo-nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
-            'sub'  => [
-                "sub_nav1"=>"/url1",
-                "sub_nav2"=>"/url2",
-                "sub_nav3"=>"/url3",
-            ]
-        ]
-    ],
-    "section_title_2" => [
-        [
             'type' => "nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
-            "url"  => "/nav_iten_1"
+            'icon' => "fas fa-file-signature",
+            'title'=> "Procesos",
+            "url"  => "procesos"
         ]
     ]
 ];

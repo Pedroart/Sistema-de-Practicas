@@ -7,6 +7,11 @@ use app;
 class p_efectiva extends core\controller {
     public function index()
     {
+        if(!$this->matricula()){
+            $a =new app\controllers\vali_matri();
+            $a->index();
+        }
+
         core\view::view_dashboard('efectivas/index',["titulo"=>"Practicas Efectivas"]);
         return;     
     }
