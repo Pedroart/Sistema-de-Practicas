@@ -9,8 +9,14 @@ class proceso extends core\modelo
 {
     public function buscarProcesos($id_alumno)
     {
-        $sql = "SELECT `id`,`id_proceso`,`id_etapa` FROM `proceso` WHERE `id_alumno` = {$id_alumno} and `id_semestre` = (SELECT MAX(`id_semestres`)FROM `semestres`)";
+        $sql = "SELECT `id`,`id_proceso`,`id_etapa`,`id_estado` FROM `proceso` WHERE `id_alumno` = {$id_alumno} and `id_semestre` = (SELECT MAX(`id_semestres`)FROM `semestres`)";
         $this->query($sql);
+        return $this->first();
+    }
+
+    public function getProceso($id) {
+        $this->table = "proceso";
+        $this->where("id","=", $id);
         return $this->first();
     }
 
@@ -37,5 +43,10 @@ class proceso extends core\modelo
 
         return $data;
 
+    }
+
+    public function actualizar_estado($id,$data){
+        $this->table ="proceso";
+        $this->update4key($id,$data,"id");
     }
 }

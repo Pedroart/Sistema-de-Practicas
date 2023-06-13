@@ -99,6 +99,24 @@ class modelo{
         }
         return [true];
     }
+    public function update4key($id,$data,$key_){
+
+        $fields = [];
+
+        foreach ($data as $key => $value){
+            $fields[]= "`{$key}` = '{$value}'";
+        }
+        $fields = implode(', ', $fields);
+
+        $sql = "UPDATE `{$this->table}` SET {$fields} WHERE `{$key_}` = '{$id}' ";
+        
+        $this->query($sql);
+
+        if ( $this->coneccion->error){
+            return [false];
+        }
+        return [true];
+    }
 
     public function delete($id,$tag){
         $sql = "DELETE FROM {$this->table} WHERE {$tag} = {$id}";

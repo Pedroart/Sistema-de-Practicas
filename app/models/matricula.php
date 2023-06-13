@@ -119,8 +119,11 @@ class matricula extends core\modelo{
         }
 
         $data = $this->get_($id);
+        if (is_null($data)){
+            return [];
+        }
         $base = new app\models\documentos();
-    
+
         $Ficha=$base->get_documento_direc($data['ficha_matricula']);
         $matricula=$base->get_documento_direc($data['record_academico']);
         return [$Ficha,$matricula];

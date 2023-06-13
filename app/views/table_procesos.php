@@ -54,7 +54,7 @@
                             <span class="badge badge-success">Success</span>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-primary btn-sm" href="#">
+                            <a class="btn btn-primary btn-sm" href="<?=_URL_."/procesos/".$person["id"]?>">
                                 <i class="fas fa-folder">
                                 </i>
                                 View
