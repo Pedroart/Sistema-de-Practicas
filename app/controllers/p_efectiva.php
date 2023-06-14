@@ -27,25 +27,41 @@ class p_efectiva extends core\controller
         }
         return $data;
     }
+    
+    public function parametros(&$array,$id){
+        switch ($id) {
+            case 7:
+                # code...
+                break;
+            case 8:
+                $array["id_empresa"] = 1;
+                $array["empresa_nombre"] = "Empresa - Ejemplo";
+                    break;
+            default:
+                # code...
+                break;
+        }
+    }
 
     public function proceso($id,$id_etapa_actual, $estado)
     {
-        $id_proceso = 1;
-
-        $model = new app\models\t_proceso();
-        $etapas = $model->get_etapas($id_proceso);
-
-        core\view::view_dashboard('efectivas/etapas/' . $id_etapa_actual, ["titulo" => "","id_"=>$id, "etapas" => $etapas, "activo" => $id_etapa_actual, "actual" => $id_etapa_actual, "estado" => $estado]);
+        
+        $this->proceso_id($id_etapa_actual, $id_etapa_actual,$id,$estado);
         return;
     }
 
-    public function proceso_id($id, $actual)
+    public function proceso_id($id, $actual,$id_main_proceso,$estado_main_proceso)
     {
         $id_proceso = 1;
         $model = new app\models\t_proceso();
         $etapas = $model->get_etapas($id_proceso);
         if ($id <= $actual) {
-            core\view::view_dashboard('efectivas/etapas/' . $id, ["titulo" => "", "etapas" => $etapas, "activo" => $id, "actual" => $actual]);
+            $datacall = ["titulo" => "","id_"=>$id_main_proceso, "etapas" => $etapas, "activo" => $id, "actual" => $actual,"estado"=>3];
+            $this->parametros($datacall,$id);
+            if($id == $actual){
+                $datacall["estado"]=$estado_main_proceso;
+            }
+            core\view::view_dashboard('efectivas/etapas/' . $id, $datacall);
             return;
         }
         core\view::view_dashboard('efectivas/etapas/0', ["titulo" => "", "etapas" => $etapas, "activo" => $id, "actual" => $actual]);

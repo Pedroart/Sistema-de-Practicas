@@ -84,7 +84,7 @@ $roteador->get('/efectivas/proceso', function(){
 $roteador->get('/efectivas/proceso/$id', function($id){
     $controlador = new app\controllers\p_efectiva();
     $data=$controlador->pre_proceso($_SESSION['id_user']);
-    $controlador->proceso_id($id,$data['id_etapa']);
+    $controlador->proceso_id($id,$data['id_etapa'],$data['id'],$data['id_estado']);
 });
 
 $roteador->post('/efectivas/proceso', function(){

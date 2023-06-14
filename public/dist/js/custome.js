@@ -8,7 +8,7 @@ b_logout.addEventListener("click", function (e) {
     .then((res) => res.json())
     .then((data) => {
       if (data.resultado === true) {
-        location.reload();
+        window.location.href = "http://practicas.test";
       }
     });
 });

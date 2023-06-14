@@ -1,4 +1,9 @@
+<div class="container-fluid text-center">
+    <?php
 
+    $modelo = new app\models\user();
+    $Datos_usuari = $modelo->Datos_Alumno($data["id_alumno"]);
+    ?>
 
 <div class="row">
     <div class="col-md-3">
@@ -155,48 +160,16 @@
 
 <script>
     function aceptar(){
-        fetch('http://practicas.test/proceso/aceptado/<?= $id ?>', {
+        fetch('http://practicas.test/proceso/aceptado/<?= $data["id"] ?>', {
         method: 'POST',
       })
       .then(response => {
-        window.location.href ='<?= _URL_ ?>/validaciones';
+        window.location.href ='<?= _URL_ ?>/procesos';
       })
       .catch(error => {
         // Manejar el error aquí
         console.error('Error en la llamada POST:', error);
       });
     }
-    function revisar(){
 
-        var datos = new FormData();
-        
-        datos.append("Ficha",document.getElementById("Ficha").value);
-        datos.append("record",document.getElementById("record").value);
-        datos.append("idFicha",<?= $id_documentos[0] ?>);
-        datos.append("idrecord",<?= $id_documentos[0] ?>);
-        fetch('http://practicas.test/proceso/revisar/<?= $id ?>', {
-        method: 'POST',
-        body: datos
-      })
-      .then(response => {
-        alert(response);
-        //window.location.href ='<?= _URL_ ?>/validaciones';
-      })
-      .catch(error => {
-        // Manejar el error aquí
-        console.error('Error en la llamada POST:', error);
-      });
-    }
-    function rechazar(){
-        fetch('http://practicas.test/proceso/rechazar/<?= $id ?>', {
-        method: 'POST',
-      })
-      .then(response => {
-        window.location.href ='<?= _URL_ ?>/validaciones';
-      })
-      .catch(error => {
-        // Manejar el error aquí
-        console.error('Error en la llamada POST:', error);
-      });
-    }
 </script>
