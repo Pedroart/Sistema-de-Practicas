@@ -49,4 +49,47 @@ class proceso extends core\modelo
         $this->table ="proceso";
         $this->update4key($id,$data,"id");
     }
+
+    public function data_proceso($data,$proceso,$etapa){
+        
+        switch($proceso){
+            case 1:
+                
+                return $this->data_efectivas($data,$etapa);
+                
+            case 2:
+                break;
+            default:
+            break;
+        }
+    }
+
+    public function data_efectivas($data,$etapa) {
+        $retultado = [];
+        $modelEmpresa = new app\models\empresa();
+        $modelDocumento = new app\models\documentos();
+        switch($etapa){
+            case 7:
+                $retultado["CentroLaboral"] = $modelEmpresa->get_empresa($data["id_empresa"]);
+                $retultado["represente"] = $modelEmpresa->get_representante_empresa($data["id_empresa"]);
+            case 8:
+                $retultado["CentroLaboral"] = $modelEmpresa->get_empresa($data["id_empresa"]);
+                $retultado["Carta"] = $modelEmpresa->get_empresaAlumno($retultado["CentroLaboral"][0]["id_empresa_alumno"]);
+                $retultado["Documento"] = $modelDocumento->get_documento_direc($retultado["Carta"]["carta_aceptacion"]);
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            default:
+        }
+        return $retultado;
+    }
+
+    public function siguienteProceso($id){
+        $this->table = "tetapas_proceso";
+        $this->where("id_etapa","=", $id);
+        $data = $this->first();
+        return $data;
+    }
+    
 }

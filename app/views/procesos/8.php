@@ -66,8 +66,8 @@
                     <div class="form-group row">
                         <label for="empresa" class="col-sm-4 col-form-label">Empresa</label>
                         <div class="col-sm-8">
-                            <select class="form-control" id="empresa" name="empresa">
-                                <option value="<?= $id_empresa ?>"><?= $empresa_nombre ?></option>
+                            <select class="form-control" id="empresa" name="empresa" disabled>
+                                <option value=""><?= $relleno['CentroLaboral'][0]["nombre"] ?></option>
                             </select>
                         </div>
                     </div>
@@ -75,14 +75,14 @@
                     <div class="form-group row">
                         <label for="fecha_inicio" class="col-sm-4 col-form-label">Fecha de inicio de las prácticas</label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
+                            <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" value="<?=$relleno["Carta"]["fecha_inicio"]?>"  disabled>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="fecha_fin" class="col-sm-4 col-form-label">Fecha de fin de las prácticas</label>
+                        <label for="fecha_inicio" class="col-sm-4 col-form-label">Fecha de inicio de las prácticas</label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
+                            <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" value="<?=$relleno["Carta"]["fecha_fin"]?>"  disabled>
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                 </div>
 
                 <div class="card-body">
-                    <embed src="<?= _URL_ ?><?= substr($documentos[1]["uri"], 7) ?>" height="500px" width="100%">
+                    <embed src="<?= _URL_ ?><?= substr($relleno["Documento"]["uri"], 7) ?>" height="500px" width="100%">
                 </div>
                 <div class="card-footer">
                     <input class="form-control" id="record" type="text" placeholder="Ingrese Comentario">
@@ -110,8 +110,11 @@
 
     <script>
         function aceptar() {
-            fetch('http://practicas.test/proceso/aceptado/<?= $data["id"] ?>', {
+            var datos = new FormData();
+            datos.append("id_proceso", <?= $data["id_etapa"] ?>);
+            fetch('http://practicas.test/procesos/aceptado/<?= $data["id"] ?>', {
                     method: 'POST',
+                    body: datos
                 })
                 .then(response => {
                     window.location.href = '<?= _URL_ ?>/procesos';

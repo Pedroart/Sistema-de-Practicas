@@ -28,15 +28,21 @@ class p_efectiva extends core\controller
         return $data;
     }
     
-    public function parametros(&$array,$id){
+    public function parametros(&$array,$id,$id_proceso){
+        $modeloEmpresa = new app\models\empresa();
         switch ($id) {
             case 7:
                 # code...
                 break;
             case 8:
-                $array["id_empresa"] = 1;
-                $array["empresa_nombre"] = "Empresa - Ejemplo";
+            case 9:
+            case 10:    
+                $dataEmpresa = $modeloEmpresa->get_name_empresa($id_proceso);
+                $array["empresa_nombre"] = $dataEmpresa["Razon_socal_empresa"];
+                $array["id_empresaAlumno"] = $dataEmpresa["id_empresa_alumno"];
+                $array["id_empresa"] = $dataEmpresa["id_empresa"];
                     break;
+            
             default:
                 # code...
                 break;
@@ -57,7 +63,7 @@ class p_efectiva extends core\controller
         $etapas = $model->get_etapas($id_proceso);
         if ($id <= $actual) {
             $datacall = ["titulo" => "","id_"=>$id_main_proceso, "etapas" => $etapas, "activo" => $id, "actual" => $actual,"estado"=>3];
-            $this->parametros($datacall,$id);
+            $this->parametros($datacall,$id,$id_main_proceso);
             if($id == $actual){
                 $datacall["estado"]=$estado_main_proceso;
             }
@@ -79,13 +85,73 @@ class p_efectiva extends core\controller
     public function update_proceso($id, $estado)
     {
         switch ($id) {
-            case 7:
-                $this->proceso_7($estado);
+            case 7: $this->proceso_7($estado);break;
+            case 8: $this->proceso_8($estado);break;
+            case 9: $this->proceso_9($estado);break;
+            case 9: $this->proceso_10($estado);break;
+            default: break;
+        }
+    }
+    private function proceso_10($estado){
+        switch($estado){
+            case 2:
+            case 5:
+                $base = new app\models\documentos();
+                $Actividades=$base-> create_files_post('Plan_Actividades',"application/pdf");
+                $base->crear_empresa_documento($Actividades,$_POST["id_empresaAlumno"],1);
                 break;
-
             default:
-                # code...
+        }
+    }
+
+    private function proceso_9($estado){
+        $Data_Representante = [
+            "id_empresa" => $_POST["id_empresa"],
+            "id_puesto"=> 2,
+            "DNI" =>$_POST["dni"] ,
+            "correo" =>$_POST["correo"] ,
+            "numero" =>$_POST["numero"] ,
+            "Genero" =>$_POST["Genero"] ,
+            "nombre" =>$_POST["nombre"] ,
+            "apellido_p" =>$_POST["apellido_p"] ,
+            "apellido_m" =>$_POST["apellido_m"] ,
+            "GradoInstruccion" =>$_POST["GradoInstruccion"] ,
+            "cargo" =>$_POST["cargo"] ,
+        ];
+        switch ($estado) {
+            case 2:
+            case 5:
+                $model = new app\models\empresa();                
+                $id_jefe = $model->crear_representante_empresa($Data_Representante);
+                $model->update_empres_alumno($_POST["id_empresaAlumno"],["id_jefe_inmediato"=>$id_jefe]);
+
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["id_estado"=>2]);
                 break;
+            
+            default:
+                break;
+        }
+    }
+
+    private function proceso_8($estado){
+        $Data_Aceptacion = [
+            "fecha_inicio"=>date("Y-m-d", strtotime($_POST["fecha_inicio"])),
+            "fecha_fin"=>date("Y-m-d", strtotime($_POST["fecha_fin"])),
+        ];
+
+        switch($estado){
+            case 2:
+            case 5:
+                $base = new app\models\documentos();
+                $matricula=$base-> create_files_post('carta_presentacion',"application/pdf");
+                $Data_Aceptacion["carta_aceptacion"]=$matricula;
+                $model = new app\models\empresa();
+                $model->update_empres_alumno($_POST["id_empresa_alumno"],$Data_Aceptacion);
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["id_estado"=>2]);
+                break;
+            default:
         }
     }
 
@@ -122,6 +188,7 @@ class p_efectiva extends core\controller
         $model->actualizar_DatosSecundarios_Alumno($id_persona["id_persona"],$Data_Estudiante);
         
         switch ($estado) {
+            case 2:
             case 5:
                 $model = new app\models\empresa();
                 $id_Empresa=$model->crear($Data_Empresa);
@@ -131,10 +198,11 @@ class p_efectiva extends core\controller
                 
                 $id_represe_empresa = $model->crear_representante_empresa($Data_Representante);
                 $Data_Empresa_Alumno["id_representante"]=$id_represe_empresa;
-                $model->crear_empresa_alumno($Data_Empresa_Alumno);
+                $empresa_Alumno=$model->crear_empresa_alumno($Data_Empresa_Alumno);
                 $model = new app\models\proceso();
-                $model->actualizar_estado($_POST["id_proceso"],["id_estado"=>2]);
+                $model->actualizar_estado($_POST["id_proceso"],["id_estado"=>2,"id_empresa"=>$empresa_Alumno]);
                 break;
+            
             default:
                 # code...
                 break;

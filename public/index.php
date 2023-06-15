@@ -157,4 +157,14 @@ $roteador->get('/procesos/$id', function($id){
     $controlador = new app\controllers\p_procesos();$controlador->edit($id);
 });
 
+$roteador->post('/procesos/aceptado/$id', function($id){
+
+    $controlador = new app\models\proceso;
+    header('Content-type: application/json');
+    
+    $controlador->actualizar_estado($id,["id_estado"=>5,"id_etapa"=>$controlador->siguienteProceso($_POST["id_proceso"])["id_siguiente_etapa"]]);
+    echo json_encode( [true] );
+});
+
+
 $roteador->any('/404','app/views/404.php');

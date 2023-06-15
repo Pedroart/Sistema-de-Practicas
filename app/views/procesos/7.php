@@ -1,8 +1,10 @@
+<?php //echo json_encode($relleno); ?>
 <div class="container-fluid text-center">
     <?php
 
     $modelo = new app\models\user();
     $Datos_usuari = $modelo->Datos_Alumno($data["id_alumno"]);
+    
     ?>
 
 <div class="row">
@@ -66,40 +68,38 @@
                         <div class="form-group row">
                             <label for="staticRUC" class="col-sm-4 col-form-label">Numero de RUC de la Empresa</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="empresa_RUC" value="7" readonly>
+                                <input type="number" class="form-control" name="empresa_RUC" value="<?= $relleno['CentroLaboral'][0]["ruc"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticNombreEmpres" class="col-sm-4 col-form-label">Nombre de la Empresa*</label>
                             <div class="col-sm-8">
-                                <input type="mail" class="form-control" name="empresa_NombreEmpres" value="Name" readonly>
+                                <input type="mail" class="form-control" name="empresa_NombreEmpres" value="<?= $relleno['CentroLaboral'][0]["nombre"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticDirecLabo" class="col-sm-4 col-form-label">Dirección*</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="empresa_DirecLabo" value="Name" readonly>
+                                <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['CentroLaboral'][0]["direc"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticDepartamento2" class="col-sm-4 col-form-label">Departamento</label>
                             <div class="col-sm-8">
-                                <select id="staticDepartamento2" name="empresa_Departamento" class="form-control" readonly>
-                                </select>
+                                <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['CentroLaboral'][0]["departamento"] ?>" readonly>
+                            
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticProvincia2" class="col-sm-4 col-form-label">Provincia</label>
                             <div class="col-sm-8">
-                                <select id="staticProvincia2" name="empresa_Provincia2" class="form-control" readonly>
-                                </select>
+                                <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['CentroLaboral'][0]["provincia"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticDistrito2" class="col-sm-4 col-form-label">Distrito</label>
                             <div class="col-sm-8">
-                                <select id="staticDistrito2" name="empresa_Distrito2" class="form-control" readonly>
-                                </select>
+                                <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['CentroLaboral'][0]["distrito"] ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -117,39 +117,37 @@
                         <div class="form-group row">
                             <label for="Genero" class="col-sm-4 col-form-label">Genero</label>
                             <div class="col-sm-8">
-                                <select name="Genero" class="form-control" readonly>
-                                </select>
+                            <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['represente'][0]["Genero"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticNameRepre" class="col-sm-4 col-form-label">Nombre</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="representante_Name" value="Name" readonly>
+                                <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['represente'][0]["nombre"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticAparternorRepre" class="col-sm-4 col-form-label">Apellido Parterno</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="representante_Aparternor" value="Name" readonly>
+                            <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['represente'][0]["apellido_p"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticAmarterno" class="col-sm-4 col-form-label">Apellido Marterno</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-user" name="representante_Amarterno" value="Name" readonly>
+                            <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['represente'][0]["apellido_m"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="GradoInstruccion" class="col-sm-4 col-form-label">Grado de Instruccíon</label>
                             <div class="col-sm-8">
-                                <select name="representante_GradoInstruccion" class="form-control" readonly>
-                                </select>
+                            <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['represente'][0]["GradoInstruccion"] ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="Cargo" class="col-sm-4 col-form-label">Cargo</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="Cargo" value="Name" readonly>
+                            <input type="text" class="form-control" name="empresa_DirecLabo" value="<?= $relleno['represente'][0]["cargo"] ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -161,10 +159,13 @@
 
 <script>
     function aceptar(){
-        fetch('http://practicas.test/proceso/aceptado/<?= $data["id"] ?>', {
+        var datos = new FormData();
+        datos.append("id_proceso",<?= $data["id_etapa"]?>);
+        fetch('http://practicas.test/procesos/aceptado/<?= $data["id"] ?>', {
         method: 'POST',
+        body: datos
       })
-      .then(response => {
+      .then(response => {   
         window.location.href ='<?= _URL_ ?>/procesos';
       })
       .catch(error => {

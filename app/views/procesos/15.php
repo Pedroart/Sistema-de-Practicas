@@ -160,17 +160,20 @@
 </div>
 
 <script>
-    function aceptar(){
-        fetch('http://practicas.test/proceso/aceptado/<?= $data["id"] ?>', {
-        method: 'POST',
-      })
-      .then(response => {
-        window.location.href ='<?= _URL_ ?>/procesos';
-      })
-      .catch(error => {
-        // Manejar el error aquí
-        console.error('Error en la llamada POST:', error);
-      });
-    }
+    function aceptar() {
+            var datos = new FormData();
+            datos.append("id_proceso", <?= $data["id_etapa"] ?>);
+            fetch('http://practicas.test/procesos/aceptado/<?= $data["id"] ?>', {
+                    method: 'POST',
+                    body: datos
+                })
+                .then(response => {
+                    window.location.href = '<?= _URL_ ?>/procesos';
+                })
+                .catch(error => {
+                    // Manejar el error aquí
+                    console.error('Error en la llamada POST:', error);
+                });
+        }
 
 </script>

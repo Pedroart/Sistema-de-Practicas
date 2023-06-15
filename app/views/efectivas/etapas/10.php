@@ -3,7 +3,7 @@
     include _view_ . "/efectivas/submenu.php";
     ?>
 
-    <h2 class="h2 mb-2 text-gray-800">Ficha de control Mensual</h2>
+    <h2 class="h2 mb-2 text-gray-800">Ficha de Actividades</h2>
     <p class="mb-4">
         Es un documento en donde se registran las posibles actividades a
         realizarse durante todo el periodo prácticas, el cual debe estar firmado y
@@ -39,7 +39,7 @@
                             <label for="empresa" class="col-sm-4 col-form-label">Empresa</label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="empresa" name="empresa">
-                                    <option value="empresa_a">Empresa A</option>
+                                <option value=""><?=$empresa_nombre?></option>
                                 </select>
                             </div>
                         </div>
@@ -57,3 +57,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+    var b_FichaDatos = document.getElementById('formFichaDatos');
+
+    if (b_FichaDatos) {
+        b_FichaDatos.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var datos = new FormData(e.target);
+            datos.append("id_proceso", <?= $id_ ?>);
+            datos.append("etapa", <?= $actual ?>);
+            datos.append("estado", <?= $estado ?>);
+            datos.append("id_empresa",<?= $id_empresa ?>)
+            datos.append("id_empresaAlumno",<?= $id_empresaAlumno?>)
+            console.log(datos);
+            fetch('http://practicas.test/efectivas/proceso', {
+                    method: 'POST',
+                    body: datos
+                }).then(res => res.json())
+                .then(data => {
+                    if (data.resultado === true) {
+                        location.reload();
+                    } else {
+                        console.log(data);
+                    }
+                })
+        });
+    }
+</script>

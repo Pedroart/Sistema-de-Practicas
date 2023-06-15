@@ -96,8 +96,11 @@
 
     <script>
         function aceptar() {
-            fetch('http://practicas.test/proceso/aceptado/<?= $data["id"] ?>', {
+            var datos = new FormData();
+            datos.append("id_proceso", <?= $data["id_etapa"] ?>);
+            fetch('http://practicas.test/procesos/aceptado/<?= $data["id"] ?>', {
                     method: 'POST',
+                    body: datos
                 })
                 .then(response => {
                     window.location.href = '<?= _URL_ ?>/procesos';

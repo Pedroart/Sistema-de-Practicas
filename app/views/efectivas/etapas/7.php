@@ -130,19 +130,19 @@
                         <div class="form-group row">
                             <label for="staticRUC" class="col-sm-4 col-form-label">Numero de RUC de la Empresa</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="empresa_RUC" value="7" required>
+                                <input type="number" class="form-control" name="empresa_RUC" value="99999" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticNombreEmpres" class="col-sm-4 col-form-label">Nombre de la Empresa*</label>
+                            <label for="staticNombreEmpres" class="col-sm-4 col-form-label">Nombre de la Empresa</label>
                             <div class="col-sm-8">
-                                <input type="mail" class="form-control" name="empresa_NombreEmpres" value="Name" required>
+                                <input type="mail" class="form-control" name="empresa_NombreEmpres"  required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="staticDirecLabo" class="col-sm-4 col-form-label">Dirección*</label>
+                            <label for="staticDirecLabo" class="col-sm-4 col-form-label">Dirección</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="empresa_DirecLabo" value="Name" required>
+                                <input type="text" class="form-control" name="empresa_DirecLabo"  required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -183,27 +183,27 @@
                             <label for="Genero" class="col-sm-4 col-form-label">Genero</label>
                             <div class="col-sm-8">
                                 <select name="Genero" class="form-control" required>
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
+                                    <option value="Femenino">Femenino</option>
+                                    <option value="Masculino">Masculino</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticNameRepre" class="col-sm-4 col-form-label">Nombre</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="representante_Name" value="Name">
+                                <input type="text" class="form-control" name="representante_Name" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticAparternorRepre" class="col-sm-4 col-form-label">Apellido Parterno</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="representante_Aparternor" value="Name">
+                                <input type="text" class="form-control" name="representante_Aparternor" >
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="staticAmarterno" class="col-sm-4 col-form-label">Apellido Marterno</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-user" name="representante_Amarterno" value="Name">
+                                <input type="text" class="form-control form-control-user" name="representante_Amarterno" >
                             </div>
                         </div>
                         <div class="form-group row">
@@ -222,7 +222,7 @@
                         <div class="form-group row">
                             <label for="Cargo" class="col-sm-4 col-form-label">Cargo</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="Cargo" value="Name" required>
+                                <input type="text" class="form-control" name="Cargo"  required>
                             </div>
                         </div>
                     </div>

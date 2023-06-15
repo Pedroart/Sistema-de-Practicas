@@ -39,7 +39,7 @@
                             <label for="empresa" class="col-sm-4 col-form-label">Empresa</label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="empresa" name="empresa">
-                                    <option value="<?=$id_empresa?>"><?=$empresa_nombre?></option>
+                                <option value=""><?=$empresa_nombre?></option>
                                 </select>
                             </div>
                         </div>
@@ -79,6 +79,7 @@
       datos.append("id_proceso",<?= $id_?>);
         datos.append("etapa",<?= $actual?>);
         datos.append("estado",<?= $estado?>);
+        datos.append("id_empresa_alumno",<?= $id_empresaAlumno ?>)
       console.log(datos);
       fetch('http://practicas.test/efectivas/proceso', {
           method: 'POST',

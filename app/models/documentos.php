@@ -4,6 +4,17 @@ namespace app\models;
 use core;
 
 class documentos extends core\modelo{
+    public function crear_empresa_documento($id_documento,$id_empresa_alumno,$tipo) {
+        $inset = [
+            "id_documento"=>$id_documento,
+            "id_empresa_alumno"=>$id_empresa_alumno,
+            "Tipo"=>$tipo
+        ];
+        $this->table = "empresa_documentos";
+        $id = $this->create($inset);
+        return $id;
+    }
+
     public function create_files_post($name_post,$tipe)
     {
         $ficha  = $_FILES[$name_post];
