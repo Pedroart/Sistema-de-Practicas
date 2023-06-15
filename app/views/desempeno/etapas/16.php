@@ -1,6 +1,6 @@
 <div class="container-fluid text-center">
     <?php
-    include _view_ . "/efectivas/submenu.php";
+    include _view_ . "/desempeno/submenu.php";
     ?>
 
     <h1 class="h2 mb-2 text-gray-800">Datos del jefe inmediato</h1>
@@ -31,9 +31,7 @@
 
             <div class="col">
                 <div class="card mb-4">
-                    <div class="card-header">
-                        Datos del Representante de la Empresa
-                    </div>
+                    
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="empresa" class="col-sm-4 col-form-label">Empresa</label>

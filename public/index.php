@@ -106,6 +106,29 @@ $roteador->get('/desempeno', function(){
     $controlador = new app\controllers\p_desempeno();$controlador->index();
 });
 
+
+$roteador->get('/desempeno/proceso', function(){
+    
+    $controlador = new app\controllers\p_desempeno();
+    $data=$controlador->pre_proceso($_SESSION['id_user']);
+    
+    if($data!=false){
+        if($data["id_proceso"]==2)
+        $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
+        return;
+    }
+    // Realizar proceso
+    echo "hola";
+    core\view::view_dashboard('conf_proceso',["titulo"=>"Desempeño Laboral","proceso"=>2]);
+        
+});
+
+$roteador->get('/desempeno/proceso/$id', function($id){
+    $controlador = new app\controllers\p_desempeno();
+    $data=$controlador->pre_proceso($_SESSION['id_user']);
+    $controlador->proceso_id($id,$data['id_etapa'],$data['id'],$data['id_estado']);
+});
+
 $roteador->get('/validaciones', function(){
     $controlador = new app\controllers\p_validaciones();$controlador->index();
 });

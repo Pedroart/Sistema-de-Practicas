@@ -1,13 +1,17 @@
 <div class="container-fluid text-center">
     <?php
-    include _view_ . "/efectivas/submenu.php";
+    include _view_ . "/desempeno/submenu.php";
     ?>
 
-    <h2 class="h2 mb-2 text-gray-800">Ficha de control Mensual</h2>
+    <h2 class="h2 mb-2 text-gray-800">Boletas de pago</h2>
     <p class="mb-4">
-    Es un documento en donde se registra todas las actividades realizadas cada mes,
-    el cual debe estar firmado y sellado por tu jefe inmediato y tu persona.
-    Debe escanear y subir este documento al sistema en formato PDF.
+        Es el medio por el cual se acredita el cumplimiento de la prestación en una relación
+        laboral. Es decir, la boleta confirma que ha recibido del empleador una
+        remuneración como contraprestación por la labor que ha realizado.
+        </br>
+        Si emites recibos por honorarios electrónicos deben estar firmados y sel lados por la
+        empresa. Debe escanear y subir estos documentos (las tres últimas boletas o
+        recibos a la fecha) al sistema en formato PDF.
     </p>
 
     <?php if ($estado == 3) : ?>
@@ -29,9 +33,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-lg-6 ">
             <div class="card mb-4">
-                <div class="card-header">
-                    Fichas Mensuales
-                </div>
+                
                 <div class="card-body">
                     <form>
                         <div class="form-group row">
@@ -46,19 +48,19 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="ficha_mensual1" class="col-sm-4 col-form-label">Ficha mensual #1</label>
+                            <label for="ficha_mensual1" class="col-sm-4 col-form-label">Boleta pago #1</label>
                             <div class="col-sm-8">
                                 <input type="file" class="form-control-file" id="ficha_mensual1" name="ficha_mensual1">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ficha_mensual2" class="col-sm-4 col-form-label">Ficha mensual #2</label>
+                            <label for="ficha_mensual2" class="col-sm-4 col-form-label">Boleta pago #2</label>
                             <div class="col-sm-8">
                                 <input type="file" class="form-control-file" id="ficha_mensual2" name="ficha_mensual2">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ficha_mensual3" class="col-sm-4 col-form-label">Ficha mensual #3</label>
+                            <label for="ficha_mensual3" class="col-sm-4 col-form-label">Boleta pago #3</label>
                             <div class="col-sm-8">
                                 <input type="file" class="form-control-file" id="ficha_mensual3" name="ficha_mensual3">
                             </div>

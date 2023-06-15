@@ -47,11 +47,28 @@
                                 </div>
                             </div>
                             <small>
-                                Convalidacion
+                                <?=strtoupper($person["e_nombre"]).":".($person["id_etapa"]-$person["Inicio"])."/".$person["Numero_Pasos"] ?>
                             </small>
                         </td>
                         <td class="project-state">
-                            <span class="badge badge-success">Success</span>
+                            <?php switch($person["id_estado"]): case 1: ?>
+                                <span class="badge badge-info">Pendiente</span>
+                                <?php break;?>
+                                <?php case 2:?>
+                                <span class="badge badge-warning">Enviado</span>
+                                <?php break;?>
+                                <?php case 3:?>
+                                <span class="badge badge-success">Completado</span>
+                                <?php break;?>
+                                <?php case 4:?>
+                                <span class="badge badge-danger">Fallido</span>
+                                <?php break;?>
+                                <?php case "5":?>
+                                    <span class="badge badge-primary">Completando</span>
+                                <?php break;?>
+                                <?php default:?>
+                                
+                            <?php endswitch;?>
                         </td>
                         <td class="project-actions text-right">
                             <a class="btn btn-primary btn-sm" href="<?=_URL_."/procesos/".$person["id"]?>">

@@ -31,7 +31,7 @@ class proceso extends core\modelo
 
     public function get_tabla()
     {
-        $sql = "SELECT `id`, alumno.id_alumno,persona.nombre,persona.apellido_paterno, empresa.Razon_socal_empresa, tprocesos.Inicio, tprocesos.Numero_Pasos, `id_etapa`\n"
+        $sql = "SELECT `id`,`id_estado` , alumno.id_alumno,persona.nombre,persona.apellido_paterno, empresa.Razon_socal_empresa, tprocesos.Inicio,tprocesos.nombre as e_nombre , tprocesos.Numero_Pasos, `id_etapa`\n"
             . "FROM `proceso`\n"
             . "INNER JOIN alumno on proceso.id_alumno = alumno.id_alumno\n"
             . "INNER JOIN persona on persona.id_persona = alumno.id_persona\n"
