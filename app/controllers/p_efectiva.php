@@ -32,7 +32,6 @@ class p_efectiva extends core\controller
         $modeloEmpresa = new app\models\empresa();
         switch ($id) {
             case 7:
-                # code...
                 break;
             case 8:
             case 9:
