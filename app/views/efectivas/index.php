@@ -1,8 +1,4 @@
-<div class="containers text-center">
-  
-<div class="mb-4">
-  <h1 class="h2 mb-0 text-gray-800">Practicas Efectivas</h1>
-</div>
+
 
 <div class="row">
   <div class="col-lg-4">
@@ -44,5 +40,4 @@
                                 </div>
                             </div>
   </div>
-</div>
 </div>

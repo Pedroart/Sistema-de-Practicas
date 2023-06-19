@@ -11,16 +11,19 @@ $roteador->post('/api/departamentos', function(){
     $controlador = new app\models\lugar();
     header('Content-type: application/json');
     echo json_encode( $controlador->departamentos(18) );
-    
 });
 
 $roteador->post('/api/provincia', function(){
     $controlador = new app\models\lugar();
     header('Content-type: application/json');
-    echo $_POST['id'];//json_encode( $controlador->provincia($_POST['id']) );
-
+    echo json_encode( $controlador->provincia($_POST['id']) );
 });
 
+$roteador->post('/api/distrito', function(){
+    $controlador = new app\models\lugar();
+    header('Content-type: application/json');
+    echo json_encode( $controlador->distrito($_POST['id']) );
+});
 
 // Login
 if (! isset($_SESSION['id_user'])){
@@ -46,6 +49,10 @@ $roteador->post('/validacion', function(){
     $controlador = new app\controllers\vali_matri();$controlador->create_();
 });
 
+$roteador->post('/validacion/put', function(){
+    $controlador = new app\controllers\vali_matri();$controlador->updateFile_();
+});
+
 $roteador->get('/validacion', function(){
     $controlador = new app\controllers\vali_matri();$controlador->index();
 });
@@ -63,9 +70,10 @@ $roteador->get('/efectivas/proceso', function(){
     
     $controlador = new app\controllers\p_efectiva();
     $data=$controlador->pre_proceso($_SESSION['id_user']);
+    
     if($data!=false){
         if($data["id_proceso"]==1)
-        $controlador->proceso($data['id_etapa']);
+        $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
         return;
     }
     // Realizar proceso
@@ -76,7 +84,14 @@ $roteador->get('/efectivas/proceso', function(){
 $roteador->get('/efectivas/proceso/$id', function($id){
     $controlador = new app\controllers\p_efectiva();
     $data=$controlador->pre_proceso($_SESSION['id_user']);
-    $controlador->proceso_id($id,$data['id_etapa']);
+    $controlador->proceso_id($id,$data['id_etapa'],$data['id'],$data['id_estado']);
+});
+
+$roteador->post('/efectivas/proceso', function(){
+    $controlador = new app\controllers\p_efectiva();
+    $controlador->update_proceso($_POST["etapa"],$_POST["estado"]);
+    header('Content-type: application/json');
+    echo json_encode( $_POST );
 });
 
 $roteador->get('/efectivas/cartas', function(){
@@ -91,18 +106,64 @@ $roteador->get('/desempeno', function(){
     $controlador = new app\controllers\p_desempeno();$controlador->index();
 });
 
-$roteador->get('/efectivas/proceso', function(){
+
+$roteador->get('/desempeno/proceso', function(){
     
-    $controlador = new app\controllers\p_efectiva();
+    $controlador = new app\controllers\p_desempeno();
     $data=$controlador->pre_proceso($_SESSION['id_user']);
+    
     if($data!=false){
-        if($data["id_proceso"]==1)
-        $controlador->proceso($data['id_etapa']);
+        if($data["id_proceso"]==2)
+        $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
         return;
     }
     // Realizar proceso
-    core\view::view_dashboard('conf_proceso',["titulo"=>"Efectivas","proceso"=>1]);
+    echo "hola";
+    core\view::view_dashboard('conf_proceso',["titulo"=>"Desempeño Laboral","proceso"=>2]);
         
+});
+
+$roteador->get('/desempeno/proceso/$id', function($id){
+    $controlador = new app\controllers\p_desempeno();
+    $data=$controlador->pre_proceso($_SESSION['id_user']);
+    $controlador->proceso_id($id,$data['id_etapa'],$data['id'],$data['id_estado']);
+});
+
+$roteador->get('/validaciones', function(){
+    $controlador = new app\controllers\p_validaciones();$controlador->index();
+});
+
+$roteador->get('/validaciones/$id', function($id){
+    $controlador = new app\controllers\p_validaciones();$controlador->edit($id);
+});
+
+$roteador->post('/validaciones/aceptado/$id', function($id){
+    $controlador = new app\models\matricula;$controlador->aceptado($id);
+});
+
+$roteador->post('/validaciones/revisar/$id', function($id){
+    $controlador = new app\controllers\p_validaciones();$controlador->revisar($id);
+});
+
+$roteador->post('/validaciones/rechazar/$id', function($id){
+    $controlador = new app\models\matricula;$controlador->rechazar($id);
+});
+
+$roteador->get('/procesos', function(){
+    $controlador = new app\controllers\p_procesos();$controlador->index();
+});
+
+$roteador->get('/procesos/$id', function($id){
+    $controlador = new app\controllers\p_procesos();$controlador->edit($id);
+});
+
+$roteador->post('/procesos/aceptado/$id', function($id){
+
+    $controlador = new app\models\proceso;
+    header('Content-type: application/json');
+    
+    $controlador->actualizar_estado($id,["id_estado"=>5,"id_etapa"=>$controlador->siguienteProceso($_POST["id_proceso"])["id_siguiente_etapa"]]);
+    echo json_encode( [true] );
 });
 
 

@@ -21,7 +21,7 @@ class user extends core\modelo{
 
             $this->query("SELECT MAX(`id_semestres`), `nombre_semestres` FROM `semestres`");
             $_SESSION['semestre'] =$this->first()['nombre_semestres'];
-
+            $_SESSION['DATA_ALUMNO']=$this->Datos_Alumno($resultados['id_user']);
             return true;
         }
         return false;
@@ -33,5 +33,18 @@ class user extends core\modelo{
         $this->query($sql);
         $data = $this->first();
         return $data; 
+    }
+
+    public function buscar_id_persona_estudiante($id_alumno) {
+        $sql = "SELECT `id_persona` FROM  `alumno` WHERE `id_alumno` = {$id_alumno}";
+        $this->query($sql);
+        $data = $this->first();
+        return $data; 
+    }
+
+    public function actualizar_DatosSecundarios_Alumno($id,$datos) {
+        
+        $this->table= "persona";
+        return $this->update4key($id,$datos,"id_persona");
     }
 }

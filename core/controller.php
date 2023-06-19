@@ -2,6 +2,7 @@
 
 namespace core;
 
+use app;
 /**
  * Base controller
  *
@@ -10,7 +11,14 @@ namespace core;
 abstract class controller
 {
 
-    
+    public function matricula(){
+        $base = new app\models\matricula();
+
+        if( $base-> vericador() && $base-> estado() ){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Magic method called when a non-existent or inaccessible method is

@@ -32,27 +32,27 @@ if( $base-> vericador() && $base-> estado() ){
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-angle-double-up",
                     'title'=> "Emprendimiento",
-                    "url"  => "/nav_iten_1"
+                    "url"  => "emprendimiento"
                 ],
                 [
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-circle-notch",
                     'title'=> "Convalidacion",
-                    "url"  => "/nav_iten_1"
+                    "url"  => "convalidacion"
                 ]
             ],
             "OTROS" => [
                 [
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-user-plus",
-                    'title'=> "Practicas extracurriculares",
-                    "url"  => "/nav_iten_1"
+                    'title'=> "Practica extracurriculares",
+                    "url"  => "extracurriculares"
                 ],
                 [
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-user-graduate",
-                    'title'=> "Practicas profecionales ",
-                    "url"  => "/nav_iten_1"
+                    'title'=> "Practicas profecionales",
+                    "url"  => "profecionales"
                 ]
             ]
         ];
@@ -64,7 +64,7 @@ if( $base-> vericador() && $base-> estado() ){
                     'type' => "nav-link",
                     'icon' => "fas fa-fw fa-table",
                     'title'=> "Validacion",
-                    "url"  => "/validacion"
+                    "url"  => "validacion"
                 ]
             ]
         ];
