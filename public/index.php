@@ -67,24 +67,11 @@ $roteador->get('/efectivas', function(){
 });
 
 $roteador->get('/efectivas/proceso', function(){
-    
-    $controlador = new app\controllers\p_efectiva();
-    $data=$controlador->pre_proceso($_SESSION['id_user']);
-    
-    if($data!=false){
-        if($data["id_proceso"]==1)
-        $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
-        return;
-    }
-    // Realizar proceso
-    core\view::view_dashboard('conf_proceso',["titulo"=>"Efectivas","proceso"=>1]);
-        
+    $controlador = new app\controllers\p_efectiva();$controlador->proceso();
 });
 
 $roteador->get('/efectivas/proceso/$id', function($id){
-    $controlador = new app\controllers\p_efectiva();
-    $data=$controlador->pre_proceso($_SESSION['id_user']);
-    $controlador->proceso_id($id,$data['id_etapa'],$data['id'],$data['id_estado']);
+    $controlador = new app\controllers\p_efectiva();$controlador->proceso($id);
 });
 
 $roteador->post('/efectivas/proceso', function(){

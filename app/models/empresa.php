@@ -44,6 +44,13 @@ class empresa extends core\modelo
 
         return $data;
     }
+    public function get_jefe_empresa($id){
+        $sql = "SELECT * FROM `empresa_encargados` WHERE `id_empresa_encargado` = {$id};";
+        $this->query($sql);
+        $data = $this->first();
+
+        return $data;
+    }
 
     public function get_representante_empresa($id){
         $sql = "SELECT `Genero`, `nombre`, `apellido_p`, `apellido_m`, `GradoInstruccion`, `cargo` \n"
@@ -64,6 +71,13 @@ class empresa extends core\modelo
 
     public function get_empresaAlumno($id){
         $sql = "SELECT * FROM `empresa_alumno` WHERE `id_empresa_alumno` = {$id};";
+        $this->query($sql);
+        $data = $this->first();
+
+        return $data;
+    }
+    public function get_empresaAlumno_idEmpresa($id){
+        $sql = "SELECT * FROM `empresa_alumno` WHERE `id_empresa` = {$id};";
         $this->query($sql);
         $data = $this->first();
 

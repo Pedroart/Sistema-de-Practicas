@@ -9,7 +9,7 @@ class proceso extends core\modelo
 {
     public function buscarProcesos($id_alumno)
     {
-        $sql = "SELECT `id`,`id_proceso`,`id_etapa`,`id_estado` FROM `proceso` WHERE `id_alumno` = {$id_alumno} and `id_semestre` = (SELECT MAX(`id_semestres`)FROM `semestres`)";
+        $sql = "SELECT * FROM `proceso` WHERE `id_alumno` = {$id_alumno} and `id_semestre` = (SELECT MAX(`id_semestres`)FROM `semestres`)";
         $this->query($sql);
         return $this->first();
     }

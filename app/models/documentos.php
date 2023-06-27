@@ -62,4 +62,10 @@ class documentos extends core\modelo{
         $data =$this->find($id,"id_documento");
         return ["uri"=>$data["direccion_documento"],"comentario"=>$data["comentario"]];
     }
+
+    public function get_documentos_empresa($id_empresa_alumno){
+        $this->table = "empresa_documentos";
+        $data =$this-> where("id_empresa_alumno","=",$id_empresa_alumno);
+        return $this->get();
+    }
 }

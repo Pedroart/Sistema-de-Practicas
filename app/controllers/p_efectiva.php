@@ -18,59 +18,6 @@ class p_efectiva extends core\controller
         return;
     }
 
-    public function pre_proceso($id_alumno)
-    {
-        $model = new app\models\proceso();
-        $data = $model->buscarProcesos($id_alumno);
-        if ($model->_num_rows() == 0) {
-            return false;
-        }
-        return $data;
-    }
-    
-    public function parametros(&$array,$id,$id_proceso){
-        $modeloEmpresa = new app\models\empresa();
-        switch ($id) {
-            case 7:
-                break;
-            case 8:
-            case 9:
-            case 10:    
-                $dataEmpresa = $modeloEmpresa->get_name_empresa($id_proceso);
-                $array["empresa_nombre"] = $dataEmpresa["Razon_socal_empresa"];
-                $array["id_empresaAlumno"] = $dataEmpresa["id_empresa_alumno"];
-                $array["id_empresa"] = $dataEmpresa["id_empresa"];
-                    break;
-            
-            default:
-                # code...
-                break;
-        }
-    }
-
-    public function proceso($id,$id_etapa_actual, $estado)
-    {
-        
-        $this->proceso_id($id_etapa_actual, $id_etapa_actual,$id,$estado);
-        return;
-    }
-
-    public function proceso_id($id, $actual,$id_main_proceso,$estado_main_proceso)
-    {
-        $id_proceso = 1;
-        $model = new app\models\t_proceso();
-        $etapas = $model->get_etapas($id_proceso);
-        if ($id <= $actual) {
-            $datacall = ["titulo" => "","id_"=>$id_main_proceso, "etapas" => $etapas, "activo" => $id, "actual" => $actual,"estado"=>3];
-            $this->parametros($datacall,$id,$id_main_proceso);
-            if($id == $actual){
-                $datacall["estado"]=$estado_main_proceso;
-            }
-            core\view::view_dashboard('efectivas/etapas/' . $id, $datacall);
-            return;
-        }
-        core\view::view_dashboard('efectivas/etapas/0', ["titulo" => "", "etapas" => $etapas, "activo" => $id, "actual" => $actual]);
-    }
     public function cartas()
     {
         core\view::view_dashboard('efectivas/cartas', ["titulo" => " Hisotiral de Cartas"]);
@@ -81,14 +28,70 @@ class p_efectiva extends core\controller
         core\view::view_dashboard('efectivas/estado', ["titulo" => " Estado"]);
         return;
     }
+
+    public function proceso($id=null)
+    {
+        $proceso = new app\models\proceso();
+        $dataProceso = $proceso->buscarProcesos($_SESSION['id_user']);
+
+        if($proceso->_num_rows() ==0){ // Propone crear un proceso si no existe
+            core\view::view_dashboard('conf_proceso',["titulo"=>"Efectivas","proceso"=>1]);
+            return;
+        }
+
+        if(!($dataProceso["id_proceso"]==1)){
+            $id = 0;
+        }
+
+        $this->proceso_id($id,$dataProceso);
+        return;
+    }
+
+    private function proceso_id($id,$dataProceso){
+        $id_actual = $dataProceso["id_etapa"];
+        if(is_null($id)){
+            $id = $id_actual;
+        }
+        $id_proceso = 1;
+        $model = new app\models\t_proceso();
+        $etapas = $model->get_etapas($id_proceso);
+        if ($id <= $id_actual){
+            $data = new app\models\data_efectivas();
+            $dataProceso["id_Alumno"] = $_SESSION['id_user'];
+            
+            core\view::view_dashboard('efectivas/etapas/'.$id, ["titulo" => "", "etapas" => $etapas,"id_"=>$dataProceso["id"], "activo" => $id, "actual" => $id_actual,"dataProceso"=>&$dataProceso, "formulario"=> $data->data($id,(($id_actual>$id)? "3":$dataProceso["id_estado"]),$dataProceso)]);
+            return;   
+        }
+        core\view::view_dashboard('efectivas/etapas/0', ["titulo" => "", "etapas" => $etapas, "activo" => $id, "actual" => $id_actual]);
+        return;
+    }
+
     public function update_proceso($id, $estado)
     {
         switch ($id) {
             case 7: $this->proceso_7($estado);break;
             case 8: $this->proceso_8($estado);break;
             case 9: $this->proceso_9($estado);break;
-            case 9: $this->proceso_10($estado);break;
+            case 10: $this->proceso_10($estado);break;
+            case 11: $this->proceso_11($estado);break;
             default: break;
+        }
+    }
+    private function proceso_11($estado){
+        switch($estado){
+            case 2:
+            case 5:
+                $base = new app\models\documentos();
+                $FichaControl1 = $base->create_files_post('FichaControl1', "application/pdf");
+                $base->crear_empresa_documento($FichaControl1, $_POST["id_empresaAlumno"], 2);
+                $FichaControl2 = $base->create_files_post('FichaControl2', "application/pdf");
+                $base->crear_empresa_documento($FichaControl1, $_POST["id_empresaAlumno"], 2);
+                $FichaControl3 = $base->create_files_post('FichaControl3', "application/pdf");
+                $base->crear_empresa_documento($FichaControl1, $_POST["id_empresaAlumno"], 2);
+                $FichaControl4 = $base->create_files_post('FichaControl4', "application/pdf");
+                $base->crear_empresa_documento($FichaControl1, $_POST["id_empresaAlumno"], 2);
+                break;
+            default:
         }
     }
     private function proceso_10($estado){
@@ -107,7 +110,7 @@ class p_efectiva extends core\controller
         $Data_Representante = [
             "id_empresa" => $_POST["id_empresa"],
             "id_puesto"=> 2,
-            "DNI" =>$_POST["dni"] ,
+            "DNI" =>$_POST["DNI"] ,
             "correo" =>$_POST["correo"] ,
             "numero" =>$_POST["numero"] ,
             "Genero" =>$_POST["Genero"] ,
@@ -157,26 +160,26 @@ class p_efectiva extends core\controller
     private function proceso_7($estado)
     {
         $Data_Estudiante = [
-            "direccion" => $_POST["estudiante_Direc"],
-            "correo" => $_POST["estudiante_Correo"],
-            "celular" => $_POST["estudiante_Celular"],
-            "departamento" => $_POST["estudiante_Departamento"],
-            "provincia" => $_POST["estudiante_Provincia"],
-            "distrito" => $_POST["estudiante_Distrito"]
+            "direccion" =>      $_POST["direccion"],
+            "correo" =>         $_POST["correo"],
+            "celular" =>        $_POST["celular"],
+            "departamento" =>   $_POST["departamento"],
+            "provincia" =>      $_POST["provincia"],
+            "distrito" =>       $_POST["distrito"],
         ];
         $Data_Empresa = [
-            "RUC" => $_POST["empresa_RUC"],
-            "Razon_socal_empresa" => $_POST["empresa_NombreEmpres"],
-            "Referencia_ubicacion_empresa" => $_POST["empresa_DirecLabo"],
-            "id_distrito" => $_POST["empresa_Distrito2"],
+            "RUC" =>                            $_POST["empresa_RUC"],
+            "Razon_socal_empresa" =>            $_POST["empresa_NombreEmpres"],
+            "Referencia_ubicacion_empresa" =>   $_POST["empresa_DirecLabo"],
+            "id_distrito" =>                    $_POST["empresa_Distrito2"],
         ];
         $Data_Representante = [
-            "nombre" => $_POST["representante_Name"],
-            "apellido_p" => $_POST["representante_Aparternor"],
-            "apellido_m" => $_POST["representante_Amarterno"],
-            "cargo" => $_POST["Cargo"],
-            "Genero" => $_POST["Genero"],
-            "GradoInstruccion" => $_POST["representante_GradoInstruccion"],
+            "nombre" =>             $_POST["representante_Name"],
+            "apellido_p" =>         $_POST["representante_Aparternor"],
+            "apellido_m" =>         $_POST["representante_Amarterno"],
+            "cargo" =>              $_POST["Cargo"],
+            "Genero" =>             $_POST["Genero"],
+            "GradoInstruccion" =>   $_POST["representante_GradoInstruccion"],
         ];
         $Data_Empresa_Alumno=[
             "id_alumno"=>$_SESSION['id_user']
@@ -207,4 +210,5 @@ class p_efectiva extends core\controller
                 break;
         }
     }
+    
 }

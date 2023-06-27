@@ -1,3 +1,7 @@
+<?php
+$estado = ($actual>$activo)? "3":$dataProceso["id_estado"];
+?>
+
 <div class="container-fluid text-center">
     <?php
     include _view_ . "/efectivas/submenu.php";
@@ -10,65 +14,8 @@
         culminación tus prácticas. Debe escanear y subir este documento al sistema en formato PDF.
     </p>
 
-    <?php if($estado==3) :?>
-    <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Respuesta del Sistema</h4>
-        <p>Etapa Finalizada</p>
-    </div>
-    <?php elseif($estado==2) :?>
-    <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Respuesta del Sistema</h4>
-        <p>Datos cargados exitosamente</p>
-    </div>
-    <?php elseif($estado==1) :?>
-    <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Docente: Loren Ipsu</h4>
-        <p>Datos Erroneos empresa no encontrada</p>
-    </div>
-    <?php endif; ?>
-
-    <div class="row d-flex justify-content-center">
-        <div class="col-lg-6 ">
-            <div class="card mb-4">
-                <div class="card-header">
-                    Aceptación de Practicas
-                </div>
-                <div class="card-body">
-                    <form name="formFichaDatos" id="formFichaDatos">
-                        <div class="form-group row">
-                            <label for="empresa" class="col-sm-4 col-form-label">Empresa</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" id="empresa" name="empresa">
-                                <option value=""><?=$empresa_nombre?></option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="fecha_inicio" class="col-sm-4 col-form-label">Fecha de inicio de las prácticas</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="fecha_fin" class="col-sm-4 col-form-label">Fecha de fin de las prácticas</label>
-                            <div class="col-sm-8">
-                                <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="carta_presentacion" class="col-sm-4 col-form-label">Carta de presentación</label>
-                            <div class="col-sm-8">
-                                <input type="file" class="form-control-file" id="carta_presentacion" name="carta_presentacion">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include _view_ . "/efectivas/cabecera.php";?>
+    <?php include _view_ . "/efectivas/generador.php";?>
 </div>
 <script>
     var b_FichaDatos = document.getElementById('formFichaDatos');
@@ -79,7 +26,7 @@
       datos.append("id_proceso",<?= $id_?>);
         datos.append("etapa",<?= $actual?>);
         datos.append("estado",<?= $estado?>);
-        datos.append("id_empresa_alumno",<?= $id_empresaAlumno ?>)
+        datos.append("id_empresa_alumno",<?= $dataProceso["id_empresaAlumno"] ?>)
       console.log(datos);
       fetch('http://practicas.test/efectivas/proceso', {
           method: 'POST',

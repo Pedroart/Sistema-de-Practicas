@@ -29,7 +29,12 @@ class user extends core\modelo{
     
     public function Datos_Alumno($id_alumno)
     {
-        $sql = "SELECT `nombre`, `apellido_paterno`, `apellido_materno`, `DNI` FROM `persona` WHERE `id_persona` = (SELECT `id_persona` FROM  `alumno` WHERE `id_alumno` = {$id_alumno} );";
+        $sql = "SELECT `nombre`, `apellido_paterno`, `apellido_materno`, `DNI`,`direccion`, `correo`, `celular`, `departamento`, departamento_pais.nombre_departamento, `provincia`, provincia.nombre_provincia, `distrito`, distrito.nombre_distrito\n"
+        . "FROM `persona` \n"
+        . "left JOIN departamento_pais on persona.departamento = departamento_pais.id_departamento\n"
+        . "left JOIN provincia on persona.provincia = provincia.id_provincia\n"
+        . "left JOIN distrito on persona.distrito = distrito.id_distrito\n"
+        . "WHERE `id_persona` = (SELECT `id_persona` FROM  `alumno` WHERE `id_alumno` = 332131002 );";
         $this->query($sql);
         $data = $this->first();
         return $data; 
