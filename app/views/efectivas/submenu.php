@@ -10,7 +10,7 @@
         <?php foreach($etapas as $etapa): ?>
             <?php //echo $etapa['id_etapa'] ?>
         <li class="nav-item ">
-        <a class="nav-link <?php echo ($activo == $etapa['id_etapa'])? "active" : ""; ?> <?php echo ($actual >= $etapa['id_etapa'])? "" : "disabled"; ?>" href="http://practicas.test/efectivas/proceso/<?php echo $etapa['id_etapa'] ?>"><?=$etapa['nombre'] ?></a>
+        <a class="nav-link <?php echo ($activo == $etapa['tetp_id_etapa'])? "active" : ""; ?> <?php echo ($actual >= $etapa['tetp_id_etapa'])? "" : "disabled"; ?>" href="http://practicas.test/efectivas/proceso/<?php echo $etapa['tetp_id_etapa'] ?>"><?=$etapa['tetp_nombre'] ?></a>
         </li>
         <?php endforeach; ?>
     </ul>

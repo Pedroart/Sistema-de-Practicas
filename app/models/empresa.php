@@ -70,7 +70,8 @@ class empresa extends core\modelo
     }
 
     public function get_empresaAlumno($id){
-        $sql = "SELECT * FROM `empresa_alumno` WHERE `id_empresa_alumno` = {$id};";
+        $sql = "SELECT * FROM `empresa_proceso`\n"
+        . "WHERE `empresa_proceso` = {$id};";
         $this->query($sql);
         $data = $this->first();
 

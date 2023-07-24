@@ -6,13 +6,13 @@ use core;
 class comentarios extends core\modelo{
     public function createComentario($idRole, $idUser, $cuerpo){
         $insert = [
-            "id_role" => $idRole,
-            "id_user" => $idUser,
-            "cuerpo" => $cuerpo,
-            "fecha" => date('Y-m-d')
+            "comentario_role" => $idRole,
+            "comentario_user" => $idUser,
+            "comentario_cuerpo" => $cuerpo,
+            "comentario_fecha" => date('Y-m-d')
         ];
         
-        $this->table = 'comentario';
+        $this->table = 'comentarios';
         $id = $this->create($insert);
         
         return $id;

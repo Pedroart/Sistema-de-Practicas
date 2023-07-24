@@ -39,7 +39,7 @@ class p_efectiva extends core\controller
             return;
         }
 
-        if(!($dataProceso["id_proceso"]==1)){
+        if(!($dataProceso["procesos_tipo"]==1)){
             $id = 0;
         }
 
@@ -48,7 +48,7 @@ class p_efectiva extends core\controller
     }
 
     private function proceso_id($id,$dataProceso){
-        $id_actual = $dataProceso["id_etapa"];
+        $id_actual = $dataProceso["proceso_etapa"];
         if(is_null($id)){
             $id = $id_actual;
         }
@@ -59,7 +59,7 @@ class p_efectiva extends core\controller
             $data = new app\models\data_efectivas();
             $dataProceso["id_Alumno"] = $_SESSION['id_user'];
             
-            core\view::view_dashboard('efectivas/etapas/'.$id, ["titulo" => "", "etapas" => $etapas,"id_"=>$dataProceso["id"], "activo" => $id, "actual" => $id_actual,"dataProceso"=>&$dataProceso, "formulario"=> $data->data($id,(($id_actual>$id)? "3":$dataProceso["id_estado"]),$dataProceso)]);
+            core\view::view_dashboard('efectivas/etapas/'.$id, ["titulo" => "", "etapas" => $etapas,"id_"=>$dataProceso["procesos_id"], "activo" => $id, "actual" => $id_actual,"dataProceso"=>&$dataProceso, "formulario"=> $data->data($id,(($id_actual>$id)? "3":$dataProceso["procesos_estado"]),$dataProceso)]);
             return;   
         }
         core\view::view_dashboard('efectivas/etapas/0', ["titulo" => "", "etapas" => $etapas, "activo" => $id, "actual" => $id_actual]);

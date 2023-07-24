@@ -9,7 +9,7 @@ class proceso extends core\modelo
 {
     public function buscarProcesos($id_alumno)
     {
-        $sql = "SELECT * FROM `proceso` WHERE `id_alumno` = {$id_alumno} and `id_semestre` = (SELECT MAX(`id_semestres`)FROM `semestres`)";
+        $sql = "SELECT * FROM `procesos` WHERE `procesos_alumno` = {$id_alumno} and `procesos_semestre` = {$_SESSION['id_semestre']}";
         $this->query($sql);
         return $this->first();
     }
@@ -24,7 +24,8 @@ class proceso extends core\modelo
     {
         $model = new app\models\t_proceso();
         $etapa = $model->get_etapas($id);
-        $sql = "INSERT INTO `proceso` (`id_semestre`, `id_proceso`, `id_alumno`, `id_etapa`) VALUES ((SELECT MAX(`id_semestres`)FROM `semestres`)," . $id . "," . $_SESSION['id_user'] . "," . $etapa[0]['id_etapa'] . ")";
+        $sql = "INSERT INTO `procesos` (`procesos_semestre`, `procesos_tipo`, `procesos_alumno`, `proceso_etapa`,`procesos_estado`) VALUES ({$_SESSION['id_semestre']}," . $id . ", '". $_SESSION['id_user'] ."'," . $etapa[0]['tetp_id_etapa'] . ",1)";
+
         $this->query($sql);
         echo json_encode(["resultado" => true]);
     }

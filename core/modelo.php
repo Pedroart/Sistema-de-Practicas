@@ -8,7 +8,7 @@ class modelo{
     protected $db_host = "localhost";
     protected $db_user = "root";
     protected $db_pass = "";
-    protected $db_name = "practicas";
+    protected $db_name = "sistema_practicas";
 
     protected $coneccion;
     protected $query;

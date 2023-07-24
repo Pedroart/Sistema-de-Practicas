@@ -8,7 +8,7 @@ class lugar extends core\modelo
 {
     public function departamentos($id_pais)
     {
-        $sql = "SELECT `id_departamento`, `nombre_departamento` FROM `departamento_pais` WHERE `id_pais` = {$id_pais};";
+        $sql = "SELECT `departamento_id`, `departamento_nombre` FROM `departamentos_pais` WHERE `departamento_padre_id` = {$id_pais};";
         $this->query($sql);
         $data = $this->get();
         return $data;

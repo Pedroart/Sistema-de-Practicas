@@ -29,7 +29,7 @@ class data_efectivas extends core\modelo{
         return call_user_func_array(array($this, "data_".$id),array($estado,&$dataProceso));
     }
 
-    public function data_7($estado,&$dataProceso) {
+    public function data_1($estado,&$dataProceso) {
         $data = [
             "Datos Personales" => [
                 ["NameData", "Nombres", "text", "", "readonly"],
@@ -66,32 +66,34 @@ class data_efectivas extends core\modelo{
 
             ];
         
+            $user = new app\models\user();
+            $dataEstudiante = $user->Datos_Alumno($dataProceso["procesos_alumno"]);
+            
+            $data["Datos Personales"][0][3]=$dataEstudiante["persona_nombres"];
+            $data["Datos Personales"][1][3]=$dataEstudiante["persona_papellido"];
+            $data["Datos Personales"][2][3]=$dataEstudiante["persona_mapellido"];
+            $data["Datos Personales"][3][3]=$dataEstudiante["persona_DNI"];
+            $data["Datos Personales"][4][3]=$_SESSION['semestre'];
+
         if($estado>=2){
             
-            $user = new app\models\user();
-            $dataEstudiante = $user->Datos_Alumno($dataProceso["id_Alumno"]);
             
-            $data["Datos Personales"][0][3]=$dataEstudiante["nombre"];
-            $data["Datos Personales"][1][3]=$dataEstudiante["apellido_paterno"];
-            $data["Datos Personales"][2][3]=$dataEstudiante["apellido_materno"];
-            $data["Datos Personales"][3][3]=$dataEstudiante["DNI"];
-            $data["Datos Personales"][4][3]=0;
             
             $data["Datos del Estudiante"][3][5]="";
             $data["Datos del Estudiante"][4][5]="";
             $data["Datos del Estudiante"][5][5]="";
 
-            $data["Datos del Estudiante"][0][3]=$dataEstudiante["direccion"];
-            $data["Datos del Estudiante"][1][3]=$dataEstudiante["correo"];
-            $data["Datos del Estudiante"][2][3]=$dataEstudiante["celular"];
-            $data["Datos del Estudiante"][3][3]=[$dataEstudiante["departamento"]=>$dataEstudiante["nombre_departamento"]];
-            $data["Datos del Estudiante"][4][3]=[$dataEstudiante["provincia"]=>$dataEstudiante["nombre_provincia"]];
-            $data["Datos del Estudiante"][5][3]=[$dataEstudiante["distrito"]=>$dataEstudiante["nombre_distrito"]];
+            $data["Datos del Estudiante"][0][3]=$dataEstudiante["persona_direccion"];
+            $data["Datos del Estudiante"][1][3]=$dataEstudiante["persona_correo"];
+            $data["Datos del Estudiante"][2][3]=$dataEstudiante["persona_celular"];
+            $data["Datos del Estudiante"][3][3]=[$dataEstudiante["departamento_id"]=>$dataEstudiante["departamento_nombre"]];
+            $data["Datos del Estudiante"][4][3]=[$dataEstudiante["provincia_id"]=>$dataEstudiante["provincia_nombre"]];
+            $data["Datos del Estudiante"][5][3]=[$dataEstudiante["distrito_id"]=>$dataEstudiante["distrito_nombre"]];
 
             $empresa = new app\models\empresa();
             
-            $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
-            $dataEmpresa = $empresa->get_empresa($aux["id_empresa_alumno"])[0];
+            $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
+            $dataEmpresa = $empresa->get_empresa($aux["empresa_datos"])[0];
             $data["Datos del Centro de Practicas"][0][3] = $dataEmpresa["ruc"];
             $data["Datos del Centro de Practicas"][1][3]= $dataEmpresa["nombre"];
             $data["Datos del Centro de Practicas"][2][3]= $dataEmpresa["direc"];
@@ -111,7 +113,7 @@ class data_efectivas extends core\modelo{
         return $data;
     }
     
-    public function data_8($estado,&$dataProceso) {
+    public function data_2($estado,&$dataProceso) {
 
         $empresa = new app\models\empresa();
         $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
@@ -168,7 +170,7 @@ class data_efectivas extends core\modelo{
         return $data;
     }
     
-    public function data_10($estado,&$dataProceso) {
+    public function data_3($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
         $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
         $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];
@@ -190,7 +192,7 @@ class data_efectivas extends core\modelo{
         return $data;
     }
     
-    public function data_11($estado,&$dataProceso) {
+    public function data_4($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
         $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
         $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];
@@ -218,7 +220,7 @@ class data_efectivas extends core\modelo{
         return $data;
     }
     
-    public function data_12($estado,&$dataProceso) {
+    public function data_5($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
         $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
         $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];

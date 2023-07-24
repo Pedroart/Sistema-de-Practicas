@@ -1,5 +1,5 @@
 <?php
-$estado = ($actual>$activo)? "3":$dataProceso["id_estado"];
+$estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
 ?>
 
 <div class="container-fluid text-center">

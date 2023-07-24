@@ -1,5 +1,5 @@
 
-
+<?php echo json_encode($documentos)?>
 <div class="row">
     <div class="col-md-3">
 
@@ -30,7 +30,7 @@
                 <embed src="<?= _URL_ ?><?= substr($documentos[0]["uri"], 7) ?>" height="500px" width="100%">
             </div>
             <div class="card-footer">
-            <input class="form-control" id="Ficha"; type="text" placeholder="Ingrese Comentario">
+            <input class="form-control" id="Ficha"; type="text" placeholder="Ingrese Comentario" value="<?=$documentos[0]["comentario"]?>">
             </div>
 
         </div>
@@ -46,7 +46,7 @@
             <embed src="<?= _URL_ ?><?= substr($documentos[1]["uri"], 7) ?>" height="500px" width="100%">
             </div>
             <div class="card-footer">
-                <input class="form-control" id="record" type="text" placeholder="Ingrese Comentario">
+                <input class="form-control" id="record" type="text" placeholder="Ingrese Comentario" value="<?=$documentos[1]["comentario"]?>">
             </div>
         </div>
 
@@ -73,14 +73,13 @@
         datos.append("Ficha",document.getElementById("Ficha").value);
         datos.append("record",document.getElementById("record").value);
         datos.append("idFicha",<?= $id_documentos[0] ?>);
-        datos.append("idrecord",<?= $id_documentos[0] ?>);
+        datos.append("idrecord",<?= $id_documentos[1] ?>);
         fetch('http://practicas.test/validaciones/revisar/<?= $id ?>', {
         method: 'POST',
         body: datos
       })
       .then(response => {
-        alert(response);
-        //window.location.href ='<?= _URL_ ?>/validaciones';
+        window.location.href ='<?= _URL_ ?>/validaciones';
       })
       .catch(error => {
         // Manejar el error aquí

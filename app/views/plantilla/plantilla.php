@@ -26,6 +26,11 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?= _URL_ ?>/plugins/summernote/summernote-bs4.min.css">
   <link rel="stylesheet" href="<?= _URL_ ?>/dist/css/login.css">
+
+  <link rel="stylesheet" href="<?= _URL_ ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= _URL_ ?>/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= _URL_ ?>/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -176,6 +181,8 @@
 <script src="<?= _URL_ ?>/dist/js/adminlte.js"></script>
 <!-- Custome App -->
 <script src="<?= _URL_ ?>/dist/js/custome.js"></script>
+
+<?= $scripstes ?>
 
 </body>
 </html>

@@ -31,25 +31,24 @@ class documentos extends core\modelo{
         // Mover a los Documentos
         move_uploaded_file($ruta_temporal,__DIREC__.'/public/uploads/' . $nombremd5);
         
-        $inset = [ "nombre_documento"=>$nombre, "fecha_documento"=> date ('Y-m-d H:i:s'), "direccion_documento"=>'/public/uploads/' . $nombremd5];
-        $this->table = 'documento';
+        $inset = [ "documento_nombre"=>$nombre, "documento_fecha"=> date ('Y-m-d H:i:s'), "documente_direc"=>'/public/uploads/' . $nombremd5];
+        $this->table = 'documentos';
         $id = $this->create($inset);
         return $id;
     }
 
     public function agregar_comentario($id,$id_comentario)
     {
-        $this->update($id,[
-            "comentario"=>$id_comentario
-        ]);
+        $this->table = 'documentos';
+        $this->update4key($id,["documento_comentario"=>$id_comentario],"documento_id");
     }
 
     public function delete_file($id)
     {
-        $this->table = 'documento';
-        $data=$this->find($id,"id_documento");
-        $this->delete($id,"id_documento");
-        unlink(__DIREC__.$data["direccion_documento"]);
+        $this->table = 'documentos';
+        $data=$this->find($id,"documento_id");
+        $this->delete($id,"documento_id");
+        unlink(__DIREC__.$data["documente_direc"]);
         return true;
     }
 
@@ -58,9 +57,24 @@ class documentos extends core\modelo{
             return [];
         }
 
-        $this->table = 'documento';
-        $data =$this->find($id,"id_documento");
-        return ["uri"=>$data["direccion_documento"],"comentario"=>$data["comentario"]];
+        $sql = "SELECT * FROM `documentos`\n"
+        . "INNER JOIN comentarios ON comentarios.comentario_id = documentos.documento_comentario\n"
+        . "WHERE `documento_id`={$id};";
+        $this->query($sql);
+        if($this->_num_rows() == 0){
+            $sql = "SELECT * FROM `documentos`\n"
+        . "WHERE `documento_id`={$id};";
+        $this->query($sql);
+        }
+
+        
+        $data = $this->get()[0];
+
+        if(!isset($data["comentario_cuerpo"])){
+            $data["comentario_cuerpo"] = "";
+        }
+
+        return ["uri"=>$data["documente_direc"],"comentario"=>$data["comentario_cuerpo"]];
     }
 
     public function get_documentos_empresa($id_empresa_alumno){

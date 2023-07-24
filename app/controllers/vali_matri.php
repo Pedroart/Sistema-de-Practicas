@@ -8,7 +8,7 @@ class vali_matri extends core\controller{
     public function index()
     {
         $base = new app\models\matricula();
-        core\view::view_dashboard('semestre_matricula',["titulo"=>"","matricula"=>$base-> vericador(),"Semestre"=>$base->ultimosemestre(),"data"=>$base->get_documentes_comentarios($_SESSION['id_user'])]);
+        core\view::view_dashboard('semestre_matricula',["titulo"=>"","matricula"=>$base-> vericador(),"Semestre"=>$_SESSION['semestre'],"data"=>$base->get_documentes_comentarios($_SESSION['id_user'])]);
         return;     
     }
     

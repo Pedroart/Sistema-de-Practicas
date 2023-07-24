@@ -24,8 +24,8 @@ function fillDepartamentosSelect(id_selector) {
 
       data.forEach((departamento) => {
         const option = document.createElement("option");
-        option.value = departamento["id_departamento"];
-        option.textContent = departamento["nombre_departamento"];
+        option.value = departamento["departamento_id"];
+        option.textContent = departamento["departamento_nombre"];
         selectDepartamento.appendChild(option);
       });
     })

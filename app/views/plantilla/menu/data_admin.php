@@ -23,13 +23,13 @@ $menu = [
             ]
         ]
     ],
-    "section_title_2" => [
+    "Matriculas" => [
         [
             'type' => "nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
-            "url"  => "/nav_iten_1"
-        ]
+            'icon' => "fas fa-check",
+            'title'=> "Validacion",
+            "url"  => "validaciones"
+        ],
     ]
 ];
 
