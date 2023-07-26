@@ -45,16 +45,18 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         fillDistritoSelect(selectedProvincia, "Distrito2");
     });
 
-    var b_FichaDatos = document.getElementById('formFichaDatos');
-
+    var b_FichaDatos = document.getElementById('idEtapa');
+    var anular = document.getElementById('borrar');
   if (b_FichaDatos) {
     b_FichaDatos.addEventListener('submit', function(e) {
+      
       e.preventDefault();
       var datos = new FormData(e.target);
       datos.append("id_proceso",<?= $id_?>);
         datos.append("etapa",<?= $actual?>);
         datos.append("estado",<?= $estado?>);
       console.log(datos);
+      
       fetch('http://practicas.test/efectivas/proceso', {
           method: 'POST',
           body: datos
@@ -62,10 +64,41 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         .then(data => {
           if (data.resultado === true) {
             location.reload();
+            //console.log(data);
           } else {
             console.log(data);
           }
-        })
+        }).catch((error)=>{
+          console.log(error);
+        });
+        return 0;
+    });
+  }
+  if(anular){
+    anular.addEventListener('submit', function(e) {
+      
+      e.preventDefault();
+      var datos = new FormData(e.target);
+      datos.append("id_proceso",<?= $id_?>);
+        datos.append("etapa",<?= $actual?>);
+        datos.append("estado",<?= $estado?>);
+      console.log(datos);
+      
+      fetch('http://practicas.test/efectivas/proceso', {
+          method: 'POST',
+          body: datos
+        }).then(res => res.json())
+        .then(data => {
+          if (data.resultado === true) {
+            location.reload();
+            //console.log(data);
+          } else {
+            console.log(data);
+          }
+        }).catch((error)=>{
+          console.log(error);
+        });
+        return 0;
     });
   }
 </script>

@@ -20,7 +20,7 @@ function fillDepartamentosSelect(id_selector) {
     .then((response) => response.json())
     .then((data) => {
       const selectDepartamento = document.getElementById(id_selector);
-      selectDepartamento.innerHTML = "";
+      
 
       data.forEach((departamento) => {
         const option = document.createElement("option");
@@ -47,10 +47,14 @@ function fillProvinciaSelect(idDepartamento, id_selector) {
       const selectProvincia = document.getElementById(id_selector);
       selectProvincia.innerHTML = "";
       console.log(data);
+      const option = document.createElement("option");
+      option.value = 0;
+      option.textContent = "seleccionar";
+      selectProvincia.appendChild(option);
       data.forEach((provincia) => {
         const option = document.createElement("option");
-        option.value = provincia["id_provincia"];
-        option.textContent = provincia["nombre_provincia"];
+        option.value = provincia["provincia_id"];
+        option.textContent = provincia["provincia_nombre"];
         selectProvincia.appendChild(option);
       });
     })
@@ -74,8 +78,8 @@ function fillDistritoSelect(idProvincia, id_selector) {
         
         data.forEach(distrito => {
           const option = document.createElement('option');
-          option.value = distrito.id_distrito;
-          option.textContent = distrito.nombre_distrito;
+          option.value = distrito.distrito_id;
+          option.textContent = distrito.distrito_nombre;
           selectDistrito.appendChild(option);
         });
       })

@@ -45,7 +45,7 @@ class user extends core\modelo{
     }
 
     public function buscar_id_persona_estudiante($id_alumno) {
-        $sql = "SELECT `id_persona` FROM  `alumno` WHERE `id_alumno` = {$id_alumno}";
+        $sql = "SELECT `user_persona_id` FROM  `alumnos` WHERE `alumno_codigo` = {$id_alumno}";
         $this->query($sql);
         $data = $this->first();
         return $data; 
@@ -53,7 +53,7 @@ class user extends core\modelo{
 
     public function actualizar_DatosSecundarios_Alumno($id,$datos) {
         
-        $this->table= "persona";
-        return $this->update4key($id,$datos,"id_persona");
+        $this->table= "personas";
+        return $this->update4key($id,$datos,"persona_id");
     }
 }

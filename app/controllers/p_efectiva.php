@@ -69,7 +69,7 @@ class p_efectiva extends core\controller
     public function update_proceso($id, $estado)
     {
         switch ($id) {
-            case 7: $this->proceso_7($estado);break;
+            case 1: $this->proceso_1($estado);break;
             case 8: $this->proceso_8($estado);break;
             case 9: $this->proceso_9($estado);break;
             case 10: $this->proceso_10($estado);break;
@@ -157,58 +157,67 @@ class p_efectiva extends core\controller
         }
     }
 
-    private function proceso_7($estado)
+    private function proceso_1($estado)
     {
-        $Data_Estudiante = [
-            "direccion" =>      $_POST["direccion"],
-            "correo" =>         $_POST["correo"],
-            "celular" =>        $_POST["celular"],
-            "departamento" =>   $_POST["departamento"],
-            "provincia" =>      $_POST["provincia"],
-            "distrito" =>       $_POST["distrito"],
-        ];
-        $Data_Empresa = [
-            "RUC" =>                            $_POST["empresa_RUC"],
-            "Razon_socal_empresa" =>            $_POST["empresa_NombreEmpres"],
-            "Referencia_ubicacion_empresa" =>   $_POST["empresa_DirecLabo"],
-            "id_distrito" =>                    $_POST["empresa_Distrito2"],
-        ];
-        $Data_Representante = [
-            "nombre" =>             $_POST["representante_Name"],
-            "apellido_p" =>         $_POST["representante_Aparternor"],
-            "apellido_m" =>         $_POST["representante_Amarterno"],
-            "cargo" =>              $_POST["Cargo"],
-            "Genero" =>             $_POST["Genero"],
-            "GradoInstruccion" =>   $_POST["representante_GradoInstruccion"],
-        ];
-        $Data_Empresa_Alumno=[
-            "id_alumno"=>$_SESSION['id_user']
-        ];
+        if(isset($_POST["distrito"])){
+            $Data_Estudiante = [
+                "persona_direccion" =>      $_POST["direccion"],
+                "persona_correo" =>         $_POST["correo"],
+                "persona_celular" =>        $_POST["celular"],
+                "persona_ubi" =>       $_POST["distrito"],
+            ];
+            $Data_Empresa = [
+                "empresa_RUC" =>                            $_POST["RUC"],
+                "empresa_razon_social" =>            $_POST["Razon_socal_empresa"],
+                "empresa_direcion" =>   $_POST["Referencia_ubicacion_empresa"],
+                "empresa_ubi" =>                    $_POST["id_distrito"],
+            ];
+            $Data_Representante = [
+                "encargado_nombres" =>             $_POST["nombre"],
+                "encargado_papellido" =>         $_POST["apellido_p"],
+                "encargado_mapellido" =>         $_POST["apellido_m"],
+                "encargado_cargo" =>              $_POST["cargo"],
+                "encargado_genero" =>             $_POST["Genero"],
+                "encargado_grado_instruccion" =>   $_POST["GradoInstruccion"],
+            ];
+            $Data_Empresa_Alumno=[
+                "empresa_alumno"=>$_SESSION['id_user'],
+                "empresa_proceso"=>$_POST["id_proceso"],
+            ];
+            $model = new app\models\user();
+            $id_persona =$model->buscar_id_persona_estudiante($_SESSION['id_user']);
+
+            $model->actualizar_DatosSecundarios_Alumno($id_persona["user_persona_id"],$Data_Estudiante);
+        }
         
-        $model = new app\models\user();
-        $id_persona =$model->buscar_id_persona_estudiante($_SESSION['id_user']);
-        $model->actualizar_DatosSecundarios_Alumno($id_persona["id_persona"],$Data_Estudiante);
+        
         
         switch ($estado) {
-            case 2:
-            case 5:
+            case 1:
                 $model = new app\models\empresa();
-                $id_Empresa=$model->crear($Data_Empresa);
-                $Data_Empresa_Alumno["id_empresa"] = $id_Empresa;
-                $Data_Representante["id_empresa"] = $id_Empresa;
-                $Data_Representante["id_puesto"]= 1;
-                
-                $id_represe_empresa = $model->crear_representante_empresa($Data_Representante);
-                $Data_Empresa_Alumno["id_representante"]=$id_represe_empresa;
+                $id_Empresa=$model->crear_data($Data_Empresa);
+                $Data_Empresa_Alumno["empresa_datos"] = $id_Empresa;
                 $empresa_Alumno=$model->crear_empresa_alumno($Data_Empresa_Alumno);
+                
+                $Data_Representante["encargado_puesto"]= 4;
+                $Data_Representante["encargado_empresa"]= $empresa_Alumno;
+                $id_represe_empresa = $model->crear_representante_empresa($Data_Representante);
+                
+                $model->actualizar_estado($empresa_Alumno,["empresa_representante"=>$id_represe_empresa]);
+                
                 $model = new app\models\proceso();
-                $model->actualizar_estado($_POST["id_proceso"],["id_estado"=>2,"id_empresa"=>$empresa_Alumno]);
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
                 break;
-            
+            case 2:
+                $model = new app\models\empresa();
+                $model->cadenaBorrado1($_POST["id_proceso"]);
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1]);
             default:
                 # code...
                 break;
         }
+        return true;
     }
     
 }

@@ -77,8 +77,9 @@ $roteador->get('/efectivas/proceso/$id', function($id){
 $roteador->post('/efectivas/proceso', function(){
     $controlador = new app\controllers\p_efectiva();
     $controlador->update_proceso($_POST["etapa"],$_POST["estado"]);
+    
     header('Content-type: application/json');
-    echo json_encode( $_POST );
+    echo json_encode( ["resultado"=>true] );
 });
 
 $roteador->get('/efectivas/cartas', function(){
@@ -100,7 +101,7 @@ $roteador->get('/desempeno/proceso', function(){
     $data=$controlador->pre_proceso($_SESSION['id_user']);
     
     if($data!=false){
-        if($data["id_proceso"]==2)
+        if($data["proceso_id"]==2)
         $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
         return;
     }
@@ -149,9 +150,15 @@ $roteador->post('/procesos/aceptado/$id', function($id){
     $controlador = new app\models\proceso;
     header('Content-type: application/json');
     
-    $controlador->actualizar_estado($id,["id_estado"=>5,"id_etapa"=>$controlador->siguienteProceso($_POST["id_proceso"])["id_siguiente_etapa"]]);
+    $controlador->actualizar_estado($id,["procesos_estado"=>3]);
     echo json_encode( [true] );
 });
 
+$roteador->post('/procesos/revisar/$id', function($id){
+
+    $controlador = new app\controllers\p_procesos();$controlador->revisar($id);
+    header('Content-type: application/json');
+    echo json_encode( [true] );
+});
 
 $roteador->any('/404','app/views/404.php');

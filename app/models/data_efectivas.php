@@ -60,7 +60,7 @@ class data_efectivas extends core\modelo{
                 ["nombre", "Nombres", "text", "", "required"],
                 ["apellido_p", "Apellido Paterno", "text", "", "required"],
                 ["apellido_m", "Apellido Materno", "text", "", "required"],
-                ["GradoInstruccion", "Grado Instruccion", "select", ["ejemplo"=>"Presidente"], "required"],
+                ["GradoInstruccion", "Grado Instruccion", "select", ["Presidente"=>"Presidente","CCO"=>"CCO"], "required"],
                 ["cargo", "Cargo", "text","", "required"],
             ]
 
@@ -78,36 +78,34 @@ class data_efectivas extends core\modelo{
         if($estado>=2){
             
             
-            
-            $data["Datos del Estudiante"][3][5]="";
-            $data["Datos del Estudiante"][4][5]="";
-            $data["Datos del Estudiante"][5][5]="";
-
             $data["Datos del Estudiante"][0][3]=$dataEstudiante["persona_direccion"];
             $data["Datos del Estudiante"][1][3]=$dataEstudiante["persona_correo"];
             $data["Datos del Estudiante"][2][3]=$dataEstudiante["persona_celular"];
-            $data["Datos del Estudiante"][3][3]=[$dataEstudiante["departamento_id"]=>$dataEstudiante["departamento_nombre"]];
+            $data["Datos del Estudiante"][3][3]=[""=>$dataEstudiante["departamento_nombre"]];
             $data["Datos del Estudiante"][4][3]=[$dataEstudiante["provincia_id"]=>$dataEstudiante["provincia_nombre"]];
             $data["Datos del Estudiante"][5][3]=[$dataEstudiante["distrito_id"]=>$dataEstudiante["distrito_nombre"]];
 
             $empresa = new app\models\empresa();
             
             $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
-            $dataEmpresa = $empresa->get_empresa($aux["empresa_datos"])[0];
-            $data["Datos del Centro de Practicas"][0][3] = $dataEmpresa["ruc"];
-            $data["Datos del Centro de Practicas"][1][3]= $dataEmpresa["nombre"];
-            $data["Datos del Centro de Practicas"][2][3]= $dataEmpresa["direc"];
-            $data["Datos del Centro de Practicas"][3][3]= [""=>$dataEmpresa["departamento"]];
-            $data["Datos del Centro de Practicas"][4][3]= [""=>$dataEmpresa["provincia"]];
-            $data["Datos del Centro de Practicas"][5][3]= [""=>$dataEmpresa["distrito"]];
-
-            $dataRepresentate = $empresa->get_representante_empresa($aux["id_empresa_alumno"])[0];
-            $data["Datos del Representante"][0][3]= [""=>$dataRepresentate["Genero"]];
-            $data["Datos del Representante"][1][3]=$dataRepresentate["nombre"];
-            $data["Datos del Representante"][2][3]=$dataRepresentate["apellido_p"];
-            $data["Datos del Representante"][3][3]=$dataRepresentate["apellido_m"];
-            $data["Datos del Representante"][4][3]=[""=>$dataRepresentate["GradoInstruccion"]];
-            $data["Datos del Representante"][5][3]=$dataRepresentate["cargo"];
+            
+            $dataEmpresa = $empresa->get_empresa_datos($aux["empresa_datos"])[0];
+            
+            $data["Datos del Centro de Practicas"][0][3] = $dataEmpresa["empresa_RUC"];
+            $data["Datos del Centro de Practicas"][1][3]= $dataEmpresa["empresa_razon_social"];
+            $data["Datos del Centro de Practicas"][2][3]= $dataEmpresa["empresa_direcion"];
+            $data["Datos del Centro de Practicas"][3][3]= ["1"=>$dataEmpresa["departamento_nombre"]];
+            $data["Datos del Centro de Practicas"][4][3]= ["1"=>$dataEmpresa["provincia_nombre"]];
+            $data["Datos del Centro de Practicas"][5][3]= ["1"=>$dataEmpresa["distrito_nombre"]];
+            
+            $dataRepresentate = $empresa->get_representante_empresa($aux["empresa_representante"]);
+            
+            $data["Datos del Representante"][0][3]= ["1"=>$dataRepresentate["encargado_genero"]];
+            $data["Datos del Representante"][1][3]=$dataRepresentate["encargado_nombres"];
+            $data["Datos del Representante"][2][3]=$dataRepresentate["encargado_papellido"];
+            $data["Datos del Representante"][3][3]=$dataRepresentate["encargado_mapellido"];
+            $data["Datos del Representante"][4][3]=["1"=>$dataRepresentate["encargado_grado_instruccion"]];
+            $data["Datos del Representante"][5][3]=$dataRepresentate["encargado_cargo"];
         }
 
         return $data;

@@ -18,7 +18,7 @@
 
                                     <?php if ($input[2] == "select") : ?>
                                         
-                                        <select name="<?= $input[0] ?>" id="<?php echo (isset($input[5])) ? $input[5] : "1"; ?>" class="form-control" <?php echo ($estado >= 2) ? "disabled" : $input[4]; ?>>
+                                        <select name="<?= $input[0] ?>" id="<?php echo (isset($input[5])) ? $input[5] : "1"; ?>" class="form-control" disabled>
                                             <?php foreach ($input[3] as $val => $text) : ?>
                                                 <option value="<?= $val ?>"><?= $text ?></option>
                                             <?php endforeach; ?>
@@ -50,7 +50,7 @@
                                         </div>
                                     <?php else : ?>
                                         
-                                        <input  type="<?= $input[2] ?>" name="<?= $input[0] ?>" id="<?php echo (isset($input[5])) ? $input[5] : "1"; ?>" class="form-control<?php echo ($input[2] == "file") ? "-plaintext" : ""; ?>" <?php echo ($input[2] == "file") ? "accept='application/pdf'" : ""; ?> value="<?= $input[3] ?>">
+                                        <input type="<?= $input[2] ?>" name="<?= $input[0] ?>" id="<?php echo (isset($input[5])) ? $input[5] : "1"; ?>" class="form-control<?php echo ($input[2] == "file") ? "-plaintext" : ""; ?>" <?php echo ($input[2] == "file") ? "accept='application/pdf'" : ""; ?> value="<?= $input[3] ?>" readonly>
                                     <?php endif ?>
                                 </div>
                             </div>
@@ -60,5 +60,7 @@
             </div>
             
         <?php endforeach; ?>
-    </div>    
+    </div>
+
+    
 </form>
