@@ -28,7 +28,9 @@ class data_efectivas extends core\modelo{
     public function data($id,$estado,&$dataProceso){
         return call_user_func_array(array($this, "data_".$id),array($estado,&$dataProceso));
     }
-
+    public function data_all(&$dataProceso){
+        return $this->data_1(1,$dataProceso) + $this->data_2(1,$dataProceso);
+    }
     public function data_1($estado,&$dataProceso) {
         $data = [
             "Datos Personales" => [
@@ -114,8 +116,8 @@ class data_efectivas extends core\modelo{
     public function data_2($estado,&$dataProceso) {
 
         $empresa = new app\models\empresa();
-        $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
-        $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];
+        $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
+        
 
         $data = [
             "Documentacion" => [

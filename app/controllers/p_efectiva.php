@@ -60,7 +60,12 @@ class p_efectiva extends core\controller
 
     public function estado()
     {
-        core\view::view_dashboard('efectivas/estado', ["titulo" => " Estado"]);
+        
+        $proceso = new app\models\proceso();
+        $dataProceso = $proceso->buscarProcesos($_SESSION['id_user']);
+        $data = new app\models\data_efectivas();
+        
+        core\view::view_dashboard('efectivas/estado', ["titulo" => " Estado","formulario"=>$data->data_all($dataProceso)]);
         return;
     }
 
