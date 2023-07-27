@@ -1,3 +1,5 @@
+
+
 <p class="mb-4">
   En este espacio podrás visualizar todas las cartas de presentación que
   generaste, debes descargarlo e imprimirlo a colores.
@@ -13,13 +15,24 @@
       </tr>
     </thead>
     <tbody>
+    <?php if($estado) :?>
       <tr>
-        <td>1</td>
-        <td>Centro de prácticas A</td>
+        <td><?=$dataProceso["procesos_id"]?></td>
+        <td><?=$data_empresa[0]["empresa_razon_social"]?></td>
         <td>
-          <a href="#" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
+          <a href="<?= _URL_ ?>/efectivas/cartas/1" class="btn btn-success btn-circle"><i class="fas fa-check"></i></a>
         </td>
       </tr>
+    <?php else:?>
+      <tr>
+        <td>0</td>
+        <td>Carta No generada</td>
+        <td>
+        </td>
+      </tr>
+    <?php endif; ?>
+
+      
     </tbody>
   </table>
 </div>

@@ -13,7 +13,7 @@ if( $base-> vericador() && $base-> estado() ){
                     'title'=> "Efectivas",
                     'sub'  => [
                         "Bienvenida"=>"/efectivas",
-                        "Historial de cartas"=>"/efectivas/cartas",
+                        "Carta de Presentacion"=>"/efectivas/cartas",
                         "Proceso"=>"/efectivas/proceso",
                         "Estado"=>"/efectivas/estado",
                     ]

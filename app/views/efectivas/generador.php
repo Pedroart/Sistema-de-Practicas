@@ -60,5 +60,8 @@
             </div>
             
         <?php endforeach; ?>
+        <?php if ($estado <2) : ?>
+                <button id="enviar" type="submit" class="btn btn-primary mb-5">Enviar</button>
+            <?php endif; ?>
     </div>    
 </form>

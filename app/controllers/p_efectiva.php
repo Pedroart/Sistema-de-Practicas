@@ -20,7 +20,42 @@ class p_efectiva extends core\controller
 
     public function cartas()
     {
-        core\view::view_dashboard('efectivas/cartas', ["titulo" => " Hisotiral de Cartas"]);
+        $proceso = new app\models\proceso();
+        $dataProceso = $proceso->buscarProcesos($_SESSION['id_user']);
+        $estado = false;
+        $dataEmpresa = [];
+        if($proceso->_num_rows() !=0){
+            
+            $empresa = new app\models\empresa();
+            $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
+            if(!is_null($aux)){
+                $dataEmpresa = $empresa->get_empresa_datos($aux["empresa_datos"]);
+                if($dataProceso["proceso_etapa"] > 1) {$estado = true;}
+                elseif($dataProceso["procesos_estado"] == 3) {$estado = true;}
+            }
+
+            
+        }
+
+
+
+        core\view::view_dashboard('efectivas/cartas', ["titulo" => "Carta de Presentacion","dataProceso"=>$dataProceso,"estado"=>$estado,"data_empresa"=>$dataEmpresa]);
+    }
+    public function cartas_descarga($id){
+        $proceso = new app\models\proceso();
+        $dataProceso = $proceso->buscarProcesos($_SESSION['id_user']);
+        $estado = false;
+        $dataEmpresa = [];
+        if($proceso->_num_rows() !=0){
+            
+            $empresa = new app\models\empresa();
+            $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
+            if(!is_null($aux)){
+                $dataEmpresa = $empresa->get_empresa_datos($aux["empresa_datos"]);
+                $estado = true;
+            }
+        }
+        core\view::view_('efectivas/carta_descarga', ["titulo" => "Carta de Presentacion","dataProceso"=>$dataProceso,"estado"=>$estado,"data_empresa"=>$dataEmpresa]);
     }
 
     public function estado()

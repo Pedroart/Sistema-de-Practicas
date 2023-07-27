@@ -85,6 +85,9 @@ $roteador->post('/efectivas/proceso', function(){
 $roteador->get('/efectivas/cartas', function(){
     $controlador = new app\controllers\p_efectiva();$controlador->cartas();
 });
+$roteador->get('/efectivas/cartas/$id', function($id){
+    $controlador = new app\controllers\p_efectiva();$controlador->cartas_descarga($id);
+});
 
 $roteador->get('/efectivas/estado', function(){
     $controlador = new app\controllers\p_efectiva();$controlador->estado();
