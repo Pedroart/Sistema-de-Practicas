@@ -81,7 +81,7 @@ class proceso extends core\modelo
 
     public function siguienteProceso($id){
         $this->table = "tetapas_proceso";
-        $this->where("id_etapa","=", $id);
+        $this->where("tetp_id_etapa","=", $id);
         $data = $this->first();
         return $data;
     }

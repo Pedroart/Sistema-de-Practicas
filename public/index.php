@@ -148,12 +148,17 @@ $roteador->get('/procesos/$id', function($id){
     $controlador = new app\controllers\p_procesos();$controlador->edit($id);
 });
 
+$roteador->get('/procesos/$id/Estado', function($id){
+    $controlador = new app\controllers\p_procesos();$controlador->estado($id);
+});
+
+
 $roteador->post('/procesos/aceptado/$id', function($id){
 
     $controlador = new app\models\proceso;
     header('Content-type: application/json');
     
-    $controlador->actualizar_estado($id,["procesos_estado"=>3]);
+    $controlador->actualizar_estado($id,["procesos_estado"=>1,"proceso_etapa"=>$controlador->siguienteProceso( $controlador->getProceso($id)["proceso_etapa"] ) ["tetp_id_siguiente_etapa"] ]);
     echo json_encode( [true] );
 });
 

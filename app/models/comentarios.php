@@ -17,4 +17,9 @@ class comentarios extends core\modelo{
         
         return $id;
     }
+
+    public function get_body($id){
+        $this->table = "comentarios";
+        return $this->find($id,"comentario_id");
+    }
 }

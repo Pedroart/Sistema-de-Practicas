@@ -26,7 +26,7 @@
                     <td><?= $person["tetp_nombre"]?></td>
                     <td><?= $person["tep_nombre"]?></td>
                     <td>
-                        <a class="btn btn-primary btn-sm" href="<?=_URL_."/procesos/".$person["procesos_id"]?>">
+                        <a class="btn btn-primary btn-sm" href="<?=_URL_."/procesos/".$person["procesos_id"]?><?php echo (($person["procesos_estado"] != 2) and ($person["procesos_estado"] != 5) ) ? "/Estado" :""; ?>">
                             <i class="fas fa-folder">
                             </i>
                             View

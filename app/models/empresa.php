@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use app;
 use core;
 
 class empresa extends core\modelo
@@ -80,8 +80,8 @@ class empresa extends core\modelo
     }
 
     public function update_empres_alumno($id,$data){
-        $this->table = "empresa_alumno";
-        $this->update4key($id,$data,"id_empresa_alumno");
+        $this->table = "empresa_proceso";
+        $this->update4key($id,$data,"empresa_proceso_id");
     }
 
     public function get_empresaAlumno($id){
@@ -107,5 +107,24 @@ class empresa extends core\modelo
         $this->delete($data_empresa_proceso["empresa_representante"],"encargado_id");
         $this->table="empresas_datos";
         $this->delete($data_empresa_proceso["empresa_datos"],"empresa_id");
+        $model = new app\models\proceso();
+        $this->table="comentarios";
+        $this->delete($model->buscarProcesos($_POST["id_proceso"])["procesos_comentario"],"comentario_id");
+        
+    }
+    public function sabeDocumentoEmpresa($data){
+        $this->table = "empresa_documentos";
+        return $this->create($data);
+    }
+
+    public function getDocumento($proceso,$tipo){
+        $sql = "SELECT * FROM `empresa_documentos` \n"
+
+    . "LEFT JOIN documentos on documentos.documento_id = empresa_documentos.empresa_documento\n"
+
+    . "WHERE `empresa_documento_proceso` = {$proceso} and `empresa_documento_tipo` = {$tipo};";$this->query($sql);
+        $data = $this->first();
+
+        return $data; 
     }
 }

@@ -34,11 +34,11 @@ class data_efectivas extends core\modelo{
     public function data_1($estado,&$dataProceso) {
         $data = [
             "Datos Personales" => [
-                ["NameData", "Nombres", "text", "", "readonly"],
-                ["NameData", "Apellido Paterno", "text", "", "readonly"],
-                ["NameData", "Apellido Materno", "text", "", "readonly"],
-                ["NameData", "DNI", "text", "", "readonly"],
-                ["NameData", "Semestre", "text", "", "readonly"],
+                ["NameData", "Nombres", "text", "", "disabled"],
+                ["NameData", "Apellido Paterno", "text", "", "disabled"],
+                ["NameData", "Apellido Materno", "text", "", "disabled"],
+                ["NameData", "DNI", "text", "", "disabled"],
+                ["NameData", "Semestre", "text", "", "disabled"],
             ],
             "Datos del Estudiante" => [
                 ["direccion", "Direccion", "text", "", "required"],
@@ -120,17 +120,17 @@ class data_efectivas extends core\modelo{
         
 
         $data = [
-            "Documentacion" => [
+            "Carta de Aceptacion" => [
                 ["fecha_inicio", "Fecha Inicio", "date", "", "required"],
                 ["fecha_fin", "Fecha Fin", "date", "", "required"],
                 ["carta_aceptacion", "Carta de aceptación", "file", ["","value1"], "readonly","file1"],
             ]
             ];
         if($estado>=2){
-            $documento = new app\models\documentos;
-            $data["Documentacion"][0][3] = $aux["fecha_inicio"];
-            $data["Documentacion"][1][3] = $aux["fecha_fin"];
-            $data["Documentacion"][2][3] = $documento->get_documento_direc($aux["carta_aceptacion"]);
+            $documento = $empresa->getDocumento($dataProceso["procesos_id"],3);
+            $data["Carta de Aceptacion"][0][3] = $aux["empresa_fecha_inicio"];
+            $data["Carta de Aceptacion"][1][3] = $aux["empresa_fecha_fin"];
+            $data["Carta de Aceptacion"][2][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
         }
         return $data;
     }

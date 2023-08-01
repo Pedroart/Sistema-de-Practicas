@@ -110,7 +110,7 @@ class p_efectiva extends core\controller
     {
         switch ($id) {
             case 1: $this->proceso_1($estado);break;
-            case 8: $this->proceso_8($estado);break;
+            case 2: $this->proceso_2($estado);break;
             case 9: $this->proceso_9($estado);break;
             case 10: $this->proceso_10($estado);break;
             case 11: $this->proceso_11($estado);break;
@@ -176,25 +176,31 @@ class p_efectiva extends core\controller
         }
     }
 
-    private function proceso_8($estado){
+    private function proceso_2($estado){
         $Data_Aceptacion = [
-            "fecha_inicio"=>date("Y-m-d", strtotime($_POST["fecha_inicio"])),
-            "fecha_fin"=>date("Y-m-d", strtotime($_POST["fecha_fin"])),
+            "empresa_fecha_inicio"=>date("Y-m-d", strtotime($_POST["fecha_inicio"])),
+            "empresa_fecha_fin"=>date("Y-m-d", strtotime($_POST["fecha_fin"])),
         ];
 
         switch($estado){
-            case 2:
-            case 5:
+            case 1:
+                error_log("2");
                 $base = new app\models\documentos();
-                $matricula=$base-> create_files_post('carta_presentacion',"application/pdf");
-                $Data_Aceptacion["carta_aceptacion"]=$matricula;
+                $carta_presenta=$base-> create_files_post('carta_aceptacion',"application/pdf");
+                
+
                 $model = new app\models\empresa();
-                $model->update_empres_alumno($_POST["id_empresa_alumno"],$Data_Aceptacion);
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>3,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$carta_presenta]);
+                error_log(  json_encode( $model->get_empresaAlumno( $_POST["id_proceso"] ) ) );
+                $model->update_empres_alumno( $model->get_empresaAlumno($_POST["id_proceso"]) ["empresa_proceso_id"] , $Data_Aceptacion );
+                
                 $model = new app\models\proceso();
-                $model->actualizar_estado($_POST["id_proceso"],["id_estado"=>2]);
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
                 break;
+            case 2:
             default:
         }
+        return;
     }
 
     private function proceso_1($estado)
@@ -249,11 +255,11 @@ class p_efectiva extends core\controller
                 $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
                 break;
             case 2:
+            default:
                 $model = new app\models\empresa();
                 $model->cadenaBorrado1($_POST["id_proceso"]);
-                $model = new app\models\proceso();
-                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1]);
-            default:
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1,"procesos_comentario"=>"NULL"]);
+            
                 # code...
                 break;
         }

@@ -23,7 +23,7 @@
                                                 <option value="<?= $val ?>"><?= $text ?></option>
                                             <?php endforeach; ?>
                                         </select>
-                                    <?php elseif ($input[2] == "file" && $estado >= 2) : ?>
+                                    <?php elseif ($input[2] == "file" ) : ?>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo (isset($input[5])) ? $input[5] : "1"; ?>">
                                             Ver Documento
                                         </button>
@@ -42,7 +42,7 @@
                                                     <embed src="<?= _URL_ ?><?= substr($input[3]["uri"], 7) ?>" height="800px" width="1000px">
 
                                                     <div class="card-footer">
-                                                        <input class="form-control" id="record" type="text" placeholder="<?= $input[3]["comentario"] ?>" disabled>
+                                                        <input class="form-control" id="record" type="text">
                                                     </div>
 
                                                 </div>

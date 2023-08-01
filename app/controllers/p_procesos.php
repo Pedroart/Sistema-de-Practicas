@@ -24,11 +24,22 @@ class p_procesos extends core\controller {
         core\view::view_dashboard("table_procesos",["titulo"=>"","data"=>$base->get_tabla()],$scrips);
         return;
     }
+    public function estado($proceso){
+        $base = new app\models\proceso();
+        $data=$base->getProceso($proceso);
+        //echo json_encode($data);
+        if($data["procesos_tipo"]==1){
+            core\view::view_dashboard("efectivas/estado",["titulo"=>"","data"=>$data,"formulario"=>$base->data_proceso($data,$data["procesos_tipo"],$data["proceso_etapa"])]);
+        }elseif($data["procesos_tipo"]==1){
+            return;
+        }
+        return;
+    }
 
     public function edit($id){
         $base = new app\models\proceso();
         $data=$base->getProceso($id);
-
+        
         //echo json_encode($data);
         core\view::view_dashboard("procesos/".$data["proceso_etapa"],["titulo"=>"","data"=>$data,"formulario"=>$base->data_proceso($data,$data["procesos_tipo"],$data["proceso_etapa"])]);
         return;
@@ -38,6 +49,6 @@ class p_procesos extends core\controller {
         $comentarios = new \app\models\Comentarios();
         $idComentario = $comentarios->createComentario($_SESSION['role'], $_SESSION['id_user'], $_POST["comentario_principal"]);
         $controlador = new app\models\proceso;
-        $controlador->actualizar_estado($id,["procesos_estado"=>4]);
+        $controlador->actualizar_estado($id,["procesos_estado"=>4,"procesos_comentario"=>$idComentario]);
     }
 }
