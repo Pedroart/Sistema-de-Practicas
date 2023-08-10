@@ -29,7 +29,7 @@ class data_efectivas extends core\modelo{
         return call_user_func_array(array($this, "data_".$id),array($estado,&$dataProceso));
     }
     public function data_all(&$dataProceso){
-        return $this->data_1(1,$dataProceso) + $this->data_2(1,$dataProceso);
+        return $this->data_1(3,$dataProceso) + $this->data_2(3,$dataProceso);
     }
     public function data_1($estado,&$dataProceso) {
         $data = [
@@ -135,45 +135,45 @@ class data_efectivas extends core\modelo{
         return $data;
     }
     
-    public function data_9($estado,&$dataProceso) {
+    public function data_3($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
-        $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
-        $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];
+        $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
+        
         $data = [
-            "Documentacion" => [
-                ["DNI", "DNI", "text", "", "readonly"],
-                ["correo", "Correo", "mail", "", "required"],
-                ["numero", "Celular", "number", "", "required"],
-                ["Genero", "Genero", "select", ["femenino"=>"femenino","masculino"=>"masculino"], "required"],
-                ["nombre", "Nombres", "text", "", "required"],
-                ["apellido_p", "Apellido Paterno", "text", "", "required"],
-                ["apellido_m", "Apellido Materno", "text", "", "required"],
-                ["GradoInstruccion", "Grado Instruccion", "select", ["ejemplo"=>"Presidente"], "required"],
-                ["cargo", "Cargo", "text","", "required"],
+            "Datos del Representante" => [
+                ["encargado_dni", "DNI", "text", "", "required"],
+                ["encargado_genero", "Genero", "select", ["femenino"=>"femenino","masculino"=>"masculino"], "required"],
+                ["encargado_nombres", "Nombres", "text", "", "required"],
+                ["encargado_papellido", "Apellido Paterno", "text", "", "required"],
+                ["encargado_mapellido", "Apellido Materno", "text", "", "required"],
+                ["encargado_grado_instruccion", "Grado Instruccion", "select", ["Presidente"=>"Presidente","CCO"=>"CCO"], "required"],
+                ["encargado_cargo", "Cargo", "text","", "required"],
+                ["encargado_correo", "Correo", "mail", "", "required"],
+                ["encargado_celular", "Celular", "number", "", "required"] 
             ]
             ];
         
             if($estado>=2){
-                $empresa = new app\models\empresa();
-                $dataRepresentante=$empresa->get_jefe_empresa($aux["id_jefe_inmediato"]);
-                $data["Documentacion"][0][3] = $dataRepresentante["DNI"];
-                $data["Documentacion"][1][3] = $dataRepresentante["correo"];
-                $data["Documentacion"][2][3] = $dataRepresentante["numero"];
-                $data["Documentacion"][3][3] = [""=>$dataRepresentante["Genero"]];
-                $data["Documentacion"][4][3] = $dataRepresentante["nombre"];
-                $data["Documentacion"][5][3] = $dataRepresentante["apellido_p"];
-                $data["Documentacion"][6][3] = $dataRepresentante["apellido_m"];
-                $data["Documentacion"][7][3] = [""=>$dataRepresentante["GradoInstruccion"]];
-                $data["Documentacion"][8][3] = $dataRepresentante["cargo"];
+                $dataRepresentate = $empresa->get_representante_empresa($aux["empresa_jefe_inmediato"]);
+                error_log(  json_encode( $dataRepresentate) );
+                $data["Datos del Representante"][0][3] = $dataRepresentate["encargado_dni"];
+                $data["Datos del Representante"][1][3] = ["1"=>$dataRepresentate["encargado_genero"]];
+                $data["Datos del Representante"][2][3] = $dataRepresentate["encargado_nombres"];
+                $data["Datos del Representante"][3][3] = $dataRepresentate["encargado_papellido"];
+                $data["Datos del Representante"][4][3] = $dataRepresentate["encargado_mapellido"];
+                $data["Datos del Representante"][5][3] = ["1"=>$dataRepresentate["encargado_grado_instruccion"]];
+                $data["Datos del Representante"][6][3] = $dataRepresentate["encargado_cargo"];
+                $data["Datos del Representante"][7][3] = $dataRepresentate["encargado_correo"];
+                $data["Datos del Representante"][8][3] = $dataRepresentate["encargado_celular"];
+
             }
 
         return $data;
     }
     
-    public function data_3($estado,&$dataProceso) {
+    public function data_4($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
-        $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
-        $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];
+        $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
 
         $data = [
             "Documentacion" => [
@@ -181,21 +181,17 @@ class data_efectivas extends core\modelo{
             ]
             ];
         if($estado>=2){
-            $documento = new app\models\documentos;
-            $arrayData = $documento->get_documentos_empresa($aux["id_empresa_alumno"]);
-            $documentosTipo1 = array_filter($arrayData, function ($documento) {
-                return $documento['Tipo'] === '1';
-            });
-            echo json_encode($documentosTipo1);
-            $data["Documentacion"][0][3] = $documento->get_documento_direc($documentosTipo1[0]["id_documento"]);
+            
+            $documento = $empresa->getDocumento($dataProceso["procesos_id"],1);
+            $data["Documentacion"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
         }
         return $data;
     }
     
-    public function data_4($estado,&$dataProceso) {
+    public function data_5($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
-        $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
-        $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];
+        $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
+        
 
         $data = [
             "Documentacion" => [
@@ -206,33 +202,36 @@ class data_efectivas extends core\modelo{
             ]
         ];
         if($estado>=2){
-            $documento = new app\models\documentos;
-            $arrayData = $documento->get_documentos_empresa($aux["id_empresa_alumno"]);
-            $documentosTipo1 = array_filter($arrayData, function ($documento) {
-                return $documento['Tipo'] === '2';
-            });
-            echo json_encode($documento->get_documento_direc($documentosTipo1[2]["id_documento"]));
-            $data["Documentacion"][0][3] = $documento->get_documento_direc($documentosTipo1[1]["id_documento"]);
-            $data["Documentacion"][1][3] = $documento->get_documento_direc($documentosTipo1[2]["id_documento"]);
-            $data["Documentacion"][2][3] = $documento->get_documento_direc($documentosTipo1[3]["id_documento"]);
-            $data["Documentacion"][3][3] = $documento->get_documento_direc($documentosTipo1[4]["id_documento"]);
+            $documento = $empresa->getDocumentos($dataProceso["procesos_id"],2);
+            
+            $data["Documentacion"][0][3] = ["uri"=>$documento[0]["documente_direc"],"comentario"=>""];
+            $data["Documentacion"][1][3] = ["uri"=>$documento[1]["documente_direc"],"comentario"=>""];
+            $data["Documentacion"][2][3] = ["uri"=>$documento[2]["documente_direc"],"comentario"=>""];
+            $data["Documentacion"][3][3] = ["uri"=>$documento[3]["documente_direc"],"comentario"=>""];
         }
         return $data;
     }
     
-    public function data_5($estado,&$dataProceso) {
+    public function data_6($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
-        $aux = $empresa->get_empresaAlumno($dataProceso["id_empresa"]);
-        $dataProceso["id_empresaAlumno"] = $aux["id_empresa_alumno"];
+        $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
+        
 
         $data = [
             "Documentacion" => [
-                ["Informe_Final", "Plan de Actividades", "file", ["","value1"], "readonly","file1"],
-                ["Constancia_Practicas", "Plan de Actividades", "file", ["","value1"], "readonly","file2"],
-                
+                ["Informe_Final", "Informe Final", "file", ["","value1"], "readonly","file1"],
+                ["Constancia_Practicas", "Constancia Practicas", "file", ["","value1"], "readonly","file2"],
             ]
-            ];
-            return $data;
+        ];
+        
+        if($estado>=2){
+            $documento = $empresa->getDocumento($dataProceso["procesos_id"],5);
+            $data["Documentacion"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
+            $documento = $empresa->getDocumento($dataProceso["procesos_id"],6);
+            $data["Documentacion"][1][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
+        }
+        
+        return $data;
     }
 }
 

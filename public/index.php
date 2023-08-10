@@ -157,8 +157,15 @@ $roteador->post('/procesos/aceptado/$id', function($id){
 
     $controlador = new app\models\proceso;
     header('Content-type: application/json');
-    
-    $controlador->actualizar_estado($id,["procesos_estado"=>1,"proceso_etapa"=>$controlador->siguienteProceso( $controlador->getProceso($id)["proceso_etapa"] ) ["tetp_id_siguiente_etapa"] ]);
+    $etapa_actual = $controlador->getProceso($id)["proceso_etapa"];
+    $etapa_siguiente = $controlador->siguienteProceso( $etapa_actual ) ["tetp_id_siguiente_etapa"];
+
+    if($etapa_actual != $etapa_siguiente ){
+        $controlador->actualizar_estado($id,["procesos_estado"=>1,"proceso_etapa"=>$etapa_siguiente ]);
+    }
+    else{
+        $controlador->actualizar_estado($id,["procesos_estado"=>3,"procesos_finalizado"=>1 ]);
+    }
     echo json_encode( [true] );
 });
 

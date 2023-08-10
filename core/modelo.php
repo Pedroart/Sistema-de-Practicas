@@ -119,6 +119,7 @@ class modelo{
     }
 
     public function delete($id,$tag){
+        
         $sql = "DELETE FROM {$this->table} WHERE {$tag} = {$id}";
         $this->query($sql);
 

@@ -19,7 +19,7 @@ class documentos extends core\modelo{
     {
         $ficha  = $_FILES[$name_post];
         $nombre = $ficha['name'];
-        $nombremd5= md5(date ('Y-m-d H:i:s')).$nombre;
+        $nombremd5= md5(date ('Y-m-d H:i:s')).mt_rand(1,10).$nombre;
         $tipo   = $ficha['type'];
         $tamano = $ficha['size'];
         $ruta_temporal= $ficha['tmp_name'];

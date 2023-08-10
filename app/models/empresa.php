@@ -127,4 +127,43 @@ class empresa extends core\modelo
 
         return $data; 
     }
+
+    public function getDocumentos($proceso,$tipo){
+        $sql = "SELECT * FROM `empresa_documentos` \n"
+
+    . "LEFT JOIN documentos on documentos.documento_id = empresa_documentos.empresa_documento\n"
+
+    . "WHERE `empresa_documento_proceso` = {$proceso} and `empresa_documento_tipo` = {$tipo};";$this->query($sql);
+        $data = $this->get();
+
+        return $data; 
+    }
+
+    public function deleteEmpresaDocumento($proceso,$tipo){
+        $id = $this->getDocumento($proceso,$tipo);
+        
+
+        $documento = new app\models\documentos;
+        $documento->delete_file($id["empresa_documento"]);
+        
+        $this->table="empresa_documentos";
+        $this->delete($id["empresa_documento_id"],"empresa_documento_id");
+        
+        return true;
+    }
+
+    public function deleteEmpresaDocumentos($proceso,$tipo){
+        $id = $this->getDocumentos($proceso,$tipo);
+        
+
+        foreach($id as &$ids){
+            $documento = new app\models\documentos;
+            $documento->delete_file($ids["empresa_documento"]);
+            
+            $this->table="empresa_documentos";
+            $this->delete($ids["empresa_documento_id"],"empresa_documento_id");
+        }
+        
+        return true;
+    }
 }
