@@ -62,6 +62,10 @@ $roteador->post('/proceso/create',function(){
     $modelo->creata($_POST['id']);
 });
 
+$roteador->get('/documentos', function(){
+    core\view::view_dashboard('documentos', ["titulo"=>null]);
+});
+
 $roteador->get('/efectivas', function(){
     $controlador = new app\controllers\p_efectiva();$controlador->index();
 });

@@ -10,8 +10,8 @@
 
 <div class="container-fluid text-center">
     
-    <?php include _view_ . "/efectivas/generador.php";?>
-
+    <?php include _view_ . "/efectivas/generador_estado.php";?>
+    
 
 
 </div>

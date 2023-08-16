@@ -48,10 +48,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?= _URL_ ?>" class="nav-link">Home</a>
+        <a href="<?= _URL_ ?>" class="nav-link">Banco de Practicas</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="<?= _URL_ ?>/documentos" class="nav-link">Documentos</a>
       </li>
     </ul>
 

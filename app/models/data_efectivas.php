@@ -29,7 +29,15 @@ class data_efectivas extends core\modelo{
         return call_user_func_array(array($this, "data_".$id),array($estado,&$dataProceso));
     }
     public function data_all(&$dataProceso){
-        return $this->data_1(3,$dataProceso) + $this->data_2(3,$dataProceso);
+        $info = [];
+            if ($dataProceso["proceso_etapa"]>1){ $info +=$this->data_1(3,$dataProceso);}
+            if ($dataProceso["proceso_etapa"]>2){ $info +=$this->data_2(3,$dataProceso);}
+            if ($dataProceso["proceso_etapa"]>3){ $info +=$this->data_3(3,$dataProceso);}
+            if ($dataProceso["proceso_etapa"]>4){ $info +=$this->data_4(3,$dataProceso);}
+            if ($dataProceso["proceso_etapa"]>5){ $info +=$this->data_5(3,$dataProceso);}
+            if ($dataProceso["proceso_etapa"]==6){ $info +=$this->data_6(3,$dataProceso);}
+        return $info;
+        //return $this->data_1(3,$dataProceso) + $this->data_2(3,$dataProceso);
     }
     public function data_1($estado,&$dataProceso) {
         $data = [
@@ -176,14 +184,14 @@ class data_efectivas extends core\modelo{
         $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
 
         $data = [
-            "Documentacion" => [
+            "Plan de Actividades" => [
                 ["Plan_Actividades", "Plan de Actividades", "file", ["","value1"], "readonly","file1"],
             ]
             ];
         if($estado>=2){
             
             $documento = $empresa->getDocumento($dataProceso["procesos_id"],1);
-            $data["Documentacion"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
+            $data["Plan de Actividades"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
         }
         return $data;
     }
@@ -194,7 +202,7 @@ class data_efectivas extends core\modelo{
         
 
         $data = [
-            "Documentacion" => [
+            "Control Mensual" => [
                 ["FichaControl1", "Ficha de control Mensual 1", "file", ["","value1"], "readonly","file1"],
                 ["FichaControl2", "Ficha de control Mensual 2", "file", ["","value1"], "readonly","file2"],
                 ["FichaControl3", "Ficha de control Mensual 3", "file", ["","value1"], "readonly","file3"],
@@ -204,10 +212,10 @@ class data_efectivas extends core\modelo{
         if($estado>=2){
             $documento = $empresa->getDocumentos($dataProceso["procesos_id"],2);
             
-            $data["Documentacion"][0][3] = ["uri"=>$documento[0]["documente_direc"],"comentario"=>""];
-            $data["Documentacion"][1][3] = ["uri"=>$documento[1]["documente_direc"],"comentario"=>""];
-            $data["Documentacion"][2][3] = ["uri"=>$documento[2]["documente_direc"],"comentario"=>""];
-            $data["Documentacion"][3][3] = ["uri"=>$documento[3]["documente_direc"],"comentario"=>""];
+            $data["Control Mensual"][0][3] = ["uri"=>$documento[0]["documente_direc"],"comentario"=>""];
+            $data["Control Mensual"][1][3] = ["uri"=>$documento[1]["documente_direc"],"comentario"=>""];
+            $data["Control Mensual"][2][3] = ["uri"=>$documento[2]["documente_direc"],"comentario"=>""];
+            $data["Control Mensual"][3][3] = ["uri"=>$documento[3]["documente_direc"],"comentario"=>""];
         }
         return $data;
     }
@@ -218,7 +226,7 @@ class data_efectivas extends core\modelo{
         
 
         $data = [
-            "Documentacion" => [
+            "Documentacion Final" => [
                 ["Informe_Final", "Informe Final", "file", ["","value1"], "readonly","file1"],
                 ["Constancia_Practicas", "Constancia Practicas", "file", ["","value1"], "readonly","file2"],
             ]
@@ -226,9 +234,9 @@ class data_efectivas extends core\modelo{
         
         if($estado>=2){
             $documento = $empresa->getDocumento($dataProceso["procesos_id"],5);
-            $data["Documentacion"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
+            $data["Documentacion Final"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
             $documento = $empresa->getDocumento($dataProceso["procesos_id"],6);
-            $data["Documentacion"][1][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
+            $data["Documentacion Final"][1][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
         }
         
         return $data;
