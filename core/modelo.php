@@ -2,6 +2,12 @@
 
 namespace core;
 
+/*
+
+    Define una clase modelo que encapsula la lógica para realizar operaciones comunes
+    en una base de datos, como consultar, insertar, actualizar y eliminar registros.
+*/
+
 use mysqli;
 
 class modelo{

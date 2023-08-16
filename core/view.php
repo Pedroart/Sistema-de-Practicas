@@ -2,6 +2,13 @@
 
 namespace core;
 
+/*
+
+    Clase controladora de la vista, permitiendo construir las pagina en 2 modos
+    1. Full Pantalla
+    2. Plantilla Dashboard
+*/
+
 class view{
     
     public static function view_($route, $data = []){

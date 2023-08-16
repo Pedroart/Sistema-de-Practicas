@@ -1,5 +1,11 @@
 <?php
 
+/*
+
+Implementa un enrutador que maneja diversas rutas y acciones en una aplicación PHP.
+Estas rutas abarcan áreas como autenticación y procesos.
+
+*/ 
 
 define("__DIREC__",str_replace("/public","",$_SERVER['DOCUMENT_ROOT']) );
 include __DIREC__."/core/config.php";

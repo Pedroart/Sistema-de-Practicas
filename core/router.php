@@ -1,5 +1,9 @@
 <?php
 
+/*
+    Esta clase proporciona funcionalidades para enrutar y manejar solicitudes HTTP.
+*/
+
 namespace core;
 
 class router{

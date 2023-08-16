@@ -1,5 +1,14 @@
 <?php
 
+/*
+    En este código se define una serie de constantes y una configuración
+    en forma de objeto. Las constantes definidas representan rutas a carpetas
+    en el sistema, y el objeto $config contiene información relevante sobre la
+    configuración de la base de datos y la aplicación en sí. Estas constantes y
+    configuraciones pueden ser utilizadas en toda la aplicación para acceder a
+    rutas y valores específicos.
+*/
+
 $config = (object) array(
     
     'database' => (object) array(
