@@ -43,7 +43,13 @@ class login extends core\controller {
 
 
     public function gestion_usuario(){
+        
         core\view::view_dashboard("gestion_usuario/alumno",["titulo"=>""]);
         return;       
+    }
+
+    public function crear_usuarios()  {
+        core\view::view_dashboard("gestion_usuario/generar_alumnos",["titulo"=>""]);
+        return;
     }
 }

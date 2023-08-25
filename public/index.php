@@ -13,6 +13,12 @@ include __DIREC__."/core/autoloader.php";
 
 $roteador = new core\router;
 
+$roteador->post('/api/registraralumnos', function(){
+    $user = new app\models\user();
+    header('Content-type: application/json');
+    echo json_encode($user->crearUsuarios() );
+});
+
 $roteador->post('/api/departamentos', function(){
     $controlador = new app\models\lugar();
     header('Content-type: application/json');
@@ -189,6 +195,10 @@ $roteador->post('/procesos/revisar/$id', function($id){
     $controlador = new app\controllers\p_procesos();$controlador->revisar($id);
     header('Content-type: application/json');
     echo json_encode( [true] );
+});
+
+$roteador->get('/crear_usuarios', function(){
+    $controlador = new app\controllers\login();$controlador->crear_usuarios();
 });
 
 $roteador->any('/404','app/views/404.php');

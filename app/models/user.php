@@ -56,4 +56,34 @@ class user extends core\modelo{
         $this->table= "personas";
         return $this->update4key($id,$datos,"persona_id");
     }
+
+    public function crearUsuarios() {
+        $data = [];
+        if(isset($_FILES)) {
+            
+            move_uploaded_file($_FILES['archivo_csv']['tmp_name'],__DIREC__.'/app/temporales/'.$_FILES['archivo_csv']['name'] );
+            
+                
+
+                $file = fopen(__DIREC__.'/app/temporales/'.$_FILES['archivo_csv']['name'], 'r');
+
+                if ($file) {
+                    
+                    
+                    while (($row = fgetcsv($file,0,';')) !== false) {
+                        $data= $row;
+                    }
+                    
+                    fclose($file);
+                    return $data;
+                } else {
+                    return "No se pudo abrir el archivo.";
+                }
+            
+        }else{
+            return "error carga archivo";
+        }
+
+    }
+    
 }
