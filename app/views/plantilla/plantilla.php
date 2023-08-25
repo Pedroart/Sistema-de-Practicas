@@ -65,7 +65,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
-          <a href="usuario" class="dropdown-item">
+          <a href="<?= _URL_ ?>/usuario" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> Gestion de Cuenta
           </a>
           <div class="dropdown-divider"></div>
@@ -83,7 +83,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="<?= _URL_ ?>" class="brand-link">
       <img src="<?= _URL_ ?>/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" >
       <span class="brand-text font-weight-light">Sistema Practicas</span>
     </a>

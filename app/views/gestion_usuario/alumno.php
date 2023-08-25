@@ -1,35 +1,103 @@
-<form>
-    <div class="mb-3">
-        <label for="persona_nombres" class="form-label">Nombres</label>
-        <input type="text" class="form-control" id="persona_nombres">
+<section class="content">
+    <div class="container-fluid ">
+        <div class="row justify-content-end">
+            <div class="col-md-3">
+
+                <div class="card">
+                    <div class="card-body box-profile">
+
+                        <h3 class="profile-username text-center">Codigo Estudiante</h3>
+                        <p class="text-muted text-center">Carrera</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-9">
+
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Datos Personales </div>
+                    <div class="card-body">
+
+                        <div class="form-group row">
+
+                            <label for="NameData" class="col-sm-4 col-form-label">Nombres</label>
+
+                            <div class="col-sm-8">
+
+
+                                <input type="text" name="NameData" id="1" class="form-control" value="Ana" disabled="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label for="NameData" class="col-sm-4 col-form-label">Apellido Paterno</label>
+
+                            <div class="col-sm-8">
+
+
+                                <input type="text" name="NameData" id="1" class="form-control" value="Gómez"
+                                    disabled="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label for="NameData" class="col-sm-4 col-form-label">Apellido Materno</label>
+
+                            <div class="col-sm-8">
+
+
+                                <input type="text" name="NameData" id="1" class="form-control" value="Sánchez"
+                                    disabled="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label for="NameData" class="col-sm-4 col-form-label">DNI</label>
+
+                            <div class="col-sm-8">
+
+
+                                <input type="text" name="NameData" id="1" class="form-control" value="01234567"
+                                    disabled="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label for="NameData" class="col-sm-4 col-form-label">Semestre</label>
+
+                            <div class="col-sm-8">
+
+
+                                <input type="text" name="NameData" id="1" class="form-control" value="2023-III"
+                                    disabled="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        Solicitud de procesos</div>
+                    <div class="card-body">
+                        <a href="#">Cambio de contraseña</a>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
-    <div class="mb-3">
-        <label for="persona_papellido" class="form-label">Primer Apellido</label>
-        <input type="text" class="form-control" id="persona_papellido">
+
     </div>
-    <div class="mb-3">
-        <label for="persona_mapellido" class="form-label">Segundo Apellido</label>
-        <input type="text" class="form-control" id="persona_mapellido">
-    </div>
-    <div class="mb-3">
-        <label for="persona_DNI" class="form-label">DNI</label>
-        <input type="text" class="form-control" id="persona_DNI">
-    </div>
-    <div class="mb-3">
-        <label for="persona_direccion" class="form-label">Dirección</label>
-        <input type="text" class="form-control" id="persona_direccion">
-    </div>
-    <div class="mb-3">
-        <label for="persona_correo" class="form-label">Correo Electrónico</label>
-        <input type="email" class="form-control" id="persona_correo">
-    </div>
-    <div class="mb-3">
-        <label for="persona_celular" class="form-label">Número de Celular</label>
-        <input type="tel" class="form-control" id="persona_celular">
-    </div>
-    <div class="mb-3">
-        <label for="persona_ubi" class="form-label">Ubicación</label>
-        <input type="text" class="form-control" id="persona_ubi">
-    </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
+</section>

@@ -14,7 +14,7 @@ class user extends core\modelo{
 
         $resultados = $this->first();
         
-        if($resultados['user_contra'] == $contra){
+        if($resultados['user_contra'] == md5($contra)){
 
             $_SESSION['id_user'] = $resultados['user_role_id'];
             $_SESSION['role'] = $resultados['user_type_role'];
