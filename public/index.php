@@ -72,6 +72,11 @@ $roteador->get('/documentos', function(){
     core\view::view_dashboard('documentos', ["titulo"=>null]);
 });
 
+$roteador->get('/usuario', function(){
+    $controlador = new app\controllers\login();$controlador->gestion_usuario();
+});
+
+
 $roteador->get('/efectivas', function(){
     $controlador = new app\controllers\p_efectiva();$controlador->index();
 });

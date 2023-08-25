@@ -40,4 +40,10 @@ class login extends core\controller {
         header('Content-type: application/json');
         echo json_encode( ['resultado'=> true] );
     }
+
+
+    public function gestion_usuario(){
+        core\view::view_dashboard("gestion_usuario/alumno",["titulo"=>""]);
+        return;       
+    }
 }

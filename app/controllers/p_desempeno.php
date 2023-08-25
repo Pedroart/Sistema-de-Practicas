@@ -10,6 +10,7 @@ class p_desempeno extends core\controller {
         if (!$this->matricula()) {
             $a = new app\controllers\vali_matri();
             $a->index();
+            return;
         }
 
         core\view::view_dashboard('desempeno/index', ["titulo" => "Practicas Efectivas"]);

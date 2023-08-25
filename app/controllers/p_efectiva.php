@@ -13,6 +13,7 @@ class p_efectiva extends core\controller
         if (!$this->matricula()) {
             $a = new app\controllers\vali_matri();
             $a->index();
+            return;
         }
 
         core\view::view_dashboard('efectivas/index', ["titulo" => "Practicas Efectivas"]);

@@ -16,7 +16,7 @@ class matricula extends core\modelo{
         if (! ($_SESSION['role'] == 3) ){
             return false;
         }
-        $_SESSION['id_semestre']  =2;
+        
         $usuario = $this->query("SELECT * FROM matricula WHERE matricula_id_semestre = ".$_SESSION['id_semestre']." AND matricula_alumno = ".$_SESSION['id_user']);
         $data = $this->first();
         if($this->_num_rows() == 0){

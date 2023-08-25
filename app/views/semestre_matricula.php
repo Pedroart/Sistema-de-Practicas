@@ -25,9 +25,6 @@
           <div class="card-body">
             <embed src="<?= _URL_ ?><?= substr($data[0]["uri"], 7) ?>" height="500px" width="100%">
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
         </div>
         <div class="card">
           <div class="card-header">
@@ -39,9 +36,6 @@
 
           <div class="card-body">
           <embed src="<?= _URL_ ?><?= substr($data[1]["uri"], 7) ?>" height="500px" width="100%">
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
           </div>
         </div>
 
