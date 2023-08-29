@@ -58,7 +58,7 @@ class user extends core\modelo{
     }
 
     public function crearUsuarios() {
-        $data = [];
+        $data = "";
         if(isset($_FILES)) {
             
             move_uploaded_file($_FILES['archivo_csv']['tmp_name'],__DIREC__.'/app/temporales/'.$_FILES['archivo_csv']['name'] );
@@ -68,14 +68,46 @@ class user extends core\modelo{
                 $file = fopen(__DIREC__.'/app/temporales/'.$_FILES['archivo_csv']['name'], 'r');
 
                 if ($file) {
-                    
-                    
+                    $data_persona = [];
+                    $contador = true;
                     while (($row = fgetcsv($file,0,';')) !== false) {
-                        $data= $row;
+                        if($contador){
+                            $contador = false;
+                        }else{
+                            $data_persona = [
+                                "persona_nombres"=>trim($row[4]),
+                                "persona_papellido"=>trim($row[5]),
+                                "persona_mapellido"=>trim($row[6]),
+                            ];
+                            $this->table = "personas";
+                            $id_persona=$this->create($data_persona);
+
+                            $data_alumno = ["alumno_codigo"=>trim($row[2])
+                            //, "alumnos_escuela"=>trim($row[3]), 
+                            , "alumnos_escuela"=>10, 
+                            "user_persona_id"=>$id_persona];
+
+                            $this->table = "alumnos";
+                            $id_alumno=$this->create($data_alumno);
+
+
+                            $data_usuarios = [
+                                "user_correo"=>($row[0]),
+                                "user_contra"=>md5($row[1]),
+                                "user_type_role"=>3,
+                                "user_role_id"=>trim($row[2]),
+                                "user_persona_id"=>$id_persona
+                            ];
+
+                            $this->table = "users";
+                            $id_persona=$this->create($data_usuarios);
+
+                        }
+
                     }
                     
                     fclose($file);
-                    return $data;
+                    return $data_persona;
                 } else {
                     return "No se pudo abrir el archivo.";
                 }
