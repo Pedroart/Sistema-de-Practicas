@@ -130,7 +130,7 @@ $roteador->get('/desempeno/proceso', function(){
         return;
     }
     // Realizar proceso
-    echo "hola";
+    
     core\view::view_dashboard('conf_proceso',["titulo"=>"Desempeño Laboral","proceso"=>2]);
         
 });
@@ -199,6 +199,10 @@ $roteador->post('/procesos/revisar/$id', function($id){
 
 $roteador->get('/crear_usuarios', function(){
     $controlador = new app\controllers\login();$controlador->crear_usuarios();
+});
+
+$roteador->get('/lista_usuarios', function(){
+    $controlador = new app\controllers\login();$controlador->lista_usuarios();
 });
 
 $roteador->any('/404','app/views/404.php');

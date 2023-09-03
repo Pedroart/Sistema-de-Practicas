@@ -52,4 +52,23 @@ class login extends core\controller {
         core\view::view_dashboard("gestion_usuario/generar_alumnos",["titulo"=>""]);
         return;
     }
+
+    public function lista_usuarios(){
+        $scrips =[
+            "/plugins/datatables/jquery.dataTables.min.js",
+            "/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js",
+            "/plugins/datatables-responsive/js/dataTables.responsive.min.js",
+            "/plugins/datatables-responsive/js/responsive.bootstrap4.min.js",
+            "/plugins/datatables-buttons/js/dataTables.buttons.min.js",
+            "/plugins/datatables-buttons/js/buttons.bootstrap4.min.js",
+            "/plugins/jszip/jszip.min.js",
+            "/plugins/pdfmake/pdfmake.min.js",
+            "/plugins/pdfmake/vfs_fonts.js",
+            "/plugins/datatables-buttons/js/buttons.html5.min.js",
+            "/plugins/datatables-buttons/js/buttons.print.min.js",
+            "/plugins/datatables-buttons/js/buttons.colVis.min.js"];
+        $user = new app\models\user();
+        core\view::view_dashboard("gestion_usuario/tabla_alumnos",["titulo"=>"","Data"=>$user->Datos_Alumnos()],$scrips);
+        return;
+    }
 }

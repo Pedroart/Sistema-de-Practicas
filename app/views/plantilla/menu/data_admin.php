@@ -30,6 +30,18 @@ $menu = [
             'title'=> "Validacion",
             "url"  => "validaciones"
         ],
+    ],
+    "Usuarios" => [
+        [
+            'type' => "grupo-nav-link",
+            'icon' => "fas fa-fw fa-table",
+            'title'=> "Alumnos",
+            'sub'  => [
+                "Lista"=>"/lista_usuarios",
+                "Agregar Lote"=>"/crear_usuarios",
+
+            ]
+        ],
     ]
 ];
 

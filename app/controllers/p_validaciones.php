@@ -27,7 +27,9 @@ class p_validaciones extends core\controller {
     }
     public function edit($id){
         $base = new app\models\matricula();
-        core\view::view_dashboard("view_matricula",["titulo"=>"","id_documentos"=>$base->get_documentos_ids($id),"id"=>$id,"documentos"=>$base->get_documentes_comentarios($id)]);
+        $model = new app\models\user();
+        $id_persona =$model->Datos_Alumno($id);
+        core\view::view_dashboard("view_matricula",["titulo"=>"","persona"=>$id_persona,"id_documentos"=>$base->get_documentos_ids($id),"id"=>$id,"documentos"=>$base->get_documentes_comentarios($id)]);
         return;
     }
 

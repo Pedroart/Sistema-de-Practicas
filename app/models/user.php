@@ -28,6 +28,26 @@ class user extends core\modelo{
         return false;
     }
     
+    public function Datos_Alumnos(){
+        $sql = "SELECT alumno_codigo, persona_nombres, persona_papellido, persona_mapellido, escuela_nombre FROM `alumnos`\n"
+
+        . "LEFT JOIN personas on personas.persona_id = alumnos.user_persona_id\n"
+        . "LEFT JOIN escuelas on escuelas.escuela_id = alumnos.alumnos_escuela\n"
+        . "WHERE 1";
+
+        
+
+        $this->query($sql);
+        $data = $this->get();
+        $formato = function($lista){
+            $lista["url"] = "";
+            return array_values($lista);
+        };
+        $datas = array_map($formato,$data);
+
+        return $datas; 
+    }
+
     public function Datos_Alumno($id_alumno){
         $sql = "SELECT * FROM `alumnos`\n"
 
@@ -36,7 +56,7 @@ class user extends core\modelo{
         . "LEFT JOIN distritos_pais on distritos_pais.distrito_id = personas.persona_ubi\n"
 
         . "LEFT JOIN provincias_pais on provincias_pais.provincia_id = distritos_pais.distrito_padre_id\n"
-
+        . "LEFT JOIN escuelas on escuelas.escuela_id = alumnos.alumnos_escuela\n"
         . "LEFT JOIN departamentos_pais on departamentos_pais.departamento_id = provincias_pais.provincia_padre_id\n"
         . "WHERE `alumno_codigo` = '{$id_alumno}';";
         $this->query($sql);
@@ -55,6 +75,11 @@ class user extends core\modelo{
         
         $this->table= "personas";
         return $this->update4key($id,$datos,"persona_id");
+    }
+
+    public function actualizarDNI($alumno,$dni){
+        $sql = "UPDATE `personas` SET `persona_DNI`='{$dni}' WHERE `persona_id`=(SELECT `user_persona_id` FROM `alumnos` WHERE `alumno_codigo` = '{$alumno})'";
+        $this->query($sql);
     }
 
     public function crearUsuarios() {

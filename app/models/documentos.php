@@ -69,12 +69,13 @@ class documentos extends core\modelo{
 
         
         $data = $this->get()[0];
-
+        $data["estado"] =1;
         if(!isset($data["comentario_cuerpo"])){
             $data["comentario_cuerpo"] = "";
+            $data["estado"] =0;
         }
 
-        return ["uri"=>$data["documente_direc"],"comentario"=>$data["comentario_cuerpo"]];
+        return ["uri"=>$data["documente_direc"],"comentario"=>$data["comentario_cuerpo"],"estado"=>$data["estado"]];
     }
 
     public function get_documentos_empresa($id_empresa_alumno){
