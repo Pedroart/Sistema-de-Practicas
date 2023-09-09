@@ -1,27 +1,20 @@
 <?php
 
 $menu = [
-    "PRACTICAS PRE PROFECIONALES" => [
+    "Proceso" => [
         [
-            'type' => "grupo-nav-link",
+            'type' => "nav-link",
             'icon' => "fas fa-fw fa-table",
             'title'=> "Efectivas",
-            'sub'  => [
-                "Bienvenida"=>"/url1",
-                "Historial de cartas"=>"/url2",
-                "Estado"=>"/url3",
-            ]
+            "url"  => "validaciones"
         ],
         [
-            'type' => "grupo-nav-link",
+            'type' => "nav-link",
             'icon' => "fas fa-fw fa-table",
-            'title'=> "Desempeño laboral",
-            'sub'  => [
-                "Bienvenida"=>"/url1",
-                "Proceso"=>"/url2",
-                "Estado"=>"/url3",
-            ]
+            'title'=> "Efectivas",
+            "url"  => "validaciones"
         ]
+        
     ],
     "Matriculas" => [
         [
@@ -34,11 +27,31 @@ $menu = [
     "Usuarios" => [
         [
             'type' => "grupo-nav-link",
-            'icon' => "fas fa-fw fa-table",
+            'icon' => "fa fa-users",
             'title'=> "Alumnos",
             'sub'  => [
                 "Lista"=>"/lista_usuarios",
                 "Agregar Lote"=>"/crear_usuarios",
+
+            ]
+        ],
+        [
+            'type' => "grupo-nav-link",
+            'icon' => "fa fa-graduation-cap",
+            'title'=> "Profesores",
+            'sub'  => [
+                "Lista"=>"/lista_usuarios",
+                "Agregar"=>"/crear_usuarios",
+
+            ]
+        ],
+        [
+            'type' => "grupo-nav-link",
+            'icon' => "fa fa-university",
+            'title'=> "Asistentes",
+            'sub'  => [
+                "Lista"=>"/lista_usuarios",
+                "Agregar"=>"/crear_usuarios",
 
             ]
         ],
