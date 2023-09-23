@@ -3,7 +3,7 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
 ?>
 <div class="container-fluid text-center">
     <?php
-    include _view_ . "/efectivas/submenu.php";
+    include _view_ . "/desempeno/submenu.php";
     ?>
 
 
@@ -31,8 +31,8 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
             </div>
     </div>
 
-    <?php include _view_ . "/efectivas/cabecera.php";?>
-    <?php include _view_ . "/efectivas/generador.php";?>
+    <?php include _view_ . "/desempeno/cabecera.php";?>
+    <?php include _view_ . "/desempeno/generador.php";?>
 </div>
 <script>
     var b_FichaDatos = document.getElementById('idEtapa');
@@ -46,7 +46,7 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         datos.append("estado",<?= $estado?>);
       console.log(datos);
       
-      fetch('<?= _URL_ ?>/efectivas/proceso', {
+      fetch('<?= _URL_ ?>/desempeno/proceso', {
           method: 'POST',
           body: datos
         }).then(res => res.json())

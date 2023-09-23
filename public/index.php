@@ -121,25 +121,21 @@ $roteador->get('/desempeno', function(){
 
 $roteador->get('/desempeno/proceso', function(){
     
-    $controlador = new app\controllers\p_desempeno();
-    $data=$controlador->pre_proceso($_SESSION['id_user']);
-    
-    if($data!=false){
-        if($data["proceso_id"]==2)
-        $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
-        return;
-    }
-    // Realizar proceso
-    
-    core\view::view_dashboard('conf_proceso',["titulo"=>"Desempeño Laboral","proceso"=>2]);
-        
+    $controlador = new app\controllers\p_desempeno();$controlador->proceso();    
 });
 
 $roteador->get('/desempeno/proceso/$id', function($id){
-    $controlador = new app\controllers\p_desempeno();
-    $data=$controlador->pre_proceso($_SESSION['id_user']);
-    $controlador->proceso_id($id,$data['id_etapa'],$data['id'],$data['id_estado']);
+    $controlador = new app\controllers\p_desempeno();$controlador->proceso($id);
 });
+
+$roteador->post('/desempeno/proceso', function(){
+    $controlador = new app\controllers\p_desempeno();
+    $controlador->update_proceso($_POST["etapa"],$_POST["estado"]);
+    
+    header('Content-type: application/json');
+    echo json_encode( ["resultado"=>true] );
+});
+
 
 $roteador->get('/validaciones', function(){
     $controlador = new app\controllers\p_validaciones();$controlador->index();
@@ -204,5 +200,6 @@ $roteador->get('/crear_usuarios', function(){
 $roteador->get('/lista_usuarios', function(){
     $controlador = new app\controllers\login();$controlador->lista_usuarios();
 });
+
 
 $roteador->any('/404','app/views/404.php');

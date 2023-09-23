@@ -17,122 +17,269 @@ class p_desempeno extends core\controller {
         return;
     }
 
-    public function pre_proceso($id_alumno)
+    public function proceso($id=null)
     {
-        $model = new app\models\proceso();
-        $data = $model->buscarProcesos($id_alumno);
-        if ($model->_num_rows() == 0) {
-            return false;
-        }
-        return $data;
-    }
-    
-    public function parametros(&$array,$id){
-        switch ($id) {
-            case 7:
-                # code...
-                break;
-            case 8:
-                $array["id_empresa"] = 1;
-                $array["empresa_nombre"] = "Empresa - Ejemplo";
-                    break;
-            default:
-                # code...
-                break;
-        }
-    }
+        $proceso = new app\models\proceso();
+        $dataProceso = $proceso->buscarProcesos($_SESSION['id_user']);
 
-    public function proceso($id,$id_etapa_actual, $estado)
-    {
-        
-        $this->proceso_id($id_etapa_actual, $id_etapa_actual,$id,$estado);
+        if($proceso->_num_rows() ==0){ // Propone crear un proceso si no existe
+            core\view::view_dashboard('conf_proceso',["titulo"=>"Desempeño","proceso"=>2]);
+            return;
+        }
+
+        if(!($dataProceso["procesos_tipo"]==2)){
+            $id = 0;
+        }
+
+        $this->proceso_id($id,$dataProceso);
         return;
     }
 
-    public function proceso_id($id, $actual,$id_main_proceso,$estado_main_proceso)
-    {
+    private function proceso_id($id,$dataProceso){
+        $id_actual = $dataProceso["proceso_etapa"];
+        if(is_null($id)){
+            $id = $id_actual;
+        }
         $id_proceso = 2;
         $model = new app\models\t_proceso();
         $etapas = $model->get_etapas($id_proceso);
-        if ($id <= $actual) {
-            $datacall = ["titulo" => "","id_"=>$id_main_proceso, "etapas" => $etapas, "activo" => $id, "actual" => $actual,"estado"=>3];
-            $this->parametros($datacall,$id);
-            if($id == $actual){
-                $datacall["estado"]=$estado_main_proceso;
-            }
-            core\view::view_dashboard('desempeno/etapas/' . $id, $datacall);
-            return;
+        if (($id <= $id_actual) && $id!=0){
+            $data = new app\models\data_desempeno();
+            $dataProceso["id_Alumno"] = $_SESSION['id_user'];
+            
+            core\view::view_dashboard('desempeno/etapas/'.$id, ["titulo" => "", "etapas" => $etapas,"id_"=>$dataProceso["procesos_id"], "activo" => $id, "actual" => $id_actual,"dataProceso"=>&$dataProceso, "formulario"=> $data->data($id,(($id_actual>$id)? "3":$dataProceso["procesos_estado"]),$dataProceso)]);
+            return;   
         }
-        core\view::view_dashboard('desempeno/etapas/0', ["titulo" => "", "etapas" => $etapas, "activo" => $id, "actual" => $actual]);
-    }
-
-    public function estado()
-    {
-        core\view::view_dashboard('desempeno/estado', ["titulo" => " Estado"]);
+        core\view::view_dashboard('desempeno/etapas/0', ["titulo" => "", "etapas" => $etapas, "activo" => $id, "actual" => $id_actual]);
         return;
     }
+
     public function update_proceso($id, $estado)
     {
         switch ($id) {
-            case 7:
-                $this->proceso_7($estado);
-                break;
-
-            default:
-                # code...
-                break;
+            case 7: $this->proceso_1($estado);break;
+            case 8: $this->proceso_2($estado);break;
+            case 9: $this->proceso_3($estado);break;
+            case 10: $this->proceso_4($estado);break;
+            case 11: $this->proceso_6($estado);break;
+            default: break;
         }
     }
+    private function proceso_6($estado){
+        switch($estado){
+            case 1:
+                $base = new app\models\documentos();
+                $Control1 =$base-> create_files_post('Informe_Final',"application/pdf");
+                $Control2 =$base-> create_files_post('Constancia_Practicas',"application/pdf");
+                $model = new app\models\empresa();
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>5,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$Control1]);
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>6,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$Control2]);
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
+                break;
+            case 2:
+                default:
+                        $model = new app\models\empresa();
+                        $model->deleteEmpresaDocumento($_POST["id_proceso"],5);
+                        $model->deleteEmpresaDocumento($_POST["id_proceso"],6);
+                        $model = new app\models\proceso();
+                        $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1]);
+                
+            break;
+        }
+        return true;
+    }
+    private function proceso_5($estado){
+        switch($estado){
+            case 1:
+                $base = new app\models\documentos();
+                $Control1 =$base-> create_files_post('FichaControl1',"application/pdf");
+                $Control2 =$base-> create_files_post('FichaControl2',"application/pdf");
+                $Control3 =$base-> create_files_post('FichaControl3',"application/pdf");
+                $Control4 =$base-> create_files_post('FichaControl4',"application/pdf");
+                $model = new app\models\empresa();
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>2,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$Control1]);
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>2,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$Control2]);
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>2,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$Control3]);
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>2,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$Control4]);
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
+                break;
+            case 2:
+                default:
+                        $model = new app\models\empresa();
+                        $model->deleteEmpresaDocumentos($_POST["id_proceso"],2);
+                        $model = new app\models\proceso();
+                        $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1]);
+                
+            break;
+        }
+        return true;
+    }
+    private function proceso_4($estado){
+        switch($estado){
+            case 1:
+                
+                $base = new app\models\documentos();
+                $Actividades =$base-> create_files_post('Plan_Actividades',"application/pdf");
+                
 
-    private function proceso_7($estado)
-    {
-        $Data_Estudiante = [
-            "direccion" => $_POST["estudiante_Direc"],
-            "correo" => $_POST["estudiante_Correo"],
-            "celular" => $_POST["estudiante_Celular"],
-            "departamento" => $_POST["estudiante_Departamento"],
-            "provincia" => $_POST["estudiante_Provincia"],
-            "distrito" => $_POST["estudiante_Distrito"]
+                $model = new app\models\empresa();
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>1,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$Actividades]);
+                
+                
+                
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
+                break;
+            case 2:
+            default:
+                $model = new app\models\empresa();
+                $model->deleteEmpresaDocumento($_POST["id_proceso"],1);
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1]);
+        }
+        return true;
+    }
+
+    private function proceso_3($estado){
+        if($estado<2){
+            $Data_Representante = [
+            "encargado_dni"=>$_POST["encargado_dni"],
+            "encargado_genero"=>$_POST["encargado_genero"],
+            "encargado_nombres"=>$_POST["encargado_nombres"],
+            "encargado_papellido"=>$_POST["encargado_papellido"],
+            "encargado_mapellido"=>$_POST["encargado_mapellido"],
+            "encargado_grado_instruccion"=>$_POST["encargado_grado_instruccion"],
+            "encargado_cargo"=>$_POST["encargado_cargo"],
+            "encargado_correo"=>$_POST["encargado_correo"],
+            "encargado_celular"=>$_POST["encargado_celular"],
         ];
-        $Data_Empresa = [
-            "RUC" => $_POST["empresa_RUC"],
-            "Razon_socal_empresa" => $_POST["empresa_NombreEmpres"],
-            "Referencia_ubicacion_empresa" => $_POST["empresa_DirecLabo"],
-            "id_distrito" => $_POST["empresa_Distrito2"],
-        ];
-        $Data_Representante = [
-            "nombre" => $_POST["representante_Name"],
-            "apellido_p" => $_POST["representante_Aparternor"],
-            "apellido_m" => $_POST["representante_Amarterno"],
-            "cargo" => $_POST["Cargo"],
-            "Genero" => $_POST["Genero"],
-            "GradoInstruccion" => $_POST["representante_GradoInstruccion"],
-        ];
-        $Data_Empresa_Alumno=[
-            "id_alumno"=>$_SESSION['id_user']
-        ];
-        
-        $model = new app\models\user();
-        $id_persona =$model->buscar_id_persona_estudiante($_SESSION['id_user']);
-        $model->actualizar_DatosSecundarios_Alumno($id_persona["id_persona"],$Data_Estudiante);
+        }
         
         switch ($estado) {
-            case 5:
+            case 1:
                 $model = new app\models\empresa();
-                $id_Empresa=$model->crear($Data_Empresa);
-                $Data_Empresa_Alumno["id_empresa"] = $id_Empresa;
-                $Data_Representante["id_empresa"] = $id_Empresa;
-                $Data_Representante["id_puesto"]= 1;
                 
+                $empresa_Alumno= $model->get_empresaAlumno($_POST["id_proceso"])["empresa_proceso_id"] ;
+                
+                
+                $Data_Representante["encargado_puesto"]= 5;
+                $Data_Representante["encargado_empresa"]= $empresa_Alumno;
                 $id_represe_empresa = $model->crear_representante_empresa($Data_Representante);
-                $Data_Empresa_Alumno["id_representante"]=$id_represe_empresa;
-                $model->crear_empresa_alumno($Data_Empresa_Alumno);
+                error_log(  json_encode( $id_represe_empresa )  );
+                $model->update_empres_alumno($empresa_Alumno , ["empresa_jefe_inmediato"=>$id_represe_empresa] );
+                
                 $model = new app\models\proceso();
-                $model->actualizar_estado($_POST["id_proceso"],["id_estado"=>2]);
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
                 break;
+            case 2:
             default:
+                $model = new app\models\empresa();
+                    
+                $empresa_Alumno= $model->get_empresaAlumno($_POST["id_proceso"]);
+                
+                $model->table="empresa_encargado";
+                $model->delete($empresa_Alumno["empresa_jefe_inmediato"],"encargado_id");
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1]);
+                
                 # code...
                 break;
         }
+        return true;
+    }
+
+    private function proceso_2($estado){
+        $Data_Aceptacion = [
+            "empresa_fecha_inicio"=>date("Y-m-d", strtotime($_POST["fecha_inicio"])),
+            "empresa_fecha_fin"=>date("Y-m-d", strtotime($_POST["fecha_fin"])),
+        ];
+
+        switch($estado){
+            case 1:
+                
+                $base = new app\models\documentos();
+                $carta_presenta=$base-> create_files_post('carta_aceptacion',"application/pdf");
+                
+
+                $model = new app\models\empresa();
+                $model->sabeDocumentoEmpresa(["empresa_documento_tipo"=>3,"empresa_documento_proceso"=>$_POST["id_proceso"],"empresa_documento"=>$carta_presenta]);
+                
+                $model->update_empres_alumno( $model->get_empresaAlumno($_POST["id_proceso"]) ["empresa_proceso_id"] , $Data_Aceptacion );
+                
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
+                break;
+            case 2:
+                $model = new app\models\empresa();
+                $model->deleteEmpresaDocumento($_POST["id_proceso"],3);
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1]);
+            default:
+        }
+        return true;
+    }
+
+    private function proceso_1($estado)
+    {
+        if(isset($_POST["distrito"])){
+            $Data_Estudiante = [
+                "persona_direccion" =>      $_POST["direccion"],
+                "persona_correo" =>         $_POST["correo"],
+                "persona_celular" =>        $_POST["celular"],
+                "persona_ubi" =>       $_POST["distrito"],
+            ];
+            $Data_Empresa = [
+                "empresa_RUC" =>                            $_POST["RUC"],
+                "empresa_razon_social" =>            $_POST["Razon_socal_empresa"],
+                "empresa_direcion" =>   $_POST["Referencia_ubicacion_empresa"],
+                "empresa_ubi" =>                    $_POST["id_distrito"],
+            ];
+            $Data_Representante = [
+                "encargado_nombres" =>             $_POST["nombre"],
+                "encargado_papellido" =>         $_POST["apellido_p"],
+                "encargado_mapellido" =>         $_POST["apellido_m"],
+                "encargado_cargo" =>              $_POST["cargo"],
+                "encargado_genero" =>             $_POST["Genero"],
+                "encargado_grado_instruccion" =>   $_POST["GradoInstruccion"],
+            ];
+            $Data_Empresa_Alumno=[
+                "empresa_alumno"=>$_SESSION['id_user'],
+                "empresa_proceso"=>$_POST["id_proceso"],
+            ];
+            $model = new app\models\user();
+            $id_persona =$model->buscar_id_persona_estudiante($_SESSION['id_user']);
+
+            $model->actualizar_DatosSecundarios_Alumno($id_persona["user_persona_id"],$Data_Estudiante);
+        }
+        
+        
+        
+        switch ($estado) {
+            case 1:
+                $model = new app\models\empresa();
+                $id_Empresa=$model->crear_data($Data_Empresa);
+                $Data_Empresa_Alumno["empresa_datos"] = $id_Empresa;
+                $empresa_Alumno=$model->crear_empresa_alumno($Data_Empresa_Alumno);
+                
+                $Data_Representante["encargado_puesto"]= 4;
+                $Data_Representante["encargado_empresa"]= $empresa_Alumno;
+                $id_represe_empresa = $model->crear_representante_empresa($Data_Representante);
+                
+                $model->actualizar_estado($empresa_Alumno,["empresa_representante"=>$id_represe_empresa]);
+                
+                $model = new app\models\proceso();
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>2]);
+                break;
+            case 2:
+            default:
+                $model = new app\models\empresa();
+                $model->cadenaBorrado1($_POST["id_proceso"]);
+                $model->actualizar_estado($_POST["id_proceso"],["procesos_estado"=>1,"procesos_comentario"=>"NULL"]);
+            
+                # code...
+                break;
+        }
+        return true;
     }
 }

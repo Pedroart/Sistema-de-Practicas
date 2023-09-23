@@ -62,7 +62,7 @@
 
 <script>
     function aceptar(){
-        fetch('http://practicas.test/validaciones/aceptado/<?= $id ?>', {
+        fetch('<?= _URL_ ?>/validaciones/aceptado/<?= $id ?>', {
         method: 'POST',
       })
       .then(response => {
@@ -81,7 +81,7 @@
         datos.append("record",document.getElementById("record").value);
         datos.append("idFicha",<?= $id_documentos[0] ?>);
         datos.append("idrecord",<?= $id_documentos[1] ?>);
-        fetch('http://practicas.test/validaciones/revisar/<?= $id ?>', {
+        fetch('<?= _URL_ ?>/validaciones/revisar/<?= $id ?>', {
         method: 'POST',
         body: datos
       })
@@ -94,7 +94,7 @@
       });
     }
     function rechazar(){
-        fetch('http://practicas.test/validaciones/rechazar/<?= $id ?>', {
+        fetch('<?= _URL_ ?>/validaciones/rechazar/<?= $id ?>', {
         method: 'POST',
       })
       .then(response => {

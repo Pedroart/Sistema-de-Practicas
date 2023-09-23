@@ -1,20 +1,22 @@
+const domain = window.location.hostname;
+
 var b_logout = document.getElementById("b_logout");
 b_logout.addEventListener("click", function (e) {
   e.preventDefault();
 
-  fetch("http://practicas.test/logout", {
+  fetch(`http://${domain}/logout`, {
     method: "POST",
   })
     .then((res) => res.json())
     .then((data) => {
       if (data.resultado === true) {
-        window.location.href = "http://practicas.test";
+        window.location.href = `http://${domain}`;
       }
     });
 });
 
 function fillDepartamentosSelect(id_selector) {
-  fetch("http://practicas.test/api/departamentos", {
+  fetch(`http://${domain}/api/departamentos`, {
     method: "POST",
   })
     .then((response) => response.json())
@@ -30,13 +32,13 @@ function fillDepartamentosSelect(id_selector) {
       });
     })
     .catch((error) => {
-      console.error("Error fetching departamentos:", error);
+      console.log( error );
     });
 }
 
 function fillProvinciaSelect(idDepartamento, id_selector) {
     
-    fetch("http://practicas.test/api/provincia", {
+    fetch(`http://${domain}/api/provincia`, {
     method: "POST",
     body: new URLSearchParams({
       id: idDepartamento,
@@ -65,7 +67,7 @@ function fillProvinciaSelect(idDepartamento, id_selector) {
 
 function fillDistritoSelect(idProvincia, id_selector) {
     console.log(idProvincia);
-    fetch('http://practicas.test/api/distrito', {
+    fetch(`http://${domain}/api/distrito`, {
       method: 'POST',
       body: new URLSearchParams({
         id: idProvincia

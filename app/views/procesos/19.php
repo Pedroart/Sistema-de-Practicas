@@ -97,7 +97,7 @@
 
     <script>
         function aceptar() {
-            fetch('http://practicas.test/proceso/aceptado/<?= $data["id"] ?>', {
+            fetch('<?= _URL_ ?>/proceso/aceptado/<?= $data["id"] ?>', {
                     method: 'POST',
                 })
                 .then(response => {

@@ -11,7 +11,7 @@ $menu = [
         [
             'type' => "nav-link",
             'icon' => "fas fa-fw fa-table",
-            'title'=> "Efectivas",
+            'title'=> "Desempeño",
             "url"  => "validaciones"
         ]
         

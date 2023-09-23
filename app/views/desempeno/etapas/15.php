@@ -270,7 +270,7 @@
         datos.append("etapa",<?= $actual?>);
         datos.append("estado",<?= $estado?>);
       console.log(datos);
-      fetch('http://practicas.test/efectivas/proceso', {
+      fetch('<?= _URL_ ?>/efectivas/proceso', {
           method: 'POST',
           body: datos
         }).then(res => res.json())

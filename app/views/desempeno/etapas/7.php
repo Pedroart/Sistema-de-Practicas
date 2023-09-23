@@ -3,16 +3,15 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
 ?>
 
 <div class="container-fluid text-center">
-    <?php include _view_ . "/efectivas/submenu.php";?>
+    <?php include _view_ . "/desempeno/submenu.php";?>
 
-    <h1 class="h2 mb-2 text-gray-800">FICHA DE DATOS - carta de presentación</h1>
+    <h1 class="h2 mb-2 text-gray-800">FICHA DE DATOS</h1>
     <p class="mb-4">
-        La carta de presentación es un documento formal a nombre de la Universidad
-        dirigida a una empresa ofreciendo tus servicios de manera espontánea. Su
-        función es presentarte e introducir brevemente tu candidatura.
+      Rellena la ficha con tus datos personales, estos det*n ser auténticos y verídicos de 10 contrario tener
+  inconvenientes el
     </p>
-    <?php include _view_ . "/efectivas/cabecera.php";?>
-    <?php include _view_ . "/efectivas/generador.php";?>
+    <?php include _view_ . "/desempeno/cabecera.php";?>
+    <?php include _view_ . "/desempeno/generador.php";?>
 
 
 
@@ -57,7 +56,7 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         datos.append("estado",<?= $estado?>);
       console.log(datos);
       
-      fetch('<?= _URL_ ?>/efectivas/proceso', {
+      fetch('<?= _URL_ ?>/desempeno/proceso', {
           method: 'POST',
           body: datos
         }).then(res => res.json())
@@ -84,7 +83,7 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         datos.append("estado",<?= $estado?>);
       console.log(datos);
       
-      fetch('<?= _URL_ ?>/efectivas/proceso', {
+      fetch('<?= _URL_ ?>/desempeno/proceso', {
           method: 'POST',
           body: datos
         }).then(res => res.json())

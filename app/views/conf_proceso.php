@@ -36,7 +36,7 @@ if(b_confirmacion){
             var datos = new FormData();
             datos.append('id', b_confirmacion.dataset.proceso);
             
-            fetch('http://practicas.test/proceso/create',{
+            fetch('<?= _URL_ ?>/proceso/create',{
                 method: 'POST',
                 body: datos
             })  .then(res => res.json())

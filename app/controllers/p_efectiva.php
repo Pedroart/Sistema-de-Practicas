@@ -95,10 +95,10 @@ class p_efectiva extends core\controller
         if(is_null($id)){
             $id = $id_actual;
         }
-        $id_proceso = 1;
+        $id_proceso = 2;
         $model = new app\models\t_proceso();
         $etapas = $model->get_etapas($id_proceso);
-        if ($id <= $id_actual){
+        if (($id <= $id_actual) && $id!=0){
             $data = new app\models\data_efectivas();
             $dataProceso["id_Alumno"] = $_SESSION['id_user'];
             

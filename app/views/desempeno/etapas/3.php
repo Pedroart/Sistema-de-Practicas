@@ -4,7 +4,7 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
 
 <div class="container-fluid text-center">
     <?php
-    include _view_ . "/efectivas/submenu.php";
+    include _view_ . "/desempeno/submenu.php";
     ?>
 
     <h1 class="h2 mb-2 text-gray-800">Datos del jefe inmediato</h1>
@@ -13,8 +13,8 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         y verídicos de lo contrario no podrá continuar con los siguientes pasos.
     </p>
 
-    <?php include _view_ . "/efectivas/cabecera.php";?>
-    <?php include _view_ . "/efectivas/generador.php";?>
+    <?php include _view_ . "/desempeno/cabecera.php";?>
+    <?php include _view_ . "/desempeno/generador.php";?>
 </div>
 
 <script>
@@ -29,7 +29,7 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         datos.append("estado",<?= $estado?>);
       console.log(datos);
       
-      fetch('<?= _URL_ ?>/efectivas/proceso', {
+      fetch('<?= _URL_ ?>/desempeno/proceso', {
           method: 'POST',
           body: datos
         }).then(res => res.json())

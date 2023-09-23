@@ -86,7 +86,7 @@
       var datos = new FormData(e.target);
 
       console.log(datos);
-      fetch('http://practicas.test/validacion', {
+      fetch('<?= _URL_ ?>/validacion', {
           method: 'POST',
           body: datos
         }).then(res => res.json())
@@ -103,7 +103,7 @@
   var b_put = document.getElementById('put');
   if (b_put){
     b_put.addEventListener('click', function(e) {
-      fetch('http://practicas.test/validacion/put', {
+      fetch('<?= _URL_ ?>/validacion/put', {
           method: 'POST'
         });
         location.reload();

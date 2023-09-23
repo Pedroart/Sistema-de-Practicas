@@ -4,17 +4,18 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
 
 <div class="container-fluid text-center">
     <?php
-    include _view_ . "/efectivas/submenu.php";
+    include _view_ . "/desempeno/submenu.php";
     ?>
 
-    <h1 class="h2 mb-2 text-gray-800">Datos del jefe inmediato</h1>
+    <h2 class="h2 mb-2 text-gray-800">Carta de aceptación</h2>
     <p class="mb-4">
-        Rellena la ficha con los datos de tu jefe inmediato, los datos deben ser auténticos
-        y verídicos de lo contrario no podrá continuar con los siguientes pasos.
+        Es un documento debidamente firmado y sellado, otorgado por la empresa donde menciona que
+        ha sido aceptado para realizar sus prácticas pre profesionales, donde indica la fecha de inicio y
+        culminación tus prácticas. Debe escanear y subir este documento al sistema en formato PDF.
     </p>
 
-    <?php include _view_ . "/efectivas/cabecera.php";?>
-    <?php include _view_ . "/efectivas/generador.php";?>
+    <?php include _view_ . "/desempeno/cabecera.php";?>
+    <?php include _view_ . "/desempeno/generador.php";?>
 </div>
 
 <script>
@@ -29,7 +30,7 @@ $estado = ($actual>$activo)? "3":$dataProceso["procesos_estado"];
         datos.append("estado",<?= $estado?>);
       console.log(datos);
       
-      fetch('<?= _URL_ ?>/efectivas/proceso', {
+      fetch('<?= _URL_ ?>/desempeno/proceso', {
           method: 'POST',
           body: datos
         }).then(res => res.json())

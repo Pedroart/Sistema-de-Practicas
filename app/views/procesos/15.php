@@ -163,7 +163,7 @@
     function aceptar() {
             var datos = new FormData();
             datos.append("id_proceso", <?= $data["id_etapa"] ?>);
-            fetch('http://practicas.test/procesos/aceptado/<?= $data["id"] ?>', {
+            fetch('<?= _URL_ ?>/procesos/aceptado/<?= $data["id"] ?>', {
                     method: 'POST',
                     body: datos
                 })
