@@ -1,35 +1,60 @@
 <?php
 
 $menu = [
-    "PRACTICAS PRE PROFECIONALES" => [
+    "Proceso" => [
         [
-            'type' => "grupo-nav-link",
+            'type' => "nav-link",
             'icon' => "fas fa-fw fa-table",
             'title'=> "Efectivas",
+            "url"  => "validaciones"
+        ],
+        [
+            'type' => "nav-link",
+            'icon' => "fas fa-fw fa-table",
+            'title'=> "Efectivas",
+            "url"  => "validaciones"
+        ]
+        
+    ],
+    "Matriculas" => [
+        [
+            'type' => "nav-link",
+            'icon' => "fas fa-check",
+            'title'=> "Validacion",
+            "url"  => "validaciones"
+        ],
+    ],
+    "Usuarios" => [
+        [
+            'type' => "grupo-nav-link",
+            'icon' => "fa fa-users",
+            'title'=> "Alumnos",
             'sub'  => [
-                "Bienvenida"=>"/url1",
-                "Historial de cartas"=>"/url2",
-                "Estado"=>"/url3",
+                "Lista"=>"/lista_usuarios",
+                "Agregar Lote"=>"/crear_usuarios",
+
             ]
         ],
         [
             'type' => "grupo-nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "Desempeño laboral",
+            'icon' => "fa fa-graduation-cap",
+            'title'=> "Profesores",
             'sub'  => [
-                "Bienvenida"=>"/url1",
-                "Proceso"=>"/url2",
-                "Estado"=>"/url3",
+                "Lista"=>"/lista_usuarios",
+                "Agregar"=>"/crear_profesores",
+
             ]
-        ]
-    ],
-    "section_title_2" => [
+        ],
         [
-            'type' => "nav-link",
-            'icon' => "fas fa-fw fa-table",
-            'title'=> "nav_iten_1",
-            "url"  => "/nav_iten_1"
-        ]
+            'type' => "grupo-nav-link",
+            'icon' => "fa fa-university",
+            'title'=> "Asistentes",
+            'sub'  => [
+                "Lista"=>"/lista_usuarios",
+                "Agregar"=>"/crear_usuarios",
+
+            ]
+        ],
     ]
 ];
 

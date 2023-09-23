@@ -1,11 +1,23 @@
 <?php
 
+/*
+
+Implementa un enrutador que maneja diversas rutas y acciones en una aplicación PHP.
+Estas rutas abarcan áreas como autenticación y procesos.
+
+*/ 
 
 define("__DIREC__",str_replace("/public","",$_SERVER['DOCUMENT_ROOT']) );
 include __DIREC__."/core/config.php";
 include __DIREC__."/core/autoloader.php";
 
 $roteador = new core\router;
+
+$roteador->post('/api/registraralumnos', function(){
+    $user = new app\models\user();
+    header('Content-type: application/json');
+    echo json_encode($user->crearUsuarios() );
+});
 
 $roteador->post('/api/departamentos', function(){
     $controlador = new app\models\lugar();
@@ -62,6 +74,15 @@ $roteador->post('/proceso/create',function(){
     $modelo->creata($_POST['id']);
 });
 
+$roteador->get('/documentos', function(){
+    core\view::view_dashboard('documentos', ["titulo"=>null]);
+});
+
+$roteador->get('/usuario', function(){
+    $controlador = new app\controllers\login();$controlador->gestion_usuario();
+});
+
+
 $roteador->get('/efectivas', function(){
     $controlador = new app\controllers\p_efectiva();$controlador->index();
 });
@@ -77,12 +98,16 @@ $roteador->get('/efectivas/proceso/$id', function($id){
 $roteador->post('/efectivas/proceso', function(){
     $controlador = new app\controllers\p_efectiva();
     $controlador->update_proceso($_POST["etapa"],$_POST["estado"]);
+    
     header('Content-type: application/json');
-    echo json_encode( $_POST );
+    echo json_encode( ["resultado"=>true] );
 });
 
 $roteador->get('/efectivas/cartas', function(){
     $controlador = new app\controllers\p_efectiva();$controlador->cartas();
+});
+$roteador->get('/efectivas/cartas/$id', function($id){
+    $controlador = new app\controllers\p_efectiva();$controlador->cartas_descarga($id);
 });
 
 $roteador->get('/efectivas/estado', function(){
@@ -100,12 +125,12 @@ $roteador->get('/desempeno/proceso', function(){
     $data=$controlador->pre_proceso($_SESSION['id_user']);
     
     if($data!=false){
-        if($data["id_proceso"]==2)
+        if($data["proceso_id"]==2)
         $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
         return;
     }
     // Realizar proceso
-    echo "hola";
+    
     core\view::view_dashboard('conf_proceso',["titulo"=>"Desempeño Laboral","proceso"=>2]);
         
 });
@@ -144,14 +169,40 @@ $roteador->get('/procesos/$id', function($id){
     $controlador = new app\controllers\p_procesos();$controlador->edit($id);
 });
 
+$roteador->get('/procesos/$id/Estado', function($id){
+    $controlador = new app\controllers\p_procesos();$controlador->estado($id);
+});
+
+
 $roteador->post('/procesos/aceptado/$id', function($id){
 
     $controlador = new app\models\proceso;
     header('Content-type: application/json');
-    
-    $controlador->actualizar_estado($id,["id_estado"=>5,"id_etapa"=>$controlador->siguienteProceso($_POST["id_proceso"])["id_siguiente_etapa"]]);
+    $etapa_actual = $controlador->getProceso($id)["proceso_etapa"];
+    $etapa_siguiente = $controlador->siguienteProceso( $etapa_actual ) ["tetp_id_siguiente_etapa"];
+
+    if($etapa_actual != $etapa_siguiente ){
+        $controlador->actualizar_estado($id,["procesos_estado"=>1,"proceso_etapa"=>$etapa_siguiente ]);
+    }
+    else{
+        $controlador->actualizar_estado($id,["procesos_estado"=>3,"procesos_finalizado"=>1 ]);
+    }
     echo json_encode( [true] );
 });
 
+$roteador->post('/procesos/revisar/$id', function($id){
+
+    $controlador = new app\controllers\p_procesos();$controlador->revisar($id);
+    header('Content-type: application/json');
+    echo json_encode( [true] );
+});
+
+$roteador->get('/crear_usuarios', function(){
+    $controlador = new app\controllers\login();$controlador->crear_usuarios();
+});
+
+$roteador->get('/lista_usuarios', function(){
+    $controlador = new app\controllers\login();$controlador->lista_usuarios();
+});
 
 $roteador->any('/404','app/views/404.php');

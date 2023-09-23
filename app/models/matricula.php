@@ -16,13 +16,13 @@ class matricula extends core\modelo{
         if (! ($_SESSION['role'] == 3) ){
             return false;
         }
-
-        $usuario = $this->query("SELECT * FROM matricula WHERE id_semestres = (SELECT MAX(id_semestres)FROM semestres) AND id_alumno = ".$_SESSION['id_user']);
+        
+        $usuario = $this->query("SELECT * FROM matricula WHERE matricula_id_semestre = ".$_SESSION['id_semestre']." AND matricula_alumno = ".$_SESSION['id_user']);
         $data = $this->first();
         if($this->_num_rows() == 0){
             return false;
         }
-        elseif(is_null($data['ficha_matricula'])){
+        elseif(is_null($data['matricula_ficha'])){
             return false;
         }   
         return true;
@@ -34,15 +34,18 @@ class matricula extends core\modelo{
             return false;
         }
 
-        $usuario = $this->query("SELECT * FROM matricula WHERE id_semestres = (SELECT MAX(id_semestres)FROM semestres) AND id_alumno = ".$_SESSION['id_user']);
+        $usuario = $this->query("SELECT * FROM matricula WHERE matricula_id_semestre =  {$_SESSION['id_semestre']} AND matricula_alumno = ".$_SESSION['id_user']);
         $data = $this->first();
         if($this->_num_rows() == 0){
             return false;
         }
-        elseif(is_null($data['ficha_matricula'])){
-            return "actualizar";
+        elseif(is_null($data['matricula_ficha'])){
+            return false;
         } 
-        return $data['estado_matricula'];
+        elseif($data['matricula_estado']!=3){
+            return false;
+        } 
+        return true;
     }
     public function createe()
     {
@@ -59,24 +62,21 @@ class matricula extends core\modelo{
         }
         if (!$this->estado()){
             
-            $this->query("SELECT MAX(`id_semestres`) FROM `semestres`");
-            
             $inset = [
-                "id_semestres" => $this->first()['MAX(`id_semestres`)'],
-                "id_alumno" => $_SESSION['id_user'],
-                "ficha_matricula" => $matricula,
-                "record_academico" => $record,
-                "Fecha" => date('Y-m-d'),
-                "estado_matricula"=>0,
-                "comentario"=>"Creado"
+                "matricula_id_semestre" => $_SESSION['id_semestre'],
+                "matricula_alumno" => $_SESSION['id_user'],
+                "matricula_ficha" => $matricula,
+                "matricula_record_academico" => $record,
+                "matricula_fecha" => date('Y-m-d'),
+                "matricula_estado"=>2,
             ];
             $this->table = 'matricula';
             $id = $this->create($inset);
             return true;
-        }elseif($this->estado()=="actualizar"   ){
+        }elseif($this->estado()!=3   ){
             $data = $this->get_();
             $fecha = date('Y-m-d');
-            $this->query("UPDATE `matricula` SET `ficha_matricula`={$matricula},`record_academico`={$record},`Fecha`='{$fecha}',`comentario`='Actualizado' WHERE `id_semestres` = (SELECT MAX(id_semestres) FROM semestres) AND `id_alumno` = ".$_SESSION['id_user']);
+            $this->query("UPDATE `matricula` SET `matricula_ficha`={$matricula},`matricula_record_academico`={$record},`matricula_fecha`='{$fecha}' WHERE `matricula_id_semestre` = {$_SESSION['id_semestre']} AND `matricula_alumno` = ".$_SESSION['id_user']);
             return true;
         }
 
@@ -84,7 +84,7 @@ class matricula extends core\modelo{
 
     public function aceptado($id)
     {
-        $this->query("UPDATE `matricula` SET `estado_matricula`=1,`comentario`='Aceptado' WHERE `id_semestres` = (SELECT MAX(id_semestres) FROM semestres) AND `id_alumno` = ".$id);
+        $this->query("UPDATE `matricula` SET `matricula_estado`=3 WHERE `matricula_id_semestre` = {$_SESSION['id_semestre']} AND `matricula_alumno` = ".$id);
     }
     public function revisar($idRole, $idUser, $cuerpo)
     {
@@ -94,14 +94,14 @@ class matricula extends core\modelo{
 
     public function rechazar($id)
     {
-        $this->query("DELETE FROM `matricula` WHERE `id_semestres` = (SELECT MAX(id_semestres) FROM semestres) AND `id_alumno` = ".$id);   
+        $this->query("DELETE FROM `matricula` WHERE `matricula_id_semestre` = {$_SESSION['id_semestre']} AND `matricula_alumno` = ".$id);   
     }
 
     public function get_($id=null){
         if(is_null($id)){
             $id = $_SESSION['id_user'];
         }
-        $usuario = $this->query("SELECT * FROM matricula WHERE id_semestres = (SELECT MAX(id_semestres) FROM semestres) AND id_alumno = ".$id);
+        $usuario = $this->query("SELECT * FROM matricula WHERE matricula_id_semestre = {$_SESSION['id_semestre']} AND 	matricula_alumno = ".$id);
         $data = $this->first();
         return $data;  
     }
@@ -109,7 +109,7 @@ class matricula extends core\modelo{
     public function get_documentos_ids($id = null)
     {
         $data = $this->get_($id);
-        return [$data['ficha_matricula'],$data['record_academico']];
+        return [$data['matricula_ficha'],$data['matricula_record_academico']];
     }
 
     public function get_documentes_comentarios($id=null){
@@ -124,8 +124,8 @@ class matricula extends core\modelo{
         }
         $base = new app\models\documentos();
 
-        $Ficha=$base->get_documento_direc($data['ficha_matricula']);
-        $matricula=$base->get_documento_direc($data['record_academico']);
+        $Ficha=$base->get_documento_direc($data['matricula_ficha']);
+        $matricula=$base->get_documento_direc($data['matricula_record_academico']);
         return [$Ficha,$matricula];
     }
 
@@ -138,18 +138,19 @@ class matricula extends core\modelo{
         
         $data = $this->get_();
         $base = new app\models\documentos();
-        $base->delete_file($data['ficha_matricula']);
-        $base->delete_file($data['record_academico']);
-        $this->query("UPDATE `matricula` SET `ficha_matricula`={$matricula},`record_academico`={$record} WHERE `id_semestres` = (SELECT MAX(id_semestres) FROM semestres) AND `id_alumno` = ".$_SESSION['id_user']);
+        $base->delete_file($data['matricula_ficha']);
+        $base->delete_file($data['matricula_record_academico']);
+        $this->query("UPDATE `matricula` SET `matricula_ficha`={$matricula},`matricula_record_academico`={$record} WHERE `matricula_id_semestre` = {$_SESSION['id_semestre']} AND `matricula_alumno` = ".$_SESSION['id_user']);
+        
         return true;
     }
 
     public function get_list(){
-        $sql = "SELECT `comentario`,`Fecha`, matricula.id_alumno,persona.nombre, persona.apellido_paterno\n"
-        . "FROM matricula\n"
-        . "INNER JOIN alumno on alumno.id_alumno = matricula.id_alumno\n"
-        . "INNER JOIN persona on alumno.id_persona = persona.id_persona\n"
-        . "WHERE `estado_matricula`=0;";
+        $sql = "SELECT * FROM `matricula` \n"
+        . "INNER JOIN alumnos on alumnos.alumno_codigo = matricula.matricula_alumno\n"
+        . "INNER JOIN personas on personas.persona_id = alumnos.user_persona_id\n"
+        . "INNER JOIN testados_proceso on testados_proceso.tep_id_estado = matricula.matricula_estado\n"
+        . "WHERE `matricula_estado`!=3;";
 
         $this->query($sql);
         return  $this->get();

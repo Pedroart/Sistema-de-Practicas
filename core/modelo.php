@@ -2,13 +2,19 @@
 
 namespace core;
 
+/*
+
+    Define una clase modelo que encapsula la lógica para realizar operaciones comunes
+    en una base de datos, como consultar, insertar, actualizar y eliminar registros.
+*/
+
 use mysqli;
 
 class modelo{
     protected $db_host = "localhost";
     protected $db_user = "root";
     protected $db_pass = "";
-    protected $db_name = "practicas";
+    protected $db_name = "sistema_practicas";
 
     protected $coneccion;
     protected $query;
@@ -119,6 +125,7 @@ class modelo{
     }
 
     public function delete($id,$tag){
+        
         $sql = "DELETE FROM {$this->table} WHERE {$tag} = {$id}";
         $this->query($sql);
 

@@ -1,24 +1,29 @@
 <?php
 
 namespace app\models;
-
+use app;
 use core;
 
 class empresa extends core\modelo
 {
-    public function crear($data) {
-        $this->table="empresa";
+    public function crear_data($data) {
+        $this->table="empresas_datos";
         return $this->create($data);
     }
     public function crear_representante_empresa($data){
-        $this->table="empresa_encargados";
+        $this->table="empresa_encargado";
         return $this->create($data);
     }
     public function crear_empresa_alumno($data){
-        $this->table="empresa_alumno";
+        $this->table="empresa_proceso";
         return $this->create($data);
     }
     
+    public function actualizar_estado($id,$data){
+        $this->table ="empresa_proceso";
+        $this->update4key($id,$data,"empresa_proceso_id");
+    }
+
     public function get_name_empresa($id_proceso){
         $sql = "SELECT empresa.Razon_socal_empresa, empresa_alumno.id_empresa_alumno, empresa_alumno.id_empresa\n"
         . "FROM `proceso` \n"
@@ -27,6 +32,22 @@ class empresa extends core\modelo
         . "WHERE `id`={$id_proceso};";
         $this->query($sql);
         $data = $this->first();
+
+        return $data;
+    }
+
+    public function get_empresa_datos($id){
+        $sql = "SELECT * FROM `empresas_datos` \n"
+
+        . "LEFT JOIN distritos_pais on distritos_pais.distrito_id = empresas_datos.empresa_ubi\n"
+
+        . "LEFT JOIN provincias_pais on provincias_pais.provincia_id = distritos_pais.distrito_padre_id\n"
+
+        . "LEFT JOIN departamentos_pais on departamentos_pais.departamento_id = provincias_pais.provincia_padre_id\n"
+
+        . "WHERE `empresa_id` = {$id};";
+        $this->query($sql);
+        $data = $this->get();
 
         return $data;
     }
@@ -53,24 +74,19 @@ class empresa extends core\modelo
     }
 
     public function get_representante_empresa($id){
-        $sql = "SELECT `Genero`, `nombre`, `apellido_p`, `apellido_m`, `GradoInstruccion`, `cargo` \n"
-        . "FROM `empresa_encargados`\n"
-        . "LEFT JOIN empresa_alumno on empresa_encargados.id_empresa_encargado = empresa_alumno.id_representante\n"
-        . "WHERE `id_puesto`=1 and  empresa_alumno.id_empresa_alumno={$id};";
-
-        $this->query($sql);
-        $data = $this->get();
-
-        return $data;
+        $this->table = "empresa_encargado";
+    
+        return $this->find($id,"encargado_id");
     }
 
     public function update_empres_alumno($id,$data){
-        $this->table = "empresa_alumno";
-        $this->update4key($id,$data,"id_empresa_alumno");
+        $this->table = "empresa_proceso";
+        $this->update4key($id,$data,"empresa_proceso_id");
     }
 
     public function get_empresaAlumno($id){
-        $sql = "SELECT * FROM `empresa_alumno` WHERE `id_empresa_alumno` = {$id};";
+        $sql = "SELECT * FROM `empresa_proceso`\n"
+        . "WHERE `empresa_proceso` = {$id};";
         $this->query($sql);
         $data = $this->first();
 
@@ -82,5 +98,72 @@ class empresa extends core\modelo
         $data = $this->first();
 
         return $data;
+    }
+    public function cadenaBorrado1($id) {
+        $data_empresa_proceso = $this->get_empresaAlumno($id);
+        $this->table="empresa_proceso";
+        $this->delete($id,"empresa_proceso_id");
+        $this->table="empresa_encargado";
+        $this->delete($data_empresa_proceso["empresa_representante"],"encargado_id");
+        $this->table="empresas_datos";
+        $this->delete($data_empresa_proceso["empresa_datos"],"empresa_id");
+        $model = new app\models\proceso();
+        $this->table="comentarios";
+        $this->delete($model->buscarProcesos($_POST["id_proceso"])["procesos_comentario"],"comentario_id");
+        
+    }
+    public function sabeDocumentoEmpresa($data){
+        $this->table = "empresa_documentos";
+        return $this->create($data);
+    }
+
+    public function getDocumento($proceso,$tipo){
+        $sql = "SELECT * FROM `empresa_documentos` \n"
+
+    . "LEFT JOIN documentos on documentos.documento_id = empresa_documentos.empresa_documento\n"
+
+    . "WHERE `empresa_documento_proceso` = {$proceso} and `empresa_documento_tipo` = {$tipo};";$this->query($sql);
+        $data = $this->first();
+
+        return $data; 
+    }
+
+    public function getDocumentos($proceso,$tipo){
+        $sql = "SELECT * FROM `empresa_documentos` \n"
+
+    . "LEFT JOIN documentos on documentos.documento_id = empresa_documentos.empresa_documento\n"
+
+    . "WHERE `empresa_documento_proceso` = {$proceso} and `empresa_documento_tipo` = {$tipo};";$this->query($sql);
+        $data = $this->get();
+
+        return $data; 
+    }
+
+    public function deleteEmpresaDocumento($proceso,$tipo){
+        $id = $this->getDocumento($proceso,$tipo);
+        
+
+        $documento = new app\models\documentos;
+        $documento->delete_file($id["empresa_documento"]);
+        
+        $this->table="empresa_documentos";
+        $this->delete($id["empresa_documento_id"],"empresa_documento_id");
+        
+        return true;
+    }
+
+    public function deleteEmpresaDocumentos($proceso,$tipo){
+        $id = $this->getDocumentos($proceso,$tipo);
+        
+
+        foreach($id as &$ids){
+            $documento = new app\models\documentos;
+            $documento->delete_file($ids["empresa_documento"]);
+            
+            $this->table="empresa_documentos";
+            $this->delete($ids["empresa_documento_id"],"empresa_documento_id");
+        }
+        
+        return true;
     }
 }

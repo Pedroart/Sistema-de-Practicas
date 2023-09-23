@@ -24,10 +24,11 @@
 
           <div class="card-body">
             <embed src="<?= _URL_ ?><?= substr($data[0]["uri"], 7) ?>" height="500px" width="100%">
+            
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
+          <?php if( $data[0]["estado"]==1):?>
+          <div class="card-footer"><input class="form-control" id="record" type="text" placeholder="Ingrese Comentario" value="<?=$data[0]["comentario"]?>" disabled></div>
+          <?php endif ?>
         </div>
         <div class="card">
           <div class="card-header">
@@ -40,11 +41,11 @@
           <div class="card-body">
           <embed src="<?= _URL_ ?><?= substr($data[1]["uri"], 7) ?>" height="500px" width="100%">
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
+          <?php if( $data[1]["estado"]==1):?>
+          <div class="card-footer"><input class="form-control" id="record" type="text" placeholder="Ingrese Comentario" value="<?=$data[1]["comentario"]?>" disabled></div>
+          <?php endif ?>
         </div>
-
+        
       </div>
 
 
@@ -55,6 +56,10 @@
           <div class="form-group">
             <label for="semestre">Semestre:</label>
             <input type="text" class="form-control" id="semestre" name="semestre" placeholder="<?= $Semestre  ?>" disabled>
+          </div>
+          <div class="form-group">
+            <label for="nDNI">DNI:</label>
+            <input type="number" class="form-control" id="nDNI" name="nDNI" placeholder="" required>
           </div>
           <div class="form-group">
             <label for="ficha_matricula">Ficha de Matrícula:</label>

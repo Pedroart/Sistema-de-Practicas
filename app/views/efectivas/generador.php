@@ -17,6 +17,7 @@
                                 <div class="col-sm-8">
 
                                     <?php if ($input[2] == "select") : ?>
+                                        
                                         <select name="<?= $input[0] ?>" id="<?php echo (isset($input[5])) ? $input[5] : "1"; ?>" class="form-control" <?php echo ($estado >= 2) ? "disabled" : $input[4]; ?>>
                                             <?php foreach ($input[3] as $val => $text) : ?>
                                                 <option value="<?= $val ?>"><?= $text ?></option>
@@ -48,7 +49,8 @@
                                             </div>
                                         </div>
                                     <?php else : ?>
-                                        <input type="<?= $input[2] ?>" name="<?= $input[0] ?>" id="<?php echo (isset($input[5])) ? $input[5] : "1"; ?>" class="form-control<?php echo ($input[2] == "file") ? "-plaintext" : ""; ?>" <?php echo ($input[2] == "file") ? "accept='application/pdf'" : ""; ?> value="<?= $input[3] ?>" <?php echo ($estado >= 2) ? "readonly" : $input[4]; ?>>
+                                        
+                                        <input  type="<?= $input[2] ?>" name="<?= $input[0] ?>" id="<?php echo (isset($input[5])) ? $input[5] : "1"; ?>" class="form-control<?php echo ($input[2] == "file") ? "-plaintext" : ""; ?>" <?php echo ($input[2] == "file") ? "accept='application/pdf'" : ""; ?> value="<?= $input[3] ?>" <?php echo ($estado >= 2) ? "disabled" : $input[4]; ?>>
                                     <?php endif ?>
                                 </div>
                             </div>
@@ -58,8 +60,12 @@
             </div>
             
         <?php endforeach; ?>
+        
     </div>
     <?php if ($estado <2) : ?>
                 <button id="enviar" type="submit" class="btn btn-primary mb-5">Enviar</button>
-        <?php endif; ?>
+    <?php elseif ($estado ==2 or $estado ==4):?>
+        <button id="enviar" type="submit" class="btn btn-primary mb-5">Eliminar
+        </button>
+                <?php endif; ?> 
 </form>

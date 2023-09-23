@@ -9,14 +9,14 @@ class proceso extends core\modelo
 {
     public function buscarProcesos($id_alumno)
     {
-        $sql = "SELECT * FROM `proceso` WHERE `id_alumno` = {$id_alumno} and `id_semestre` = (SELECT MAX(`id_semestres`)FROM `semestres`)";
+        $sql = "SELECT * FROM `procesos` WHERE `procesos_alumno` = {$id_alumno} and `procesos_semestre` = {$_SESSION['id_semestre']}";
         $this->query($sql);
         return $this->first();
     }
 
     public function getProceso($id) {
-        $this->table = "proceso";
-        $this->where("id","=", $id);
+        $this->table = "procesos";
+        $this->where("procesos_id","=", $id);
         return $this->first();
     }
 
@@ -24,20 +24,29 @@ class proceso extends core\modelo
     {
         $model = new app\models\t_proceso();
         $etapa = $model->get_etapas($id);
-        $sql = "INSERT INTO `proceso` (`id_semestre`, `id_proceso`, `id_alumno`, `id_etapa`) VALUES ((SELECT MAX(`id_semestres`)FROM `semestres`)," . $id . "," . $_SESSION['id_user'] . "," . $etapa[0]['id_etapa'] . ")";
+        $sql = "INSERT INTO `procesos` (`procesos_semestre`, `procesos_tipo`, `procesos_alumno`, `proceso_etapa`,`procesos_estado`) VALUES ({$_SESSION['id_semestre']}," . $id . ", '". $_SESSION['id_user'] ."'," . $etapa[0]['tetp_id_etapa'] . ",1)";
+
         $this->query($sql);
         echo json_encode(["resultado" => true]);
     }
 
     public function get_tabla()
     {
-        $sql = "SELECT `id`,`id_estado` , alumno.id_alumno,persona.nombre,persona.apellido_paterno, empresa.Razon_socal_empresa, tprocesos.Inicio,tprocesos.nombre as e_nombre , tprocesos.Numero_Pasos, `id_etapa`\n"
-            . "FROM `proceso`\n"
-            . "INNER JOIN alumno on proceso.id_alumno = alumno.id_alumno\n"
-            . "INNER JOIN persona on persona.id_persona = alumno.id_persona\n"
-            . "LEFT JOIN empresa on empresa.id_empresa = proceso.id_empresa\n"
-            . "INNER JOIN tprocesos on tprocesos.id_tprocesos = proceso.id_proceso\n"
-            . "WHERE proceso.id_semestre = (SELECT MAX(id_semestres) FROM semestres);";
+        $sql = "SELECT * FROM `procesos`\n"
+
+    . "LEFT JOIN alumnos on alumnos.alumno_codigo = procesos_alumno\n"
+
+    . "LEFT JOIN personas on personas.persona_id = alumnos.user_persona_id\n"
+
+    . "LEFT JOIN escuelas on escuelas.escuela_id = alumnos.alumnos_escuela\n"
+
+    . "LEFT JOIN tetapas_proceso on tetapas_proceso.tetp_id_etapa = procesos.proceso_etapa\n"
+
+    . "LEFT JOIN testados_proceso on testados_proceso.tep_id_estado = procesos.procesos_estado\n"
+
+    . "LEFT JOIN tprocesos on tprocesos.tp_id_tprocesos = procesos.procesos_tipo\n"
+
+        . "WHERE procesos_semestre = {$_SESSION['id_semestre']};";
         $this->query($sql);
         $data = $this->get();
 
@@ -46,8 +55,8 @@ class proceso extends core\modelo
     }
 
     public function actualizar_estado($id,$data){
-        $this->table ="proceso";
-        $this->update4key($id,$data,"id");
+        $this->table ="procesos";
+        $this->update4key($id,$data,"procesos_id");
     }
 
     public function data_proceso($data,$proceso,$etapa){
@@ -65,29 +74,14 @@ class proceso extends core\modelo
     }
 
     public function data_efectivas($data,$etapa) {
-        $retultado = [];
-        $modelEmpresa = new app\models\empresa();
-        $modelDocumento = new app\models\documentos();
-        switch($etapa){
-            case 7:
-                $retultado["CentroLaboral"] = $modelEmpresa->get_empresa($data["id_empresa"]);
-                $retultado["represente"] = $modelEmpresa->get_representante_empresa($data["id_empresa"]);
-            case 8:
-                $retultado["CentroLaboral"] = $modelEmpresa->get_empresa($data["id_empresa"]);
-                $retultado["Carta"] = $modelEmpresa->get_empresaAlumno($retultado["CentroLaboral"][0]["id_empresa_alumno"]);
-                $retultado["Documento"] = $modelDocumento->get_documento_direc($retultado["Carta"]["carta_aceptacion"]);
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            default:
-        }
-        return $retultado;
+        $dataefectiva = new app\models\data_efectivas();
+        return $dataefectiva ->data($etapa,2,$data);
+        
     }
 
     public function siguienteProceso($id){
         $this->table = "tetapas_proceso";
-        $this->where("id_etapa","=", $id);
+        $this->where("tetp_id_etapa","=", $id);
         $data = $this->first();
         return $data;
     }

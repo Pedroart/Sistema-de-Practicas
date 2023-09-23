@@ -9,6 +9,7 @@
                                       <i class="fas fa-fw fa-link"></i>  
                                     </a>
                                 </div>
+                                <img class="card-img-top" src="<?= _URL_ ?>/img/cartas.jpg" alt="Card image cap">
                                 <div class="card-body">
                                     En este espacio podrás visualizar todas las cartas de presentación regeneradas. Debes descargar, imprimirlo y llevarlo a la empresa.
                                 </div>
@@ -22,6 +23,8 @@
                                       <i class="fas fa-fw fa-link"></i>  
                                     </a>
                                 </div>
+                                <img class="card-img-top" src="<?= _URL_ ?>/img/proceso.jpg" alt="Card image cap">
+                                
                                 <div class="card-body">
                                 En este espacio realizas todos los pasos de tu proceso de prácticas preprofesionales.
                                 </div>
@@ -35,6 +38,8 @@
                                       <i class="fas fa-fw fa-link"></i>  
                                     </a>
                                 </div>
+                                <img class="card-img-top" src="<?= _URL_ ?>/img/estado.jpg" alt="Card image cap">
+                                
                                 <div class="card-body">
                                 En este espacio podrás darle seguimiento a tu proceso de prácticas, recuerda que los pasos son secuenciales y no podrás avanzar al siguiente paso hasta que se te revise y apruebe el anterior. Así mismo podrás ver las observaciones realizadas y tendrás 7 días hábiles como máximo para poder subsanar la observación.
                                 </div>
