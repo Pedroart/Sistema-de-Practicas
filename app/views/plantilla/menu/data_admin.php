@@ -41,7 +41,7 @@ $menu = [
             'title'=> "Profesores",
             'sub'  => [
                 "Lista"=>"/lista_usuarios",
-                "Agregar"=>"/crear_usuarios",
+                "Agregar"=>"/crear_profesores",
 
             ]
         ],

@@ -28,6 +28,23 @@ class user extends core\modelo{
         return false;
     }
     
+    public function Datos_Docentes(){
+        $sql = "SELECT `docentes`.*, `personas`.*"
+        ."FROM `docentes`"
+        .    "LEFT JOIN `personas` ON `docentes`.`user_persona_id` = `personas`.`persona_id`"
+        ."WHERE 1";
+
+        $this->query($sql);
+        $data = $this->get();
+        $formato = function($lista){
+            $lista["url"] = "";
+            return array_values($lista);
+        };
+        $datas = array_map($formato,$data);
+
+        return $datas; 
+    }
+
     public function Datos_Alumnos(){
         $sql = "SELECT alumno_codigo, persona_nombres, persona_papellido, persona_mapellido, escuela_nombre FROM `alumnos`\n"
 
