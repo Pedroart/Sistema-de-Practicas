@@ -95,7 +95,10 @@ class user extends core\modelo{
     }
 
     public function actualizarDNI($alumno,$dni){
-        $sql = "UPDATE `personas` SET `persona_DNI`='{$dni}' WHERE `persona_id`=(SELECT `user_persona_id` FROM `alumnos` WHERE `alumno_codigo` = '{$alumno})'";
+        
+        $sql = "UPDATE `personas` SET `persona_DNI`='{$dni}' WHERE `persona_id`=(SELECT `user_persona_id` FROM `alumnos` WHERE `alumno_codigo` = '{$alumno}')";
+        error_log($sql);
+        
         $this->query($sql);
     }
 

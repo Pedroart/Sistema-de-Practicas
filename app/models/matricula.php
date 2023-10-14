@@ -72,6 +72,8 @@ class matricula extends core\modelo{
             ];
             $this->table = 'matricula';
             $id = $this->create($inset);
+            
+            $user = new app\models\user();$user->actualizarDNI($_SESSION['id_user'],$_POST["nDNI"]);
             return true;
         }elseif($this->estado()!=3   ){
             $data = $this->get_();

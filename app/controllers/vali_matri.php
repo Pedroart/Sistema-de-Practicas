@@ -16,8 +16,6 @@ class vali_matri extends core\controller{
         header('Content-type: application/json');
         $base = new app\models\matricula();
         $id = $base->createe();
-        $persona = new app\models\user();
-        $persona->actualizarDNI($_SESSION['id_user'],$_POST["nDNI"]);
         echo json_encode( ['resultado'=> $id] );
     }
     public function updateFile_(){

@@ -84,7 +84,7 @@
     b_matricula.addEventListener('submit', function(e) {
       e.preventDefault();
       var datos = new FormData(e.target);
-
+      datos.append("nDNI",document.getElementById("nDNI").value);
       console.log(datos);
       fetch('<?= _URL_ ?>/validacion', {
           method: 'POST',
