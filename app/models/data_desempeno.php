@@ -31,7 +31,7 @@ class data_desempeno extends core\modelo{
     public function data_all(&$dataProceso){
         $info = [];
             if ($dataProceso["proceso_etapa"]>1){ $info +=$this->data_7(3,$dataProceso);}
-            if ($dataProceso["proceso_etapa"]>2){ $info +=$this->data_2(3,$dataProceso);}
+            if ($dataProceso["proceso_etapa"]>2){ $info +=$this->data_8(3,$dataProceso);}
             if ($dataProceso["proceso_etapa"]>3){ $info +=$this->data_3(3,$dataProceso);}
             if ($dataProceso["proceso_etapa"]>4){ $info +=$this->data_4(3,$dataProceso);}
             if ($dataProceso["proceso_etapa"]>5){ $info +=$this->data_5(3,$dataProceso);}
@@ -121,7 +121,7 @@ class data_desempeno extends core\modelo{
         return $data;
     }
     
-    public function data_2($estado,&$dataProceso) {
+    public function data_100($estado,&$dataProceso) { // Borrar
 
         $empresa = new app\models\empresa();
         $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
@@ -134,6 +134,7 @@ class data_desempeno extends core\modelo{
                 ["carta_aceptacion", "Carta de aceptación", "file", ["","value1"], "readonly","file1"],
             ]
             ];
+        error_log($estado);
         if($estado>=2){
             $documento = $empresa->getDocumento($dataProceso["procesos_id"],3);
             $data["Carta de Aceptacion"][0][3] = $aux["empresa_fecha_inicio"];
@@ -143,7 +144,7 @@ class data_desempeno extends core\modelo{
         return $data;
     }
     
-    public function data_3($estado,&$dataProceso) {
+    public function data_8($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
         $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
         
@@ -179,19 +180,19 @@ class data_desempeno extends core\modelo{
         return $data;
     }
     
-    public function data_4($estado,&$dataProceso) {
+    public function data_9($estado,&$dataProceso) {
         $empresa = new app\models\empresa();
         $aux = $empresa->get_empresaAlumno($dataProceso["procesos_id"]);
 
         $data = [
-            "Plan de Actividades" => [
-                ["Plan_Actividades", "Plan de Actividades", "file", ["","value1"], "readonly","file1"],
+            "Contrato" => [
+                ["Contrato", "Contrato", "file", ["","value1"], "readonly","file1"],
             ]
             ];
         if($estado>=2){
             
             $documento = $empresa->getDocumento($dataProceso["procesos_id"],1);
-            $data["Plan de Actividades"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
+            $data["Contrato"][0][3] = ["uri"=>$documento["documente_direc"],"comentario"=>""];
         }
         return $data;
     }

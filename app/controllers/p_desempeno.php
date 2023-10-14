@@ -142,7 +142,7 @@ class p_desempeno extends core\controller {
         return true;
     }
 
-    private function proceso_3($estado){
+    private function proceso_2($estado){
         if($estado<2){
             $Data_Representante = [
             "encargado_dni"=>$_POST["encargado_dni"],
@@ -190,7 +190,7 @@ class p_desempeno extends core\controller {
         return true;
     }
 
-    private function proceso_2($estado){
+    private function proceso_20($estado){// Borrar
         $Data_Aceptacion = [
             "empresa_fecha_inicio"=>date("Y-m-d", strtotime($_POST["fecha_inicio"])),
             "empresa_fecha_fin"=>date("Y-m-d", strtotime($_POST["fecha_fin"])),
