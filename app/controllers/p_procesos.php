@@ -5,7 +5,7 @@ use core;
 use app;
 
 class p_procesos extends core\controller {
-    public function index()
+    public function index($tipo)
     {
         $base = new app\models\proceso();
         $scrips =[
@@ -21,9 +21,11 @@ class p_procesos extends core\controller {
             "/plugins/datatables-buttons/js/buttons.html5.min.js",
             "/plugins/datatables-buttons/js/buttons.print.min.js",
             "/plugins/datatables-buttons/js/buttons.colVis.min.js"];
-        core\view::view_dashboard("table_procesos",["titulo"=>"","data"=>$base->get_tabla()],$scrips);
+        core\view::view_dashboard("table_procesos",["titulo"=>"","data"=>$base->get_tabla_filtro($tipo)],$scrips);
         return;
     }
+
+    
     public function estado($proceso){
         $base = new app\models\proceso();
         $data=$base->getProceso($proceso);
@@ -39,7 +41,7 @@ class p_procesos extends core\controller {
     public function edit($id){
         $base = new app\models\proceso();
         $data=$base->getProceso($id);
-        
+        error_log($data["proceso_etapa"]);
         //echo json_encode($data);
         core\view::view_dashboard("procesos/".$data["proceso_etapa"],["titulo"=>"","data"=>$data,"formulario"=>$base->data_proceso($data,$data["procesos_tipo"],$data["proceso_etapa"])]);
         return;

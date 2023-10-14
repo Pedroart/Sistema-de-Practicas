@@ -6,13 +6,13 @@ $menu = [
             'type' => "nav-link",
             'icon' => "fas fa-fw fa-table",
             'title'=> "Efectivas",
-            "url"  => "validaciones"
+            "url"  => "procesos/Efectivas"
         ],
         [
             'type' => "nav-link",
             'icon' => "fas fa-fw fa-table",
             'title'=> "Desempeño",
-            "url"  => "validaciones"
+            "url"  => "procesos/Desempeno"
         ]
         
     ],

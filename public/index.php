@@ -157,11 +157,11 @@ $roteador->post('/validaciones/rechazar/$id', function($id){
     $controlador = new app\models\matricula;$controlador->rechazar($id);
 });
 
-$roteador->get('/procesos', function(){
-    $controlador = new app\controllers\p_procesos();$controlador->index();
+$roteador->get('/procesos/$tipo', function($tipo){
+    $controlador = new app\controllers\p_procesos();$controlador->index($tipo);
 });
 
-$roteador->get('/procesos/$id', function($id){
+$roteador->get('/procesos/$id/Edit', function($id){
     $controlador = new app\controllers\p_procesos();$controlador->edit($id);
 });
 

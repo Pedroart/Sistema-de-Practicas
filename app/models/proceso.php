@@ -53,6 +53,22 @@ class proceso extends core\modelo
         return $data;
 
     }
+    public function get_tabla_filtro($tipo)
+    {
+        $sql = "SELECT * FROM `procesos`\n"
+        . "LEFT JOIN alumnos on alumnos.alumno_codigo = procesos_alumno\n"
+        . "LEFT JOIN personas on personas.persona_id = alumnos.user_persona_id\n"
+        . "LEFT JOIN escuelas on escuelas.escuela_id = alumnos.alumnos_escuela\n"
+        . "LEFT JOIN tetapas_proceso on tetapas_proceso.tetp_id_etapa = procesos.proceso_etapa\n"
+        . "LEFT JOIN testados_proceso on testados_proceso.tep_id_estado = procesos.procesos_estado\n"
+        . "LEFT JOIN tprocesos on tprocesos.tp_id_tprocesos = procesos.procesos_tipo\n"
+        . "WHERE procesos_semestre = {$_SESSION['id_semestre']} and tp_nombre='{$tipo}';";
+        $this->query($sql);
+        $data = $this->get();
+
+        return $data;
+
+    }
 
     public function actualizar_estado($id,$data){
         $this->table ="procesos";
@@ -63,11 +79,9 @@ class proceso extends core\modelo
         
         switch($proceso){
             case 1:
-                
                 return $this->data_efectivas($data,$etapa);
-                
             case 2:
-                break;
+                return $this->data_desempeno($data,$etapa);
             default:
             break;
         }
@@ -76,7 +90,10 @@ class proceso extends core\modelo
     public function data_efectivas($data,$etapa) {
         $dataefectiva = new app\models\data_efectivas();
         return $dataefectiva ->data($etapa,2,$data);
-        
+    }
+    public function data_desempeno($data,$etapa) {
+        $datadesempe = new app\models\data_desempeno();
+        return $datadesempe ->data($etapa,2,$data);
     }
 
     public function siguienteProceso($id){
