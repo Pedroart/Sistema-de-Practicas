@@ -1,208 +1,55 @@
 <?php
 
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
+
+define('LARAVEL_START', microtime(true));
+
 /*
+|--------------------------------------------------------------------------
+| Check If The Application Is Under Maintenance
+|--------------------------------------------------------------------------
+|
+| If the application is in maintenance / demo mode via the "down" command
+| we will load this file so that any pre-rendered content can be shown
+| instead of starting the framework, which could cause an exception.
+|
+*/
 
-Implementa un enrutador que maneja diversas rutas y acciones en una aplicación PHP.
-Estas rutas abarcan áreas como autenticación y procesos.
-
-*/ 
-
-define("__DIREC__",str_replace("/public","",$_SERVER['DOCUMENT_ROOT']) );
-include __DIREC__."/core/config.php";
-include __DIREC__."/core/autoloader.php";
-
-$roteador = new core\router;
-
-$roteador->post('/api/registraralumnos', function(){
-    $user = new app\models\user();
-    header('Content-type: application/json');
-    echo json_encode($user->crearUsuarios() );
-});
-
-$roteador->post('/api/departamentos', function(){
-    $controlador = new app\models\lugar();
-    header('Content-type: application/json');
-    echo json_encode( $controlador->departamentos(18) );
-});
-
-$roteador->post('/api/provincia', function(){
-    $controlador = new app\models\lugar();
-    header('Content-type: application/json');
-    echo json_encode( $controlador->provincia($_POST['id']) );
-});
-
-$roteador->post('/api/distrito', function(){
-    $controlador = new app\models\lugar();
-    header('Content-type: application/json');
-    echo json_encode( $controlador->distrito($_POST['id']) );
-});
-
-// Login
-if (! isset($_SESSION['id_user'])){
-    $roteador->get('/', function(){
-        $controlador = new app\controllers\login();$controlador->index();
-    });
-    $roteador->post('/login',function(){
-        $controlador = new app\controllers\login();$controlador->login();
-    });
-
-    $roteador->any('/404','app/views/404.php');
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
 }
 
-$roteador->post('/logout', function(){
-    $controlador = new app\controllers\login();$controlador->logout();
-});
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| this application. We just need to utilize it! We'll simply require it
+| into the script here so we don't need to manually load our classes.
+|
+*/
 
-$roteador->get('/', function(){
-    $controlador = new app\controllers\home();$controlador->index();
-});
+require __DIR__.'/../vendor/autoload.php';
 
-$roteador->post('/validacion', function(){
-    $controlador = new app\controllers\vali_matri();$controlador->create_();
-});
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request using
+| the application's HTTP kernel. Then, we will send the response back
+| to this client's browser, allowing them to enjoy our application.
+|
+*/
 
-$roteador->post('/validacion/put', function(){
-    $controlador = new app\controllers\vali_matri();$controlador->updateFile_();
-});
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
-$roteador->get('/validacion', function(){
-    $controlador = new app\controllers\vali_matri();$controlador->index();
-});
+$kernel = $app->make(Kernel::class);
 
-$roteador->post('/proceso/create',function(){
-    $modelo = new app\models\proceso();
-    $modelo->creata($_POST['id']);
-});
+$response = $kernel->handle(
+    $request = Request::capture()
+)->send();
 
-$roteador->get('/documentos', function(){
-    core\view::view_dashboard('documentos', ["titulo"=>null]);
-});
-
-$roteador->get('/usuario', function(){
-    $controlador = new app\controllers\login();$controlador->gestion_usuario();
-});
-
-
-$roteador->get('/efectivas', function(){
-    $controlador = new app\controllers\p_efectiva();$controlador->index();
-});
-
-$roteador->get('/efectivas/proceso', function(){
-    $controlador = new app\controllers\p_efectiva();$controlador->proceso();
-});
-
-$roteador->get('/efectivas/proceso/$id', function($id){
-    $controlador = new app\controllers\p_efectiva();$controlador->proceso($id);
-});
-
-$roteador->post('/efectivas/proceso', function(){
-    $controlador = new app\controllers\p_efectiva();
-    $controlador->update_proceso($_POST["etapa"],$_POST["estado"]);
-    
-    header('Content-type: application/json');
-    echo json_encode( ["resultado"=>true] );
-});
-
-$roteador->get('/efectivas/cartas', function(){
-    $controlador = new app\controllers\p_efectiva();$controlador->cartas();
-});
-$roteador->get('/efectivas/cartas/$id', function($id){
-    $controlador = new app\controllers\p_efectiva();$controlador->cartas_descarga($id);
-});
-
-$roteador->get('/efectivas/estado', function(){
-    $controlador = new app\controllers\p_efectiva();$controlador->estado();
-});
-
-$roteador->get('/desempeno', function(){
-    $controlador = new app\controllers\p_desempeno();$controlador->index();
-});
-
-
-$roteador->get('/desempeno/proceso', function(){
-    
-    $controlador = new app\controllers\p_desempeno();
-    $data=$controlador->pre_proceso($_SESSION['id_user']);
-    
-    if($data!=false){
-        if($data["proceso_id"]==2)
-        $controlador->proceso($data['id'],$data['id_etapa'],$data['id_estado']);
-        return;
-    }
-    // Realizar proceso
-    
-    core\view::view_dashboard('conf_proceso',["titulo"=>"Desempeño Laboral","proceso"=>2]);
-        
-});
-
-$roteador->get('/desempeno/proceso/$id', function($id){
-    $controlador = new app\controllers\p_desempeno();
-    $data=$controlador->pre_proceso($_SESSION['id_user']);
-    $controlador->proceso_id($id,$data['id_etapa'],$data['id'],$data['id_estado']);
-});
-
-$roteador->get('/validaciones', function(){
-    $controlador = new app\controllers\p_validaciones();$controlador->index();
-});
-
-$roteador->get('/validaciones/$id', function($id){
-    $controlador = new app\controllers\p_validaciones();$controlador->edit($id);
-});
-
-$roteador->post('/validaciones/aceptado/$id', function($id){
-    $controlador = new app\models\matricula;$controlador->aceptado($id);
-});
-
-$roteador->post('/validaciones/revisar/$id', function($id){
-    $controlador = new app\controllers\p_validaciones();$controlador->revisar($id);
-});
-
-$roteador->post('/validaciones/rechazar/$id', function($id){
-    $controlador = new app\models\matricula;$controlador->rechazar($id);
-});
-
-$roteador->get('/procesos', function(){
-    $controlador = new app\controllers\p_procesos();$controlador->index();
-});
-
-$roteador->get('/procesos/$id', function($id){
-    $controlador = new app\controllers\p_procesos();$controlador->edit($id);
-});
-
-$roteador->get('/procesos/$id/Estado', function($id){
-    $controlador = new app\controllers\p_procesos();$controlador->estado($id);
-});
-
-
-$roteador->post('/procesos/aceptado/$id', function($id){
-
-    $controlador = new app\models\proceso;
-    header('Content-type: application/json');
-    $etapa_actual = $controlador->getProceso($id)["proceso_etapa"];
-    $etapa_siguiente = $controlador->siguienteProceso( $etapa_actual ) ["tetp_id_siguiente_etapa"];
-
-    if($etapa_actual != $etapa_siguiente ){
-        $controlador->actualizar_estado($id,["procesos_estado"=>1,"proceso_etapa"=>$etapa_siguiente ]);
-    }
-    else{
-        $controlador->actualizar_estado($id,["procesos_estado"=>3,"procesos_finalizado"=>1 ]);
-    }
-    echo json_encode( [true] );
-});
-
-$roteador->post('/procesos/revisar/$id', function($id){
-
-    $controlador = new app\controllers\p_procesos();$controlador->revisar($id);
-    header('Content-type: application/json');
-    echo json_encode( [true] );
-});
-
-$roteador->get('/crear_usuarios', function(){
-    $controlador = new app\controllers\login();$controlador->crear_usuarios();
-});
-
-$roteador->get('/lista_usuarios', function(){
-    $controlador = new app\controllers\login();$controlador->lista_usuarios();
-});
-
-$roteador->any('/404','app/views/404.php');
+$kernel->terminate($request, $response);
