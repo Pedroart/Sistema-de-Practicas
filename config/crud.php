@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'layout' => 'layouts.app',
+    'layout' => 'plantilla.tablero',
 
     'model' => [
         'namespace' => 'App\Models',

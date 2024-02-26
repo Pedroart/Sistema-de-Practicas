@@ -21,6 +21,19 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
     Route::get('/', function () {return view('dashboard');})->name('dashboard');
     Route::resource('rutafiles', App\Http\Controllers\RutafileController::class);
     Route::resource('files', App\Http\Controllers\FileController::class);
+
+    Route::resource('personas', App\Http\Controllers\PersonaController::class);
+    Route::resource('empresas', App\Http\Controllers\EmpresaController::class);
+    Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
+    
+    Route::resource('comentarios', App\Http\Controllers\ComentarioController::class);
+
+
+    Route::resource('semestres', App\Http\Controllers\semestreController::class);
+    Route::resource('tipoprocesos', App\Http\Controllers\tipoprocesoController::class);
+    Route::resource('tipoetapas', App\Http\Controllers\tipoetapaController::class);
+    Route::resource('estados', App\Http\Controllers\EstadoController::class);
+
 });
 
 /*

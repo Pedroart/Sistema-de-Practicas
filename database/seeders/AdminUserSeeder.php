@@ -29,5 +29,12 @@ class AdminUserSeeder extends Seeder
 
         $adminUser->assignRole('administrador');
 
+        $sistemaUser = User::create([
+            'name' => 'Sistema',
+            'email' => 'Sistema@admin.com',
+            'password' => bcrypt('87654321'), // Recuerda cambiar esto por una contraseña segura
+        ]);
+
+        $sistemaUser->assignRole('administrador');
     }
 }

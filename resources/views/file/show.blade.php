@@ -1,37 +1,43 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $file->name ?? "{{ __('Show') File" }}
+|{{ $file->name ?? "{{ __('Show') File" }}
 @endsection
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} File</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('files.index') }}"> {{ __('Back') }}</a>
-                        </div>
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-left">
+                        <span class="card-title">{{ __('Show') }} File</span>
                     </div>
-
-                    <div class="card-body">
-
-                        <div class="form-group">
-                            <strong>Path:</strong>
-                            {{ $file->path }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Rutafile Id:</strong>
-                            {{ $file->rutafile_id }}
-                        </div>
-
+                    <div class="float-right">
+                        <a class="btn btn-primary" href="{{ route('files.index') }}"> {{ __('Back') }}</a>
                     </div>
                 </div>
+
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <strong>Path:</strong>
+                        {{ $file->path }}
+                        
+
+                    </div>
+                    <div class="form-group">
+                        <strong>Rutafile Id:</strong>
+                        {{ $file->rutafile->name }}
+                    </div>
+                    <div class="form-group">
+                        <a href="{{ asset('storage/'.$file->path) }}" target="_blank">Abrir Archivo</a>
+                    </div>
+                    
+                </div>
             </div>
+            
         </div>
-    </section>
+    </div>
+</section>
 @endsection

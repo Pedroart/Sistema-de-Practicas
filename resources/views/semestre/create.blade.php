@@ -1,26 +1,25 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ __('Update') }} File
+    {{ __('Create') }} Semestre
 @endsection
 
 @section('content')
     <section class="content container-fluid">
-        <div class="">
+        <div class="row">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} File</span>
+                        <span class="card-title">{{ __('Create') }} Semestre</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('files.update', $file->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ route('semestres.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
-                            <?php $file = $file ?>
-                            @include('file.form')
+
+                            @include('semestre.form')
 
                         </form>
                     </div>

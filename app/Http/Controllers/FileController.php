@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Traits\Upload; //import the trait
 use Illuminate\Http\Request;
 
 /**
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
  */
 class FileController extends Controller
 {
+    use Upload;
     /**
      * Display a listing of the resource.
      *
@@ -46,12 +48,12 @@ class FileController extends Controller
         request()->validate(File::$rules);
 
 
-        if ($request->hasFile('file')) {
-            $path = $this->UploadFile($request->file('file'), $request->rutafile_id);//use the method in the trait
-            $request->path = $path;
+        if ($request->hasFile('archivo')) {
+
+            $path = $this->UploadFile($request->file('archivo'), $request->rutafile_id);//use the method in the trait
+            $request['path'] = $path;
             $file = File::create($request->all());
         }
-
 
         return redirect()->route('files.index')
             ->with('success', 'File created successfully.');
@@ -93,9 +95,18 @@ class FileController extends Controller
     public function update(Request $request, File $file)
     {
         request()->validate(File::$rules);
+        #$file->update($request->all());
 
-        $file->update($request->all());
-
+        if ($request->hasFile('archivo')) {
+            //check if the existing file is present and delete it from the storage
+            if (!is_null($file->path)) {
+                $this->deleteFile($file->path);
+            }
+            //upload the new file
+            $path = $this->UploadFile($request->file('archivo'), $request->rutafile_id);
+        }
+        $file->update(['path' => $path]);
+        
         return redirect()->route('files.index')
             ->with('success', 'File updated successfully');
     }
@@ -107,8 +118,11 @@ class FileController extends Controller
      */
     public function destroy($id)
     {
-        $file = File::find($id)->delete();
-
+        $file = File::find($id);
+        if (!is_null($file->path)) {
+            $this->deleteFile($file->path);
+        }
+        $file->delete();
         return redirect()->route('files.index')
             ->with('success', 'File deleted successfully');
     }

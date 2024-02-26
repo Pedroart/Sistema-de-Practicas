@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    File
+    Empleado
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('File') }}
+                                {{ __('Empleado') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('files.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('empleados.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,25 +35,33 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-										<th>Path</th>
-										<th>Rutafile Id</th>
+                                        
+										<th>Name</th>
+										<th>Apellido Paterno</th>
+										<th>Apellido Materno</th>
+										<th>Genero</th>
+										<th>Grado Instruccion</th>
+										<th>Cargo</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($files as $file)
+                                    @foreach ($empleados as $empleado)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
-											<td>{{ $file->path }}</td>
-											<td>{{ $file->rutafile->name }}</td>
+                                            
+											<td>{{ $empleado->name }}</td>
+											<td>{{ $empleado->apellido_paterno }}</td>
+											<td>{{ $empleado->apellido_materno }}</td>
+											<td>{{ $empleado->genero }}</td>
+											<td>{{ $empleado->grado_instruccion }}</td>
+											<td>{{ $empleado->cargo }}</td>
 
                                             <td>
-                                                <form action="{{ route('files.destroy',$file->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('files.show',$file->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('files.edit',$file->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('empleados.destroy',$empleado->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('empleados.show',$empleado->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('empleados.edit',$empleado->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -66,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $files->links() !!}
+                {!! $empleados->links() !!}
             </div>
         </div>
     </div>

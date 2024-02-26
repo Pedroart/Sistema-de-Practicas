@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    File
+    Comentario
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('File') }}
+                                {{ __('Comentario') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('files.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('comentarios.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,25 +35,25 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-										<th>Path</th>
-										<th>Rutafile Id</th>
+                                        
+										<th>Contenido</th>
+										<th>User Id</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($files as $file)
+                                    @foreach ($comentarios as $comentario)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
-											<td>{{ $file->path }}</td>
-											<td>{{ $file->rutafile->name }}</td>
+                                            
+											<td>{{ $comentario->contenido }}</td>
+											<td>{{ $comentario->user_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('files.destroy',$file->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('files.show',$file->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('files.edit',$file->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('comentarios.destroy',$comentario->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('comentarios.show',$comentario->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('comentarios.edit',$comentario->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $files->links() !!}
+                {!! $comentarios->links() !!}
             </div>
         </div>
     </div>

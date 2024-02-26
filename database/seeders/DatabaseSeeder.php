@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUserSeeder::class);
         $this->call(PermisosRoles::class);
         $this->call(RutaFileSeeder::class);
+        $this->call(TiposSeeder::class);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

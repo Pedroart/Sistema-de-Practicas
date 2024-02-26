@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="shortcut icon" sizes="192x192" href="{{ asset('favicons/android-chrome-192x192.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

@@ -15,7 +15,19 @@
                 ['url' =>  route('rutafiles.index') , 'text' => 'Conf. Rutas'],
                 ['url' =>  route('files.index') , 'text' => 'Listado'],
             ]" />
-
+            <x-nav-dropdown :title="'Usuarios'" :icon="'fas fa-user'" :links="[
+                ['url' =>  route('personas.index') , 'text' => 'Personas'],
+            ]" />
+            <x-nav-dropdown :title="'Empresa'" :icon="'fas fa-building'" :links="[
+                ['url' =>  route('empresas.index') , 'text' => 'Empresas (RUC)'],
+                ['url' =>  route('empleados.index') , 'text' => 'Empleados'],
+            ]" />
+            <x-nav-dropdown :title="'Conf. Proceso'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('semestres.index') , 'text' => 'Semestres'],
+                ['url' =>  route('tipoprocesos.index') , 'text' => 'Conf. Proceso'],
+                ['url' =>  route('tipoetapas.index') , 'text' => 'Conf. Etapas'],
+                ['url' =>  route('estados.index') , 'text' => 'Conf. Estados'],
+            ]" />
             <!-- Add icons to the links using the .nav-icon class
    with font-awesome or any other icon font library
             <li class="nav-item">

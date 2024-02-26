@@ -41,6 +41,4 @@ class File extends Model
     {
         return $this->hasOne('App\Models\Rutafile', 'id', 'rutafile_id');
     }
-
-
 }
