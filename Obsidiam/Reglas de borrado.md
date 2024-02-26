@@ -1,1 +1,0 @@
-- Relacion, ALumno, persona, usuario

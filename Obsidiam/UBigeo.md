@@ -1,1 +1,0 @@
-https://github.com/ernestorivero/Ubigeo-Peru/blob/master/php_arrays/ubigeo_peru_2016_distritos.php

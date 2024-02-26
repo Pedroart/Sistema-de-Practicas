@@ -1,1 +1,0 @@
-<p>Esta es la pagina de administrativo</p>
