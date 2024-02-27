@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PermisosRoles::class);
         $this->call(RutaFileSeeder::class);
         $this->call(TiposSeeder::class);
+        $this->call(FacultadDepartamentoEscuelaSeeder::class);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
