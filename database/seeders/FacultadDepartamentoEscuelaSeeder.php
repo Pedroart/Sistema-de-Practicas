@@ -60,19 +60,19 @@ class FacultadDepartamentoEscuelaSeeder extends Seeder
 
 
         // Asociar Departamentos a Facultades
-        $facultad1->Departamentoacademico()->saveMany([$departamento1]);
-        $facultad2->Departamentoacademico()->saveMany([$departamento2]);
-        $facultad3->Departamentoacademico()->saveMany([$departamento3]);
-        $facultad4->Departamentoacademico()->saveMany([$departamento4, $departamento5]);
-        $facultad5->Departamentoacademico()->saveMany([$departamento6, $departamento7]);
-        $facultad6->Departamentoacademico()->saveMany([$departamento8]);
-        $facultad7->Departamentoacademico()->saveMany([$departamento9, $departamento10, $departamento11]);
-        $facultad8->Departamentoacademico()->saveMany([$departamento12,$departamento13]);
-        $facultad9->Departamentoacademico()->saveMany([$departamento14]);
-        $facultad10->Departamentoacademico()->saveMany([$departamento15]);
-        $facultad11->Departamentoacademico()->saveMany([$departamento16, $departamento17, $departamento18]);
-        $facultad12->Departamentoacademico()->saveMany([$departamento19]);
-        $facultad13->Departamentoacademico()->saveMany([$departamento20, $departamento21, $departamento22]);
+        $facultad1->departamentos()->saveMany([$departamento1]);
+        $facultad2->departamentos()->saveMany([$departamento2]);
+        $facultad3->departamentos()->saveMany([$departamento3]);
+        $facultad4->departamentos()->saveMany([$departamento4, $departamento5]);
+        $facultad5->departamentos()->saveMany([$departamento6, $departamento7]);
+        $facultad6->departamentos()->saveMany([$departamento8]);
+        $facultad7->departamentos()->saveMany([$departamento9, $departamento10, $departamento11]);
+        $facultad8->departamentos()->saveMany([$departamento12,$departamento13]);
+        $facultad9->departamentos()->saveMany([$departamento14]);
+        $facultad10->departamentos()->saveMany([$departamento15]);
+        $facultad11->departamentos()->saveMany([$departamento16, $departamento17, $departamento18]);
+        $facultad12->departamentos()->saveMany([$departamento19]);
+        $facultad13->departamentos()->saveMany([$departamento20, $departamento21, $departamento22]);
 
         // Crear Escuelas
         // Crear Escuelas
