@@ -4,7 +4,7 @@ var departamentoEDUSelect = document.getElementById("departamento");
 var escuelaSelect = document.getElementById("escuela");
 
 function loadConten() {
-    facultadSelect.innerHTML = "";
+    //facultadSelect.innerHTML = "";
     departamentoEDUSelect.innerHTML = "";
     escuelaSelect.innerHTML = "";
 
@@ -82,5 +82,5 @@ if (departamentoEDUSelect) {
 
     departamentoEDUSelect.addEventListener("change", changeDepartamento);
 
-    document.addEventListener("DOMContentLoaded", loadConten);
+    facultadSelect.addEventListener("click", loadConten);
 }

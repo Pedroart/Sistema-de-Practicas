@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
     Route::resource('personas', App\Http\Controllers\PersonaController::class);
     Route::resource('empresas', App\Http\Controllers\EmpresaController::class);
     Route::resource('empleados', App\Http\Controllers\EmpleadoController::class);
-    
+
     Route::resource('comentarios', App\Http\Controllers\ComentarioController::class);
 
 
@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
     Route::resource('tipoetapas', App\Http\Controllers\tipoetapaController::class);
     Route::resource('estados', App\Http\Controllers\EstadoController::class);
 
+    Route::resource('userinstitucionals', App\Http\Controllers\UserinstitucionalController::class);
 });
 
 /*

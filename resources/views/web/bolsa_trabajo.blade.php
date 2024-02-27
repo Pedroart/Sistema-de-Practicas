@@ -1,5 +1,7 @@
 @extends('plantilla.web')
 
 @section('content')
-    <x-ubiedu-form />
+    <x-card>
+        HOla
+    </x-card>
 @endsection

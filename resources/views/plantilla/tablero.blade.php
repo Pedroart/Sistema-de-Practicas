@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="{{ url("/") }}/tablero/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url("/") }}/tablero/dist/css/adminlte.min.css">
+    @yield('style')
+      <!-- Scripts -->
+    @vite([ 'resources/js/app.js'])
 </head>
 
 <body class="hold-transition sidebar-mini ">
@@ -102,7 +105,7 @@
     <script src="{{ url("/") }}/tablero/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="{{ url("/") }}/tablero/dist/js/adminlte.min.js"></script>
-
+    @yield('script')
 </body>
 
 </html>

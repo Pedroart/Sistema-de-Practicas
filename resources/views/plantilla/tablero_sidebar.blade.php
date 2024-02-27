@@ -17,6 +17,7 @@
             ]" />
             <x-nav-dropdown :title="'Usuarios'" :icon="'fas fa-user'" :links="[
                 ['url' =>  route('personas.index') , 'text' => 'Personas'],
+                ['url' =>  route('userinstitucionals.index') , 'text' => 'Institucionals'],
             ]" />
             <x-nav-dropdown :title="'Empresa'" :icon="'fas fa-building'" :links="[
                 ['url' =>  route('empresas.index') , 'text' => 'Empresas (RUC)'],

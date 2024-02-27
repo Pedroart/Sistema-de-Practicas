@@ -41,6 +41,7 @@ function DepartamentoCambia() {
             // Agregar la opción al select de departamentos
             UbiProvincia.appendChild(option);
         });
+        ProvinciaCambia();
     })
     .catch(error => {
         // Manejar errores
@@ -54,10 +55,10 @@ if(UbiDepartamento)
     UbiProvincia.addEventListener('change',ProvinciaCambia);
     UbiDepartamento.addEventListener('change',DepartamentoCambia);
 
-    document.addEventListener('DOMContentLoaded', function() {
+    UbiDepartamento.addEventListener('click', function() {
         UbiProvincia.innerHTML = '';
         UbiDistrito.innerHTML = '';
-        UbiDepartamento.innerHTML = '';
+        //UbiDepartamento.innerHTML = '';
         fetch('api/ubigeo/departamentos')
         .then(response => response.json())
         .then(data => {
