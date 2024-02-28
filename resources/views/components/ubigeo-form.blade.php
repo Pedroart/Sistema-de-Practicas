@@ -12,6 +12,6 @@
 
 <div class="form-group">
     {{ Form::label('Distrito') }}
-    {{ Form::select('distrito', $lista_distrito, $indi_distrito, ['id' => 'UbiDistrito', 'class' => 'form-control' . ($errors->has('distrito') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un distrito', $bloqueado ? ' disabled' : '']) }}
-    {!! $errors->first('distrito', '<div class="invalid-feedback">:message</div>') !!}
+    {{ Form::select('ubidistrito_id', $lista_distrito, $indi_distrito, ['id' => 'UbiDistrito', 'class' => 'form-control' . ($errors->has('ubidistrito_id') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un distrito', $bloqueado ? ' disabled' : '']) }}
+    {!! $errors->first('ubidistrito_id', '<div class="invalid-feedback">:message</div>') !!}
 </div>

@@ -8,7 +8,7 @@ function loadConten() {
     departamentoEDUSelect.innerHTML = "";
     escuelaSelect.innerHTML = "";
 
-    fetch("api/ubiedu/facultades")
+    fetch(url+"/api/ubiedu/facultades")
         .then((response) => response.json())
         .then((data) => {
             data.forEach(function(item) {
@@ -32,7 +32,7 @@ function changeFacultad()
     departamentoEDUSelect.innerHTML = "";
     escuelaSelect.innerHTML = "";
     var selector = facultadSelect.value;
-    fetch("api/ubiedu/"+selector+"/departamentos")
+    fetch(url+"/api/ubiedu/"+selector+"/departamentos")
         .then((response) => response.json())
         .then((data) => {
             data.forEach(function(item) {
@@ -57,7 +57,7 @@ function changeDepartamento()
 {
     escuelaSelect.innerHTML = "";
     var selector = departamentoEDUSelect.value;
-    fetch("api/ubiedu/"+selector+"/escuelas")
+    fetch(url+"/api/ubiedu/"+selector+"/escuelas")
         .then((response) => response.json())
         .then((data) => {
             data.forEach(function(item) {

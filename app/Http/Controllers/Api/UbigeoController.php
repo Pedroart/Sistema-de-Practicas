@@ -10,6 +10,18 @@ use App\Models\ubidistrito;
 
 class UbigeoController extends Controller
 {
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index($id)
+    {
+        return response()->json($this->consolidad($id), 200, [], JSON_UNESCAPED_UNICODE);
+    }
+
     public function consolidad($id){
         $distrito = UbiDistrito::findOrFail($id);
         $provincia = $distrito->ubiprovincia;
@@ -33,18 +45,6 @@ class UbigeoController extends Controller
 
         return $formattedData;
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($id)
-    {
-        return response()->json($this->consolidad($id), 200, [], JSON_UNESCAPED_UNICODE);
-    }
-
-
 
     public function departamentos()
     {

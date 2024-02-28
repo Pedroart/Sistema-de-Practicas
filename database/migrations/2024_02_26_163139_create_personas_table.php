@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('apellido_materno');
             $table->string('apellido_paterno');
-            $table->char('dni', 7)->unique();
-            $table->foreignId('ubidistrito_id')->constrained();
+            $table->char('dni', 8)->nullable();
+            $table->foreignId('ubidistrito_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

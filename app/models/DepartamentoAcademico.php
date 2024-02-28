@@ -13,7 +13,7 @@ class Departamentoacademico extends Model
 
     public function facultad()
     {
-        return $this->hasOne(Facultad::class);
+        return $this->belongsto(Facultad::class);
     }
 
     public function escuelas()

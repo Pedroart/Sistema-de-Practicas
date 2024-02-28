@@ -9,14 +9,39 @@ use App\Models\Escuela;
 
 class UbieduController extends Controller
 {
+    public function consolidado($id){
+        $escuela = escuela::findOrFail($id);
+        $departamento = $escuela->departamentoacademico;
+        $facultad = $departamento->facultad;
+
+        // Construir el array asociativo con el formato deseado
+        $formattedData = [
+            'escuela' => [
+                'id' => $escuela->id,
+                'nombre' => $escuela->nombre,
+            ],
+            'departamento' => [
+                'id' => $departamento->id,
+                'nombre' => $departamento->nombre,
+            ],
+            'facultad' => [
+                'id' => $facultad->id,
+                'nombre' => $facultad->nombre,
+            ],
+        ];
+
+        return $formattedData;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return json();
+        return response()->json($this->consolidado($id), 200, [], JSON_UNESCAPED_UNICODE);
+
     }
 
     public function facultad()

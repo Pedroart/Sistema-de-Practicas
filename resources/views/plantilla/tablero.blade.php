@@ -17,6 +17,9 @@
     @yield('style')
       <!-- Scripts -->
     @vite([ 'resources/js/app.js'])
+    <script>
+        const url = '{{ url("/") }}';
+    </script>
 </head>
 
 <body class="hold-transition sidebar-mini ">

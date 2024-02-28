@@ -1,6 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
             {{ Form::label('name') }}
             {{ Form::text('name', $persona->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
@@ -21,11 +21,7 @@
             {{ Form::text('dni', $persona->dni, ['class' => 'form-control' . ($errors->has('dni') ? ' is-invalid' : ''), 'placeholder' => 'Dni']) }}
             {!! $errors->first('dni', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('ubidistrito_id') }}
-            {{ Form::text('ubidistrito_id', $persona->ubidistrito_id, ['class' => 'form-control' . ($errors->has('ubidistrito_id') ? ' is-invalid' : ''), 'placeholder' => 'Ubidistrito Id']) }}
-            {!! $errors->first('ubidistrito_id', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
+        <x-ubigeo-form id='{{$persona->ubidistrito_id}}' />
 
     </div>
     <div class="box-footer mt20">

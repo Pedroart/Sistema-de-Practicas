@@ -9,12 +9,13 @@ class NavDropdown extends Component
     public $title;
     public $links;
     public $icon;
-
-    public function __construct($icon,$title, $links)
+    public $permiso;
+    public function __construct($permiso="edit",$icon,$title, $links)
     {
         $this->icon = $icon;
         $this->title = $title;
         $this->links = $links;
+        $this->permiso = $permiso;
     }
 
     public function render()

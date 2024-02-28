@@ -7,7 +7,7 @@ function DistritoCambia() {}
 function ProvinciaCambia() {
     UbiDistrito.innerHTML = '';
     var selector = UbiProvincia.value;
-    fetch('api/ubigeo/'+selector+'/distritos')
+    fetch(url+'/api/ubigeo/'+selector+'/distritos')
     .then(response => response.json())
     .then(data => {
         data.forEach(function(item) {
@@ -29,7 +29,7 @@ function DepartamentoCambia() {
     UbiProvincia.innerHTML = '';
     UbiDistrito.innerHTML = '';
     var selector = UbiDepartamento.value;
-    fetch('api/ubigeo/'+selector+'/provincias')
+    fetch(url+'/api/ubigeo/'+selector+'/provincias')
     .then(response => response.json())
     .then(data => {
         data.forEach(function(item) {
@@ -59,7 +59,7 @@ if(UbiDepartamento)
         UbiProvincia.innerHTML = '';
         UbiDistrito.innerHTML = '';
         //UbiDepartamento.innerHTML = '';
-        fetch('api/ubigeo/departamentos')
+        fetch(url+'/api/ubigeo/departamentos')
         .then(response => response.json())
         .then(data => {
             data.forEach(function(departamento) {

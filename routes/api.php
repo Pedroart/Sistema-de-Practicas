@@ -24,5 +24,7 @@ Route::get('ubigeo/{id_ubidepartamento}/provincias',[App\Http\Controllers\Api\Ub
 Route::get('ubigeo/{id_ubidepartamento}/distritos',[App\Http\Controllers\Api\UbigeoController::class,'distrito']);
 
 Route::get('ubiedu/facultades', [App\Http\Controllers\Api\UbieduController::class, 'facultad']);
+Route::get('ubiedu/{id}', [App\Http\Controllers\Api\UbieduController::class, 'index']);
+
 Route::get('ubiedu/{id_facultad}/departamentos', [App\Http\Controllers\Api\UbieduController::class, 'departamento']);
 Route::get('ubiedu/{id_departamento}/escuelas', [App\Http\Controllers\Api\UbieduController::class, 'escuela']);

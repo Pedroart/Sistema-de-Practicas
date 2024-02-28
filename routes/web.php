@@ -35,6 +35,11 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
     Route::resource('estados', App\Http\Controllers\EstadoController::class);
 
     Route::resource('userinstitucionals', App\Http\Controllers\UserinstitucionalController::class);
+    Route::resource('userinstitucionalslote', App\Http\Controllers\UserinstitucionalloteControlador::class);
+
+    Route::resource('perfil', App\Http\Controllers\PerfilController::class);
+
+    Route::resource('matriculas', App\Http\Controllers\MatriculaController::class);
 });
 
 /*

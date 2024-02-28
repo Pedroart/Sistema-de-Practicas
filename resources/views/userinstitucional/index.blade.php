@@ -14,7 +14,7 @@
                 </span>
 
                 <div class="float-right">
-                    <a href="{{ route('userinstitucionals.create') }}" class="btn btn-primary btn-sm float-right"
+                    <a href="{{ route('userinstitucionalslote.index') }}" class="btn btn-primary btn-sm float-right"
                         data-placement="left">
                         {{ __('Create New') }}
                     </a>
@@ -45,12 +45,12 @@
                 <tbody>
                     @foreach ($userinstitucionals as $userinstitucional)
                         <tr>
-                            <td>{{ $userinstitucional->id }}</td>
+                            <td>{{ $userinstitucional->user->roles[0]->name }}</td>
 
                             <td>{{ $userinstitucional->codigo }}</td>
-                            <td>{{ $userinstitucional->user_id }}</td>
+                            <td>{{ $userinstitucional->user->name }}</td>
                             <td>{{ $userinstitucional->personas_id }}</td>
-                            <td>{{ $userinstitucional->escuela_id }}</td>
+                            <td>{{ $userinstitucional->escuela->nombre }}</td>
 
                             <td>
                                 <form action="{{ route('userinstitucionals.destroy', $userinstitucional->id) }}"

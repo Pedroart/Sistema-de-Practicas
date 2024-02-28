@@ -28,8 +28,15 @@ class RoleSeeder extends Seeder
         $asistente_docencia     =Role::create(['name' => 'asistente docencia']);
         $estudiante             =Role::create(['name' => 'estudiante']);
 
-        Permission::create(['name' => 'edit.articles'])->syncRoles([$administrador]);
-        Permission::create(['name' => 'prueba'])->syncRoles([$administrador]);
+        Permission::create(['name' => 'edit'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia,
+            $estudiante]);
+        Permission::create(['name' => 'files.conf'])->syncRoles([$administrador,$director_academico,$director_academico,$director_escuela,$docente]);
 
 
     }

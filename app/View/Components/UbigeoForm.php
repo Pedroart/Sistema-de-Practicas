@@ -33,7 +33,7 @@ class UbigeoForm extends Component
         $this->indi_provincia=null;
         $this->indi_distrito=null;
 
-        if(!is_null($id)){
+        if(!is_null($id) & $id !== ""){
             $controller = new UbigeoController();
             $data = $controller->consolidad($id);
             $this->lista_departamento = [ $data['departamento']['id'] => $data['departamento']['nombre'] ];

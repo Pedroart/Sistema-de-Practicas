@@ -28,6 +28,21 @@ class Ubieduform extends Component
         $this->indi_facultad=null;
         $this->indi_departamento=null;
         $this->indi_escuela=null;
+
+        $this->bloqueado = $bloqueado;
+
+        if(!is_null($id)){
+            $controller = new UbieduController();
+            $data = $controller->consolidado($id);
+            $this->lista_facultad = [ $data['facultad']['id'] => $data['facultad']['nombre'] ];
+            $this->indi_facultad = $data['facultad']['id'];
+
+            $this->lista_departamento = [ $data['departamento']['id'] => $data['departamento']['nombre'] ];
+            $this->indi_departamento = $data['departamento']['id'];
+
+            $this->lista_escuela = [ $data['escuela']['id'] => $data['escuela']['nombre'] ];
+            $this->indi_escuela = $data['escuela']['id'];
+        }
     }
 
     /**

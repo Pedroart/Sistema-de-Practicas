@@ -16,7 +16,7 @@
             <a>
         </form>
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">
+        <a href="{{route('perfil.index')}}" class="dropdown-item">
             Perfil
         </a>
     </div>

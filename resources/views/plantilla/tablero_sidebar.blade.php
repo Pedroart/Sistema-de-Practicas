@@ -11,7 +11,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <x-nav-dropdown :title="'Archivos'" :icon="'fas fa-file'" :links="[
+            <x-nav-dropdown :permiso="'files.conf'" :title="'Archivos'" :icon="'fas fa-file'" :links="[
                 ['url' =>  route('rutafiles.index') , 'text' => 'Conf. Rutas'],
                 ['url' =>  route('files.index') , 'text' => 'Listado'],
             ]" />
@@ -28,6 +28,9 @@
                 ['url' =>  route('tipoprocesos.index') , 'text' => 'Conf. Proceso'],
                 ['url' =>  route('tipoetapas.index') , 'text' => 'Conf. Etapas'],
                 ['url' =>  route('estados.index') , 'text' => 'Conf. Estados'],
+            ]" />
+            <x-nav-dropdown :title="'Matricula'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('matriculas.index') , 'text' => 'Registro'],
             ]" />
             <!-- Add icons to the links using the .nav-icon class
    with font-awesome or any other icon font library
