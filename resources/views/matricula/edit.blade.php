@@ -20,7 +20,7 @@
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('matricula.form')
+                            @include('matricula.formedit')
 
                         </form>
                     </div>

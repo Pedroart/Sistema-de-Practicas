@@ -7,7 +7,7 @@
             <x-card title="Institucional">
                 <div class="form-group">
                     {{ Form::label('codigo') }}
-                    {{ Form::text('codigo', $user->userinstitucional->codigo, ['class' => 'form-control' . ($errors->has('codigo') ? ' is-invalid' : ''), 'placeholder' => 'codigo', 'disabled']) }}
+                    {{ Form::text('codigo', $user->userinstitucional->codigo ?? null, ['class' => 'form-control' . ($errors->has('codigo') ? ' is-invalid' : ''), 'placeholder' => 'codigo', 'disabled']) }}
                     {!! $errors->first('codigo', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <x-ubieduform id="{{$user->userinstitucional->escuela_id}}" bloqueado='TRUE' />

@@ -35,11 +35,10 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Userinstitucional Id</th>
 										<th>Semestre Id</th>
 										<th>Estado Id</th>
-										<th>Comentario Id</th>
 										<th>Matricula Id</th>
 										<th>Record Id</th>
 
@@ -50,21 +49,28 @@
                                     @foreach ($matriculas as $matricula)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $matricula->userinstitucional_id }}</td>
-											<td>{{ $matricula->semestre_id }}</td>
-											<td>{{ $matricula->estado_id }}</td>
-											<td>{{ $matricula->comentario_id }}</td>
+
+											<td>{{ $matricula->userinstitucional->codigo }}</td>
+											<td>{{ $matricula->semestre->name }}</td>
+											<td>{{ $matricula->estado->name }}</td>
+
 											<td>{{ $matricula->matricula_id }}</td>
 											<td>{{ $matricula->record_id }}</td>
 
                                             <td>
                                                 <form action="{{ route('matriculas.destroy',$matricula->id) }}" method="POST">
+                                                    @can('matricula.view')
                                                     <a class="btn btn-sm btn-primary " href="{{ route('matriculas.show',$matricula->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    @endcan
+
+                                                    @can('matricula.edit')
                                                     <a class="btn btn-sm btn-success" href="{{ route('matriculas.edit',$matricula->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    @endcan
+                                                    @can('matricula.delete')
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>

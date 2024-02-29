@@ -30,10 +30,7 @@ class Matricula extends Model
 {
 
     static $rules = [
-		'userinstitucional_id' => 'required',
 		'semestre_id' => 'required',
-		'estado_id' => 'required',
-		'comentario_id' => 'required',
 		'matricula_id' => 'required',
 		'record_id' => 'required',
     ];

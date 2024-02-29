@@ -23,13 +23,13 @@
                 ['url' =>  route('empresas.index') , 'text' => 'Empresas (RUC)'],
                 ['url' =>  route('empleados.index') , 'text' => 'Empleados'],
             ]" />
-            <x-nav-dropdown :permiso="'files.conf'" :title="'Conf. Proceso'" :icon="'fas fa-book'" :links="[
+            <x-nav-dropdown :permiso="'edit'" :title="'Conf. Proceso'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('semestres.index') , 'text' => 'Semestres'],
                 ['url' =>  route('tipoprocesos.index') , 'text' => 'Conf. Proceso'],
                 ['url' =>  route('tipoetapas.index') , 'text' => 'Conf. Etapas'],
                 ['url' =>  route('estados.index') , 'text' => 'Conf. Estados'],
             ]" />
-            <x-nav-dropdown :permiso="'files.conf'" :title="'Matricula'" :icon="'fas fa-book'" :links="[
+            <x-nav-dropdown :permiso="'edit'" :title="'Matricula'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('matriculas.index') , 'text' => 'Registro'],
             ]" />
             <!-- Add icons to the links using the .nav-icon class

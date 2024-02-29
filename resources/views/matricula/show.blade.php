@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Userinstitucional Id:</strong>
                             {{ $matricula->userinstitucional_id }}
@@ -33,16 +33,12 @@
                             {{ $matricula->estado_id }}
                         </div>
                         <div class="form-group">
-                            <strong>Comentario Id:</strong>
-                            {{ $matricula->comentario_id }}
-                        </div>
-                        <div class="form-group">
                             <strong>Matricula Id:</strong>
-                            {{ $matricula->matricula_id }}
+                            <a href="{{ asset('storage/'. $matricula->matricula->path) }}" target="_blank">Abrir Archivo</a>
                         </div>
                         <div class="form-group">
                             <strong>Record Id:</strong>
-                            {{ $matricula->record_id }}
+                            <a href="{{ asset('storage/'. $matricula->record->path) }}" target="_blank">Abrir Archivo</a>
                         </div>
 
                     </div>
