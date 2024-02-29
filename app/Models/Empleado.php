@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Empleado
  *
  * @property $id
+ * @property $empresa_id
  * @property $name
  * @property $apellido_paterno
  * @property $apellido_materno
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $created_at
  * @property $updated_at
  *
+ * @property Empresa $empresa
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -39,8 +41,16 @@ class Empleado extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','apellido_paterno','apellido_materno','genero','grado_instruccion','cargo'];
+    protected $fillable = ['empresa_id','name','apellido_paterno','apellido_materno','genero','grado_instruccion','cargo'];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function empresa()
+    {
+        return $this->hasOne('App\Models\Empresa', 'id', 'empresa_id');
+    }
+    
 
 }

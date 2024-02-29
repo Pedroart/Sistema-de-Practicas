@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('empleados', function (Blueprint $table) {
+        Schema::create('procesos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('empresa_id')->nullable()->constrained();
-            $table->string('name');
-            $table->string('apellido_paterno');
-            $table->string('apellido_materno');
-            $table->string('genero');
-            $table->string('grado_instruccion');
-            $table->string('cargo');
+            $table->foreignId('profesor_id')->constrained('userinstitucionals');
+            $table->foreignId('estudiante_id')->constrained('userinstitucionals');
+            $table->foreignId('semestre_id')->constrained();
+            $table->foreignId('estado_id')->constrained();
+            $table->foreignId('tipoproceso_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empleados');
+        Schema::dropIfExists('procesos');
     }
 };

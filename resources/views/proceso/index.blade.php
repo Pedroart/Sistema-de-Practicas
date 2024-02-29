@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    Empleado
+    Proceso
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Empleado') }}
+                                {{ __('Proceso') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('empleados.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('procesos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -36,34 +36,30 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Empresa Id</th>
-										<th>Name</th>
-										<th>Apellido Paterno</th>
-										<th>Apellido Materno</th>
-										<th>Genero</th>
-										<th>Grado Instruccion</th>
-										<th>Cargo</th>
+										<th>Profesor Id</th>
+										<th>Estudiante Id</th>
+										<th>Semestre Id</th>
+										<th>Estado Id</th>
+										<th>Tipoproceso Id</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($empleados as $empleado)
+                                    @foreach ($procesos as $proceso)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $empleado->empresa_id }}</td>
-											<td>{{ $empleado->name }}</td>
-											<td>{{ $empleado->apellido_paterno }}</td>
-											<td>{{ $empleado->apellido_materno }}</td>
-											<td>{{ $empleado->genero }}</td>
-											<td>{{ $empleado->grado_instruccion }}</td>
-											<td>{{ $empleado->cargo }}</td>
+											<td>{{ $proceso->profesor_id }}</td>
+											<td>{{ $proceso->estudiante_id }}</td>
+											<td>{{ $proceso->semestre_id }}</td>
+											<td>{{ $proceso->estado_id }}</td>
+											<td>{{ $proceso->tipoproceso_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('empleados.destroy',$empleado->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('empleados.show',$empleado->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('empleados.edit',$empleado->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('procesos.destroy',$proceso->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('procesos.show',$proceso->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('procesos.edit',$proceso->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -76,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $empleados->links() !!}
+                {!! $procesos->links() !!}
             </div>
         </div>
     </div>

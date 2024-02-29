@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
     Route::resource('perfil', App\Http\Controllers\PerfilController::class);
 
     Route::resource('matriculas', App\Http\Controllers\MatriculaController::class);
+    Route::resource('procesos', App\Http\Controllers\procesoController::class);
 });
 
 /*

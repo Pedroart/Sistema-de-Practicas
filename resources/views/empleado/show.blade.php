@@ -21,6 +21,10 @@
                     <div class="card-body">
                         
                         <div class="form-group">
+                            <strong>Empresa Id:</strong>
+                            {{ $empleado->empresa_id }}
+                        </div>
+                        <div class="form-group">
                             <strong>Name:</strong>
                             {{ $empleado->name }}
                         </div>
