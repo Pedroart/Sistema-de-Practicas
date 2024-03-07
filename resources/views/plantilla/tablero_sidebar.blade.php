@@ -7,7 +7,6 @@
             <a class="d-block"> {{ ucfirst(Auth::user()->getRoleNames()->first()) }} {{ Auth::user()->name }}</a>
         </div>
     </div>
-
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -15,22 +14,36 @@
                 ['url' =>  route('rutafiles.index') , 'text' => 'Conf. Rutas'],
                 ['url' =>  route('files.index') , 'text' => 'Listado'],
             ]" />
-            <x-nav-dropdown :permiso="'files.conf'" :title="'Usuarios'" :icon="'fas fa-user'" :links="[
+            <x-nav-dropdown :permiso="'user.conf'" :title="'Usuarios'" :icon="'fas fa-user'" :links="[
                 ['url' =>  route('personas.index') , 'text' => 'Personas'],
                 ['url' =>  route('userinstitucionals.index') , 'text' => 'Institucionals'],
             ]" />
-            <x-nav-dropdown :permiso="'files.conf'" :title="'Empresa'" :icon="'fas fa-building'" :links="[
+            <x-nav-dropdown :permiso="'empresas.conf'" :title="'Empresa'" :icon="'fas fa-building'" :links="[
                 ['url' =>  route('empresas.index') , 'text' => 'Empresas (RUC)'],
                 ['url' =>  route('empleados.index') , 'text' => 'Empleados'],
             ]" />
-            <x-nav-dropdown :permiso="'edit'" :title="'Conf. Proceso'" :icon="'fas fa-book'" :links="[
+            <x-nav-dropdown :permiso="'confproceso.view'" :title="'Conf. Proceso'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('semestres.index') , 'text' => 'Semestres'],
                 ['url' =>  route('tipoprocesos.index') , 'text' => 'Conf. Proceso'],
                 ['url' =>  route('tipoetapas.index') , 'text' => 'Conf. Etapas'],
                 ['url' =>  route('estados.index') , 'text' => 'Conf. Estados'],
             ]" />
-            <x-nav-dropdown :permiso="'edit'" :title="'Matricula'" :icon="'fas fa-book'" :links="[
+            <x-nav-dropdown :permiso="'matricula.view'" :title="'Matricula'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('matriculas.index') , 'text' => 'Registro'],
+            ]" />
+            <x-nav-dropdown :permiso="'matricula.view'" :title="'Procesos'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('matriculas.index') , 'text' => 'Desempeno'],
+                ['url' =>  route('matriculas.index') , 'text' => 'Efectivas'],
+                ['url' =>  route('matriculas.index') , 'text' => 'Emprendimiento'],
+                ['url' =>  route('matriculas.index') , 'text' => 'Convalidacion'],
+            ]" />
+            <x-nav-dropdown :permiso="'matricula.view'" :title="'Procesos Regulares'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('matriculas.index') , 'text' => 'Desempeno'],
+                ['url' =>  route('matriculas.index') , 'text' => 'Efectivas'],
+            ]" />
+            <x-nav-dropdown :permiso="'matricula.view'" :title="'Procesos Registro'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('matriculas.index') , 'text' => 'Emprendimiento'],
+                ['url' =>  route('matriculas.index') , 'text' => 'Convalidacion'],
             ]" />
             <!-- Add icons to the links using the .nav-icon class
    with font-awesome or any other icon font library

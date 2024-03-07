@@ -48,6 +48,7 @@ class AdminUserSeeder extends Seeder
         $estudianteIntitu = Userinstitucional::create([
             'codigo'=>'0123456789',
             'user_id'=>$estudiante->id,
+            'escuela_id'=>1,
         ]);
 
         $estudiante->assignRole('estudiante');

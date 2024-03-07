@@ -38,6 +38,102 @@ class RoleSeeder extends Seeder
             $asistente_docencia,
             $estudiante]);
         Permission::create(['name' => 'files.conf'])->syncRoles([$administrador,$director_academico,$director_academico,$director_escuela,$docente]);
+        Permission::create(['name' => 'files.rutas.conf'])->syncRoles([
+            $administrador]);
+        Permission::create(['name' => 'files.rutas.view'])->syncRoles([
+            $administrador]);
+        Permission::create(['name' => 'files.view'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'files.create'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'files.edit'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'files.delete'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+
+        Permission::create(['name' => 'user.conf'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'user.personas.conf'])->syncRoles([
+            $administrador]);
+        Permission::create(['name' => 'user.personas.view'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'user.institucional.conf'])->syncRoles([
+            $administrador]);
+        Permission::create(['name' => 'user.institucional.view'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+
+        Permission::create(['name' => 'empresas.conf'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'empresas.view'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'empresas.create']);
+        Permission::create(['name' => 'empresas.edit']);
+        Permission::create(['name' => 'empresas.delete']);
+        Permission::create(['name' => 'empleados.view'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+        Permission::create(['name' => 'empleados.create']);
+        Permission::create(['name' => 'empleados.edit']);
+        Permission::create(['name' => 'empleados.delete']);
+
+        Permission::create(['name' => 'confproceso.conf'])->syncRoles([
+            $administrador]);
+        Permission::create(['name' => 'confproceso.view'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
 
         Permission::create(['name' => 'matricula.view'])->syncRoles([$administrador,$director_academico,$director_academico,$director_escuela,$docente,$asistente_docencia,$estudiante]);
         Permission::create(['name' => 'matricula.create'])->syncRoles([$administrador,$estudiante]);

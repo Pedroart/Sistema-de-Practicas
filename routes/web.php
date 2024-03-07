@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
 
     Route::resource('matriculas', App\Http\Controllers\MatriculaController::class);
     Route::resource('procesos', App\Http\Controllers\procesoController::class);
+    Route::resource('desempeno', App\Http\Controllers\Proceso\Desempeno\desempenoController::class);
 });
 
 /*
