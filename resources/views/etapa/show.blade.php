@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $tipoproceso->name ?? "{{ __('Show') Tipoproceso" }}
+    {{ $etapa->name ?? "{{ __('Show') Etapa" }}
 @endsection
 
 @section('content')
@@ -11,22 +11,26 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Tipoproceso</span>
+                            <span class="card-title">{{ __('Show') }} Etapa</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('tipoprocesos.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('etapas.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Name:</strong>
-                            {{ $tipoproceso->name }}
+                            <strong>Proceso Id:</strong>
+                            {{ $etapa->proceso_id }}
                         </div>
                         <div class="form-group">
-                            <strong>Descripcion:</strong>
-                            {{ $tipoproceso->descripcion }}
+                            <strong>Tipoetapas Id:</strong>
+                            {{ $etapa->tipoetapas_id }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Estado Id:</strong>
+                            {{ $etapa->estado_id }}
                         </div>
 
                     </div>

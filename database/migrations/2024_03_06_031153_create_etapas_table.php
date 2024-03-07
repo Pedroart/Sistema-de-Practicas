@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('procesos', function (Blueprint $table) {
+        Schema::create('etapas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profesor_id')->nullable()->constrained('userinstitucionals');
-            $table->foreignId('estudiante_id')->constrained('userinstitucionals');
-            $table->foreignId('semestre_id')->constrained();
+            $table->foreignId('proceso_id')->constrained();
+            $table->foreignId('tipoetapas_id')->constrained();
             $table->foreignId('estado_id')->constrained();
-            $table->foreignId('tipoproceso_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('procesos');
+        Schema::dropIfExists('etapas');
     }
 };

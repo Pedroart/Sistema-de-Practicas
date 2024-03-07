@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $name
+ * @property $descripcion
  * @property $created_at
  * @property $updated_at
  *
+ * @property Proceso[] $procesos
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -29,8 +31,16 @@ class Tipoproceso extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name','descripcion'];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function procesos()
+    {
+        return $this->hasMany('App\Models\Proceso', 'tipoproceso_id', 'id');
+    }
+    
 
 }

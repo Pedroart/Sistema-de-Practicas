@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    Matricula
+    Etapa
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Matricula') }}
+                                {{ __('Etapa') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('matriculas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('etapas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -35,43 +35,30 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-										<th>Userinstitucional Id</th>
-										<th>Semestre Id</th>
+                                        
+										<th>Proceso Id</th>
+										<th>Tipoetapas Id</th>
 										<th>Estado Id</th>
-										<th>Matricula Id</th>
-										<th>Record Id</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($matriculas as $matricula)
+                                    @foreach ($etapas as $etapa)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
-											<td>{{ $matricula->userinstitucional->codigo }}</td>
-											<td>{{ $matricula->semestre->name }}</td>
-											<td>{{ $matricula->estado->name }}</td>
-
-											<td>{{ $matricula->matricula_id }}</td>
-											<td>{{ $matricula->record_id }}</td>
+                                            
+											<td>{{ $etapa->proceso_id }}</td>
+											<td>{{ $etapa->tipoetapas_id }}</td>
+											<td>{{ $etapa->estado_id }}</td>
 
                                             <td>
-                                                <form action="{{ route('matriculas.destroy',$matricula->id) }}" method="POST">
-                                                    @can('matricula.view')
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('matriculas.show',$matricula->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    @endcan
-                                                @if ($matricula->estado->id !==3 )
-                                                    @can('matricula.edit')
-                                                    <a class="btn btn-sm btn-success" href="{{ route('matriculas.edit',$matricula->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
-                                                    @endcan
-                                                    @can('matricula.delete')
+                                                <form action="{{ route('etapas.destroy',$etapa->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('etapas.show',$etapa->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('etapas.edit',$etapa->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                    @endcan
-                                                @endif
                                                 </form>
                                             </td>
                                         </tr>
@@ -81,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $matriculas->links() !!}
+                {!! $etapas->links() !!}
             </div>
         </div>
     </div>

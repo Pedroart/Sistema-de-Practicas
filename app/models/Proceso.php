@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $updated_at
  *
  * @property Estado $estado
+ * @property Etapa[] $etapas
  * @property Semestre $semestre
  * @property Tipoproceso $tipoproceso
  * @property Userinstitucional $userinstitucional
@@ -53,6 +54,14 @@ class Proceso extends Model
     }
 
     /**
+     *
+     */
+    public function etapas()
+    {
+        return $this->hasMany('App\Models\Etapa', 'proceso_id', 'id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function semestre()
@@ -71,17 +80,17 @@ class Proceso extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function estudiante()
+    public function profesor()
     {
-        return $this->hasOne('App\Models\Userinstitucional', 'id', 'estudiante_id');
+        return $this->hasOne('App\Models\Userinstitucional', 'id', 'profesor_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function profesor()
+    public function estudiante()
     {
-        return $this->hasOne('App\Models\Userinstitucional', 'id', 'profesor_id');
+        return $this->hasOne('App\Models\Userinstitucional', 'id', 'estudiante_id');
     }
 
 

@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Docente;
 use App\Models\Persona;
 use App\Models\Alumno;
+use App\Models\Userinstitucional;
+
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 
@@ -36,5 +38,19 @@ class AdminUserSeeder extends Seeder
         ]);
 
         $sistemaUser->assignRole('administrador');
+
+        $estudiante = User::create([
+            'name' => 'estudiante',
+            'email' => 'estudiante@admin.com',
+            'password' => bcrypt('87654321'), // Recuerda cambiar esto por una contraseña segura
+        ]);
+
+        $estudianteIntitu = Userinstitucional::create([
+            'codigo'=>'0123456789',
+            'user_id'=>$estudiante->id,
+        ]);
+
+        $estudiante->assignRole('estudiante');
+        $estudiante->assignRole('matriculado');
     }
 }

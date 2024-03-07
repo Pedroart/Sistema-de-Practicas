@@ -17,13 +17,15 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(UbigeoSeeder::class);
         $this->call(RoleSeeder::class);
-        $this->call(AdminUserSeeder::class);
+
         $this->call(PermisosRoles::class);
         $this->call(RutaFileSeeder::class);
         $this->call(TiposSeeder::class);
         $this->call(FacultadDepartamentoEscuelaSeeder::class);
         $this->call(FileSeeder::class);
         $this->call(SemestreSeeder::class);
+        $this->call(AdminUserSeeder::class);
+        $this->call(ProcesoSeeder::class);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Proceso;
 use Illuminate\Http\Request;
-
+use App\Models\Semestre;
+use App\Models\Estado;
+use App\Models\Tipoproceso;
 /**
  * Class ProcesoController
  * @package App\Http\Controllers
@@ -16,7 +18,12 @@ class ProcesoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(){
+        $proceso = Proceso::where('estudiante_id', 1)->first();
+        return view('proceso.estudiante.index',compact('proceso'));
+    }
+
+    public function indexa()
     {
         $procesos = Proceso::paginate();
 
@@ -32,7 +39,16 @@ class ProcesoController extends Controller
     public function create()
     {
         $proceso = new Proceso();
-        return view('proceso.create', compact('proceso'));
+
+        $semestre = Semestre::orderByDesc('id')->pluck('name', 'id');
+        $proceso->semestre_id = $semestre->keys()->first();
+
+        $estados = Estado::all()->pluck('name', 'id');
+        $proceso->estado_id = 1;
+
+        $tipoprocesos = Tipoproceso::all()->pluck('name', 'id');
+
+        return view('proceso.estudiante.create', compact('proceso','semestre','estados','tipoprocesos'));
     }
 
     /**

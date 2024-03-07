@@ -153,9 +153,11 @@ class MatriculaController extends Controller
      */
     public function update(Request $request, Matricula $matricula)
     {
-
-
         $matricula->update(["estado_id"=>$request['estado_id']]);
+        if($request['estado_id']==3){
+            $matricula->userinstitucional->user->assignRole('matriculado');
+        }
+
 
         return redirect()->route('matriculas.index')
             ->with('success', 'Matricula updated successfully');
@@ -168,7 +170,24 @@ class MatriculaController extends Controller
      */
     public function destroy($id)
     {
-        $matricula = Matricula::find($id)->delete();
+
+
+        $matricula = Matricula::find($id)->matricula;
+        $record = Matricula::find($id)->record;
+
+        if (!is_null($matricula->path)) {
+            $this->deleteFile($matricula->path);
+        }
+
+
+        if (!is_null($record->path)) {
+            $this->deleteFile($record->path);
+        }
+
+
+        $matri = Matricula::find($id)->delete();
+        $matricula->delete();
+        $record->delete();
 
         return redirect()->route('matriculas.index')
             ->with('success', 'Matricula deleted successfully');

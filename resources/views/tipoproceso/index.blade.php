@@ -37,6 +37,7 @@
                                         <th>No</th>
                                         
 										<th>Name</th>
+										<th>Descripcion</th>
 
                                         <th></th>
                                     </tr>
@@ -47,6 +48,7 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $tipoproceso->name }}</td>
+											<td>{{ $tipoproceso->descripcion }}</td>
 
                                             <td>
                                                 <form action="{{ route('tipoprocesos.destroy',$tipoproceso->id) }}" method="POST">
