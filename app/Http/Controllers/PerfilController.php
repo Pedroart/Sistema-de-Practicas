@@ -76,9 +76,16 @@ class PerfilController extends Controller
     {
         $user = Auth::user();
         $persona = $user->userinstitucional->persona;
-        request()->validate(Persona::$rules);
 
-        $persona->update($request->all());
+        if($persona !== null){
+            request()->validate(Persona::$rules);
+            $persona->update($request->all());
+
+        }else{
+            $persona = Persona::create($request->all());
+            $user->userinstitucional->update(['personas_id'=>$persona->id]);
+        }
+
 
         return redirect()->route('perfil.index')
             ->with('success', 'Persona updated successfully');

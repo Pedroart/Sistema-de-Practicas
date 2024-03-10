@@ -22,7 +22,65 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Empresa extends Model
 {
-    
+    static $showform = [
+        'ruc'=>[
+            'type'=>'text',
+            'name'=>'Numero de RUC',
+            'origen'=>'param',
+            'selector'=>'param',
+            'validador'=>'required|string|size:11',
+            'modo'=>[
+                'view'      => 'all',
+                'create'    => 'estudiante',
+                'edit'      => 'estudiante',
+                'delete'    => 'all',
+
+            ]
+        ],
+        'razon_social'=>[
+            'type'=>'text',
+            'name'=>'Rason Social',
+            'origen'=>'class.this',
+            'selector'=>'class.ruc',
+            'validador'=>'required',
+            'modo'=>[
+                'view'      => 'all',
+                'create'    => 'estudiante',
+                'edit'      => 'estudiante',
+                'delete'    => 'all',
+
+            ]
+        ],
+        'direccion'=>[
+            'type'=>'text',
+            'name'=>'Direccion',
+            'origen'=>'class.this',
+            'selector'=>'class.ruc',
+            'validador'=>'required',
+            'modo'=>[
+                'view'      => 'all',
+                'create'    => 'estudiante',
+                'edit'      => 'estudiante',
+                'delete'    => 'all',
+
+            ]
+        ],
+        'ubidistrito_id'=>[
+            'type'=>'ubidistrito',
+            'name'=>'Origen',
+            'origen'=>'class.this',
+            'selector'=>'class.ruc',
+            'validador'=>'required',
+            'modo'=>[
+                'view'      => 'all',
+                'create'    => 'estudiante',
+                'edit'      => 'estudiante',
+                'delete'    => 'all',
+
+            ]
+        ],
+    ];
+
     static $rules = [
 		'ruc' => 'required',
 		'razon_social' => 'required',
@@ -47,7 +105,7 @@ class Empresa extends Model
     {
         return $this->hasMany('App\Models\Empleado', 'empresa_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -55,6 +113,6 @@ class Empresa extends Model
     {
         return $this->hasOne('App\Models\Ubidistrito', 'id', 'ubidistrito_id');
     }
-    
+
 
 }

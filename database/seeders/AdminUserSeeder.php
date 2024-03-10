@@ -53,5 +53,34 @@ class AdminUserSeeder extends Seeder
 
         $estudiante->assignRole('estudiante');
         $estudiante->assignRole('matriculado');
+
+        $this->crearUsuario('director_facultad', 'director_facultad@admin.com', 'director facultad');
+        $this->crearUsuario('director_academico', 'director_academico@admin.com', 'director academico');
+        $this->crearUsuario('director_escuela', 'director_escuela@admin.com', 'director escuela');
+        $this->crearUsuario('docente', 'docente@admin.com', 'docente');
+        $this->crearUsuario('asistente_docencia', 'asistente@admin.com', 'asistente docencia');
+    }
+
+    protected function crearUsuario($nombre, $email, $rol)
+    {
+        // Generar un código aleatorio de 10 dígitos
+        $codigoAleatorio = str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT);
+
+        // Crear el usuario
+        $usuario = User::create([
+            'name' => $nombre,
+            'email' => $email,
+            'password' => bcrypt('87654321'), // Recuerda cambiar esto por una contraseña segura
+        ]);
+
+        // Crear el usuario institucional con el código aleatorio
+        $usuarioInstitucional = Userinstitucional::create([
+            'codigo' => $codigoAleatorio,
+            'user_id' => $usuario->id,
+            'escuela_id' => 1, // ID de la escuela
+        ]);
+
+        // Asignar el rol al usuario
+        $usuario->assignRole($rol);
     }
 }

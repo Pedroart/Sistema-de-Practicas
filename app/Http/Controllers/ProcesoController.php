@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Proceso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 use App\Models\Semestre;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
@@ -13,22 +16,23 @@ use App\Models\Tipoproceso;
  */
 class ProcesoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index_estudiante(){
-        $proceso = Proceso::where('estudiante_id', 1)->first();
-        return view('proceso.estudiante.index',compact('proceso'));
-    }
-
     public function index()
     {
-        $procesos = Proceso::paginate();
+        $semestre = Semestre::orderBy('id', 'desc')->first();
+        $user = auth()->user();
+        if ($user->hasRole('administrador')){
+            $procesos = Proceso::all();
+        }
+        elseif ($user->hasRole('docente') || $user->hasRole('asistente docencia')){
+            $procesos = Proceso::where('semestre_id', $semestre->id)
+            ->whereHas('estudiante', function ($query) use ($user) {
+                $query->where('escuela_id', $user->Userinstitucional->escuela_id);
+            })
+            ->get();
+        }
 
-        return view('proceso.index', compact('procesos'))
-            ->with('i', (request()->input('page', 1) - 1) * $procesos->perPage());
+
+        return view('proceso.index', compact('procesos'));
     }
 
     /**

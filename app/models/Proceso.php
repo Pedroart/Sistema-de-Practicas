@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Proceso
  *
  * @property $id
- * @property $profesor_id
+ * @property $docente_id
  * @property $estudiante_id
  * @property $semestre_id
  * @property $estado_id
@@ -29,10 +29,10 @@ class Proceso extends Model
 {
 
     static $rules = [
-		'profesor_id' => 'required',
 		'estudiante_id' => 'required',
 		'semestre_id' => 'required',
 		'estado_id' => 'required',
+        'tipoproceso_id'=> 'required',
     ];
 
     protected $perPage = 20;
@@ -42,7 +42,7 @@ class Proceso extends Model
      *
      * @var array
      */
-    protected $fillable = ['profesor_id','estudiante_id','semestre_id','estado_id','tipoproceso_id'];
+    protected $fillable = ['docente_id','estudiante_id','semestre_id','estado_id','tipoproceso_id'];
 
 
     /**
@@ -80,9 +80,9 @@ class Proceso extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function profesor()
+    public function docente()
     {
-        return $this->hasOne('App\Models\Userinstitucional', 'id', 'profesor_id');
+        return $this->hasOne('App\Models\Userinstitucional', 'id', 'docente_id');
     }
 
     /**

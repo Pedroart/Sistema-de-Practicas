@@ -1,24 +1,70 @@
 <?php
 
-namespace App\Http\Controllers\Proceso\Desempeno;
+namespace App\Http\Controllers;
 
 use App\Models\Proceso;
-use App\Http\Controllers\Controller;
+use App\Models\Matricula;
 use Illuminate\Http\Request;
 use App\Models\Semestre;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 /**
  * Class ProcesoController
  * @package App\Http\Controllers
  */
-class DesempenoController extends Controller
+class ProcesoEstudianteController extends Controller
 {
     protected $procesoNoExistente;
-
+    protected $user_id;
+    protected $estudiante_id;
+    protected $semestre;
+    protected $procesos;
     public function __construct()
     {
-        $procesoNoExistente = true;
+        $this->semestre = Semestre::orderBy('id', 'desc')->first();
+        $this->middleware(function ($request, $next) {
+            $this->user_id = Auth::user();
+            $this->estudiante_id = $this->user_id->userinstitucional->id;
+            $this->procesos = Proceso::where([  ['estudiante_id', $this->estudiante_id],
+                                            ['semestre_id',$this->semestre->id]
+                                            ])->get();
+            return $next($request);
+        });
+    }
+    public function procesar(Request $request, $nombre, $etapa = null, $metodo = null)
+    {
+        $proceso = Tipoproceso::where('name', $nombre)->firstOrFail();
+        // Procesar la URL según los parámetros recibidos
+        if (!is_null($etapa) && !is_null($metodo)) {
+            // Si se proporcionan todos los parámetros
+            return "Procesando proceso '$nombre' en la etapa '$etapa' con el método '$metodo'";
+        } elseif (!is_null($etapa)) {
+            // Si se proporciona solo el nombre y la etapa
+            return "Procesando proceso '$nombre' en la etapa '$etapa'";
+        } else {
+            // Si solo se proporciona el nombre
+            $procesosFiltrados = $this->procesos;
+            $procesosFiltrados = $procesosFiltrados->filter(function ($subproceso) use ($proceso) {
+                return $subproceso->tipoproceso_id === $proceso->id;
+            });
+            if($procesosFiltrados->isEmpty()){
+                return $this->create_proceso($proceso->id);
+            }
+            return $this->index_proceos($procesosFiltrados->first()->id);
+        }
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_proceos($id_proceso)
+    {
+        $proceso = Proceso::where('id', $id_proceso)->first();
+        return view('proceso.estudiante.index',compact('proceso'));
     }
 
     /**
@@ -28,12 +74,32 @@ class DesempenoController extends Controller
      */
     public function index()
     {
+        return redirect()->route('dashboard');
         if($this->procesoNoExistente){
             return redirect()->route('desempeno.create');
         }
-
+        $estudiante = $this->procesos;
         $proceso = Proceso::where('estudiante_id', 1)->first();
-        return view('proceso.estudiante.index',compact('proceso'));
+        return view('proceso.estudiante.index',compact('proceso','estudiante'));
+    }
+
+    public function create_proceso($id_proceso)
+    {
+        $user = auth()->user();
+
+        $proceso = new Proceso();
+        $proceso->estudiante_id = $user->userinstitucional->id;
+
+        $semestre = Semestre::orderByDesc('id')->pluck('name', 'id');
+        $proceso->semestre_id = $semestre->keys()->first();
+
+        $estados = Estado::all()->pluck('name', 'id');
+        $proceso->estado_id = 1;
+
+        $tipoprocesos = Tipoproceso::all()->pluck('name', 'id');
+        $proceso->tipoproceso_id = $id_proceso;
+
+        return view('proceso.estudiante.create', compact('proceso','semestre','estados','tipoprocesos'));
     }
 
     /**
@@ -72,7 +138,7 @@ class DesempenoController extends Controller
 
         $proceso = Proceso::create($request->all());
 
-        return redirect()->route('procesos.index')
+        return back()
             ->with('success', 'Proceso created successfully.');
     }
 

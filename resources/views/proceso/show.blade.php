@@ -19,10 +19,10 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
-                            <strong>Profesor Id:</strong>
-                            {{ $proceso->profesor_id }}
+                            <strong>docente Id:</strong>
+                            {{ $proceso->docente_id }}
                         </div>
                         <div class="form-group">
                             <strong>Estudiante Id:</strong>

@@ -1,10 +1,10 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
-            {{ Form::label('profesor_id') }}
-            {{ Form::text('profesor_id', $proceso->profesor_id, ['class' => 'form-control' . ($errors->has('profesor_id') ? ' is-invalid' : ''), 'placeholder' => 'Profesor Id']) }}
-            {!! $errors->first('profesor_id', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('docente_id') }}
+            {{ Form::text('docente_id', $proceso->docente_id, ['class' => 'form-control' . ($errors->has('docente_id') ? ' is-invalid' : ''), 'placeholder' => 'docente Id']) }}
+            {!! $errors->first('docente_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('estudiante_id') }}

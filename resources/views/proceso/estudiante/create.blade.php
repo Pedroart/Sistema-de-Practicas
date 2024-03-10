@@ -16,7 +16,7 @@
                         <span class="card-title">{{ __('Create') }} Proceso</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('procesos.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('proceso_.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
                             @include('proceso.estudiante.create_form')

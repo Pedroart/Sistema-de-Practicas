@@ -17,6 +17,7 @@ class ProcesoSeeder extends Seeder
     public function run()
     {
         $Desempeno = Proceso::create([
+            'docente_id'=>5,
             'estudiante_id'=>1,
             'semestre_id'=>1,
             'estado_id'=>1,

@@ -2,7 +2,7 @@
     <div class="box-body">
         <div class="form-group">
             {{ Form::label('estudiante_id') }}
-            {{ Form::text('estudiante_id',  $proceso->estudiante->codigo, ['class' => 'form-control' . ($errors->has('estudiante_id') ? ' is-invalid' : ''), 'placeholder' => 'Estudiante Id','readonly'=>'readonly']) }}
+            {{ Form::select('estudiante_id', [strval($proceso->estudiante->id)=>strval($proceso->estudiante->codigo)], $proceso->estudiante->id, ['class' => 'form-control' . ($errors->has('estudiante_id') ? ' is-invalid' : ''), 'placeholder' => 'Estudiante Id','readonly'=>'readonly']) }}
             {!! $errors->first('estudiante_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

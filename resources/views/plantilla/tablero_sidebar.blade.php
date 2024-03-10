@@ -31,19 +31,20 @@
             <x-nav-dropdown :permiso="'matricula.view'" :title="'Matricula'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('matriculas.index') , 'text' => 'Registro'],
             ]" />
-            <x-nav-dropdown :permiso="'matricula.view'" :title="'Procesos'" :icon="'fas fa-book'" :links="[
-                ['url' =>  route('matriculas.index') , 'text' => 'Desempeno'],
-                ['url' =>  route('matriculas.index') , 'text' => 'Efectivas'],
-                ['url' =>  route('matriculas.index') , 'text' => 'Emprendimiento'],
-                ['url' =>  route('matriculas.index') , 'text' => 'Convalidacion'],
+            <x-nav-dropdown :permiso="'procesos.view'" :title="'Procesos'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('procesos.index') , 'text' => 'Listado'],
+                ['url' =>  route('procesos.index') , 'text' => 'Desempeno'],
+                ['url' =>  route('procesos.index') , 'text' => 'Efectivas'],
+                ['url' =>  route('procesos.index') , 'text' => 'Emprendimiento'],
+                ['url' =>  route('procesos.index') , 'text' => 'Convalidacion'],
             ]" />
-            <x-nav-dropdown :permiso="'matricula.view'" :title="'Procesos Regulares'" :icon="'fas fa-book'" :links="[
-                ['url' =>  route('matriculas.index') , 'text' => 'Desempeno'],
-                ['url' =>  route('matriculas.index') , 'text' => 'Efectivas'],
+            <x-nav-dropdown :permiso="'proceso.view'" :title="'Procesos Regulares'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('proceso.index',['nombre'=>'desempeno']) , 'text' => 'Desempeno'],
+                ['url' =>  route('proceso.index',['nombre'=>'efectivas']) , 'text' => 'Efectivas'],
             ]" />
-            <x-nav-dropdown :permiso="'matricula.view'" :title="'Procesos Registro'" :icon="'fas fa-book'" :links="[
-                ['url' =>  route('matriculas.index') , 'text' => 'Emprendimiento'],
-                ['url' =>  route('matriculas.index') , 'text' => 'Convalidacion'],
+            <x-nav-dropdown :permiso="'proceso.view'" :title="'Procesos Registro'" :icon="'fas fa-book'" :links="[
+                ['url' =>  route('proceso.index',['nombre'=>'emprendimiento']) , 'text' => 'Emprendimiento'],
+                ['url' =>  route('proceso.index',['nombre'=>'convalidacion']) , 'text' => 'Convalidacion'],
             ]" />
             <!-- Add icons to the links using the .nav-icon class
    with font-awesome or any other icon font library
