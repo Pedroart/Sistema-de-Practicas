@@ -6,10 +6,11 @@ use App\Models\Proceso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use App\Http\Controllers\Api\UbieduController;
 use App\Models\Semestre;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
+
 /**
  * Class ProcesoController
  * @package App\Http\Controllers
@@ -23,13 +24,24 @@ class ProcesoController extends Controller
         if ($user->hasRole('administrador')){
             $procesos = Proceso::all();
         }
-        elseif ($user->hasRole('docente') || $user->hasRole('asistente docencia')){
+        elseif ($user->hasRole('docente') || $user->hasRole('asistente docencia') || $user->hasRole('director escuela') ){
             $procesos = Proceso::where('semestre_id', $semestre->id)
             ->whereHas('estudiante', function ($query) use ($user) {
                 $query->where('escuela_id', $user->Userinstitucional->escuela_id);
             })
             ->get();
         }
+        elseif ($user->hasRole('director facultad')){
+
+        }
+        elseif ($user->hasRole('director academico')){
+
+        }
+        elseif ($user->hasRole('director escuela')){
+
+        }
+
+
 
 
         return view('proceso.index', compact('procesos'));
@@ -93,8 +105,15 @@ class ProcesoController extends Controller
     public function edit($id)
     {
         $proceso = Proceso::find($id);
-
-        return view('proceso.edit', compact('proceso'));
+        $listadodocentes= User::getUsersWithRole('docente');
+        $docentes = $listadodocentes->map(function($user){
+            return [
+                'id'=>$user->userinstitucional->id,
+                'name'=>$user->userinstitucional->codigo.' | '.$user->name,
+            ];
+        })->pluck('name', 'id');
+        $estudiante = Userinstitucional::where('id',$proceso->estudiante_id);
+        return view('proceso.edit', compact('proceso','docentes'));
     }
 
     /**

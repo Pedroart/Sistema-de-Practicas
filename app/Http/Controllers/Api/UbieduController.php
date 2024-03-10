@@ -33,6 +33,13 @@ class UbieduController extends Controller
         return $formattedData;
     }
 
+    public function comparacion($grado,$id1,$id2){
+        $data1 = $this->consolidado($id1);
+        $data2 = $this->consolidado($id1);
+
+        return ($data1['grado']['id'] == $data2['grado']['id'])? true:false;
+    }
+
     /**
      * Display a listing of the resource.
      *

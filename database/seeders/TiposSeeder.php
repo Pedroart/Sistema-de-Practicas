@@ -17,7 +17,7 @@ class TiposSeeder extends Seeder
      */
     public function run()
     {
-        $nameEstados = ["Asignado", "Revision", "Finalizado", "Rechazado"];
+        $nameEstados = ["Asignado", "Revision", "Finalizado", "Rechazado","Sin asignar"];
 
         foreach ($nameEstados as $nameEstado) {
             Estado::create(['name' => $nameEstado]);

@@ -94,7 +94,7 @@ class ProcesoEstudianteController extends Controller
         $proceso->semestre_id = $semestre->keys()->first();
 
         $estados = Estado::all()->pluck('name', 'id');
-        $proceso->estado_id = 1;
+        $proceso->estado_id = 5;
 
         $tipoprocesos = Tipoproceso::all()->pluck('name', 'id');
         $proceso->tipoproceso_id = $id_proceso;

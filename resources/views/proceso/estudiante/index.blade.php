@@ -11,7 +11,11 @@
                 <x-card :title='$proceso->tipoproceso->name'>
                     <div class="d-flex justify-content-between align-items-center">
                         <div>{{ $proceso->tipoproceso->descripcion }}</div>
-                        <div>Actualizado: {{ $proceso->updated_at }}</div>
+                        <div>
+                            Profesor: {{$proceso->docente->codigo ?? 'No Asignado'}}
+                            <br>
+                            Actualizado: {{ $proceso->updated_at }}
+                        </div>
                         <div>{{ $proceso->estado->name }}</div>
                     </div>
                 </x-card>
