@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\UbieduController;
 use App\Models\Semestre;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
+use App\Models\Userinstitucional;
 
 /**
  * Class ProcesoController
@@ -112,8 +113,18 @@ class ProcesoController extends Controller
                 'name'=>$user->userinstitucional->codigo.' | '.$user->name,
             ];
         })->pluck('name', 'id');
+        $estudiantes = User::getUsersWithRole('estudiante');
+        $listadoInstitucional = $estudiantes->map(function ($estudiante){
+            return [
+                'id'=>$estudiante->userinstitucional->id,
+                'name'=>$estudiante->userinstitucional->codigo
+            ];
+        })->pluck('name', 'id');
+        $estados = Estado::all()->pluck('name', 'id');
+        $semestre = Semestre::orderByDesc('id')->pluck('name', 'id');
         $estudiante = Userinstitucional::where('id',$proceso->estudiante_id);
-        return view('proceso.edit', compact('proceso','docentes'));
+        $tipoprocesos = Tipoproceso::all()->pluck('name', 'id');
+        return view('proceso.edit', compact('proceso','docentes','estados','semestre','tipoprocesos','listadoInstitucional'));
     }
 
     /**
