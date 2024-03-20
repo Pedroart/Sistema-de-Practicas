@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -32,24 +33,40 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($proceso->etapas as $etapa )
+
+                        @for ($i = 0; $i < count($etapas); $i++)
                             <tr>
                                 <td>
-                                    {{$etapa->tipoetapa->name}}
+                                    {{ $etapas[$i]->tipoetapa->name }}
                                 </td>
                                 <td>
-                                    {{$etapa->estado->name}}
+                                    @if($etapas[$i]->estado_id !== 5)
+                                        {{ $etapas[$i]->estado->name }}
+                                    @endif
                                 </td>
                                 <td>
-                                    {{$etapa->updated_at}}
+
                                 </td>
                                 <td>
-                                    <a href="" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
+                                    @if (($i == 0 && $etapas[$i]->estado_id == 5) || ($i > 0 && $etapas[$i - 1]->estado_id ==3))
+                                        <a href="{{ route('proceso.conf',['nombre'=>$proceso->tipoproceso->name,'etapa'=>$etapas[$i]->tipoetapas_id,'metodo'=>'create']) }}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    @endif
+                                    @if ($etapas[$i]->estado_id == 2 )
+                                        <a href="{{ route('proceso.conf',['nombre'=>$proceso->tipoproceso->name,'etapa'=>$etapas[$i]->tipoetapas_id,'metodo'=>'edit']) }}" class="btn btn-sm btn-success">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                    @endif
+                                    @if ($etapas[$i]->estado_id > 1 && $etapas[$i]->estado_id < 5 )
+                                        <a href="{{ route('proceso.conf',['nombre'=>$proceso->tipoproceso->name,'etapa'=>$etapas[$i]->tipoetapas_id,'metodo'=>'show']) }}" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
-                            @endforeach
+                        @endfor
+
 
 
                         </tbody>

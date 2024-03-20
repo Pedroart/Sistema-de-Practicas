@@ -9,6 +9,9 @@ use App\Models\Semestre;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
 use App\Models\User;
+use App\Models\Tipoetapa;
+use App\Models\Etapa;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 /**
@@ -64,7 +67,29 @@ class ProcesoEstudianteController extends Controller
     public function index_proceos($id_proceso)
     {
         $proceso = Proceso::where('id', $id_proceso)->first();
-        return view('proceso.estudiante.index',compact('proceso'));
+        $tipoetapas = Tipoetapa::where('tipoproceso_id',$proceso->tipoproceso_id)->get();
+        $etapas = [];
+        $etapabase = new Etapa();
+        $etapabase->id = 99;
+        $etapabase->proceso_id = $proceso->id;
+        $etapabase->estado_id = 5;
+        $proceoetapas = $proceso->etapas;
+        foreach($tipoetapas as $etapa){
+
+            $etapa_con_tipoetapa = $proceoetapas->whereIn('tipoetapas_id', $etapa->id)->first();
+            if($etapa_con_tipoetapa){
+                $etapas[] = $etapa_con_tipoetapa ;
+            }
+            else{
+                $newEtapa = $etapabase->replicate();
+                $newEtapa->tipoetapas_id = $etapa->id;
+                $etapas[] = $newEtapa;
+            }
+
+        }
+
+
+        return view('proceso.estudiante.index',compact('proceso','tipoetapas','etapas'));
     }
 
     /**
