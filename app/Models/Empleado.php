@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Empleado extends Model
 {
-    
+
     static $rules = [
 		'name' => 'required',
 		'apellido_paterno' => 'required',
@@ -51,6 +51,6 @@ class Empleado extends Model
     {
         return $this->hasOne('App\Models\Empresa', 'id', 'empresa_id');
     }
-    
+
 
 }

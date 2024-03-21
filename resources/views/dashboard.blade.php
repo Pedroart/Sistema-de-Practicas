@@ -4,7 +4,7 @@
 
 @section('content')
 <x-card>
-    <x-ClassFormComponent :clase="App\models\empresa::class" :modo="'edit'" />
+    <x-ClassFormComponent :tipoproceso="'2'" :global="['proceso'=>'1']" />
 </x-card>
 
 @endsection

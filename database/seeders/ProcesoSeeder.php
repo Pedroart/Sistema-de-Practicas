@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Proceso;
 use App\Models\Etapa;
 
+
 class ProcesoSeeder extends Seeder
 {
     /**
@@ -27,7 +28,7 @@ class ProcesoSeeder extends Seeder
         $etapas = Etapa::create([
             'proceso_id'=>$Desempeno->id,
             'tipoetapas_id'=>1,
-            'estado_id'=>1,
+            'estado_id'=>3,
         ]);
     }
 }

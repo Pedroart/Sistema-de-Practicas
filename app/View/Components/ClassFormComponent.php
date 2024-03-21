@@ -4,7 +4,9 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 use App\Models\User;
+use App\Models\Modelador;
 
 class ClassFormComponent extends Component
 {
@@ -14,16 +16,34 @@ class ClassFormComponent extends Component
      * @return void
      */
 
-    public $clase;
-    public $propiedades;
-    public $modo; // crear ver editar($role) borrar
-    public $role;
-    public function __construct($clase,$modo)
+    public $modelos;
+    public $retorno;
+    public function __construct($tipoproceso,$global)
     {
-        $this->modo = $modo;
-        $this->clase = $clase;
-        $this->propiedades = $clase::$showform;
-        $this->role = (auth()->user()->hasRole('estudiante')) ? 'estudiante': 'docente';
+        $modelos = [];
+        $modelosRaw = Modelador::where('tipoproceso_id',$tipoproceso)->get();
+        foreach($modelosRaw as $modelo){
+            $data = json_decode($modelo->json_data);
+            //array_keys(get_object_vars($data->origen))[0];
+            $origen = $data->origen;
+
+            $busqueda = array_map(function($item) use ($global,$modelos){
+                $atributo = array_keys(get_object_vars($item))[0];
+                switch ($atributo) {
+                    case 'global':
+                        return $global[$item->global];
+                    case 'ref':
+                        return $modelos[$item->ref]->getAttribute($item->atributo);
+                    case 'set':
+                        return $item->set;
+                    default:
+                        return null;
+                }
+            },get_object_vars($origen));
+
+            $modelos[$modelo->indicador] = App::make($modelo->model_type)::firstOrNew($busqueda);
+        }
+        $this->modelos = $modelos;
     }
 
     /**
@@ -33,13 +53,7 @@ class ClassFormComponent extends Component
      */
     public function render()
     {
-        return view('components.class-form-component',
-            [
-                'clase'=> $this->clase,
-                'propiedades'=>$this->propiedades,
-                'modo'=>$this->modo,
-                'role'=>$this->role,
-            ]
-        );
+        $datos = get_object_vars($this);
+        return view('components.class-form-component', $datos);
     }
 }

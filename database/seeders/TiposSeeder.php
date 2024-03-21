@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
 use App\Models\Tipoetapa;
+use App\Models\Modelador;
 
 class TiposSeeder extends Seeder
 {
@@ -58,5 +59,39 @@ class TiposSeeder extends Seeder
                 'tipoproceso_id' => 2
             ]);
         }
+
+        Modelador::create([
+            'indicador' => 1,
+            'tipoproceso_id' => 2,
+            'model_type' => 'App\Models\Proceso',
+            'json_data' => json_encode([
+                'origen' => [
+                    'id'=>['global'=>'proceso']
+                    ],
+                'item' => []
+            ],JSON_FORCE_OBJECT)
+        ]);
+        Modelador::create([
+            'indicador' => 2,
+            'tipoproceso_id' => 2,
+            'model_type' => 'App\Models\Semestre',
+            'json_data' => json_encode([
+                'origen' => [
+                    'id' => ['ref'=>'1','atributo'=>'semestre_id']
+                    ],
+                'item' => []
+            ],JSON_FORCE_OBJECT)
+        ]);
+        Modelador::create([
+            'indicador' => 3,
+            'tipoproceso_id' => 2,
+            'model_type' => 'App\Models\Semestre',
+            'json_data' => json_encode([
+                'origen' => [
+                    'id' => ['set'=>'1']
+                    ],
+                'item' => []
+            ],JSON_FORCE_OBJECT)
+        ]);
     }
 }
