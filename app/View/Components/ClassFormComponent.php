@@ -17,9 +17,12 @@ class ClassFormComponent extends Component
      */
 
     public $modelos;
+    public $items;
     public $retorno;
-    public function __construct($tipoproceso,$global)
+    public $modo;
+    public function __construct($modo,$tipoproceso,$global)
     {
+        $this->modo = $modo;
         $modelos = [];
         $modelosRaw = Modelador::where('tipoproceso_id',$tipoproceso)->get();
         foreach($modelosRaw as $modelo){
@@ -42,6 +45,12 @@ class ClassFormComponent extends Component
             },get_object_vars($origen));
 
             $modelos[$modelo->indicador] = App::make($modelo->model_type)::firstOrNew($busqueda);
+
+            foreach($data->item as $clave => $valor){
+                $valor->value = $modelos[$modelo->indicador]->getAttribute($clave);
+                $this->items[$valor->grupo][$modelo->indicador.'.'.$clave] = $valor;
+            }
+
         }
         $this->modelos = $modelos;
     }
