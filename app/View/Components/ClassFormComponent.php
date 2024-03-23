@@ -16,43 +16,44 @@ class ClassFormComponent extends Component
      * @return void
      */
 
-    public $modelos;
-    public $items;
-    public $retorno;
     public $modo;
+    public $items;
+    public $callback;
+
     public function __construct($modo,$tipoproceso,$global)
     {
         $this->modo = $modo;
+        $modeladorRaw = Modelador::where('tipoproceso_id',$tipoproceso)->first();
         $modelos = [];
-        $modelosRaw = Modelador::where('tipoproceso_id',$tipoproceso)->get();
-        foreach($modelosRaw as $modelo){
-            $data = json_decode($modelo->json_data);
-            //array_keys(get_object_vars($data->origen))[0];
-            $origen = $data->origen;
 
-            $busqueda = array_map(function($item) use ($global,$modelos){
-                $atributo = array_keys(get_object_vars($item))[0];
+        foreach(json_decode($modeladorRaw->modelo,true) as $modelador){
+
+            $paramb1 = array_map(function($item) use ($modelos,$global){
+                $atributo = array_keys($item)[0];
+
                 switch ($atributo) {
-                    case 'global':
-                        return $global[$item->global];
-                    case 'ref':
-                        return $modelos[$item->ref]->getAttribute($item->atributo);
-                    case 'set':
-                        return $item->set;
-                    default:
-                        return null;
+                case 'global':
+                    return $global[$item->global];
+                case 'ref':
+                    return $modelos[$item->ref]->getAttribute($item->atributo);
+                case 'set':
+                    return $item->set;
+                default:
+                    return null;
                 }
-            },get_object_vars($origen));
-
-            $modelos[$modelo->indicador] = App::make($modelo->model_type)::firstOrNew($busqueda);
-
-            foreach($data->item as $clave => $valor){
-                $valor->value = $modelos[$modelo->indicador]->getAttribute($clave);
-                $this->items[$valor->grupo][$modelo->indicador.'.'.$clave] = $valor;
-            }
+            },
+            $modelador['atributo_busqueda']);
+            $modelos[$modelador['etiqueta_modelo']] = App::make($modelador['modelo_tipo'])::firstOrNew($paramb1);
 
         }
-        $this->modelos = $modelos;
+        foreach(collect(json_decode($modeladorRaw->item))->groupBy('grupo') as $grupo){
+            foreach($grupo as $item){
+                $item->valor = $modelos[$item->etiqueta_modelo]->getAttribute($item->atributo);
+            }
+            $this->items[$grupo->first()->grupo] = $grupo;
+
+        }
+
     }
 
     /**

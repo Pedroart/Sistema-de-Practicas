@@ -60,207 +60,364 @@ class TiposSeeder extends Seeder
             ]);
         }
 
-        Modelador::create([
-            'indicador' => 1,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\Proceso',
-            'json_data' => json_encode([
-                'origen' => [
-                    'id'=>['global'=>'proceso']
+        $modelo2 = [
+            [
+                "etiqueta_modelo"=> "proceso",
+                "modelo_tipo"=> "App\Models\Proceso",
+                "atributo_busqueda"=> [
+                    "id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "proceso",
+                        "atributo_ref"=> "",
                     ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.view',
-                            'docente.view'
-                        ]
+                ],
+            ],
+            [
+                "etiqueta_modelo"=> "institucional",
+                "modelo_tipo"=> "App\Models\Userinstitucional",
+                "atributo_busqueda"=> [
+                    "id"=>[
+                        "metodo"=> "ref",
+                        "valor"=> "proceso",
+                        "atributo_ref"=> "estudiante_id",
                     ]
                 ]
-            ],JSON_FORCE_OBJECT)
-        ]);
-        Modelador::create([
-            'indicador' => 2,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\Userinstitucional',
-            'json_data' => json_encode([
-                'origen' => [
-                    'id' => ['ref'=>'1','atributo'=>'estudiante_id']
-                    ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.view',
-                            'docente.view'
-                        ]
-                    ],
-                    'codigo'=>[
-                        'grupo' => 'Datos del Estudiante',
-                        'display' => 'codigo',
-                        'type' => 'text',
-                        'permiso' => [
-                            'estudiante.view',
-                            'docente.view'
-                        ]
-                    ],
-                    'escuela_id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'ubiedu',
-                        'permiso' => [
-                            'estudiante.edit',
-                            'estudiante.view',
-                            'docente.edit',
-                            'docente.view'
-                        ]
+            ],
+            [
+                "etiqueta_modelo"=> "persona",
+                "modelo_tipo"=> "App\Models\Persona",
+                "atributo_busqueda"=> [
+                    "id"=>[
+                        "metodo"=> "ref",
+                        "valor"=> "institucional",
+                        "atributo_ref"=> "personas_id",
                     ]
                 ]
-            ],JSON_FORCE_OBJECT)
-        ]);
-        Modelador::create([
-            'indicador' => 3,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\Persona',
-            'json_data' => json_encode([
-                'origen' => [
-                    'id' => ['ref'=>'2','atributo'=>'personas_id']
-                    ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.edit',
-                            'estudiante.view',
-                            'docente.edit',
-                            'docente.view'
-                        ]
+            ],
+            [
+                "etiqueta_modelo"=> "user",
+                "modelo_tipo"=> "App\Models\User",
+                "atributo_busqueda"=> [
+                    "id"=>[
+                        "metodo"=> "ref",
+                        "valor"=> "institucional",
+                        "atributo_ref"=> "user_id",
                     ]
                 ]
-            ],JSON_FORCE_OBJECT)
-        ]);
-        Modelador::create([
-            'indicador' => 4,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\User',
-            'json_data' => json_encode([
-                'origen' => [
-                    'id' => ['ref'=>'2','atributo'=>'user_id']
+            ],
+            [
+                "etiqueta_modelo"=> "model.empresa",
+                "modelo_tipo"=> "App\Models\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=> "ref",
+                        "valor"=> "proceso",
+                        "atributo_ref"=> "id",
                     ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.edit',
-                            'estudiante.view',
-                            'docente.edit',
-                            'docente.view'
-                        ]
+                    "etiqueta"=>[
+                        "metodo"=> "set",
+                        "valor"=> "model.empresa",
+                        "atributo_ref"=> ""
                     ]
                 ]
-            ],JSON_FORCE_OBJECT)
-        ]);
-        Modelador::create([
-            'indicador' => 5,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\Archivo',
-            'json_data' => json_encode([
-                'origen' => [
-                    'proceso_id' => ['ref'=>'1','atributo'=>'id'],
-                    'etiqueta' => ['set'=>'class.empresa']
+
+            ],
+            [
+                "etiqueta_modelo"=> "empresa.presentante",
+                "modelo_tipo"=> "App\Models\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=> "ref",
+                        "valor"=> "proceso",
+                        "atributo_ref"=> "id",
                     ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.edit',
-                            'estudiante.view',
-                            'docente.edit',
-                            'docente.view'
-                        ]
+                    "etiqueta"=>[
+                        "metodo"=> "set",
+                        "valor"=> "empresa.representante",
+                        "atributo_ref"=> ""
                     ]
                 ]
-            ],JSON_FORCE_OBJECT)
-        ]);
-        Modelador::create([
-            'indicador' => 6,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\Empresa',
-            'json_data' => json_encode([
-                'origen' => [
-                    'id' => ['ref'=>'5','atributo'=>'id_model'],
-                    ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.edit',
-                            'estudiante.view',
-                            'docente.edit',
-                            'docente.view'
-                        ]
+            ],
+            [
+                "etiqueta_modelo"=> "empresa",
+                "modelo_tipo"=> "App\Models\Empresa",
+                "atributo_busqueda"=> [
+                    "id"=>[
+                        "metodo"=> "ref",
+                        "valor"=> "model.empresa",
+                        "atributo_ref"=> "id_model",
                     ]
                 ]
-            ],JSON_FORCE_OBJECT)
-        ]);
-        Modelador::create([
-            'indicador' => 7,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\Archivo',
-            'json_data' => json_encode([
-                'origen' => [
-                    'proceso_id' => ['ref'=>'1','atributo'=>'id'],
-                    'etiqueta' => ['set'=>'empleado.representante']
-                    ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.edit',
-                            'estudiante.view',
-                            'docente.edit',
-                            'docente.view'
-                        ]
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "modelo_tipo"=> "App\Models\Empleado",
+                "atributo_busqueda"=> [
+                    "id"=>[
+                        "metodo"=> "ref",
+                        "valor"=> "empresa.presentante",
+                        "atributo_ref"=> "id_model",
                     ]
                 ]
-            ],JSON_FORCE_OBJECT)
-        ]);
+            ]
+        ];
+        $items = [
+            [
+                "etiqueta_modelo"=> "proceso",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_proceso",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "institucional",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_institucional",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "persona",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_persona",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "user",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_user",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "model.empresa",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_model.empresa",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa.presentante",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empresa.presentante",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empresa",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empleado",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "persona",
+                "grupo"=> "Estudiante",
+                "atributo"=> "name",
+                "desplegar"=> "Nombre",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "persona",
+                "grupo"=> "Estudiante",
+                "atributo"=> "apellido_paterno",
+                "desplegar"=> "Apellido Paterno",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "persona",
+                "grupo"=> "Estudiante",
+                "atributo"=> "apellido_materno",
+                "desplegar"=> "Apellido Materno",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "persona",
+                "grupo"=> "Estudiante",
+                "atributo"=> "dni",
+                "desplegar"=> "DNI",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "institucional",
+                "grupo"=> "Institucionales",
+                "atributo"=> "codigo",
+                "desplegar"=> "Codigo",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "user",
+                "grupo"=> "Institucionales",
+                "atributo"=> "email",
+                "desplegar"=> "Correo",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "institucional",
+                "grupo"=> "Institucionales",
+                "atributo"=> "escuela_id",
+                "desplegar"=> "escuela",
+                "tipo"=> "ubiedu",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa",
+                "grupo"=> "Empresa",
+                "atributo"=> "ruc",
+                "desplegar"=> "RUC",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empresa",
+                "grupo"=> "Empresa",
+                "atributo"=> "razon_social",
+                "desplegar"=> "Razon Social",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empresa",
+                "grupo"=> "Empresa",
+                "atributo"=> "direccion",
+                "desplegar"=> "Direccion",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empresa",
+                "grupo"=> "Empresa",
+                "atributo"=> "ubidistrito_id",
+                "desplegar"=> "UBI",
+                "tipo"=> "ubigeo",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "grupo"=> "Representante Legal",
+                "atributo"=> "name",
+                "desplegar"=> "Nombre",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "grupo"=> "Representante Legal",
+                "atributo"=> "apellido_paterno",
+                "desplegar"=> "Apellido",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "grupo"=> "Representante Legal",
+                "atributo"=> "apellido_materno",
+                "desplegar"=> "Apellido",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "grupo"=> "Representante Legal",
+                "atributo"=> "cargo",
+                "desplegar"=> "Cargo",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "grupo"=> "Representante Legal",
+                "atributo"=> "genero",
+                "desplegar"=> "Genero",
+                "tipo"=> "selector",
+                "selector"=> "Genero",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "empleado",
+                "grupo"=> "Representante Legal",
+                "atributo"=> "grado_instruccion",
+                "desplegar"=> "Grado de Instrucción",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ]
+            ];
         Modelador::create([
-            'indicador' => 8,
-            'tipoproceso_id' => 2,
-            'model_type' => 'App\Models\Empleado',
-            'json_data' => json_encode([
-                'origen' => [
-                    'id' => ['ref'=>'7','atributo'=>'id_model'],
-                    ],
-                'item' => [
-                    'id'=>[
-                        'grupo' => 'hidden',
-                        'display' => '',
-                        'type' => 'hidden',
-                        'permiso' => [
-                            'estudiante.edit',
-                            'estudiante.view',
-                            'docente.edit',
-                            'docente.view'
-                        ]
-                    ]
-                ]
-            ],JSON_FORCE_OBJECT)
+            "tipoproceso_id"=>2,
+            "modelo"                    =>json_encode($modelo2),
+            "item"                      =>json_encode($items),
+            "dependencia_guardado"      =>"{}",
         ]);
     }
 }

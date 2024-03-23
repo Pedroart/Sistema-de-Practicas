@@ -150,5 +150,15 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'matricula.create'])->syncRoles([$administrador,$estudiante]);
         Permission::create(['name' => 'matricula.edit'])->syncRoles([$administrador,$director_academico,$director_academico,$director_escuela,$docente,$asistente_docencia]);
         Permission::create(['name' => 'matricula.delete'])->syncRoles([$administrador,$estudiante]);
+
+        Permission::create(['name' => 'estudiante'])->syncRoles([$estudiante]);
+        Permission::create(['name' => 'docente'])->syncRoles([
+            $administrador,
+            $director_academico,
+            $director_academico,
+            $director_escuela,
+            $docente,
+            $asistente_docencia]);
+
     }
 }

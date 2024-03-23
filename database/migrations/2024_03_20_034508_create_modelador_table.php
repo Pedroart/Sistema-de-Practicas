@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('modeladors', function (Blueprint $table) {
             $table->id();
-            $table->integer('indicador');
             $table->foreignId('tipoproceso_id')->nullable()->constrained();
-            $table->string('model_type');
-            $table->json('json_data');
+            $table->json('modelo');
+            $table->json('item');
+            $table->json('dependencia_guardado');
             $table->timestamps();
         });
     }

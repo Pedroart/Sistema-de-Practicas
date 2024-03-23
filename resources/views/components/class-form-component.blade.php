@@ -1,16 +1,33 @@
 
-@json($retorno)
+<div class="row">
+    @foreach ($items as $Grupo => $item)
 
-@foreach ($items as $Grupo => $item)
-    <x-card>
-    @foreach ($item as $atributo => $data)
-        <div class="form-group">
-            @switch($data->type)
-                @case('hidden')
-                    {{ Form::hidden($atributo, $data->value , ['class' => 'form-control' . ($errors->has($atributo) ? ' is-invalid' : ''), 'placeholder' => $data->display]) }}
-                @break
-            @endswitch
-        </div>
+        @if ($Grupo !== 'hidden')
+            <div class="col-sm-6">
+                <x-card title="{{$Grupo}}">
+        @endif
+                    @foreach ($item as $data)
+                    <div class="form-group">
+                        @switch($data->tipo)
+                            @case('hidden')
+                                {{ Form::hidden($data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar]) }}
+                                @break
+                            @case('text')
+                                {{ Form::label($data->desplegar) }}
+                                {{ Form::text($data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar]) }}
+                                @break
+                            @case('ubiedu')
+                                <x-ubieduform id="{{1}}" bloqueado="{{TRUE}}" />
+                                @break
+
+                        @endswitch
+                    </div>
+                    @endforeach
+        @if ($Grupo !== 'hidden')
+                </x-card>
+            </div>
+        @endif
+
     @endforeach
-    </x-card>
-@endforeach
+</div>
+
