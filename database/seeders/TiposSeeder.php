@@ -62,6 +62,17 @@ class TiposSeeder extends Seeder
 
         $modelo2 = [
             [
+                "etiqueta_modelo"=> "etapa",
+                "modelo_tipo"=> "App\Models\Etapa",
+                "atributo_busqueda"=> [
+                    "id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "etapa",
+                        "atributo_ref"=> "",
+                    ],
+                ],
+            ],
+            [
                 "etiqueta_modelo"=> "proceso",
                 "modelo_tipo"=> "App\Models\Proceso",
                 "atributo_busqueda"=> [

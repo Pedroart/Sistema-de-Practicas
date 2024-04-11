@@ -44,6 +44,8 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
 
     Route::get('proceso/{nombre}', [App\Http\Controllers\ProcesoEstudianteController::class,'procesar'])->name('proceso.index');
     Route::get('proceso/{nombre}/{etapa}/{metodo}', [App\Http\Controllers\ProcesoEstudianteController::class,'procesar'])->name('proceso.conf');
+    Route::post('proceso/create',[App\Http\Controllers\EtapaController::class,'store_modular'])->name('proceso.create');
+    Route::post('proceso/edit',[App\Http\Controllers\EtapaController::class,'store_modular'])->name('proceso.edit');
     Route::resource('proceso_', App\Http\Controllers\ProcesoEstudianteController::class);
 });
 

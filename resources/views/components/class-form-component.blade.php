@@ -13,11 +13,11 @@
                         <div class="form-group">
                             @switch($data->tipo)
                                 @case('hidden')
-                                    {{ Form::hidden($data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
+                                    {{ Form::hidden($Grupo.$data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
                                     @break
                                 @case('text')
                                     {{ Form::label($data->desplegar) }}
-                                    {{ Form::text($data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
+                                    {{ Form::text($Grupo.$data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
                                     @break
                                 @case('ubiedu')
                                     <x-ubieduform id="{{$data->valor ?: 1}}" bloqueado="{{$bloqueado}}" />

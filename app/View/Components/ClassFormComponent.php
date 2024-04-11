@@ -32,10 +32,10 @@ class ClassFormComponent extends Component
 
             $paramb1 = array_map(function($item) use ($modelos,$global){
                 $atributo = $item['metodo'];
-                $this->callback = $item['metodo'];
+
                 switch ($atributo) {
                 case 'global':
-
+                    $this->callback = $global;
                     return $global[$item['valor']];
                 case 'ref':
 
@@ -59,7 +59,6 @@ class ClassFormComponent extends Component
 
         }
 
-        $this->bloqueado = false;
 
         switch($modo){
             case 'edit':

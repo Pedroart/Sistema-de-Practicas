@@ -34,7 +34,16 @@ class EtapaController extends Controller
         $etapa = new Etapa();
         return view('etapa.create', compact('etapa'));
     }
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_modular(Request $request)
+    {
+        return response()->json($request->all());
+    }
     /**
      * Store a newly created resource in storage.
      *
