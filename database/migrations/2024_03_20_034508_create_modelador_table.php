@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('modeladors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tipoproceso_id')->nullable()->constrained();
+            $table->foreignId('tipoetapa_id')->nullable()->constrained();
             $table->json('modelo');
             $table->json('item');
             $table->json('dependencia_guardado');

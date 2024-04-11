@@ -414,7 +414,7 @@ class TiposSeeder extends Seeder
             ]
             ];
         Modelador::create([
-            "tipoproceso_id"=>2,
+            "tipoetapa_id"=>1,
             "modelo"                    =>json_encode($modelo2),
             "item"                      =>json_encode($items),
             "dependencia_guardado"      =>"{}",

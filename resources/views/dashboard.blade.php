@@ -3,5 +3,5 @@
 
 
 @section('content')
-<x-ClassFormComponent :modo="'view'" :tipoproceso="'2'" :global="['proceso'=>'1']" />
+<x-ClassFormComponent :modo="'view'" :tipoproceso="'1'" :global="['proceso'=>'1']" />
 @endsection

@@ -37,13 +37,46 @@ class ProcesoEstudianteController extends Controller
             return $next($request);
         });
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ver_metodo($metodo,$proceso,$etapa)
+    {
+        if($metodo !=='create'){
+            $EstudianteProceso=Proceso::where([
+                'tipoproceso_id'=>$proceso->id,
+                'estudiante_id' =>$this->estudiante_id,
+                'semestre_id' => $this->semestre->id,
+            ])->firstOrFail();
+            $Etapas=Etapa::where([
+                'proceso_id' => $EstudianteProceso->id,
+                'tipoetapas_id'=>$etapa
+            ])->firstOrFail();
+        }
+        else{
+            $Etapas=new Etapa;
+            $Etapas->proceso_id = $proceso->id;
+            $Etapas->tipoetapas_id = $etapa;
+        }
+        return view('modo_etapas.estudiante',compact('Etapas','metodo'));
+        //return "Procesando proceso '$EstudianteProceso";
+
+
+    }
+
+
     public function procesar(Request $request, $nombre, $etapa = null, $metodo = null)
     {
         $proceso = Tipoproceso::where('name', $nombre)->firstOrFail();
         // Procesar la URL según los parámetros recibidos
         if (!is_null($etapa) && !is_null($metodo)) {
             // Si se proporcionan todos los parámetros
-            return "Procesando proceso '$nombre' en la etapa '$etapa' con el método '$metodo'";
+            return $this->ver_metodo($metodo,$proceso,$etapa);
+
+
         } elseif (!is_null($etapa)) {
             // Si se proporciona solo el nombre y la etapa
             return "Procesando proceso '$nombre' en la etapa '$etapa'";
@@ -59,6 +92,8 @@ class ProcesoEstudianteController extends Controller
             return $this->index_proceos($procesosFiltrados->first()->id);
         }
     }
+
+
     /**
      * Display a listing of the resource.
      *

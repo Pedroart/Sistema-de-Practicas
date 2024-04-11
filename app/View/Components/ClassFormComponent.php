@@ -19,25 +19,30 @@ class ClassFormComponent extends Component
     public $modo;
     public $items;
     public $callback;
+    public $bloqueado;
 
     public function __construct($modo,$tipoproceso,$global)
     {
         $this->modo = $modo;
-        $modeladorRaw = Modelador::where('tipoproceso_id',$tipoproceso)->first();
+        $modeladorRaw = Modelador::where('tipoetapa_id',$tipoproceso)->first();
         $modelos = [];
+
 
         foreach(json_decode($modeladorRaw->modelo,true) as $modelador){
 
             $paramb1 = array_map(function($item) use ($modelos,$global){
-                $atributo = array_keys($item)[0];
-
+                $atributo = $item['metodo'];
+                $this->callback = $item['metodo'];
                 switch ($atributo) {
                 case 'global':
-                    return $global[$item->global];
+
+                    return $global[$item['valor']];
                 case 'ref':
-                    return $modelos[$item->ref]->getAttribute($item->atributo);
+
+                    return $modelos[$item['valor']]->getAttribute($item['atributo_ref']);
                 case 'set':
-                    return $item->set;
+
+                    return $item['valor'];
                 default:
                     return null;
                 }
@@ -54,6 +59,19 @@ class ClassFormComponent extends Component
 
         }
 
+        $this->bloqueado = false;
+
+        switch($modo){
+            case 'edit':
+                $this->bloqueado = false;
+                break;
+            case 'show':
+                $this->bloqueado = true;
+                break;
+            case 'create':
+                $this->bloqueado = false;
+                break;
+        }
     }
 
     /**
