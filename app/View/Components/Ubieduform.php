@@ -15,12 +15,14 @@ class Ubieduform extends Component
     public $indi_facultad;
     public $indi_departamento;
     public $indi_escuela;
+
+    public $prefijo;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id = null,$bloqueado = FALSE)
+    public function __construct($id = null,$bloqueado = FALSE, $prefijo=NULL)
     {
         $this->lista_facultad=array();
         $this->lista_departamento=array();
@@ -28,6 +30,7 @@ class Ubieduform extends Component
         $this->indi_facultad=null;
         $this->indi_departamento=null;
         $this->indi_escuela=null;
+        $this->prefijo = $prefijo;
 
         $this->bloqueado = $bloqueado;
 

@@ -5,8 +5,11 @@
     <div class="row justify-content-md-center">
         <div class="col-md-8">
             @includeif('partials.errors')
-
-            <form method="POST" action="{{ route('proceso.'.$metodo) }}"  role="form" enctype="multipart/form-data">
+            @if($metodo!=='show')
+            <form method="POST" action="{{ route('proceso.'.$metodo , ['tipoproceso'=>$Etapas->tipoetapas_id]) }}"  role="form" enctype="multipart/form-data">
+            @else
+            <form role="form" enctype="multipart/form-data">
+            @endif
                 @csrf
                 <div class="card card-default">
                     <div class="card-header">

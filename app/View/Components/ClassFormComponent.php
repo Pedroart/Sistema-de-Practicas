@@ -27,7 +27,7 @@ class ClassFormComponent extends Component
         $modeladorRaw = Modelador::where('tipoetapa_id',$tipoproceso)->first();
         $modelos = [];
 
-
+        $params = [];
         foreach(json_decode($modeladorRaw->modelo,true) as $modelador){
 
             $paramb1 = array_map(function($item) use ($modelos,$global){
@@ -35,19 +35,19 @@ class ClassFormComponent extends Component
 
                 switch ($atributo) {
                 case 'global':
-                    $this->callback = $global;
+
                     return $global[$item['valor']];
                 case 'ref':
-
                     return $modelos[$item['valor']]->getAttribute($item['atributo_ref']);
                 case 'set':
-
                     return $item['valor'];
                 default:
                     return null;
                 }
             },
             $modelador['atributo_busqueda']);
+            //$params[] = $paramb1;
+            //$this->callback = $params;
             $modelos[$modelador['etiqueta_modelo']] = App::make($modelador['modelo_tipo'])::firstOrNew($paramb1);
 
         }

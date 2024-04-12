@@ -15,16 +15,16 @@ class UbigeoForm extends Component
     public $indi_departamento;
     public $indi_provincia;
     public $indi_distrito;
-
+    public $prefijo;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id = null,$bloqueado = FALSE)
+    public function __construct($id = null,$bloqueado = FALSE, $prefijo = NULL)
     {
         $this->bloqueado = $bloqueado;
-
+        $this->prefijo = $prefijo;
         $this->lista_departamento=array();
         $this->lista_provincia=array();
         $this->lista_distrito=array();

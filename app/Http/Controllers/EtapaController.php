@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Etapa;
 use Illuminate\Http\Request;
-
+use App\Models\Modelador;
 /**
  * Class EtapaController
  * @package App\Http\Controllers
@@ -40,9 +40,38 @@ class EtapaController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store_modular(Request $request)
+    public function store_modular(Request $request,$tipoproceso)
     {
-        return response()->json($request->all());
+        // $request->file() <- obtener files
+
+        $modeladorRaw = Modelador::where('tipoetapa_id',$tipoproceso)->first();
+        $modelos = json_decode($modeladorRaw->modelo);
+
+        $etiquetas = array_map(function($elemento) {
+            return $elemento['etiqueta_modelo'];
+        }, json_decode($modeladorRaw->modelo,TRUE));
+        $agrupados = [];
+        // Iterar sobre cada elemento del array
+        foreach ($request->all() as $clave => $valor) {
+            if($clave !== '_token'){
+                // Dividir la clave en etiqueta y atributo
+                list($etiqueta, $atributo) = explode('#', $clave);
+
+                // Verificar si la etiqueta está presente en la lista de etiquetas
+                if (in_array($etiqueta, $etiquetas)) {
+                    // Verificar si la etiqueta ya está presente en el array agrupado
+                    if (!isset($agrupados[$etiqueta])) {
+                        $agrupados[$etiqueta] = [];
+                    }
+
+                    // Agregar el elemento al array agrupado
+                    $agrupados[$etiqueta][$atributo] = $valor;
+                }
+            }
+
+        }
+
+        return response()->json($agrupados);
     }
     /**
      * Store a newly created resource in storage.
