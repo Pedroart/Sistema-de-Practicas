@@ -19,6 +19,10 @@
                                     {{ Form::label($data->desplegar) }}
                                     {{ Form::text($data->etiqueta_modelo.'#'.$data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
                                     @break
+                                @case('selector')
+                                    {{ Form::label($data->desplegar) }}
+                                    {{ Form::select($data->etiqueta_modelo.'#'.$data->atributo,[], $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
+                                    @break
                                 @case('ubiedu')
                                     <x-ubieduform id="{{$data->valor ?: 1}}" bloqueado="{{$bloqueado}}" prefijo="{{$data->etiqueta_modelo.'#'}}"/>
                                     @break
