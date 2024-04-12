@@ -54,7 +54,9 @@ class ClassFormComponent extends Component
         foreach(collect(json_decode($modeladorRaw->item))->groupBy('grupo') as $grupo){
             foreach($grupo as $item){
                 $item->valor = $modelos[$item->etiqueta_modelo]->getAttribute($item->atributo);
-                if($item->tipo === 'selector'){}
+                if($item->tipo === 'selector'){
+                    $item->list = App::make($item->selector)::all()->pluck('name', 'id');
+                }
             }
             $this->items[$grupo->first()->grupo] = $grupo;
         }

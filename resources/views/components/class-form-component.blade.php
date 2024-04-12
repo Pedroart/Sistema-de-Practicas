@@ -16,12 +16,12 @@
                                     {{ Form::hidden( $data->etiqueta_modelo . '#'.$data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar]) }}
                                     @break
                                 @case('text')
-                                    {{ Form::label($data->desplegar) }}
+                                    {{ Form::label($data->desplegar,"$data->desplegar") }}
                                     {{ Form::text($data->etiqueta_modelo.'#'.$data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
                                     @break
                                 @case('selector')
                                     {{ Form::label($data->desplegar) }}
-                                    {{ Form::select($data->etiqueta_modelo.'#'.$data->atributo,[], $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
+                                    {{ Form::select($data->etiqueta_modelo.'#'.$data->atributo,$data->list, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
                                     @break
                                 @case('ubiedu')
                                     <x-ubieduform id="{{$data->valor ?: 1}}" bloqueado="{{$bloqueado}}" prefijo="{{$data->etiqueta_modelo.'#'}}"/>
@@ -56,4 +56,4 @@
     @endforeach
 </div>
 
-{{ Form::file('proceso#image') }}
+{{-- Form::file('proceso#image') --}}

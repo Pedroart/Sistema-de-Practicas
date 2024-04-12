@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
 use App\Models\Tipoetapa;
+use App\Models\Genero;
 use App\Models\Modelador;
 
 class TiposSeeder extends Seeder
@@ -19,6 +20,9 @@ class TiposSeeder extends Seeder
     public function run()
     {
         $nameEstados = ["Asignado", "Revision", "Finalizado", "Rechazado","Sin asignar"];
+
+        Genero::create(['name' => 'Masculino']);
+        Genero::create(['name' => 'Femenino']);
 
         foreach ($nameEstados as $nameEstado) {
             Estado::create(['name' => $nameEstado]);
@@ -377,7 +381,7 @@ class TiposSeeder extends Seeder
                 "etiqueta_modelo"=> "empleado",
                 "grupo"=> "Representante Legal",
                 "atributo"=> "apellido_paterno",
-                "desplegar"=> "Apellido",
+                "desplegar"=> "Apellido Paterno",
                 "tipo"=> "text",
                 "selector"=> "",
                 "permiso_ver"=> "estudiante,docente",
@@ -387,7 +391,7 @@ class TiposSeeder extends Seeder
                 "etiqueta_modelo"=> "empleado",
                 "grupo"=> "Representante Legal",
                 "atributo"=> "apellido_materno",
-                "desplegar"=> "Apellido",
+                "desplegar"=> "Apellido Materno",
                 "tipo"=> "text",
                 "selector"=> "",
                 "permiso_ver"=> "estudiante,docente",
@@ -409,7 +413,7 @@ class TiposSeeder extends Seeder
                 "atributo"=> "genero",
                 "desplegar"=> "Genero",
                 "tipo"=> "selector",
-                "selector"=> "Genero",
+                "selector"=> "App\Models\Genero",
                 "permiso_ver"=> "estudiante,docente",
                 "permiso_editar"=> "estudiante"
             ],
