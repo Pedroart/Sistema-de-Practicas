@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Etapa;
 use Illuminate\Http\Request;
 use App\Models\Modelador;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\App;
 /**
  * Class EtapaController
  * @package App\Http\Controllers
@@ -48,7 +50,7 @@ class EtapaController extends Controller
         $modelos = json_decode($modeladorRaw->modelo);
 
         $etiquetas = array_map(function($elemento) {
-            return $elemento['etiqueta_modelo'];
+            return str_replace('.', '_', $elemento['etiqueta_modelo']);
         }, json_decode($modeladorRaw->modelo,TRUE));
         $agrupados = [];
         // Iterar sobre cada elemento del array
@@ -65,13 +67,46 @@ class EtapaController extends Controller
                     }
 
                     // Agregar el elemento al array agrupado
-                    $agrupados[$etiqueta][$atributo] = $valor;
+                    if(!$request->hasFile($clave)){
+                        $agrupados[$etiqueta][$atributo] = $valor;
+                    }else{
+
+                    }
+
                 }
             }
 
         }
+        /* Observar posibilidad
+        foreach ($request->file() as $clave => $valor) {
+            list($etiqueta, $atributo) = explode('#', $clave);
+            // Verificar si la etiqueta está presente en la lista de etiquetas
+            if (in_array($etiqueta, $etiquetas)) {
+                // Verificar si la etiqueta ya está presente en el array agrupado
+                if (!isset($agrupados[$etiqueta])) {
+                    $agrupados[$etiqueta] = [];
+                }
 
-        return response()->json($agrupados);
+                $agrupados[$etiqueta][$atributo] = $request->file($clave);
+
+            }
+
+        }*/
+
+        // Etapa de procesado
+
+        // Invierte el orden de los elementos en la lista
+        $Dependencias = array_reverse($modelos);
+
+        // Itera sobre la lista invertida
+        foreach ($Dependencias as $clave => $Models) {
+            $etiquetaModel = $Models->etiqueta_modelo;
+            $atributo = $agrupados[$etiquetaModel];
+            $id=App::make($Models->modelo_tipo)::create($atributo);
+            return response()->json($id);
+        }
+
+        return response()->json($Dependencias);
     }
     /**
      * Store a newly created resource in storage.

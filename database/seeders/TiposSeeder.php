@@ -12,7 +12,7 @@ use App\Models\Modelador;
 class TiposSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeds_
      *
      * @return void
      */
@@ -117,7 +117,7 @@ class TiposSeeder extends Seeder
                 ]
             ],
             [
-                "etiqueta_modelo"=> "model.empresa",
+                "etiqueta_modelo"=> "model_empresa",
                 "modelo_tipo"=> "App\Models\Archivo",
                 "atributo_busqueda"=>[
                     "proceso_id"=>[
@@ -127,14 +127,14 @@ class TiposSeeder extends Seeder
                     ],
                     "etiqueta"=>[
                         "metodo"=> "set",
-                        "valor"=> "model.empresa",
+                        "valor"=> "model_empresa",
                         "atributo_ref"=> ""
                     ]
                 ]
 
             ],
             [
-                "etiqueta_modelo"=> "empresa.presentante",
+                "etiqueta_modelo"=> "empresa_presentante",
                 "modelo_tipo"=> "App\Models\Archivo",
                 "atributo_busqueda"=>[
                     "proceso_id"=>[
@@ -144,7 +144,7 @@ class TiposSeeder extends Seeder
                     ],
                     "etiqueta"=>[
                         "metodo"=> "set",
-                        "valor"=> "empresa.representante",
+                        "valor"=> "empresa_representante",
                         "atributo_ref"=> ""
                     ]
                 ]
@@ -155,7 +155,7 @@ class TiposSeeder extends Seeder
                 "atributo_busqueda"=> [
                     "id"=>[
                         "metodo"=> "ref",
-                        "valor"=> "model.empresa",
+                        "valor"=> "model_empresa",
                         "atributo_ref"=> "id_model",
                     ]
                 ]
@@ -166,7 +166,7 @@ class TiposSeeder extends Seeder
                 "atributo_busqueda"=> [
                     "id"=>[
                         "metodo"=> "ref",
-                        "valor"=> "empresa.presentante",
+                        "valor"=> "empresa_presentante",
                         "atributo_ref"=> "id_model",
                     ]
                 ]
@@ -214,20 +214,20 @@ class TiposSeeder extends Seeder
                 "permiso_editar"=> ""
             ],
             [
-                "etiqueta_modelo"=> "model.empresa",
+                "etiqueta_modelo"=> "model_empresa",
                 "grupo"=> "hidden",
                 "atributo"=> "id",
-                "desplegar"=> "id_model.empresa",
+                "desplegar"=> "id_model_empresa",
                 "tipo"=> "hidden",
                 "selector"=> "",
                 "permiso_ver"=> "estudiante,docente",
                 "permiso_editar"=> ""
             ],
             [
-                "etiqueta_modelo"=> "empresa.presentante",
+                "etiqueta_modelo"=> "empresa_presentante",
                 "grupo"=> "hidden",
                 "atributo"=> "id",
-                "desplegar"=> "id_empresa.presentante",
+                "desplegar"=> "id_empresa_presentante",
                 "tipo"=> "hidden",
                 "selector"=> "",
                 "permiso_ver"=> "estudiante,docente",

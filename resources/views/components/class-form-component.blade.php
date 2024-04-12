@@ -1,4 +1,4 @@
-@json($callback)
+
 <div class="row">
 
     @foreach ($items as $Grupo => $item)
@@ -52,4 +52,4 @@
     @endforeach
 </div>
 
-{{-- Form::file('image') --}}
+{{ Form::file('proceso#image') }}
