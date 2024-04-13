@@ -16,7 +16,13 @@
                         <span class="card-title">{{ $metodo }} - {{ $Etapas->tipoetapa->name}}</span>
                         @if( $metodo !== "show" )
                         <div class="float-right">
-                            <button type="submit" class="btn btn-primary">{{ __('Continuar') }}</button>
+                            <button type="submit" class="btn btn-primary">
+                                @if( $metodo !== "delete" )
+                                    Continuar
+                                @else
+                                    Borrar
+                                @endif
+                            </button>
                         </div>
                         @endif
                     </div>

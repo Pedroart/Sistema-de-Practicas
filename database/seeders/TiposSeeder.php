@@ -428,11 +428,91 @@ class TiposSeeder extends Seeder
                 "permiso_editar"=> "estudiante"
             ]
             ];
+
+        $depencia1 = [
+            [
+                'etiqueta_modelo' => 'empresa',
+                'relaciones' => [
+                    [
+                        'dependencia' => '',
+                        'modelo_referencia' => '',
+                        'atributo'=>'',
+                    ],
+                ],
+                'defecto' => [
+
+                ]
+
+            ],
+            [
+                'etiqueta_modelo' => 'empleado',
+                'relaciones' =>[
+                    [
+                        'dependencia' => 'empresa_id',
+                        'modelo_referencia' => 'empresa',
+                        'atributo'=>'id',
+                    ],
+                ],
+                'defecto' => [
+
+                ]
+            ],
+            [
+                'etiqueta_modelo' => 'empresa_presentante',
+                'relaciones' =>[
+                    [
+                        'dependencia' => 'proceso_id',
+                        'modelo_referencia' => 'proceso',
+                        'atributo'=>'id',
+                    ],
+                    [
+                        'dependencia' => 'id_model',
+                        'modelo_referencia' => 'empleado',
+                        'atributo'=>'id',
+                    ],
+                ],
+                'defecto' =>[
+                    [
+                        'atributo'=>'model_type',
+                        'valor' =>'App\Models\Empleado'
+                    ],
+                    [
+                        'atributo'=>'etiqueta',
+                        'valor' =>'empresa_representante'
+                    ],
+                ]
+            ],
+            [
+                'etiqueta_modelo' => 'model_empresa',
+                'relaciones' =>[
+                    [
+                        'dependencia' => 'proceso_id',
+                        'modelo_referencia' => 'proceso',
+                        'atributo'=>'id',
+                    ],
+                    [
+                        'dependencia' => 'id_model',
+                        'modelo_referencia' => 'empresa',
+                        'atributo'=>'id',
+                    ],
+                ],
+                'defecto' =>[
+                    [
+                        'atributo'=>'model_type',
+                        'valor' =>'App\Models\Empresa'
+                    ],
+                    [
+                        'atributo'=>'etiqueta',
+                        'valor' =>'model_empresa'
+                    ]
+                ]
+            ],
+        ];
         Modelador::create([
             "tipoetapa_id"=>1,
             "modelo"                    =>json_encode($modelo2),
             "item"                      =>json_encode($items),
-            "dependencia_guardado"      =>"{}",
+            "dependencia_guardado"      =>json_encode($depencia1),
         ]);
     }
 }

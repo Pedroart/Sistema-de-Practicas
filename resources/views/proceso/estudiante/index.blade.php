@@ -54,8 +54,8 @@
                                         </a>
                                     @endif
                                     @if ($etapas[$i]->estado_id == 2 )
-                                        <a href="{{ route('proceso.conf',['nombre'=>$proceso->tipoproceso->name,'etapa'=>$etapas[$i]->tipoetapas_id,'metodo'=>'edit']) }}" class="btn btn-sm btn-success">
-                                            <i class="fas fa-pen"></i>
+                                        <a href="{{ route('proceso.conf',['nombre'=>$proceso->tipoproceso->name,'etapa'=>$etapas[$i]->tipoetapas_id,'metodo'=>'delete']) }}" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                     @endif
                                     @if ($etapas[$i]->estado_id > 1 && $etapas[$i]->estado_id < 5 )

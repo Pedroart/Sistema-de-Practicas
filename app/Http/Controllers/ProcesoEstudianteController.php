@@ -45,7 +45,7 @@ class ProcesoEstudianteController extends Controller
      */
     public function ver_metodo($metodo,$proceso,$etapa)
     {
-        if($metodo !=='create'){
+        if($metodo !=='Create'){
             $EstudianteProceso=Proceso::where([
                 'tipoproceso_id'=>$proceso->id,
                 'estudiante_id' =>$this->estudiante_id,

@@ -26,7 +26,9 @@
                                 @case('ubiedu')
                                     <x-ubieduform id="{{$data->valor ?: 1}}" bloqueado="{{$bloqueado}}" prefijo="{{$data->etiqueta_modelo.'#'}}"/>
                                     @break
-
+                                @case('ubigeo')
+                                    <x-ubigeo-form id="{{$data->valor ?: null}}" bloqueado="{{$bloqueado}}" prefijo="{{$data->etiqueta_modelo.'#'}}"/>
+                                    @break
                             @endswitch
                         </div>
 

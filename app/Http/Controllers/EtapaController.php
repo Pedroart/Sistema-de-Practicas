@@ -95,7 +95,7 @@ class EtapaController extends Controller
 
         // Etapa de procesado
 
-        // Invierte el orden de los elementos en la lista
+        /* Invierte el orden de los elementos en la lista
         $Dependencias = array_reverse($modelos);
 
         // Itera sobre la lista invertida
@@ -104,9 +104,44 @@ class EtapaController extends Controller
             $atributo = $agrupados[$etiquetaModel];
             $id=App::make($Models->modelo_tipo)::create($atributo);
             return response()->json($id);
+        }*/
+
+        $modelosIndexados = [];
+        foreach ($modelos as $modelo) {
+            $etiqueta = $modelo->etiqueta_modelo;
+            $modelosIndexados[$etiqueta] = $modelo;
+        }
+        $Dependencias=json_decode($modeladorRaw->dependencia_guardado);
+
+        foreach($Dependencias as $clave => $Models){
+            $etiquetaModel = $Models->etiqueta_modelo;
+            $ClassModel = $modelosIndexados[$etiquetaModel]->modelo_tipo;
+
+
+            foreach($Models->defecto as $defecto){
+                $agrupados[$etiquetaModel][$defecto->atributo]= $defecto->valor;
+            }
+
+            foreach($Models->relaciones as $Relaciones){
+                if($Relaciones->dependencia !== ''){
+                    $referenciaModel = $Relaciones->modelo_referencia;
+                    $refatributo = $Relaciones->atributo;
+                    $valueRef = $agrupados[$referenciaModel][$refatributo];
+                    $agrupados[$etiquetaModel][$Relaciones->dependencia]= $valueRef;
+                }
+            }
+
+            $atributo=$agrupados[$etiquetaModel];
+            unset($atributo['id']); // Olvido el ID, normalmente si no tiene referencia no debe existir
+
+            $id=App::make($ClassModel)::create($atributo);
+            $agrupados[$etiquetaModel]['id']= $id->id;
+
         }
 
-        return response()->json($Dependencias);
+        //return response()->json($Dependencias);
+        return redirect()->route('proceso.index',['nombre'=>$modeladorRaw->tipoetapa->tipoproceso->name])
+        ->with('success', 'Etapa updated successfully');
     }
     /**
      * Store a newly created resource in storage.
@@ -167,6 +202,18 @@ class EtapaController extends Controller
             ->with('success', 'Etapa updated successfully');
     }
 
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy_modular(Request $request, $tipoproceso)
+    {
+        $modeladorRaw = Modelador::where('tipoetapa_id',$tipoproceso)->first();
+
+        return redirect()->route('proceso.index',['nombre'=>$modeladorRaw->tipoetapa->tipoproceso->name])
+            ->with('success', 'Etapa deleted successfully');
+    }
     /**
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse

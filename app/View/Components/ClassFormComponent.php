@@ -26,7 +26,6 @@ class ClassFormComponent extends Component
         $this->modo = $modo;
         $modeladorRaw = Modelador::where('tipoetapa_id',$tipoproceso)->first();
         $modelos = [];
-
         $params = [];
         foreach(json_decode($modeladorRaw->modelo,true) as $modelador){
 
@@ -63,8 +62,8 @@ class ClassFormComponent extends Component
 
 
         switch($modo){
-            case 'edit':
-                $this->bloqueado = false;
+            case 'delete':
+                $this->bloqueado = true;
                 break;
             case 'show':
                 $this->bloqueado = true;

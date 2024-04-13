@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Modelador extends Model
 {
-    
+
     static $rules = [
 		'indicador' => 'required',
 		'model_type' => 'required',
@@ -35,16 +35,16 @@ class Modelador extends Model
      *
      * @var array
      */
-    protected $fillable = ['indicador','tipoproceso_id','model_type','json_data'];
+    protected $fillable = ['modelo','tipoetapa_id','item','dependencia_guardado'];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function tipoproceso()
+    public function tipoetapa()
     {
-        return $this->hasOne('App\Models\Tipoproceso', 'id', 'tipoproceso_id');
+        return $this->hasOne('App\Models\Tipoetapa', 'id', 'tipoetapa_id');
     }
-    
+
 
 }
