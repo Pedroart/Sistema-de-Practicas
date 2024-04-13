@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('apellido_materno');
             $table->string('apellido_paterno');
             $table->char('dni', 8)->nullable();
-            $table->foreignId('ubidistrito_id')->nullable()->constrained();
+            $table->foreignId('ubidistrito_id')->nullable()->constrained()->nullable();
             $table->timestamps();
         });
     }

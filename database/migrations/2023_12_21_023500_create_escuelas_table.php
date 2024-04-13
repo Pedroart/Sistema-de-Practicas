@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('escuelas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->foreignId('departamentoacademico_id')->nullable()->constrained();
+            $table->foreignId('departamentoacademico_id')->nullable()->constrained()->nullable();
             $table->timestamps();
         });
     }

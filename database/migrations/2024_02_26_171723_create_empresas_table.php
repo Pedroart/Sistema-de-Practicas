@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('ruc', 11)->unique();
             $table->string('razon_social');
             $table->string('direccion');
-            $table->foreignId('ubidistrito_id')->constrained();
+            $table->foreignId('ubidistrito_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

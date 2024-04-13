@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('empresa_id')->nullable()->constrained();
+            $table->foreignId('empresa_id')->nullable()->constrained()->nullable();
             $table->string('name');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');

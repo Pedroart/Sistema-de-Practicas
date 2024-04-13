@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('userinstitucionals', function (Blueprint $table) {
             $table->id();
             $table->char('codigo', 10)->unique();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('personas_id')->nullable()->constrained();
-            $table->foreignId('escuela_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->nullable();
+            $table->foreignId('personas_id')->nullable()->constrained()->nullable();
+            $table->foreignId('escuela_id')->nullable()->constrained()->nullable();
             $table->timestamps();
         });
     }

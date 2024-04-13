@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('ubidistritos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->foreignId('ubiprovincia_id')->constrained();
+            $table->foreignId('ubiprovincia_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

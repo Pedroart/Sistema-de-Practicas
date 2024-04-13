@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('etapas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('proceso_id')->constrained();
-            $table->foreignId('tipoetapas_id')->constrained();
-            $table->foreignId('estado_id')->constrained();
+            $table->foreignId('proceso_id')->constrained()->nullable();
+            $table->foreignId('tipoetapas_id')->constrained()->nullable();
+            $table->foreignId('estado_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

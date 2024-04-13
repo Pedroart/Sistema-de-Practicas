@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('matriculas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userinstitucional_id')->constrained();
-            $table->foreignId('semestre_id')->constrained();
-            $table->foreignId('estado_id')->constrained();
-            $table->foreignId('comentario_id')->nullable()->constrained();
+            $table->foreignId('userinstitucional_id')->constrained()->nullable();
+            $table->foreignId('semestre_id')->constrained()->nullable();
+            $table->foreignId('estado_id')->constrained()->nullable();
+            $table->foreignId('comentario_id')->nullable()->constrained()->nullable();
             $table->foreignId('matricula_id')->constrained('files')->onDelete('cascade');
             $table->foreignId('record_id')->constrained('files')->onDelete('cascade');
             $table->timestamps();
