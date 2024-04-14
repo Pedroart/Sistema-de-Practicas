@@ -4,6 +4,7 @@
 <section class="content container-fluid">
     <div class="row justify-content-md-center">
         <div class="col-md-8">
+
             @includeif('partials.errors')
             @if($metodo!=='show')
             <form method="POST" action="{{ route('proceso.'.$metodo , ['tipoproceso'=>$Etapas->tipoetapas_id]) }}"  role="form" enctype="multipart/form-data">

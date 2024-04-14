@@ -45,7 +45,7 @@ class ProcesoEstudianteController extends Controller
      */
     public function ver_metodo($metodo,$proceso,$etapa)
     {
-        if($metodo !=='Create'){
+        if($metodo !=='create'){
             $EstudianteProceso=Proceso::where([
                 'tipoproceso_id'=>$proceso->id,
                 'estudiante_id' =>$this->estudiante_id,
@@ -55,12 +55,14 @@ class ProcesoEstudianteController extends Controller
                 'proceso_id' => $EstudianteProceso->id,
                 'tipoetapas_id'=>$etapa
             ])->firstOrFail();
+
         }
         else{
             $Etapas=new Etapa;
             $Etapas->proceso_id = $proceso->id;
             $Etapas->tipoetapas_id = $etapa;
         }
+
         return view('modo_etapas.estudiante',compact('Etapas','metodo'));
         //return "Procesando proceso '$EstudianteProceso";
 
@@ -74,6 +76,7 @@ class ProcesoEstudianteController extends Controller
         // Procesar la URL según los parámetros recibidos
         if (!is_null($etapa) && !is_null($metodo)) {
             // Si se proporcionan todos los parámetros
+
             return $this->ver_metodo($metodo,$proceso,$etapa);
 
 

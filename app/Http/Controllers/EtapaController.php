@@ -139,6 +139,12 @@ class EtapaController extends Controller
 
         }
 
+        Etapa::create([
+            'proceso_id' => $agrupados['proceso']['id'],
+            'tipoetapas_id' => $tipoproceso,
+            'estado_id' => 1,
+        ]);
+
         //return response()->json($Dependencias);
         return redirect()->route('proceso.index',['nombre'=>$modeladorRaw->tipoetapa->tipoproceso->name])
         ->with('success', 'Etapa updated successfully');
@@ -240,11 +246,14 @@ class EtapaController extends Controller
         }
 
 
+        foreach(array_reverse($Dependencias) as $nombre => $ModelBorrar){
+            $modelos[$ModelBorrar->etiqueta_modelo]->delete();
+        }
+        $modelos['etapa']->delete();
 
-        /*
         return redirect()->route('proceso.index',['nombre'=>$modeladorRaw->tipoetapa->tipoproceso->name])
             ->with('success', 'Etapa deleted successfully');
-        */
+
     }
     /**
      * @param int $id

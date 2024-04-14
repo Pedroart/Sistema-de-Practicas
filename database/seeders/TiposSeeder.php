@@ -178,6 +178,16 @@ class TiposSeeder extends Seeder
         ];
         $items = [
             [
+                "etiqueta_modelo"=> "etapa",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_etapa",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
                 "etiqueta_modelo"=> "proceso",
                 "grupo"=> "hidden",
                 "atributo"=> "id",
