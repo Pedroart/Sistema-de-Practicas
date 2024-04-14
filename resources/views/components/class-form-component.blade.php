@@ -29,6 +29,8 @@
                                 @case('ubigeo')
                                     <x-ubigeo-form id="{{$data->valor ?: null}}" bloqueado="{{$bloqueado}}" prefijo="{{$data->etiqueta_modelo.'#'}}"/>
                                     @break
+                                @case('file')
+                                    @break
                             @endswitch
                         </div>
 
