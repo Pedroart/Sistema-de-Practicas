@@ -524,5 +524,180 @@ class TiposSeeder extends Seeder
             "item"                      =>json_encode($items),
             "dependencia_guardado"      =>json_encode($depencia1),
         ]);
+
+        $MODELO02 = [
+            [
+                "etiqueta_modelo"=>"etapa",
+                "modelo_tipo"=>"App\\Models\\Etapa",
+                "atributo_busqueda"=>[
+                    "id"=>[
+                        "metodo"=>"global",
+                        "valor"=>"etapa",
+                        "atributo_ref"=>""
+                    ],
+                ]
+
+            ],
+            [
+                "etiqueta_modelo"=>"proceso",
+                "modelo_tipo"=>"App\\Models\\Proceso",
+                "atributo_busqueda"=>[
+                    "id"=>[
+                        "metodo"=>"global",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>""
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_modelo",
+                "modelo_tipo"=>"App\\Models\\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>"id"
+                    ],
+                    "etiqueta"=>[
+                        'metodo'=>'set',
+                        'valor'=>'model_empresa',
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_jefedirecto",
+                "modelo_tipo"=>"App\\Models\\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>"id"
+                    ],
+                    "etiqueta"=>[
+                        'metodo'=>'set',
+                        'valor'=>'empresa_jefedirecto',
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"jefedirecto",
+                "modelo_tipo"=>"App\\Models\\Empleado",
+                "atributo_busqueda"=>[
+                    "id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"empresa_jefedirecto",
+                        "atributo_ref"=>"id_model"
+                    ]
+                ]
+            ]
+        ];
+        $ITEM02 =[
+            [
+                "etiqueta_modelo"=> "etapa",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_etapa",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "proceso",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_proceso",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa_jefedirecto",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empresa_jefedirecto",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "jefedirecto",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_jefedirecto",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "jefedirecto",
+                "grupo"=> "Jefe Directo",
+                "atributo"=> "me",
+                "desplegar"=> "Nombre",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "jefedirecto",
+                "grupo"=> "Jefe Directo",
+                "atributo"=> "apellido_paterno",
+                "desplegar"=> "Apellido Paterno",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "jefedirecto",
+                "grupo"=> "Jefe Directo",
+                "atributo"=> "apellido_materno",
+                "desplegar"=> "Apellido Materno",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "jefedirecto",
+                "grupo"=> "Jefe Directo",
+                "atributo"=> "cargo",
+                "desplegar"=> "Cargo",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "jefedirecto",
+                "grupo"=> "Jefe Directo",
+                "atributo"=> "genero",
+                "desplegar"=> "Genero",
+                "tipo"=> "selector",
+                "selector"=> "App\\Models\\Genero",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "jefedirecto",
+                "grupo"=> "Jefe Directo",
+                "atributo"=> "grado_instruccion",
+                "desplegar"=> "Grado de Instrucción",
+                "tipo"=> "text",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ]
+        ];
+        Modelador::create([
+            "tipoetapa_id"=>2,
+            "modelo"                    =>json_encode($MODELO02),
+            "item"                      =>json_encode($ITEM02),
+            "dependencia_guardado"      =>json_encode($depencia1),
+        ]);
     }
 }
