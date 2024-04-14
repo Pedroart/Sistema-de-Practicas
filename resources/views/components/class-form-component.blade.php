@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row justify-content-center">
 
     @foreach ($items as $Grupo => $item)
 
