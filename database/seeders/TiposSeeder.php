@@ -693,11 +693,48 @@ class TiposSeeder extends Seeder
                 "permiso_editar"=> "estudiante"
             ]
         ];
+        $DEPENDENCIAS02=[
+            [
+                "etiqueta_modelo"=>"jefedirecto",
+                "relaciones"=>[
+                    ["dependencia"=>"empresa_id",
+                    "modelo_referencia"=>"empresa_modelo",
+                    "atributo"=>"id_model"],
+                    ["dependencia"=>"Na",
+                    "modelo_referencia"=>"Na",
+                    "atributo"=>"Na"]
+                ],
+                "defecto" => [
+
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_jefedirecto",
+                "relaciones"=>[
+                    ["dependencia"=>"proceso_id",
+                    "modelo_referencia"=>"proceso",
+                    "atributo"=>"id"],
+                    ["dependencia"=>"id_model",
+                    "modelo_referencia"=>"jefedirecto",
+                    "atributo"=>"id"]
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'model_type',
+                        'valor' =>'App\Models\Empleado'
+                    ],
+                    [
+                        'atributo'=>'etiqueta',
+                        'valor' =>'empresa_jefedirecto'
+                    ]
+                ]
+            ],
+        ];
         Modelador::create([
             "tipoetapa_id"=>2,
             "modelo"                    =>json_encode($MODELO02),
             "item"                      =>json_encode($ITEM02),
-            "dependencia_guardado"      =>json_encode($depencia1),
+            "dependencia_guardado"      =>json_encode($DEPENDENCIAS02),
         ]);
     }
 }
