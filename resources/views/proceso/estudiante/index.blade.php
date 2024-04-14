@@ -45,10 +45,10 @@
                                     @endif
                                 </td>
                                 <td>
-
+                                    {{$etapas[$i]->estado_id}}
                                 </td>
                                 <td>
-                                    @if (($i == 0 && $etapas[$i]->estado_id == 5) || ($i > 0 && $etapas[$i - 1]->estado_id ==3))
+                                    @if (($i == 0 && $etapas[$i]->estado_id == 5) || ($i > 0 && $etapas[$i - 1]->estado_id ==3 && $etapas[$i]->estado_id == 5))
                                         <a href="{{ route('proceso.conf',['nombre'=>$proceso->tipoproceso->name,'etapa'=>$etapas[$i]->tipoetapas_id,'metodo'=>'create']) }}" class="btn btn-sm btn-primary">
                                             <i class="fas fa-plus"></i>
                                         </a>
