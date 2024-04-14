@@ -787,9 +787,9 @@ class TiposSeeder extends Seeder
             ],
             [
                 "etiqueta_modelo"=>"file_constancia",
-                "modelo_tipo"=>"App\\Models\File",
+                "modelo_tipo"=>"App\Models\File",
                 "atributo_busqueda"=>[
-                    "proceso_id"=>[
+                    "id"=>[
                         "metodo"=>"ref",
                         "valor"=>"empresa_constancia",
                         "atributo_ref"=>"id_model"
@@ -923,7 +923,7 @@ class TiposSeeder extends Seeder
                 "etiqueta_modelo"=>"file_boleta1",
                 "modelo_tipo"=>"App\\Models\\File",
                 "atributo_busqueda"=>[
-                    "proceso_id"=>[
+                    "id"=>[
                         "metodo"=>"ref",
                         "valor"=>"empresa_boleta1",
                         "atributo_ref"=>"id_model"
@@ -949,7 +949,7 @@ class TiposSeeder extends Seeder
                 "etiqueta_modelo"=>"file_boleta2",
                 "modelo_tipo"=>"App\\Models\\File",
                 "atributo_busqueda"=>[
-                    "proceso_id"=>[
+                    "id"=>[
                         "metodo"=>"ref",
                         "valor"=>"empresa_boleta2",
                         "atributo_ref"=>"id_model"
@@ -973,9 +973,10 @@ class TiposSeeder extends Seeder
             ],
             [
                 "etiqueta_modelo"=>"file_boleta3",
+
                 "modelo_tipo"=>"App\\Models\\File",
                 "atributo_busqueda"=>[
-                    "proceso_id"=>[
+                    "id"=>[
                         "metodo"=>"ref",
                         "valor"=>"empresa_boleta3",
                         "atributo_ref"=>"id_model"

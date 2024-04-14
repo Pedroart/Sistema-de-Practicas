@@ -34,8 +34,8 @@
                                         <div class="input-group mb-3">
 
                                             <div class="custom-file">
-                                                <label class="custom-file-label" for="inputGroupFile01">Seleccionar el archivo</label>
-                                                {{ Form::file('archivo', ['class' => 'form-control-file custom-file-input' . ($errors->has('archivo') ? ' is-invalid' : '')]) }}
+                                                <label class="custom-file-label" for="inputGroupFile01">{{$data->desplegar,"$data->desplegar"}} </label>
+                                                {{ Form::file($data->etiqueta_modelo . '#'.$data->atributo, ['class' => 'form-control-file custom-file-input' . ($errors->has('archivo') ? ' is-invalid' : '')]) }}
                                             </div>
 
                                         </div>
