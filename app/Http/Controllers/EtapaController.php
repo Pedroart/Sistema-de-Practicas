@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Modelador;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\App;
+use App\Models\File;
+use App\Traits\Upload; //import the trait
+use Illuminate\Support\Str;
 /**
  * Class EtapaController
  * @package App\Http\Controllers
  */
 class EtapaController extends Controller
 {
+    use Upload;
     /**
      * Display a listing of the resource.
      *
@@ -70,7 +74,7 @@ class EtapaController extends Controller
                     if(!$request->hasFile($clave)){
                         $agrupados[$etiqueta][$atributo] = $valor;
                     }else{
-
+                        $agrupados[$etiqueta][$atributo] = "file";
                     }
 
                 }
@@ -117,6 +121,12 @@ class EtapaController extends Controller
             $etiquetaModel = $Models->etiqueta_modelo;
             $ClassModel = $modelosIndexados[$etiquetaModel]->modelo_tipo;
 
+            if($agrupados[$etiquetaModel]['id'] == 'file'){
+                //Subir Archivo al Servidor
+
+                $path = $this->UploadFile($request->file($etiquetaModel."#id"), 2, 'public', $etiquetaModel.$agrupados['proceso']['id'].Str::random(10));
+                $agrupados[$etiquetaModel]['path'] = $path;
+            }
 
             foreach($Models->defecto as $defecto){
                 $agrupados[$etiquetaModel][$defecto->atributo]= $defecto->valor;

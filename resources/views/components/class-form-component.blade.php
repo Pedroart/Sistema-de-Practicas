@@ -31,19 +31,12 @@
                                     @break
                                 @case('file')
                                     @if(!$bloqueado)
-                                        <div class="input-group mb-3">
-
-                                            <div class="custom-file">
-                                                <label class="custom-file-label" for="inputGroupFile01">{{$data->desplegar,"$data->desplegar"}} </label>
-                                                {{ Form::file($data->etiqueta_modelo . '#'.$data->atributo, ['class' => 'form-control-file custom-file-input' . ($errors->has('archivo') ? ' is-invalid' : '')]) }}
-                                            </div>
-
-                                        </div>
+                                        {{ Form::file($data->etiqueta_modelo . '#'.$data->atributo, ['class' => 'form-control-file' . ($errors->has($data->atributo) ? ' is-invalid' : '')]) }}
                                     @else
                                         <div class="input-group mb-3">
-                                            {{ Form::text( "name" ,"Archivo-js.com", ['class' => 'form-control' . ($errors->has('1') ? ' is-invalid' : '')]) }}
+                                            {{ Form::text( $data->etiqueta_modelo . '#'.$data->atributo ,$data->desplegar, ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''),'disabled']) }}
                                             <div class="input-group-append">
-                                            <a class="btn btn-outline-secondary" type="button" id="button-addon2">Abrir Archivo</a>
+                                            <x-file-view id="{{$data->valor}}" />
                                             </div>
                                         </div>
                                     @endif

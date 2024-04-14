@@ -106,7 +106,7 @@ class FileController extends Controller
             $path = $this->UploadFile($request->file('archivo'), $request->rutafile_id);
         }
         $file->update(['path' => $path]);
-        
+
         return redirect()->route('files.index')
             ->with('success', 'File updated successfully');
     }
