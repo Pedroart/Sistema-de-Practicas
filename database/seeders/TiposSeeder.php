@@ -69,9 +69,14 @@ class TiposSeeder extends Seeder
                 "etiqueta_modelo"=> "etapa",
                 "modelo_tipo"=> "App\Models\Etapa",
                 "atributo_busqueda"=> [
-                    "id"=>[
+                    "tipoetapas_id"=>[
                         "metodo"=> "global",
                         "valor"=> "etapa",
+                        "atributo_ref"=> "",
+                    ],
+                    "proceso_id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "proceso",
                         "atributo_ref"=> "",
                     ],
                 ],
@@ -527,16 +532,20 @@ class TiposSeeder extends Seeder
 
         $MODELO02 = [
             [
-                "etiqueta_modelo"=>"etapa",
-                "modelo_tipo"=>"App\Models\Etapa",
-                "atributo_busqueda"=>[
-                    "id"=>[
-                        "metodo"=>"global",
-                        "valor"=>"etapa",
-                        "atributo_ref"=>""
+                "etiqueta_modelo"=> "etapa",
+                "modelo_tipo"=> "App\Models\Etapa",
+                "atributo_busqueda"=> [
+                    "tipoetapas_id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "etapa",
+                        "atributo_ref"=> "",
                     ],
-                ]
-
+                    "proceso_id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "proceso",
+                        "atributo_ref"=> "",
+                    ],
+                ],
             ],
             [
                 "etiqueta_modelo"=>"proceso",
@@ -748,16 +757,20 @@ class TiposSeeder extends Seeder
 
         $MODELO03 = [
             [
-                "etiqueta_modelo"=>"etapa",
-                "modelo_tipo"=>"App\Models\Etapa",
-                "atributo_busqueda"=>[
-                    "id"=>[
-                        "metodo"=>"global",
-                        "valor"=>"etapa",
-                        "atributo_ref"=>""
+                "etiqueta_modelo"=> "etapa",
+                "modelo_tipo"=> "App\Models\Etapa",
+                "atributo_busqueda"=> [
+                    "tipoetapas_id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "etapa",
+                        "atributo_ref"=> "",
                     ],
-                ]
-
+                    "proceso_id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "proceso",
+                        "atributo_ref"=> "",
+                    ],
+                ],
             ],
             [
                 "etiqueta_modelo"=>"proceso",
@@ -882,16 +895,20 @@ class TiposSeeder extends Seeder
 
         $MODELO04 = [
             [
-                "etiqueta_modelo"=>"etapa",
-                "modelo_tipo"=>"App\\Models\\Etapa",
-                "atributo_busqueda"=>[
-                    "id"=>[
-                        "metodo"=>"global",
-                        "valor"=>"etapa",
-                        "atributo_ref"=>""
+                "etiqueta_modelo"=> "etapa",
+                "modelo_tipo"=> "App\Models\Etapa",
+                "atributo_busqueda"=> [
+                    "tipoetapas_id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "etapa",
+                        "atributo_ref"=> "",
                     ],
-                ]
-
+                    "proceso_id"=>[
+                        "metodo"=> "global",
+                        "valor"=> "proceso",
+                        "atributo_ref"=> "",
+                    ],
+                ],
             ],
             [
                 "etiqueta_modelo"=>"proceso",
@@ -1066,11 +1083,109 @@ class TiposSeeder extends Seeder
                 "permiso_editar"=> "estudiante"
             ]
         ];
+        $DEPENDENCIAS04=[
+            [
+                "etiqueta_modelo"=>"file_boleta1",
+                "relaciones"=>[
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'rutafile_id',
+                        'valor' =>'2'
+                    ],
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_boleta1",
+                "relaciones"=>[
+                    ["dependencia"=>"proceso_id",
+                    "modelo_referencia"=>"proceso",
+                    "atributo"=>"id"],
+                    ["dependencia"=>"id_model",
+                    "modelo_referencia"=>"file_boleta1",
+                    "atributo"=>"id"]
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'model_type',
+                        'valor' =>'App\Models\File'
+                    ],
+                    [
+                        'atributo'=>'etiqueta',
+                        'valor' =>'empresa_boleta1'
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"file_boleta2",
+                "relaciones"=>[
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'rutafile_id',
+                        'valor' =>'2'
+                    ],
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_boleta2",
+                "relaciones"=>[
+                    ["dependencia"=>"proceso_id",
+                    "modelo_referencia"=>"proceso",
+                    "atributo"=>"id"],
+                    ["dependencia"=>"id_model",
+                    "modelo_referencia"=>"file_boleta2",
+                    "atributo"=>"id"]
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'model_type',
+                        'valor' =>'App\Models\File'
+                    ],
+                    [
+                        'atributo'=>'etiqueta',
+                        'valor' =>'empresa_boleta2'
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"file_boleta3",
+                "relaciones"=>[
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'rutafile_id',
+                        'valor' =>'2'
+                    ],
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_boleta3",
+                "relaciones"=>[
+                    ["dependencia"=>"proceso_id",
+                    "modelo_referencia"=>"proceso",
+                    "atributo"=>"id"],
+                    ["dependencia"=>"id_model",
+                    "modelo_referencia"=>"file_boleta3",
+                    "atributo"=>"id"]
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'model_type',
+                        'valor' =>'App\Models\File'
+                    ],
+                    [
+                        'atributo'=>'etiqueta',
+                        'valor' =>'empresa_boleta3'
+                    ]
+                ]
+            ],
+        ];
         Modelador::create([
             "tipoetapa_id"=>4,
             "modelo"                    =>json_encode($MODELO04),
             "item"                      =>json_encode($ITEM04),
-            "dependencia_guardado"      =>json_encode($DEPENDENCIAS03),
+            "dependencia_guardado"      =>json_encode($DEPENDENCIAS04),
         ]);
     }
 }

@@ -82,6 +82,7 @@ class ClassFormComponent extends Component
     public function render()
     {
         $datos = get_object_vars($this);
+        //return json_encode($datos);
         return view('components.class-form-component', $datos);
     }
 }

@@ -115,9 +115,11 @@ class EtapaController extends Controller
             $etiqueta = $modelo->etiqueta_modelo;
             $modelosIndexados[$etiqueta] = $modelo;
         }
+
         $Dependencias=json_decode($modeladorRaw->dependencia_guardado);
 
         foreach($Dependencias as $clave => $Models){
+            $atributo = [];
             $etiquetaModel = $Models->etiqueta_modelo;
             $ClassModel = $modelosIndexados[$etiquetaModel]->modelo_tipo;
 
@@ -133,6 +135,7 @@ class EtapaController extends Controller
             }
 
             foreach($Models->relaciones as $Relaciones){
+
                 if($Relaciones->dependencia !== ''){
                     $referenciaModel = $Relaciones->modelo_referencia;
                     $refatributo = $Relaciones->atributo;
@@ -257,6 +260,14 @@ class EtapaController extends Controller
 
 
         foreach(array_reverse($Dependencias) as $nombre => $ModelBorrar){
+            if(get_class($modelos[$ModelBorrar->etiqueta_modelo]) === 'App\Models\File'){
+                $id = $modelos[$ModelBorrar->etiqueta_modelo]->id;
+                $file = File::find($id);
+                if (!is_null($file->path)) {
+                    $this->deleteFile($file->path);
+                }
+                $file->delete();
+            }
             $modelos[$ModelBorrar->etiqueta_modelo]->delete();
         }
         $modelos['etapa']->delete();
