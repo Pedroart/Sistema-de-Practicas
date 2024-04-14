@@ -528,7 +528,7 @@ class TiposSeeder extends Seeder
         $MODELO02 = [
             [
                 "etiqueta_modelo"=>"etapa",
-                "modelo_tipo"=>"App\\Models\\Etapa",
+                "modelo_tipo"=>"App\Models\Etapa",
                 "atributo_busqueda"=>[
                     "id"=>[
                         "metodo"=>"global",
@@ -540,7 +540,7 @@ class TiposSeeder extends Seeder
             ],
             [
                 "etiqueta_modelo"=>"proceso",
-                "modelo_tipo"=>"App\\Models\\Proceso",
+                "modelo_tipo"=>"App\Models\Proceso",
                 "atributo_busqueda"=>[
                     "id"=>[
                         "metodo"=>"global",
@@ -551,7 +551,7 @@ class TiposSeeder extends Seeder
             ],
             [
                 "etiqueta_modelo"=>"empresa_modelo",
-                "modelo_tipo"=>"App\\Models\\Archivo",
+                "modelo_tipo"=>"App\Models\Archivo",
                 "atributo_busqueda"=>[
                     "proceso_id"=>[
                         "metodo"=>"ref",
@@ -566,7 +566,7 @@ class TiposSeeder extends Seeder
             ],
             [
                 "etiqueta_modelo"=>"empresa_jefedirecto",
-                "modelo_tipo"=>"App\\Models\\Archivo",
+                "modelo_tipo"=>"App\Models\Archivo",
                 "atributo_busqueda"=>[
                     "proceso_id"=>[
                         "metodo"=>"ref",
@@ -581,7 +581,7 @@ class TiposSeeder extends Seeder
             ],
             [
                 "etiqueta_modelo"=>"jefedirecto",
-                "modelo_tipo"=>"App\\Models\\Empleado",
+                "modelo_tipo"=>"App\Models\Empleado",
                 "atributo_busqueda"=>[
                     "id"=>[
                         "metodo"=>"ref",
@@ -613,6 +613,16 @@ class TiposSeeder extends Seeder
                 "permiso_editar"=> ""
             ],
             [
+                "etiqueta_modelo"=> "empresa_modelo",
+                "grupo"=> "hidden",
+                "atributo"=> "id_model",
+                "desplegar"=> "id_empresa_modelo",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
                 "etiqueta_modelo"=> "empresa_jefedirecto",
                 "grupo"=> "hidden",
                 "atributo"=> "id",
@@ -635,7 +645,7 @@ class TiposSeeder extends Seeder
             [
                 "etiqueta_modelo"=> "jefedirecto",
                 "grupo"=> "Jefe Directo",
-                "atributo"=> "me",
+                "atributo"=> "name",
                 "desplegar"=> "Nombre",
                 "tipo"=> "text",
                 "selector"=> "",
@@ -697,12 +707,11 @@ class TiposSeeder extends Seeder
             [
                 "etiqueta_modelo"=>"jefedirecto",
                 "relaciones"=>[
-                    ["dependencia"=>"empresa_id",
-                    "modelo_referencia"=>"empresa_modelo",
-                    "atributo"=>"id_model"],
-                    ["dependencia"=>"Na",
-                    "modelo_referencia"=>"Na",
-                    "atributo"=>"Na"]
+                    [
+                        "dependencia"=>"empresa_id",
+                        "modelo_referencia"=>"empresa_modelo",
+                        "atributo"=>"id_model"
+                    ]
                 ],
                 "defecto" => [
 
@@ -735,6 +744,332 @@ class TiposSeeder extends Seeder
             "modelo"                    =>json_encode($MODELO02),
             "item"                      =>json_encode($ITEM02),
             "dependencia_guardado"      =>json_encode($DEPENDENCIAS02),
+        ]);
+
+        $MODELO03 = [
+            [
+                "etiqueta_modelo"=>"etapa",
+                "modelo_tipo"=>"App\Models\Etapa",
+                "atributo_busqueda"=>[
+                    "id"=>[
+                        "metodo"=>"global",
+                        "valor"=>"etapa",
+                        "atributo_ref"=>""
+                    ],
+                ]
+
+            ],
+            [
+                "etiqueta_modelo"=>"proceso",
+                "modelo_tipo"=>"App\Models\Proceso",
+                "atributo_busqueda"=>[
+                    "id"=>[
+                        "metodo"=>"global",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>""
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_constancia",
+                "modelo_tipo"=>"App\Models\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>"id"
+                    ],
+                    "etiqueta"=>[
+                        'metodo'=>'set',
+                        'valor'=>'empresa_constancia',
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"file_constancia",
+                "modelo_tipo"=>"App\\Models\File",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"empresa_constancia",
+                        "atributo_ref"=>"id_model"
+                    ]
+                ]
+            ]
+        ];
+        $ITEM03 =[
+            [
+                "etiqueta_modelo"=> "etapa",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_etapa",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "proceso",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_proceso",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa_constancia",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empresa_constancia",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "file_constancia",
+                "grupo"=> "Constancia o Contrato de Trabajo",
+                "atributo"=> "id",
+                "desplegar"=> "Constancia de Trabajo",
+                "tipo"=> "file",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ]
+        ];
+        $DEPENDENCIAS03=[
+            [
+                "etiqueta_modelo"=>"file_constancia",
+                "relaciones"=>[
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'rutafile_id',
+                        'valor' =>'2'
+                    ],
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_constancia",
+                "relaciones"=>[
+                    ["dependencia"=>"proceso_id",
+                    "modelo_referencia"=>"proceso",
+                    "atributo"=>"id"],
+                    ["dependencia"=>"id_model",
+                    "modelo_referencia"=>"file_constancia",
+                    "atributo"=>"id"]
+                ],
+                "defecto" => [
+                    [
+                        'atributo'=>'model_type',
+                        'valor' =>'App\Models\File'
+                    ],
+                    [
+                        'atributo'=>'etiqueta',
+                        'valor' =>'empresa_constancia'
+                    ]
+                ]
+            ],
+        ];
+        Modelador::create([
+            "tipoetapa_id"=>3,
+            "modelo"                    =>json_encode($MODELO03),
+            "item"                      =>json_encode($ITEM03),
+            "dependencia_guardado"      =>json_encode($DEPENDENCIAS03),
+        ]);
+
+        $MODELO04 = [
+            [
+                "etiqueta_modelo"=>"etapa",
+                "modelo_tipo"=>"App\\Models\\Etapa",
+                "atributo_busqueda"=>[
+                    "id"=>[
+                        "metodo"=>"global",
+                        "valor"=>"etapa",
+                        "atributo_ref"=>""
+                    ],
+                ]
+
+            ],
+            [
+                "etiqueta_modelo"=>"proceso",
+                "modelo_tipo"=>"App\\Models\\Proceso",
+                "atributo_busqueda"=>[
+                    "id"=>[
+                        "metodo"=>"global",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>""
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_boleta1",
+                "modelo_tipo"=>"App\\Models\\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>"id"
+                    ],
+                    "etiqueta"=>[
+                        'metodo'=>'set',
+                        'valor'=>'empresa_boleta1',
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"file_boleta1",
+                "modelo_tipo"=>"App\\Models\\File",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"empresa_boleta1",
+                        "atributo_ref"=>"id_model"
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_boleta2",
+                "modelo_tipo"=>"App\\Models\\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>"id"
+                    ],
+                    "etiqueta"=>[
+                        'metodo'=>'set',
+                        'valor'=>'empresa_boleta2',
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"file_boleta2",
+                "modelo_tipo"=>"App\\Models\\File",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"empresa_boleta2",
+                        "atributo_ref"=>"id_model"
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"empresa_boleta3",
+                "modelo_tipo"=>"App\\Models\\Archivo",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"proceso",
+                        "atributo_ref"=>"id"
+                    ],
+                    "etiqueta"=>[
+                        'metodo'=>'set',
+                        'valor'=>'empresa_boleta3',
+                    ]
+                ]
+            ],
+            [
+                "etiqueta_modelo"=>"file_boleta3",
+                "modelo_tipo"=>"App\\Models\\File",
+                "atributo_busqueda"=>[
+                    "proceso_id"=>[
+                        "metodo"=>"ref",
+                        "valor"=>"empresa_boleta3",
+                        "atributo_ref"=>"id_model"
+                    ]
+                ]
+            ]
+        ];
+        $ITEM04 =[
+            [
+                "etiqueta_modelo"=> "etapa",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_etapa",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "proceso",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_proceso",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa_boleta1",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empresa_boleta1",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa_boleta2",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empresa_boleta2",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "empresa_boleta3",
+                "grupo"=> "hidden",
+                "atributo"=> "id",
+                "desplegar"=> "id_empresa_boleta3",
+                "tipo"=> "hidden",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> ""
+            ],
+            [
+                "etiqueta_modelo"=> "file_boleta1",
+                "grupo"=> "Constancia de Pago",
+                "atributo"=> "id",
+                "desplegar"=> "Constancia de Pago #1",
+                "tipo"=> "file",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "file_boleta2",
+                "grupo"=> "Constancia de Pago",
+                "atributo"=> "id",
+                "desplegar"=> "Constancia de Pago #2",
+                "tipo"=> "file",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ],
+            [
+                "etiqueta_modelo"=> "file_boleta3",
+                "grupo"=> "Constancia de Pago",
+                "atributo"=> "id",
+                "desplegar"=> "Constancia de Pago #3",
+                "tipo"=> "file",
+                "selector"=> "",
+                "permiso_ver"=> "estudiante,docente",
+                "permiso_editar"=> "estudiante"
+            ]
+        ];
+        Modelador::create([
+            "tipoetapa_id"=>4,
+            "modelo"                    =>json_encode($MODELO04),
+            "item"                      =>json_encode($ITEM04),
+            "dependencia_guardado"      =>json_encode($DEPENDENCIAS03),
         ]);
     }
 }
