@@ -386,7 +386,7 @@ class TiposSeeder extends Seeder
                 "etiqueta_modelo"=> "empleado",
                 "grupo"=> "Representante Legal",
                 "atributo"=> "name",
-                "desplegar"=> "Nombre",
+                "desplegar"=> "Nombres",
                 "tipo"=> "text",
                 "selector"=> "",
                 "permiso_ver"=> "estudiante,docente",
