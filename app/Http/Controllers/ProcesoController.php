@@ -11,7 +11,8 @@ use App\Models\Semestre;
 use App\Models\Estado;
 use App\Models\Tipoproceso;
 use App\Models\Userinstitucional;
-
+use App\Models\Tipoetapa;
+use App\Models\Etapa;
 /**
  * Class ProcesoController
  * @package App\Http\Controllers
@@ -68,6 +69,38 @@ class ProcesoController extends Controller
         return view('proceso.estudiante.create', compact('proceso','semestre','estados','tipoprocesos'));
     }
 
+    public function ver_metodo($id,$etapa,$metodo)
+    {
+
+        $Etapas=Etapa::where([
+                'proceso_id' =>$id,
+                'tipoetapas_id'=>$etapa
+            ])->firstOrFail();
+
+        $estados = Estado::all()->pluck('name', 'id');
+
+        return view('modo_etapas.profesores',compact('Etapas','metodo','estados'));
+        //return "Procesando proceso '$EstudianteProceso";
+
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function estado(Request $request,$id_etapa)
+    {
+
+        $etapa = Etapa::find($id_etapa);
+
+        $etapa->update(['estado_id' => $request->estado_id]);
+
+        return redirect()->route('procesos.index')
+            ->with('success', 'Proceso created successfully.');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -94,7 +127,30 @@ class ProcesoController extends Controller
     {
         $proceso = Proceso::find($id);
 
-        return view('proceso.show', compact('proceso'));
+        $tipoetapas = Tipoetapa::where('tipoproceso_id',$proceso->tipoproceso_id)->get();
+        $etapas = [];
+        $etapabase = new Etapa();
+        $etapabase->id = 99;
+        $etapabase->proceso_id = $proceso->id;
+        $etapabase->estado_id = 5;
+        $proceoetapas = $proceso->etapas;
+
+        foreach($tipoetapas as $etapa){
+
+            $etapa_con_tipoetapa = $proceoetapas->whereIn('tipoetapas_id', $etapa->id)->first();
+            if($etapa_con_tipoetapa){
+                $etapas[] = $etapa_con_tipoetapa ;
+            }
+            else{
+                $newEtapa = $etapabase->replicate();
+                $newEtapa->tipoetapas_id = $etapa->id;
+                $etapas[] = $newEtapa;
+            }
+
+        }
+
+
+        return view('proceso.show', compact('proceso','etapas'));
     }
 
     /**

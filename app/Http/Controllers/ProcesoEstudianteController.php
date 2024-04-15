@@ -59,7 +59,7 @@ class ProcesoEstudianteController extends Controller
         }
         else{
             $Etapas=new Etapa;
-            $Etapas->proceso_id = $proceso->id;
+            $Etapas->proceso_id = $this->procesos->first()->id;
             $Etapas->tipoetapas_id = $etapa;
         }
 
@@ -112,6 +112,7 @@ class ProcesoEstudianteController extends Controller
         $etapabase->proceso_id = $proceso->id;
         $etapabase->estado_id = 5;
         $proceoetapas = $proceso->etapas;
+
         foreach($tipoetapas as $etapa){
 
             $etapa_con_tipoetapa = $proceoetapas->whereIn('tipoetapas_id', $etapa->id)->first();

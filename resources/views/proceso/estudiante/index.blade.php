@@ -45,7 +45,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{$etapas[$i]->estado_id}}
+                                    {{$etapas[$i]->updated_at}}
                                 </td>
                                 <td>
                                     @if (($i == 0 && $etapas[$i]->estado_id == 5) || ($i > 0 && $etapas[$i - 1]->estado_id ==3 && $etapas[$i]->estado_id == 5))

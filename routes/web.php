@@ -41,6 +41,8 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
 
     Route::resource('matriculas', App\Http\Controllers\MatriculaController::class);
     Route::resource('procesos', App\Http\Controllers\procesoController::class);
+    Route::get('procesos/{id}/{etapa}/{metodo}', [App\Http\Controllers\procesoController::class,'ver_metodo'])->name('procesos.conf');
+    Route::post('procesos/estado/{id_etapa}',[App\Http\Controllers\procesoController::class,'estado'])->name('eestado');
 
     Route::get('proceso/{nombre}', [App\Http\Controllers\ProcesoEstudianteController::class,'procesar'])->name('proceso.index');
     Route::get('proceso/{nombre}/{etapa}/{metodo}', [App\Http\Controllers\ProcesoEstudianteController::class,'procesar'])->name('proceso.conf');

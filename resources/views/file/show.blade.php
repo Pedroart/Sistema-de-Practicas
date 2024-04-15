@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <strong>Path:</strong>
                         {{ $file->path }}
-                        
+
 
                     </div>
                     <div class="form-group">
@@ -33,10 +33,9 @@
                     <div class="form-group">
                         <a href="{{ asset('storage/'.$file->path) }}" target="_blank">Abrir Archivo</a>
                     </div>
-                    
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>
