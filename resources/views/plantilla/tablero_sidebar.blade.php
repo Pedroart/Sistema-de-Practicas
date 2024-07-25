@@ -33,10 +33,6 @@
             ]" />
             <x-nav-dropdown :permiso="'procesos.view'" :title="'Procesos'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('procesos.index') , 'text' => 'Listado'],
-                ['url' =>  route('procesos.index') , 'text' => 'Desempeno'],
-                ['url' =>  route('procesos.index') , 'text' => 'Efectivas'],
-                ['url' =>  route('procesos.index') , 'text' => 'Emprendimiento'],
-                ['url' =>  route('procesos.index') , 'text' => 'Convalidacion'],
             ]" />
             <x-nav-dropdown :permiso="'proceso.view'" :title="'Procesos Regulares'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('proceso.index',['nombre'=>'desempeno']) , 'text' => 'Desempeno'],

@@ -29,6 +29,7 @@
                     </div>
                 </div>
                 <x-ClassFormComponent :modo="$metodo" :tipoproceso="$Etapas->tipoetapas_id" :global="['proceso'=>$Etapas->proceso_id,'etapa'=>$Etapas->id]" />
+
             </form>
         </div>
     </div>

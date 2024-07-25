@@ -17,11 +17,11 @@
                                     @break
                                 @case('text')
                                     {{ Form::label($data->desplegar,"$data->desplegar") }}
-                                    {{ Form::text($data->etiqueta_modelo.'#'.$data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
+                                    {{ Form::text($data->etiqueta_modelo.'#'.$data->atributo, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '','required']) }}
                                     @break
                                 @case('selector')
                                     {{ Form::label($data->desplegar) }}
-                                    {{ Form::select($data->etiqueta_modelo.'#'.$data->atributo,$data->list, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '']) }}
+                                    {{ Form::select($data->etiqueta_modelo.'#'.$data->atributo,$data->list, $data->valor , ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''), 'placeholder' => $data->desplegar, $bloqueado ? ' disabled' : '','required']) }}
                                     @break
                                 @case('ubiedu')
                                     <x-ubieduform id="{{$data->valor ?: 1}}" bloqueado="{{$bloqueado}}" prefijo="{{$data->etiqueta_modelo.'#'}}"/>
@@ -31,10 +31,11 @@
                                     @break
                                 @case('file')
                                     @if(!$bloqueado)
-                                        {{ Form::file($data->etiqueta_modelo . '#'.$data->atributo, ['class' => 'form-control-file' . ($errors->has($data->atributo) ? ' is-invalid' : '')]) }}
+                                        {{ Form::label($data->desplegar) }}
+                                        {{ Form::file($data->etiqueta_modelo . '#'.$data->atributo, ['class' => 'form-control-file' . ($errors->has($data->atributo) ? ' is-invalid' : ''),'required']) }}
                                     @else
                                         <div class="input-group mb-3">
-                                            {{ Form::text( $data->etiqueta_modelo . '#'.$data->atributo ,$data->desplegar, ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''),'disabled']) }}
+                                            {{ Form::text( $data->etiqueta_modelo . '#'.$data->atributo ,$data->desplegar, ['class' => 'form-control' . ($errors->has($data->atributo) ? ' is-invalid' : ''),'disabled','required']) }}
                                             <div class="input-group-append">
                                             <x-file-view id="{{$data->valor}}" />
                                             </div>

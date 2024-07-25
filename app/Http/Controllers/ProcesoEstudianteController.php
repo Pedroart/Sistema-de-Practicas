@@ -45,6 +45,7 @@ class ProcesoEstudianteController extends Controller
      */
     public function ver_metodo($metodo,$proceso,$etapa)
     {
+
         if($metodo !=='create'){
             $EstudianteProceso=Proceso::where([
                 'tipoproceso_id'=>$proceso->id,
@@ -59,8 +60,9 @@ class ProcesoEstudianteController extends Controller
         }
         else{
             $Etapas=new Etapa;
-            $Etapas->proceso_id = $this->procesos->first()->id;
+            $Etapas->proceso_id = $proceso->id;
             $Etapas->tipoetapas_id = $etapa;
+
         }
 
         return view('modo_etapas.estudiante',compact('Etapas','metodo'));
