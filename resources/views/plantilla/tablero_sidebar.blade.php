@@ -13,6 +13,7 @@
             <x-nav-dropdown :permiso="'files.conf'" :title="'Archivos'" :icon="'fas fa-file'" :links="[
                 ['url' =>  route('rutafiles.index') , 'text' => 'Conf. Rutas'],
                 ['url' =>  route('files.index') , 'text' => 'Listado'],
+                ['url' =>  route('enlaces.index') , 'text' => 'Pagina Enlaces'],
             ]" />
             <x-nav-dropdown :permiso="'user.conf'" :title="'Usuarios'" :icon="'fas fa-user'" :links="[
                 ['url' =>  route('personas.index') , 'text' => 'Personas'],

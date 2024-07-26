@@ -28,6 +28,8 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
 
     Route::resource('comentarios', App\Http\Controllers\ComentarioController::class);
 
+    Route::resource('enlaces', App\Http\Controllers\EnlaceController::class);
+    Route::get('enlacesrapidos', [App\Http\Controllers\EnlaceController::class,'indexado'])->name('indexado');
 
     Route::resource('semestres', App\Http\Controllers\semestreController::class);
     Route::resource('tipoprocesos', App\Http\Controllers\tipoprocesoController::class);
