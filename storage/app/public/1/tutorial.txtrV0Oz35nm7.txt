@@ -1,0 +1,18 @@
+Link de ingreso:
+
+https://dev.practicas-sistema.com/
+
+Credenciales: 
+
+// Crear un usuario administrador y asignarle el rol
+'email' => 'admin@admin.com',
+'password' => bcrypt('87654321'), // Recuerda cambiar esto por una contraseña segura
+
+'email' => 'Sistema@admin.com',
+'password' => bcrypt('87654321'), // Recuerda cambiar esto por una contraseña segura
+
+'email' => 'estudiante@admin.com',
+'password' => bcrypt('87654321'), // Recuerda cambiar esto por una contraseña segura
+
+'user_id'=>$estudiante->id,
+'escuela_id'=>1,

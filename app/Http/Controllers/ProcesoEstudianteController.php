@@ -53,14 +53,14 @@ class ProcesoEstudianteController extends Controller
                 'semestre_id' => $this->semestre->id,
             ])->firstOrFail();
             $Etapas=Etapa::where([
-                'proceso_id' => $EstudianteProceso->id,
+                'proceso_id' => $this->procesos->first()->id,
                 'tipoetapas_id'=>$etapa
             ])->firstOrFail();
 
         }
         else{
             $Etapas=new Etapa;
-            $Etapas->proceso_id = $proceso->id;
+            $Etapas->proceso_id = $this->procesos->first()->id;
             $Etapas->tipoetapas_id = $etapa;
 
         }
