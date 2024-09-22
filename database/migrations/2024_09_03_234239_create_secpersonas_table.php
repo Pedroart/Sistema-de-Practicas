@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('secpersonas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seccion_id')->constrained()->nullable();
-            $table->foreignId('supervisor_id')->nullable()->constrained('userinstitucionals');
-            $table->foreignId('estudiante_id')->constrained('userinstitucionals');
+            $table->foreignId('supervisor_id')->nullable()->constrained('userinstitucionals')->cascadeOnDelete();;
+            $table->foreignId('estudiante_id')->constrained('userinstitucionals')->cascadeOnDelete();;
             $table->timestamps();
         });
     }

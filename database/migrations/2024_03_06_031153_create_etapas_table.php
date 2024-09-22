@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('etapas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('proceso_id')->constrained()->nullable();
+            $table->foreignId('proceso_id')->constrained()->nullable()->cascadeOnDelete();;
             $table->foreignId('tipoetapas_id')->constrained()->nullable();
             $table->foreignId('estado_id')->constrained()->nullable();
             $table->timestamps();

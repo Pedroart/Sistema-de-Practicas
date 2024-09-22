@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userinstitucional_id')->constrained()->nullable();
+            $table->foreignId('userinstitucional_id')->constrained()->nullable()->cascadeOnDelete();;
             $table->foreignId('semestre_id')->constrained()->nullable();
             $table->foreignId('estado_id')->constrained()->nullable();
             $table->foreignId('doc1_id')->constrained('files')->onDelete('cascade');

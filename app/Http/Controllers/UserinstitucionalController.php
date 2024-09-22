@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Userinstitucional;
 use Illuminate\Http\Request;
 
@@ -100,7 +101,8 @@ class UserinstitucionalController extends Controller
      */
     public function destroy($id)
     {
-        $userinstitucional = Userinstitucional::find($id)->delete();
+        $userinstitucional = Userinstitucional::find($id);
+        $user = User::find($userinstitucional->user_id)->delete();
 
         return redirect()->route('userinstitucionals.index')
             ->with('success', 'Userinstitucional deleted successfully');
