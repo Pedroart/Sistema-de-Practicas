@@ -16,7 +16,7 @@
                 ['url' =>  route('enlaces.index') , 'text' => 'Pagina Enlaces'],
             ]" />
             <x-nav-dropdown :permiso="'user.conf'" :title="'Usuarios'" :icon="'fas fa-user'" :links="[
-                ['url' =>  route('personas.index') , 'text' => 'Personas'],
+                //['url' =>  route('personas.index') , 'text' => 'Personas'],
                 ['url' =>  route('userinstitucionals.index') , 'text' => 'Institucionals'],
             ]" />
             <x-nav-dropdown :permiso="'empresas.conf'" :title="'Empresa'" :icon="'fas fa-building'" :links="[
