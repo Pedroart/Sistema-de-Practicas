@@ -214,7 +214,7 @@ class ProcesoEstudianteController extends Controller
         $secciones = Secpersona::where('estudiante_id',$user->userinstitucional->id)->first();
         $docente_id = NULL;
         if($secciones){
-            $seccion = Seccion::find($secciones->id);
+            $seccion = Seccion::find($secciones->seccion_id);
             $docente_id = $seccion->docente_id;
         }
         $request['docente_id'] = $docente_id;
