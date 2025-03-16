@@ -39,7 +39,7 @@ class EnlaceController extends Controller
      */
     public function create()
     {
-        $enlace = new Enlace;
+        $enlace = new Enlace();
         $desplegable_enlaces = File::where('rutafile_id', 1)->pluck('path', 'id');
 
         return view('enlace.create', compact('enlace', 'desplegable_enlaces'));

@@ -10,11 +10,11 @@ trait Upload
 {
     public function UploadFile(UploadedFile $file, $folder = null, $disk = 'public', $filename = null)
     {
-        $FileName = ! is_null($filename) ? $filename : $file->getClientOriginalName().Str::random(10);
+        $FileName = ! is_null($filename) ? $filename : $file->getClientOriginalName() . Str::random(10);
 
         return $file->storeAs(
             $folder,
-            $FileName.'.'.$file->getClientOriginalExtension(),
+            $FileName . '.' . $file->getClientOriginalExtension(),
             $disk
         );
     }

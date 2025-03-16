@@ -28,13 +28,11 @@ class ClassFormComponent extends Component
         $modelos = [];
         $params = [];
         foreach (json_decode($modeladorRaw->modelo, true) as $modelador) {
-
             $paramb1 = array_map(function ($item) use ($modelos, $global) {
                 $atributo = $item['metodo'];
 
                 switch ($atributo) {
                     case 'global':
-
                         return $global[$item['valor']];
                     case 'ref':
                         return $modelos[$item['valor']]->getAttribute($item['atributo_ref']);
@@ -48,7 +46,6 @@ class ClassFormComponent extends Component
             // $params[] = $paramb1;
             // $this->callback = $params;
             $modelos[$modelador['etiqueta_modelo']] = App::make($modelador['modelo_tipo'])::firstOrNew($paramb1);
-
         }
         foreach (collect(json_decode($modeladorRaw->item))->groupBy('grupo') as $grupo) {
             foreach ($grupo as $item) {

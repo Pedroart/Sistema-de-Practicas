@@ -41,7 +41,7 @@ class UbigeoForm extends Component
         $this->indi_distrito = null;
 
         if (! is_null($id) & $id !== '') {
-            $controller = new UbigeoController;
+            $controller = new UbigeoController();
             $data = $controller->consolidad($id);
             $this->lista_departamento = [$data['departamento']['id'] => $data['departamento']['nombre']];
             $this->indi_departamento = $data['departamento']['id'];
@@ -52,7 +52,6 @@ class UbigeoForm extends Component
             $this->lista_distrito = [$data['distrito']['id'] => $data['distrito']['nombre']];
             $this->indi_distrito = $data['distrito']['id'];
         }
-
     }
 
     /**

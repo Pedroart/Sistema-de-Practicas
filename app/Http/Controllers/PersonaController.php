@@ -30,7 +30,7 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        $persona = new Persona;
+        $persona = new Persona();
 
         return view('persona.create', compact('persona'));
     }

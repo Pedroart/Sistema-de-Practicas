@@ -3217,6 +3217,5 @@ class TiposSeeder extends Seeder
             'item' => json_encode($ITEM04),
             'dependencia_guardado' => json_encode($DEPENDENCIAS04),
         ]);
-
     }
 }

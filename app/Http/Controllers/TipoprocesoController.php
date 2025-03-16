@@ -30,7 +30,7 @@ class TipoprocesoController extends Controller
      */
     public function create()
     {
-        $tipoproceso = new Tipoproceso;
+        $tipoproceso = new Tipoproceso();
 
         return view('tipoproceso.create', compact('tipoproceso'));
     }

@@ -38,7 +38,7 @@ class UserinstitucionalController extends Controller
      */
     public function create()
     {
-        $userinstitucional = new Userinstitucional;
+        $userinstitucional = new Userinstitucional();
 
         return view('userinstitucional.create', compact('userinstitucional'));
     }

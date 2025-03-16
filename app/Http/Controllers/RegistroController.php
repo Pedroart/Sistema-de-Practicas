@@ -47,7 +47,7 @@ class RegistroController extends Controller
      */
     public function create()
     {
-        $registro = new Registro;
+        $registro = new Registro();
         $registro->semestre = Semestre::orderBy('id', 'desc')->first();
         $user = Auth::user();
         $estudiantes = User::getUsersWithRole('docente supervisor');
@@ -78,7 +78,6 @@ class RegistroController extends Controller
         $ficha = null;
         $recod = null;
         if ($request->hasFile('doc1_id')) {
-
             $path = $this->UploadFile($request->file('doc1_id'), 2); // use the method in the trait
             $save = [
                 'path' => $path,
@@ -88,7 +87,6 @@ class RegistroController extends Controller
             $ficha = File::create($save)->id;
         }
         if ($request->hasFile('doc2_id')) {
-
             $path = $this->UploadFile($request->file('doc2_id'), 2); // use the method in the trait
             $save = [
                 'path' => $path,

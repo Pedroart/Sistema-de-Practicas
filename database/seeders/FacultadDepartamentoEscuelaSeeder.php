@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Departamentoacademico;
+use App\Models\DepartamentoAcademico;
 use App\Models\Escuela;
 use App\Models\Facultad;
 use Illuminate\Database\Seeder;
@@ -33,28 +33,28 @@ class FacultadDepartamentoEscuelaSeeder extends Seeder
 
         // Crear Departamentos Académicos
         // Crear Departamentos Académicos
-        $departamento1 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Derecho y Ciencias Políticas']);
-        $departamento2 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ciencias Sociales y Comunicación']);
-        $departamento3 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Administración y Gestión']);
-        $departamento4 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Economía y Finanzas']);
-        $departamento5 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ciencias Contables y Financieras']);
-        $departamento6 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Medicina Humana']);
-        $departamento7 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Enfermería']);
-        $departamento8 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Bromatología y Nutrición']);
-        $departamento9 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ciencias de la Educación y Tecnología Educativa']);
-        $departamento10 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ciencias Sociales y Humanidades']);
-        $departamento11 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ciencias Formales y Naturales']);
-        $departamento12 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ingeniería Industrial']);
-        $departamento13 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ingeniería de Sistemas, Informática y Electrónica']);
-        $departamento14 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ingeniería Civil']);
-        $departamento15 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ingeniería Química y Metalúrgica']);
-        $departamento16 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Agronomía']);
-        $departamento17 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Zootecnia']);
-        $departamento18 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ingeniería en Industrias Alimentarias']);
-        $departamento19 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Ingeniería Pesquera e Ingeniería Acuícola']);
-        $departamento20 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Matemática y Estadística']);
-        $departamento21 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Física']);
-        $departamento22 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Biología']);
+        $departamento1 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Derecho y Ciencias Políticas']);
+        $departamento2 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ciencias Sociales y Comunicación']);
+        $departamento3 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Administración y Gestión']);
+        $departamento4 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Economía y Finanzas']);
+        $departamento5 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ciencias Contables y Financieras']);
+        $departamento6 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Medicina Humana']);
+        $departamento7 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Enfermería']);
+        $departamento8 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Bromatología y Nutrición']);
+        $departamento9 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ciencias de la Educación y Tecnología Educativa']);
+        $departamento10 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ciencias Sociales y Humanidades']);
+        $departamento11 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ciencias Formales y Naturales']);
+        $departamento12 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ingeniería Industrial']);
+        $departamento13 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ingeniería de Sistemas, Informática y Electrónica']);
+        $departamento14 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ingeniería Civil']);
+        $departamento15 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ingeniería Química y Metalúrgica']);
+        $departamento16 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Agronomía']);
+        $departamento17 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Zootecnia']);
+        $departamento18 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ingeniería en Industrias Alimentarias']);
+        $departamento19 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Ingeniería Pesquera e Ingeniería Acuícola']);
+        $departamento20 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Matemática y Estadística']);
+        $departamento21 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Física']);
+        $departamento22 = DepartamentoAcademico::create(['nombre' => 'Departamento Académico de Biología']);
 
         // Asociar Departamentos a Facultades
         $facultad1->departamentos()->saveMany([$departamento1]);
@@ -132,6 +132,5 @@ class FacultadDepartamentoEscuelaSeeder extends Seeder
         $departamento20->escuelas()->saveMany([$escuela32, $escuela33]);
         $departamento21->escuelas()->saveMany([$escuela34]);
         $departamento22->escuelas()->saveMany([$escuela35]);
-
     }
 }

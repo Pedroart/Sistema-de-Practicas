@@ -131,6 +131,5 @@ class RoleSeeder extends Seeder
             $director_escuela,
             $docente_titular,
             $docente_supervisor]);
-
     }
 }

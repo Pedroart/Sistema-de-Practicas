@@ -30,7 +30,7 @@ class SemestreController extends Controller
      */
     public function create()
     {
-        $semestre = new Semestre;
+        $semestre = new Semestre();
 
         return view('semestre.create', compact('semestre'));
     }

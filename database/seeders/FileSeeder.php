@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\models\File;
+use App\Models\File;
 use Illuminate\Database\Seeder;
 
 class FileSeeder extends Seeder

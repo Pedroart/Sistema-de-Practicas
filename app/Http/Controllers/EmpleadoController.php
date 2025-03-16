@@ -30,7 +30,7 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $empleado = new Empleado;
+        $empleado = new Empleado();
 
         return view('empleado.create', compact('empleado'));
     }

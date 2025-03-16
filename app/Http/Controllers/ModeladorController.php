@@ -30,7 +30,7 @@ class ModeladorController extends Controller
      */
     public function create()
     {
-        $modelador = new Modelador;
+        $modelador = new Modelador();
 
         return view('modelador.create', compact('modelador'));
     }

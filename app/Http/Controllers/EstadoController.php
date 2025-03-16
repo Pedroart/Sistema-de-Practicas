@@ -30,7 +30,7 @@ class EstadoController extends Controller
      */
     public function create()
     {
-        $estado = new Estado;
+        $estado = new Estado();
 
         return view('estado.create', compact('estado'));
     }

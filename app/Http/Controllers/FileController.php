@@ -33,7 +33,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        $file = new File;
+        $file = new File();
 
         return view('file.create', compact('file'));
     }
@@ -48,7 +48,6 @@ class FileController extends Controller
         request()->validate(File::$rules);
 
         if ($request->hasFile('archivo')) {
-
             $path = $this->UploadFile($request->file('archivo'), $request->rutafile_id); // use the method in the trait
             $request['path'] = $path;
             $file = File::create($request->all());

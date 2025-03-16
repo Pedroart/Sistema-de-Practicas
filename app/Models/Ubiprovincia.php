@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\belongsto;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 
-class ubiprovincia extends Model
+class Ubiprovincia extends Model
 {
     use HasFactory;
 

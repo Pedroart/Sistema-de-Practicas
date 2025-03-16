@@ -132,8 +132,7 @@ class SeccionController extends Controller
                         'semestre_id' => $semestre->keys()->first(),
                         'estado_id' => 1,
                         'tipoproceso_id' => 5,
-                    ]
-                    );
+                    ]);
 
                     $Archivos = Archivo::create([
                         'proceso_id' => $proceso->id,
@@ -141,7 +140,6 @@ class SeccionController extends Controller
                         'id_model' => $estudiante_id,
                         'etiqueta' => 'estudiante_id']);
                     //                    return $Archivos;
-
                 } else {
                     // Opcional: Si no existe el registro, podrías crear uno nuevo o manejar el caso
                     // Secpersona::create([
@@ -181,10 +179,10 @@ class SeccionController extends Controller
             return (object) [
                 'id' => $profesor->supervisor_id,
                 'apellido' => $profesor->name,
-                'nombre_profesor' => $profesor->supervisor->persona?->name.' '.$profesor->supervisor->persona?->apellido_paterno,
+                'nombre_profesor' => $profesor->supervisor->persona?->name . ' ' . $profesor->supervisor->persona?->apellido_paterno,
             ];
         });
-        $exasec = new Secsuper;
+        $exasec = new Secsuper();
 
         return view('seccion.asignaciones', compact('seccion', 'estudiantes', 'grupos', 'estudiantes_sin_grupo'));
     }

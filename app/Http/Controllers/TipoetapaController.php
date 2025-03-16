@@ -30,7 +30,7 @@ class TipoetapaController extends Controller
      */
     public function create()
     {
-        $tipoetapa = new Tipoetapa;
+        $tipoetapa = new Tipoetapa();
 
         return view('tipoetapa.create', compact('tipoetapa'));
     }

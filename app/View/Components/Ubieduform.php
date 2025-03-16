@@ -41,7 +41,7 @@ class Ubieduform extends Component
         $this->bloqueado = $bloqueado;
 
         if (! is_null($id)) {
-            $controller = new UbieduController;
+            $controller = new UbieduController();
             $data = $controller->consolidado($id);
             $this->lista_facultad = [$data['facultad']['id'] => $data['facultad']['nombre']];
             $this->indi_facultad = $data['facultad']['id'];

@@ -30,7 +30,7 @@ class ComentarioController extends Controller
      */
     public function create()
     {
-        $comentario = new Comentario;
+        $comentario = new Comentario();
 
         return view('comentario.create', compact('comentario'));
     }

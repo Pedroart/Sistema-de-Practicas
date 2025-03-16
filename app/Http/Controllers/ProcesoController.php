@@ -108,9 +108,7 @@ class ProcesoController extends Controller
 
             return view('proceso.index_supervisor', compact('procesos'));
         } elseif ($user->hasRole('director academico')) {
-
         } elseif ($user->hasRole('director escuela')) {
-
         }
 
         return view('proceso.index_titular', compact('procesos'));
@@ -169,9 +167,7 @@ class ProcesoController extends Controller
                 ->where('estudiante_id', $user->Userinstitucional->id)
                 ->get();
         } elseif ($user->hasRole('director academico')) {
-
         } elseif ($user->hasRole('director escuela')) {
-
         }
 
         return view('proceso.index', compact('procesos'));
@@ -184,7 +180,7 @@ class ProcesoController extends Controller
      */
     public function create()
     {
-        $proceso = new Proceso;
+        $proceso = new Proceso();
 
         $semestre = Semestre::orderByDesc('id')->pluck('name', 'id');
         $proceso->semestre_id = $semestre->keys()->first();
@@ -209,7 +205,6 @@ class ProcesoController extends Controller
 
         return view('modo_etapas.profesores', compact('Etapas', 'metodo', 'estados'));
         // return "Procesando proceso '$EstudianteProceso";
-
     }
 
     public function procesar(Request $request, $id, $nombre, $etapa = null, $metodo = null)
@@ -222,7 +217,6 @@ class ProcesoController extends Controller
             // Si se proporcionan todos los parámetros
 
             return $this->ver_metodo($metodo, $proceso, $etapa);
-
         } elseif (! is_null($etapa)) {
             // Si se proporciona solo el nombre y la etapa
             return "Procesando proceso '$nombre' en la etapa '$etapa'";
@@ -239,14 +233,13 @@ class ProcesoController extends Controller
         $proceso = Proceso::where('id', $id_proceso)->first();
         $tipoetapas = Tipoetapa::where('tipoproceso_id', $proceso->tipoproceso_id)->get();
         $etapas = [];
-        $etapabase = new Etapa;
+        $etapabase = new Etapa();
         $etapabase->id = 99;
         $etapabase->proceso_id = $proceso->id;
         $etapabase->estado_id = 5;
         $proceoetapas = $proceso->etapas;
 
         foreach ($tipoetapas as $etapa) {
-
             $etapa_con_tipoetapa = $proceoetapas->whereIn('tipoetapas_id', $etapa->id)->first();
             if ($etapa_con_tipoetapa) {
                 $etapas[] = $etapa_con_tipoetapa;
@@ -255,7 +248,6 @@ class ProcesoController extends Controller
                 $newEtapa->tipoetapas_id = $etapa->id;
                 $etapas[] = $newEtapa;
             }
-
         }
 
         return view('proceso.estudiante.index', compact('proceso', 'tipoetapas', 'etapas'));
@@ -304,14 +296,13 @@ class ProcesoController extends Controller
 
         $tipoetapas = Tipoetapa::where('tipoproceso_id', $proceso->tipoproceso_id)->get();
         $etapas = [];
-        $etapabase = new Etapa;
+        $etapabase = new Etapa();
         $etapabase->id = 99;
         $etapabase->proceso_id = $proceso->id;
         $etapabase->estado_id = 5;
         $proceoetapas = $proceso->etapas;
 
         foreach ($tipoetapas as $etapa) {
-
             $etapa_con_tipoetapa = $proceoetapas->whereIn('tipoetapas_id', $etapa->id)->first();
             if ($etapa_con_tipoetapa) {
                 $etapas[] = $etapa_con_tipoetapa;
@@ -320,7 +311,6 @@ class ProcesoController extends Controller
                 $newEtapa->tipoetapas_id = $etapa->id;
                 $etapas[] = $newEtapa;
             }
-
         }
 
         return view('proceso.show', compact('proceso', 'etapas'));
@@ -333,7 +323,7 @@ class ProcesoController extends Controller
         $docentes = $listadodocentes->map(function ($user) {
             return [
                 'id' => $user->userinstitucional->id,
-                'name' => $user->userinstitucional->codigo.' | '.$user->name,
+                'name' => $user->userinstitucional->codigo . ' | ' . $user->name,
             ];
         })->pluck('name', 'id');
         $estudiantes = User::getUsersWithRole('estudiante');
@@ -364,7 +354,7 @@ class ProcesoController extends Controller
         $docentes = $listadodocentes->map(function ($user) {
             return [
                 'id' => $user->userinstitucional->id,
-                'name' => $user->userinstitucional->codigo.' | '.$user->name,
+                'name' => $user->userinstitucional->codigo . ' | ' . $user->name,
             ];
         })->pluck('name', 'id');
         $estudiantes = User::getUsersWithRole('estudiante');

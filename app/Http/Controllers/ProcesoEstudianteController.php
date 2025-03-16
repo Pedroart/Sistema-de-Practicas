@@ -60,17 +60,14 @@ class ProcesoEstudianteController extends Controller
                 'proceso_id' => $this->procesos->first()->id,
                 'tipoetapas_id' => $etapa,
             ])->firstOrFail();
-
         } else {
-            $Etapas = new Etapa;
+            $Etapas = new Etapa();
             $Etapas->proceso_id = $this->procesos->first()->id;
             $Etapas->tipoetapas_id = $etapa;
-
         }
 
         return view('modo_etapas.estudiante', compact('Etapas', 'metodo'));
         // return "Procesando proceso '$EstudianteProceso";
-
     }
 
     public function procesar(Request $request, $nombre, $etapa = null, $metodo = null)
@@ -81,7 +78,6 @@ class ProcesoEstudianteController extends Controller
             // Si se proporcionan todos los parámetros
 
             return $this->ver_metodo($metodo, $proceso, $etapa);
-
         } elseif (! is_null($etapa)) {
             // Si se proporciona solo el nombre y la etapa
             return "Procesando proceso '$nombre' en la etapa '$etapa'";
@@ -109,14 +105,13 @@ class ProcesoEstudianteController extends Controller
         $proceso = Proceso::where('id', $id_proceso)->first();
         $tipoetapas = Tipoetapa::where('tipoproceso_id', $proceso->tipoproceso_id)->get();
         $etapas = [];
-        $etapabase = new Etapa;
+        $etapabase = new Etapa();
         $etapabase->id = 99;
         $etapabase->proceso_id = $proceso->id;
         $etapabase->estado_id = 5;
         $proceoetapas = $proceso->etapas;
 
         foreach ($tipoetapas as $etapa) {
-
             $etapa_con_tipoetapa = $proceoetapas->whereIn('tipoetapas_id', $etapa->id)->first();
             if ($etapa_con_tipoetapa) {
                 $etapas[] = $etapa_con_tipoetapa;
@@ -125,7 +120,6 @@ class ProcesoEstudianteController extends Controller
                 $newEtapa->tipoetapas_id = $etapa->id;
                 $etapas[] = $newEtapa;
             }
-
         }
 
         return view('proceso.estudiante.index', compact('proceso', 'tipoetapas', 'etapas'));
@@ -159,7 +153,7 @@ class ProcesoEstudianteController extends Controller
         // $secciones = Seccion::where()
         // where('docente_id', '=', $user->Userinstitucional->id)->get();
 
-        $proceso = new Proceso;
+        $proceso = new Proceso();
         $proceso->estudiante_id = $user->userinstitucional->id;
 
         $proceso->semestre_id = $semestreactual;
@@ -182,7 +176,7 @@ class ProcesoEstudianteController extends Controller
     {
         $user = auth()->user();
 
-        $proceso = new Proceso;
+        $proceso = new Proceso();
         $proceso->estudiante_id = $user->userinstitucional->id;
 
         $semestre = Semestre::orderByDesc('id')->pluck('name', 'id');

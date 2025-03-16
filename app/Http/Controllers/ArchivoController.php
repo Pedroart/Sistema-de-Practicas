@@ -30,7 +30,7 @@ class ArchivoController extends Controller
      */
     public function create()
     {
-        $archivo = new Archivo;
+        $archivo = new Archivo();
 
         return view('archivo.create', compact('archivo'));
     }

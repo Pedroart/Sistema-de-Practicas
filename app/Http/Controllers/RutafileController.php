@@ -30,7 +30,7 @@ class RutafileController extends Controller
      */
     public function create()
     {
-        $rutafile = new Rutafile;
+        $rutafile = new Rutafile();
 
         return view('rutafile.create', compact('rutafile'));
     }

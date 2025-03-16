@@ -11,7 +11,7 @@ trait InstitucionalUser
     public function crearUserinstitucional($role, $codigo, $name, $apellido_materno, $apellido_paterno, $escuela_id, $email = null)
     {
         // Determinar el email a usar
-        $emailAddress = $email ? $email : $codigo.'@unjfsc.edu.pe';
+        $emailAddress = $email ? $email : $codigo . '@unjfsc.edu.pe';
 
         // Definir los datos del usuario
         $user_data = [

@@ -79,7 +79,6 @@ class PerfilController extends Controller
         if ($persona !== null) {
             request()->validate(Persona::$rules);
             $persona->update($request->all());
-
         } else {
             $persona = Persona::create($request->all());
             $user->userinstitucional->update(['personas_id' => $persona->id]);

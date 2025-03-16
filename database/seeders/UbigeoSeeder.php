@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\ubidepartamento;
-use App\Models\ubidistrito;
-use App\Models\ubiprovincia;
+use App\Models\Ubidepartamento;
+use App\Models\Ubidistrito;
+use App\Models\Ubiprovincia;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 

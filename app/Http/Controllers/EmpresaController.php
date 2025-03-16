@@ -30,7 +30,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        $empresa = new Empresa;
+        $empresa = new Empresa();
 
         return view('empresa.create', compact('empresa'));
     }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\belongsto;
 
-class ubidistrito extends Model
+class Ubidistrito extends Model
 {
     use HasFactory;
 

@@ -47,7 +47,7 @@ class MatriculaController extends Controller
      */
     public function create()
     {
-        $matricula = new Matricula;
+        $matricula = new Matricula();
         $matricula->semestre = Semestre::orderBy('id', 'desc')->first();
         $user = Auth::user();
         $estudiantes = User::getUsersWithRole('estudiante');
@@ -75,7 +75,6 @@ class MatriculaController extends Controller
         $ficha = null;
         $recod = null;
         if ($request->hasFile('matricula_id')) {
-
             $path = $this->UploadFile($request->file('matricula_id'), 2); // use the method in the trait
             $save = [
                 'path' => $path,
@@ -85,7 +84,6 @@ class MatriculaController extends Controller
             $ficha = File::create($save)->id;
         }
         if ($request->hasFile('record_id')) {
-
             $path = $this->UploadFile($request->file('record_id'), 2); // use the method in the trait
             $save = [
                 'path' => $path,

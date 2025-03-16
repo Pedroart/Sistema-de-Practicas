@@ -37,7 +37,7 @@ class EtapaController extends Controller
      */
     public function create()
     {
-        $etapa = new Etapa;
+        $etapa = new Etapa();
 
         return view('etapa.create', compact('etapa'));
     }
@@ -77,10 +77,8 @@ class EtapaController extends Controller
                     } else {
                         $agrupados[$etiqueta][$atributo] = 'file';
                     }
-
                 }
             }
-
         }
         /* Observar posibilidad
         foreach ($request->file() as $clave => $valor) {
@@ -127,7 +125,7 @@ class EtapaController extends Controller
             if ($agrupados[$etiquetaModel]['id'] == 'file') {
                 // Subir Archivo al Servidor
 
-                $path = $this->UploadFile($request->file($etiquetaModel.'#id'), 2, 'public', $etiquetaModel.$agrupados['proceso']['id'].Str::random(10));
+                $path = $this->UploadFile($request->file($etiquetaModel . '#id'), 2, 'public', $etiquetaModel . $agrupados['proceso']['id'] . Str::random(10));
                 $agrupados[$etiquetaModel]['path'] = $path;
             }
 
@@ -136,7 +134,6 @@ class EtapaController extends Controller
             }
 
             foreach ($Models->relaciones as $Relaciones) {
-
                 if ($Relaciones->dependencia !== '') {
                     $referenciaModel = $Relaciones->modelo_referencia;
                     $refatributo = $Relaciones->atributo;
@@ -150,7 +147,6 @@ class EtapaController extends Controller
 
             $id = App::make($ClassModel)::create($atributo);
             $agrupados[$etiquetaModel]['id'] = $id->id;
-
         }
 
         Etapa::create([
@@ -235,13 +231,11 @@ class EtapaController extends Controller
         $modelos = [];
         $params = [];
         foreach (json_decode($modeladorRaw->modelo, true) as $modelador) {
-
             $paramb1 = array_map(function ($item) use ($modelos, $global) {
                 $atributo = $item['metodo'];
 
                 switch ($atributo) {
                     case 'global':
-
                         return $global[$item['valor']];
                     case 'ref':
                         return $modelos[$item['valor']]->getAttribute($item['atributo_ref']);
@@ -255,7 +249,6 @@ class EtapaController extends Controller
             // $params[] = $paramb1;
             // $this->callback = $params;
             $modelos[$modelador['etiqueta_modelo']] = App::make($modelador['modelo_tipo'])::firstOrNew($paramb1);
-
         }
 
         foreach (array_reverse($Dependencias) as $nombre => $ModelBorrar) {
@@ -273,7 +266,6 @@ class EtapaController extends Controller
 
         return redirect()->route('proceso.index', ['nombre' => $modeladorRaw->tipoetapa->tipoproceso->name])
             ->with('success', 'Etapa deleted successfully');
-
     }
 
     /**

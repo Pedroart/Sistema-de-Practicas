@@ -81,7 +81,6 @@ class UserinstitucionalloteControlador extends Controller
             if ($valores[0] !== '') {
                 $datosCSV[] = array_slice($valores, 0, 6);
             }
-
         }
         array_shift($datosCSV);
         $role = '';
@@ -115,13 +114,12 @@ class UserinstitucionalloteControlador extends Controller
             if ($valores[0] !== '') {
                 $datosCSV[] = array_slice($valores, 0, 6);
             }
-
         }
         array_shift($datosCSV);
 
         // Extraer el dato del índice 0
         // Extraer el dato del índice 0
-        $curso = 'Escuela Profesional de '.trim($datosCSV[0][2], '"');
+        $curso = 'Escuela Profesional de ' . trim($datosCSV[0][2], '"');
 
         // Convertir todo el texto a minúsculas
         $curso = mb_strtolower($curso, 'UTF-8');

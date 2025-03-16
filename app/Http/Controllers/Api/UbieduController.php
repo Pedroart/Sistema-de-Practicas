@@ -50,7 +50,6 @@ class UbieduController extends Controller
     public function index($id)
     {
         return response()->json($this->consolidado($id), 200, [], JSON_UNESCAPED_UNICODE);
-
     }
 
     public function facultad()
