@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('archivos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('proceso_id')->constrained()->nullable()->cascadeOnDelete();;
+            $table->foreignId('proceso_id')->constrained()->nullable();
             $table->string('model_type');
             $table->unsignedBigInteger('id_model');
             $table->string('etiqueta');

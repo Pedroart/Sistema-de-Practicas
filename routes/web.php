@@ -17,6 +17,33 @@ use Illuminate\Auth\Middleware\Authorize;
 Route::get('/', function () { return view('web.index'); } )->name('index.welcome');
 Route::get('bolsa_trabajo', function () { return view('web.bolsa_trabajo'); } )->name('index.bolsa_trabajo');
 
+Route::get('/symlink', function () {
+   $target =$_SERVER['DOCUMENT_ROOT'].'/storage/app/public';
+   $link = $_SERVER['DOCUMENT_ROOT'].'/public/storage';
+   //symlink($target, $link);
+   echo $target." ".$link;
+});
+
+Route::get('/storage', function(){ 
+    Artisan::call('storage:link'); 
+    return "proceso de enlace completado exitosamente"; 
+});
+
+Route::get('/clear-cache', function () { 
+    Artisan::call('cache:clear'); 
+    return "Se borr贸 el cach茅"; 
+});
+
+Route::get('/storage/{path}', function ($path) {
+    $filePath = '/home/pracsis/practicas-sistema3/storage/app/public/' . $path;
+
+    if (!file_exists($filePath)) {
+        abort(404);
+    }
+
+    return response()->file($filePath);
+})->where('path', '.*');
+
 Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')->group(function () {
     Route::get('/', function () {return view('dashboard');})->name('dashboard');
 

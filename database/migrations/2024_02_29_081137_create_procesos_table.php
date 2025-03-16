@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('procesos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('docente_id')->nullable()->constrained('userinstitucionals')->cascadeOnDelete();;
-            $table->foreignId('estudiante_id')->constrained('userinstitucionals')->cascadeOnDelete();;
-            $table->foreignId('semestre_id')->constrained()->nullable()->onDelete('no action');
-            $table->foreignId('estado_id')->constrained()->nullable()->onDelete('no action');
-            $table->foreignId('tipoproceso_id')->nullable()->constrained()->nullable()->onDelete('no action');
+            $table->foreignId('docente_id')->nullable()->constrained('userinstitucionals');
+            $table->foreignId('estudiante_id')->constrained('userinstitucionals');
+            $table->foreignId('semestre_id')->constrained()->nullable();
+            $table->foreignId('estado_id')->constrained()->nullable();
+            $table->foreignId('tipoproceso_id')->nullable()->constrained()->nullable();
             $table->timestamps();
         });
     }

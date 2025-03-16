@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('seccions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('docente_id')->nullable()->constrained('userinstitucionals')->cascadeOnDelete();;
+            $table->foreignId('docente_id')->nullable()->constrained('userinstitucionals');
             $table->foreignId('semestre_id')->constrained()->nullable();
             $table->timestamps();
         });

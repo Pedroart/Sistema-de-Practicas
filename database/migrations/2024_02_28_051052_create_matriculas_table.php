@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('matriculas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userinstitucional_id')->constrained()->nullable()->onDelete('cascade');
+            $table->foreignId('userinstitucional_id')->constrained()->nullable();
             $table->foreignId('semestre_id')->constrained()->nullable();
             $table->foreignId('estado_id')->constrained()->nullable();
             $table->foreignId('comentario_id')->nullable()->constrained()->nullable();
