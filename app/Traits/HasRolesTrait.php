@@ -2,19 +2,17 @@
 
 namespace App\Traits;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 trait HasRolesTrait
 {
-
-    public static  function getUsersWithRole($roleName)
+    public static function getUsersWithRole($roleName)
     {
         // Obtener el rol por su nombre
         $role = Role::where('name', $roleName)->first();
 
-        if (!$role) {
+        if (! $role) {
             return []; // El rol no existe, retornar un arreglo vacío
         }
 

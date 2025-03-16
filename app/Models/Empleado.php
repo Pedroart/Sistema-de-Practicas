@@ -17,21 +17,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property $cargo
  * @property $created_at
  * @property $updated_at
- *
  * @property Empresa $empresa
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Empleado extends Model
 {
-
-    static $rules = [
-		'name' => 'required',
-		'apellido_paterno' => 'required',
-		'apellido_materno' => 'required',
-		'genero' => 'required',
-		'grado_instruccion' => 'required',
-		'cargo' => 'required',
+    public static $rules = [
+        'name' => 'required',
+        'apellido_paterno' => 'required',
+        'apellido_materno' => 'required',
+        'genero' => 'required',
+        'grado_instruccion' => 'required',
+        'cargo' => 'required',
     ];
 
     protected $perPage = 20;
@@ -41,8 +39,7 @@ class Empleado extends Model
      *
      * @var array
      */
-    protected $fillable = ['empresa_id','name','apellido_paterno','apellido_materno','genero','grado_instruccion','cargo'];
-
+    protected $fillable = ['empresa_id', 'name', 'apellido_paterno', 'apellido_materno', 'genero', 'grado_instruccion', 'cargo'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -51,6 +48,4 @@ class Empleado extends Model
     {
         return $this->hasOne('App\Models\Empresa', 'id', 'empresa_id');
     }
-
-
 }

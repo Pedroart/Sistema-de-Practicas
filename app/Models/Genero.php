@@ -9,10 +9,9 @@ class Genero extends Model
 {
     use HasFactory;
 
-    static $rules = [
-		'name' => 'required',
+    public static $rules = [
+        'name' => 'required',
     ];
-
 
     /**
      * Attributes that should be mass-assignable.

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Semestre;
+use Illuminate\Database\Seeder;
 
 class SemestreSeeder extends Seeder
 {
@@ -16,12 +15,12 @@ class SemestreSeeder extends Seeder
     public function run()
     {
         $semestre = Semestre::create([
-            'name'=>"2024-01",
-            'vigencia' => '2024-01-01'
+            'name' => '2024-01',
+            'vigencia' => '2024-01-01',
         ]);
         $semestre = Semestre::create([
-            'name'=>"2024-02",
-            'vigencia' => '2024-05-02'
+            'name' => '2024-02',
+            'vigencia' => '2024-05-02',
         ]);
     }
 }

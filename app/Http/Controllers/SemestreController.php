@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class SemestreController
- * @package App\Http\Controllers
  */
 class SemestreController extends Controller
 {
@@ -31,14 +30,14 @@ class SemestreController extends Controller
      */
     public function create()
     {
-        $semestre = new Semestre();
+        $semestre = new Semestre;
+
         return view('semestre.create', compact('semestre'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +53,7 @@ class SemestreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +66,7 @@ class SemestreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +79,6 @@ class SemestreController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Semestre $semestre
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Semestre $semestre)
@@ -95,8 +92,9 @@ class SemestreController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)

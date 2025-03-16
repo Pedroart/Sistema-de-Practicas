@@ -15,20 +15,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property $ubidistrito_id
  * @property $created_at
  * @property $updated_at
- *
  * @property Ubidistrito $ubidistrito
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Persona extends Model
 {
-
-    static $rules = [
-		'name' => 'required',
-		'apellido_materno' => 'required',
-		'apellido_paterno' => 'required',
-		'dni' => 'required|digits:8',
-		'ubidistrito_id' => 'required',
+    public static $rules = [
+        'name' => 'required',
+        'apellido_materno' => 'required',
+        'apellido_paterno' => 'required',
+        'dni' => 'required|digits:8',
+        'ubidistrito_id' => 'required',
     ];
 
     protected $perPage = 50;
@@ -38,8 +36,7 @@ class Persona extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','apellido_materno','apellido_paterno','dni','ubidistrito_id'];
-
+    protected $fillable = ['name', 'apellido_materno', 'apellido_paterno', 'dni', 'ubidistrito_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -48,6 +45,4 @@ class Persona extends Model
     {
         return $this->hasOne('App\Models\Ubidistrito', 'id', 'ubidistrito_id');
     }
-
-
 }

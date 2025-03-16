@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Secpersona;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +11,7 @@ class Seccion extends Model
 
     protected $fillable = [
         'docente_id',
-        'semestre_id'
+        'semestre_id',
     ];
 
     /**

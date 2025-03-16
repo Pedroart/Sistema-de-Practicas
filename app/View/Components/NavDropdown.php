@@ -7,10 +7,14 @@ use Illuminate\View\Component;
 class NavDropdown extends Component
 {
     public $title;
+
     public $links;
+
     public $icon;
+
     public $permiso;
-    public function __construct($permiso="edit",$icon,$title, $links)
+
+    public function __construct($permiso, $icon, $title, $links)
     {
         $this->icon = $icon;
         $this->title = $title;

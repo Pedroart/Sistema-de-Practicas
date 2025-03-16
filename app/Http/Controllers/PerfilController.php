@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use app\models\persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use app\models\persona;
 
 class PerfilController extends Controller
 {
@@ -16,7 +16,8 @@ class PerfilController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('perfil.index',compact('user'));
+
+        return view('perfil.index', compact('user'));
     }
 
     /**
@@ -32,7 +33,6 @@ class PerfilController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -68,7 +68,6 @@ class PerfilController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -77,15 +76,14 @@ class PerfilController extends Controller
         $user = Auth::user();
         $persona = $user->userinstitucional->persona;
 
-        if($persona !== null){
+        if ($persona !== null) {
             request()->validate(Persona::$rules);
             $persona->update($request->all());
 
-        }else{
+        } else {
             $persona = Persona::create($request->all());
-            $user->userinstitucional->update(['personas_id'=>$persona->id]);
+            $user->userinstitucional->update(['personas_id' => $persona->id]);
         }
-
 
         return redirect()->route('perfil.index')
             ->with('success', 'Persona updated successfully');

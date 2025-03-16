@@ -1,29 +1,27 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Seccion;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\Secsuper;
-use App\Models\Secpersona;
-use App\Models\Semestre;
 use App\Models\Archivo;
 use App\Models\Proceso;
+use App\Models\Seccion;
+use App\Models\Secpersona;
+use App\Models\Secsuper;
+use App\Models\Semestre;
+use App\Models\User;
 use Illuminate\Http\Request;
-
-
 
 class SeccionController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        if ($user->hasRole('administrador')){
+        if ($user->hasRole('administrador')) {
             $secciones = Seccion::all();
-        }
-        else {
+        } else {
             $secciones = Seccion::where('docente_id', '=', $user->Userinstitucional->id)->get();
         }
+
         // Obtén todas las secciones y pásalas a la vista
         return view('seccion.index', compact('secciones'));
     }
@@ -32,16 +30,17 @@ class SeccionController extends Controller
     {
         $profesores_ = User::getUsersWithRole('docente titular');
 
-        $profesores = $profesores_->map(function ($profesor){
-            return (object)[
-                'id'=>$profesor->userinstitucional->id,
-                'codigo'=>$profesor->userinstitucional->codigo,
-                'nombre'=> $profesor->name
+        $profesores = $profesores_->map(function ($profesor) {
+            return (object) [
+                'id' => $profesor->userinstitucional->id,
+                'codigo' => $profesor->userinstitucional->codigo,
+                'nombre' => $profesor->name,
             ];
-        })->pluck('nombre','id');
+        })->pluck('nombre', 'id');
         $semestres = Semestre::orderByDesc('id')->pluck('name', 'id');
+
         // Devuelve la vista para crear una nueva sección
-        return view('seccion.create', compact('profesores','semestres'));
+        return view('seccion.create', compact('profesores', 'semestres'));
     }
 
     public function store(Request $request)
@@ -54,13 +53,14 @@ class SeccionController extends Controller
         Seccion::create($request->all());
 
         return redirect()->route('secciones.index')
-                         ->with('success', 'Sección creada exitosamente.');
+            ->with('success', 'Sección creada exitosamente.');
     }
 
-    public function supervisores(Request $request){
+    public function supervisores(Request $request)
+    {
         $request->validate([
             'supervisores' => 'required|array',
-            'supervisores.*' => 'integer|exists:userinstitucionals,id'
+            'supervisores.*' => 'integer|exists:userinstitucionals,id',
         ]);
         $seccion_id = $request->input('seccion_id');
         $supervisores = $request->input('supervisores', []);
@@ -71,6 +71,7 @@ class SeccionController extends Controller
                 'supervisor_id' => $supervisor_id,
             ]);
         }
+
         return redirect()->back()->with('success', 'supervisores created successfully.');
     }
 
@@ -82,23 +83,23 @@ class SeccionController extends Controller
         $supervisores = Secsuper::where('seccion_id', $seccion->id)->get();
 
         $profesores_ = User::getUsersWithRole('docente supervisor');
-        
+
         $profesores_ = User::role('docente supervisor') // Use the 'role' method provided by Spatie Permissions
-                    ->whereHas('userinstitucional') // Ensure they have a 'userinstitucional' relationship
-                    ->with('userinstitucional') // Eager load this relationship
-                    ->get();
-        
-        $lista_supervisores  = $profesores_->map(function ($profesor) use ($seccion) {
-            if( $profesor->userinstitucional->escuela_id == $seccion->docente->escuela_id ){
-                return (object)[
-                    'id'=>$profesor->userinstitucional->id,
-                    'apellido'=>$profesor->name,
-                    'nombre'=> $profesor->userinstitucional->persona?->apellido_paterno,
+            ->whereHas('userinstitucional') // Ensure they have a 'userinstitucional' relationship
+            ->with('userinstitucional') // Eager load this relationship
+            ->get();
+
+        $lista_supervisores = $profesores_->map(function ($profesor) use ($seccion) {
+            if ($profesor->userinstitucional->escuela_id == $seccion->docente->escuela_id) {
+                return (object) [
+                    'id' => $profesor->userinstitucional->id,
+                    'apellido' => $profesor->name,
+                    'nombre' => $profesor->userinstitucional->persona?->apellido_paterno,
                 ];
             }
         });
 
-        return view('seccion.view', compact('seccion','estudiantes','supervisores','lista_supervisores'));
+        return view('seccion.view', compact('seccion', 'estudiantes', 'supervisores', 'lista_supervisores'));
     }
 
     public function grupos(Request $request, $id)
@@ -117,8 +118,8 @@ class SeccionController extends Controller
             foreach ($estudiantes as $estudiante_id) {
                 // Buscar el registro en Secpersona que tenga la seccion_id y el estudiante_id
                 $secpersona = Secpersona::where('seccion_id', $id)
-                                        ->where('estudiante_id', $estudiante_id)
-                                        ->first();
+                    ->where('estudiante_id', $estudiante_id)
+                    ->first();
 
                 // Si existe el registro, asignamos el supervisor_id
                 if ($secpersona) {
@@ -126,20 +127,20 @@ class SeccionController extends Controller
                     $secpersona->save();
 
                     $proceso = Proceso::create([
-                           'docente_id'=>$seccion->docente_id,
-                            'estudiante_id'=> $profesor_id,
-                            'semestre_id'=>$semestre->keys()->first(),
-                            'estado_id'=>1,
-                            'tipoproceso_id'=>5,
-                        ]
+                        'docente_id' => $seccion->docente_id,
+                        'estudiante_id' => $profesor_id,
+                        'semestre_id' => $semestre->keys()->first(),
+                        'estado_id' => 1,
+                        'tipoproceso_id' => 5,
+                    ]
                     );
 
                     $Archivos = Archivo::create([
-                        'proceso_id'=>$proceso->id,
-                        'model_type'=>'userinstitucional',
-                        'id_model'=>$estudiante_id,
-                        'etiqueta'=>'estudiante_id']);
-//                    return $Archivos;
+                        'proceso_id' => $proceso->id,
+                        'model_type' => 'userinstitucional',
+                        'id_model' => $estudiante_id,
+                        'etiqueta' => 'estudiante_id']);
+                    //                    return $Archivos;
 
                 } else {
                     // Opcional: Si no existe el registro, podrías crear uno nuevo o manejar el caso
@@ -159,7 +160,7 @@ class SeccionController extends Controller
     {
         // Devuelve la vista para editar una sección específica
         $seccion = Seccion::find($id);
-        $estudiantesTransformados = Secpersona::where('seccion_id',$seccion->id)->get();
+        $estudiantesTransformados = Secpersona::where('seccion_id', $seccion->id)->get();
         $estudiantes_sin_grupo = 0;
         $estudiantes = $estudiantesTransformados->map(function ($estudiante) use (&$estudiantes_sin_grupo) {
             // Verificar si el estudiante no tiene grupo
@@ -175,17 +176,17 @@ class SeccionController extends Controller
             ];
         });
 
-        $profesores_ = Secsuper::where('seccion_id',$seccion->id)->get();
-        $grupos  = $profesores_->map(function ($profesor){
-            return (object)[
-                'id'=>$profesor->supervisor_id,
-                'apellido'=>$profesor->name,
-                'nombre_profesor'=> $profesor->supervisor->persona?->name . " ". $profesor->supervisor->persona?->apellido_paterno,
+        $profesores_ = Secsuper::where('seccion_id', $seccion->id)->get();
+        $grupos = $profesores_->map(function ($profesor) {
+            return (object) [
+                'id' => $profesor->supervisor_id,
+                'apellido' => $profesor->name,
+                'nombre_profesor' => $profesor->supervisor->persona?->name.' '.$profesor->supervisor->persona?->apellido_paterno,
             ];
         });
-        $exasec=new Secsuper();
+        $exasec = new Secsuper;
 
-        return view('seccion.asignaciones', compact('seccion','estudiantes','grupos','estudiantes_sin_grupo'));
+        return view('seccion.asignaciones', compact('seccion', 'estudiantes', 'grupos', 'estudiantes_sin_grupo'));
     }
 
     public function update(Request $request, $id)
@@ -199,7 +200,7 @@ class SeccionController extends Controller
         $seccion->update($request->all());
 
         return redirect()->route('secciones.index')
-                         ->with('success', 'Sección actualizada exitosamente.');
+            ->with('success', 'Sección actualizada exitosamente.');
     }
 
     public function destroy($id)
@@ -209,6 +210,6 @@ class SeccionController extends Controller
         $seccion->delete();
 
         return redirect()->route('secciones.index')
-                         ->with('success', 'Sección eliminada exitosamente.');
+            ->with('success', 'Sección eliminada exitosamente.');
     }
 }

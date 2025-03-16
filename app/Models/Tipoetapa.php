@@ -13,15 +13,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property $created_at
  * @property $updated_at
  *
- * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Tipoetapa extends Model
 {
-    
-    static $rules = [
-		'name' => 'required',
-		'tipoproceso_id' => 'required',
+    public static $rules = [
+        'name' => 'required',
+        'tipoproceso_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -31,10 +29,10 @@ class Tipoetapa extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','tipoproceso_id'];
+    protected $fillable = ['name', 'tipoproceso_id'];
 
-    public function tipoproceso(){
-      return $this->belongsTo(Tipoproceso::class);
+    public function tipoproceso()
+    {
+        return $this->belongsTo(Tipoproceso::class);
     }
-    
 }

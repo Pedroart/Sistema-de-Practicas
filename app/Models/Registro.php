@@ -16,23 +16,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property $doc2_id
  * @property $created_at
  * @property $updated_at
- *
  * @property Comentario $comentario
  * @property Estado $estado
  * @property File $file
  * @property File $file
  * @property Semestre $semestre
  * @property Userinstitucional $userinstitucional
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Registro extends Model
 {
-
-    static $rules = [
-		'semestre_id' => 'required',
-		'doc1_id' => 'required',
-		'doc2_id' => 'required',
+    public static $rules = [
+        'semestre_id' => 'required',
+        'doc1_id' => 'required',
+        'doc2_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -42,8 +40,7 @@ class Registro extends Model
      *
      * @var array
      */
-    protected $fillable = ['userinstitucional_id','semestre_id','estado_id','comentario_id','doc1_id','doc2_id'];
-
+    protected $fillable = ['userinstitucional_id', 'semestre_id', 'estado_id', 'comentario_id', 'doc1_id', 'doc2_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -92,6 +89,4 @@ class Registro extends Model
     {
         return $this->hasOne('App\Models\Userinstitucional', 'id', 'userinstitucional_id');
     }
-
-
 }

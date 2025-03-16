@@ -8,17 +8,17 @@ use Illuminate\Http\Request;
 
 /**
  * Class EnlaceController
- * @package App\Http\Controllers
  */
 class EnlaceController extends Controller
 {
-
     public function indexado()
     {
         $enlaces = Enlace::all();
         $groupedEnlaces = $enlaces->groupBy('etiqueta');
+
         return view('enlace.indexado', compact('groupedEnlaces'));
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,15 +39,15 @@ class EnlaceController extends Controller
      */
     public function create()
     {
-        $enlace = new Enlace();
+        $enlace = new Enlace;
         $desplegable_enlaces = File::where('rutafile_id', 1)->pluck('path', 'id');
-        return view('enlace.create', compact('enlace','desplegable_enlaces'));
+
+        return view('enlace.create', compact('enlace', 'desplegable_enlaces'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,12 +60,10 @@ class EnlaceController extends Controller
             ->with('success', 'Enlace created successfully.');
     }
 
-
-
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -78,21 +76,20 @@ class EnlaceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $enlace = Enlace::find($id);
         $desplegable_enlaces = File::where('rutafile_id', 1)->pluck('path', 'id');
-        return view('enlace.edit', compact('enlace','desplegable_enlaces'));
+
+        return view('enlace.edit', compact('enlace', 'desplegable_enlaces'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Enlace $enlace
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Enlace $enlace)
@@ -106,8 +103,9 @@ class EnlaceController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)

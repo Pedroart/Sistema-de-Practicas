@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\facultad;
 use App\Models\DepartamentoAcademico;
 use App\Models\Escuela;
+use App\Models\facultad;
 
 class UbieduController extends Controller
 {
-    public function consolidado($id){
+    public function consolidado($id)
+    {
         $escuela = escuela::findOrFail($id);
         $departamento = $escuela->departamentoacademico;
         $facultad = $departamento->facultad;
@@ -33,11 +34,12 @@ class UbieduController extends Controller
         return $formattedData;
     }
 
-    public function comparacion($grado,$id1,$id2){
+    public function comparacion($grado, $id1, $id2)
+    {
         $data1 = $this->consolidado($id1);
         $data2 = $this->consolidado($id1);
 
-        return ($data1['grado']['id'] == $data2['grado']['id'])? true:false;
+        return ($data1['grado']['id'] == $data2['grado']['id']) ? true : false;
     }
 
     /**
@@ -59,7 +61,7 @@ class UbieduController extends Controller
     public function departamento($id_facultad)
     {
         $facultadB = facultad::findOrFail($id_facultad);
-        $departamentos=$facultadB->departamentos;
+        $departamentos = $facultadB->departamentos;
 
         return response()->json($departamentos);
     }
@@ -68,6 +70,7 @@ class UbieduController extends Controller
     {
         $departamentoB = DepartamentoAcademico::findOrFail($id_departamento);
         $escuelas = $departamentoB->escuelas;
+
         return response()->json($escuelas);
     }
 

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\View\Components;
+
 use App\Models\File;
-use App\Traits\Upload; //import the trait
+// import the trait
 use Illuminate\View\Component;
 
 class FileView extends Component
@@ -13,8 +14,11 @@ class FileView extends Component
      * @return void
      */
     public $id;
+
     public $archivo;
+
     public $patch;
+
     public function __construct($id)
     {
         $this->id = $id;
@@ -30,6 +34,7 @@ class FileView extends Component
     public function render()
     {
         $datos = get_object_vars($this);
-        return view('components.file-view',$datos);
+
+        return view('components.file-view', $datos);
     }
 }

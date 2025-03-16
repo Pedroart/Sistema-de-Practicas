@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Seccion;
-use App\Models\Userinstitucional;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use App\Traits\Upload; //import the trait
+use App\Traits\Upload; // import the trait
 use Illuminate\Http\Request;
 
 /**
  * Class FileController
- * @package App\Http\Controllers
  */
 class FileController extends Controller
 {
     use Upload;
+
     /**
      * Display a listing of the resource.
      *
@@ -33,24 +33,23 @@ class FileController extends Controller
      */
     public function create()
     {
-        $file = new File();
+        $file = new File;
+
         return view('file.create', compact('file'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         request()->validate(File::$rules);
 
-
         if ($request->hasFile('archivo')) {
 
-            $path = $this->UploadFile($request->file('archivo'), $request->rutafile_id);//use the method in the trait
+            $path = $this->UploadFile($request->file('archivo'), $request->rutafile_id); // use the method in the trait
             $request['path'] = $path;
             $file = File::create($request->all());
         }
@@ -62,7 +61,7 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -75,7 +74,7 @@ class FileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -88,21 +87,19 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  File $file
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, File $file)
     {
         request()->validate(File::$rules);
-        #$file->update($request->all());
+        // $file->update($request->all());
 
         if ($request->hasFile('archivo')) {
-            //check if the existing file is present and delete it from the storage
-            if (!is_null($file->path)) {
+            // check if the existing file is present and delete it from the storage
+            if (! is_null($file->path)) {
                 $this->deleteFile($file->path);
             }
-            //upload the new file
+            // upload the new file
             $path = $this->UploadFile($request->file('archivo'), $request->rutafile_id);
         }
         $file->update(['path' => $path]);
@@ -112,17 +109,19 @@ class FileController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)
     {
         $file = File::find($id);
-        if (!is_null($file->path)) {
+        if (! is_null($file->path)) {
             $this->deleteFile($file->path);
         }
         $file->delete();
+
         return redirect()->route('files.index')
             ->with('success', 'File deleted successfully');
     }

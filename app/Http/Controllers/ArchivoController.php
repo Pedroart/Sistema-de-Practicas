@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class ArchivoController
- * @package App\Http\Controllers
  */
 class ArchivoController extends Controller
 {
@@ -31,14 +30,14 @@ class ArchivoController extends Controller
      */
     public function create()
     {
-        $archivo = new Archivo();
+        $archivo = new Archivo;
+
         return view('archivo.create', compact('archivo'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +53,7 @@ class ArchivoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +66,7 @@ class ArchivoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +79,6 @@ class ArchivoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Archivo $archivo
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Archivo $archivo)
@@ -95,8 +92,9 @@ class ArchivoController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)

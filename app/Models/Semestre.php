@@ -13,15 +13,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property $created_at
  * @property $updated_at
  *
- * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Semestre extends Model
 {
-    
-    static $rules = [
-		'name' => 'required',
-		'vigencia' => 'required',
+    public static $rules = [
+        'name' => 'required',
+        'vigencia' => 'required',
     ];
 
     protected $perPage = 20;
@@ -31,8 +29,5 @@ class Semestre extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','vigencia'];
-
-
-
+    protected $fillable = ['name', 'vigencia'];
 }

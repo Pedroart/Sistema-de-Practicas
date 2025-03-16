@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-use App\Models\Facultad;
 use App\Models\Departamentoacademico;
 use App\Models\Escuela;
+use App\Models\Facultad;
+use Illuminate\Database\Seeder;
 
 class FacultadDepartamentoEscuelaSeeder extends Seeder
 {
@@ -58,7 +56,6 @@ class FacultadDepartamentoEscuelaSeeder extends Seeder
         $departamento21 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Física']);
         $departamento22 = Departamentoacademico::create(['nombre' => 'Departamento Académico de Biología']);
 
-
         // Asociar Departamentos a Facultades
         $facultad1->departamentos()->saveMany([$departamento1]);
         $facultad2->departamentos()->saveMany([$departamento2]);
@@ -67,7 +64,7 @@ class FacultadDepartamentoEscuelaSeeder extends Seeder
         $facultad5->departamentos()->saveMany([$departamento6, $departamento7]);
         $facultad6->departamentos()->saveMany([$departamento8]);
         $facultad7->departamentos()->saveMany([$departamento9, $departamento10, $departamento11]);
-        $facultad8->departamentos()->saveMany([$departamento12,$departamento13]);
+        $facultad8->departamentos()->saveMany([$departamento12, $departamento13]);
         $facultad9->departamentos()->saveMany([$departamento14]);
         $facultad10->departamentos()->saveMany([$departamento15]);
         $facultad11->departamentos()->saveMany([$departamento16, $departamento17, $departamento18]);
@@ -111,7 +108,6 @@ class FacultadDepartamentoEscuelaSeeder extends Seeder
         $escuela33 = Escuela::create(['nombre' => 'Escuela Profesional de Matemática Aplicada']);
         $escuela34 = Escuela::create(['nombre' => 'Escuela Profesional de Física']);
         $escuela35 = Escuela::create(['nombre' => 'Escuela Profesional de Biología con mención en Biotecnología']);
-
 
         // Asociar Escuelas a Departamentos Académicos
         $departamento1->escuelas()->saveMany([$escuela1]);

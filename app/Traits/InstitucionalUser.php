@@ -1,15 +1,17 @@
 <?php
-namespace App\Traits;
-use App\Models\User;
-use App\Models\Persona;
-use App\Models\Userinstitucional;
-use Spatie\Permission\Models\Role;
-trait InstitucionalUser{
 
+namespace App\Traits;
+
+use App\Models\Persona;
+use App\Models\User;
+use App\Models\Userinstitucional;
+
+trait InstitucionalUser
+{
     public function crearUserinstitucional($role, $codigo, $name, $apellido_materno, $apellido_paterno, $escuela_id, $email = null)
     {
         // Determinar el email a usar
-        $emailAddress = $email ? $email : $codigo . "@unjfsc.edu.pe";
+        $emailAddress = $email ? $email : $codigo.'@unjfsc.edu.pe';
 
         // Definir los datos del usuario
         $user_data = [
@@ -28,12 +30,12 @@ trait InstitucionalUser{
         $PersonaC = Persona::create($persona_data);
 
         $UserinstitucionalC = Userinstitucional::create([
-            'codigo'=>$codigo,
-            'user_id'=>$UserC->id,
-            'personas_id'=>$PersonaC->id,
-            'escuela_id'=>$escuela_id
+            'codigo' => $codigo,
+            'user_id' => $UserC->id,
+            'personas_id' => $PersonaC->id,
+            'escuela_id' => $escuela_id,
         ]);
+
         return $UserinstitucionalC;
     }
-
 }

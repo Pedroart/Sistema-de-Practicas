@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class RutafileController
- * @package App\Http\Controllers
  */
 class RutafileController extends Controller
 {
@@ -31,14 +30,14 @@ class RutafileController extends Controller
      */
     public function create()
     {
-        $rutafile = new Rutafile();
+        $rutafile = new Rutafile;
+
         return view('rutafile.create', compact('rutafile'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +53,7 @@ class RutafileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +66,7 @@ class RutafileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +79,6 @@ class RutafileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Rutafile $rutafile
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Rutafile $rutafile)
@@ -95,8 +92,9 @@ class RutafileController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)

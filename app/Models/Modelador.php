@@ -14,18 +14,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property $json_data
  * @property $created_at
  * @property $updated_at
- *
  * @property Tipoproceso $tipoproceso
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Modelador extends Model
 {
-
-    static $rules = [
-		'indicador' => 'required',
-		'model_type' => 'required',
-		'json_data' => 'required',
+    public static $rules = [
+        'indicador' => 'required',
+        'model_type' => 'required',
+        'json_data' => 'required',
     ];
 
     protected $perPage = 20;
@@ -35,8 +33,7 @@ class Modelador extends Model
      *
      * @var array
      */
-    protected $fillable = ['modelo','tipoetapa_id','item','dependencia_guardado'];
-
+    protected $fillable = ['modelo', 'tipoetapa_id', 'item', 'dependencia_guardado'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -45,6 +42,4 @@ class Modelador extends Model
     {
         return $this->hasOne('App\Models\Tipoetapa', 'id', 'tipoetapa_id');
     }
-
-
 }

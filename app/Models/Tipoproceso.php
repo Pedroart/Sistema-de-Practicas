@@ -12,16 +12,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property $descripcion
  * @property $created_at
  * @property $updated_at
- *
  * @property Proceso[] $procesos
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Tipoproceso extends Model
 {
-    
-    static $rules = [
-		'name' => 'required',
+    public static $rules = [
+        'name' => 'required',
     ];
 
     protected $perPage = 20;
@@ -31,8 +29,7 @@ class Tipoproceso extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','descripcion'];
-
+    protected $fillable = ['name', 'descripcion'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -41,6 +38,4 @@ class Tipoproceso extends Model
     {
         return $this->hasMany('App\Models\Proceso', 'tipoproceso_id', 'id');
     }
-    
-
 }

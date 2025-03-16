@@ -14,15 +14,15 @@ class ubidistrito extends Model
         'nombre',
         'ubiprovincia_id',
     ];
+
     protected $hidden = [
         'created_at',
         'updated_at',
         'ubiprovincia_id',
     ];
+
     /**
      * Get the ubiprovincia associated with the ubidistrito
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsto
      */
     public function ubiprovincia(): belongsto
     {

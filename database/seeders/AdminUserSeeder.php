@@ -2,16 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Docente;
-use App\Models\Persona;
-use App\Models\Alumno;
 use App\Models\Userinstitucional;
-
-use Spatie\Permission\Models\Role;
-use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
 
 class AdminUserSeeder extends Seeder
 {
@@ -46,9 +39,9 @@ class AdminUserSeeder extends Seeder
         ]);
 
         $estudianteIntitu = Userinstitucional::create([
-            'codigo'=>'0123456789',
-            'user_id'=>$estudiante->id,
-            'escuela_id'=>1,
+            'codigo' => '0123456789',
+            'user_id' => $estudiante->id,
+            'escuela_id' => 1,
         ]);
 
         $estudiante->assignRole('estudiante');

@@ -14,18 +14,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property $archivo
  * @property $created_at
  * @property $updated_at
- *
  * @property File $file
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Enlace extends Model
 {
-
-    static $rules = [
-		'etiqueta' => 'required',
-		'Nombre' => 'required',
-		'archivo' => 'required',
+    public static $rules = [
+        'etiqueta' => 'required',
+        'Nombre' => 'required',
+        'archivo' => 'required',
     ];
 
     protected $perPage = 20;
@@ -35,8 +33,7 @@ class Enlace extends Model
      *
      * @var array
      */
-    protected $fillable = ['etiqueta','Nombre','contenido','archivo'];
-
+    protected $fillable = ['etiqueta', 'Nombre', 'contenido', 'archivo'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -45,6 +42,4 @@ class Enlace extends Model
     {
         return $this->hasOne('App\Models\File', 'id', 'archivo');
     }
-
-
 }

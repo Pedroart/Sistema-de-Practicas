@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class EmpleadoController
- * @package App\Http\Controllers
  */
 class EmpleadoController extends Controller
 {
@@ -31,14 +30,14 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        $empleado = new Empleado();
+        $empleado = new Empleado;
+
         return view('empleado.create', compact('empleado'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +53,7 @@ class EmpleadoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +66,7 @@ class EmpleadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +79,6 @@ class EmpleadoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Empleado $empleado
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Empleado $empleado)
@@ -95,8 +92,9 @@ class EmpleadoController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)

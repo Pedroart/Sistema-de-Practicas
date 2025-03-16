@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Escuela;
 use App\Models\Secpersona;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Traits\InstitucionalUser;
+use Illuminate\Http\Request;
 
 class UserinstitucionalloteControlador extends Controller
 {
     use InstitucionalUser;
+
     /**
      * Display a listing of the resource.
      *
@@ -20,24 +21,22 @@ class UserinstitucionalloteControlador extends Controller
         $user = auth()->user();
         if ($user->hasRole('administrador')) {
             $roles = [
-                "administrador"=>"administrador",
-                "decano de facultad"=>"decano de facultad",
-                "director academico"=>"director academico",
-                "director escuela"=>"director escuela",
-                "docente titular"=>"docente titular",
-                "docente supervisor"=>"docente supervisor",
-                "estudiante"=>"estudiante"
+                'administrador' => 'administrador',
+                'decano de facultad' => 'decano de facultad',
+                'director academico' => 'director academico',
+                'director escuela' => 'director escuela',
+                'docente titular' => 'docente titular',
+                'docente supervisor' => 'docente supervisor',
+                'estudiante' => 'estudiante',
             ];
         } else {
             $roles = [
-                "docente supervisor"=>"docente supervisor",
-                "estudiante"=>"estudiante"
+                'docente supervisor' => 'docente supervisor',
+                'estudiante' => 'estudiante',
             ];
         }
 
-
-
-        return view('userinstitucional.lote.index',compact('roles'));
+        return view('userinstitucional.lote.index', compact('roles'));
     }
 
     /**
@@ -53,7 +52,6 @@ class UserinstitucionalloteControlador extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -66,12 +64,12 @@ class UserinstitucionalloteControlador extends Controller
         // Leer el archivo CSV
 
         $muestra = [
-            0 => "",
-            1 => "",
-            2 => "",
-            3 => "",
-            4 => "",
-            5 => "",
+            0 => '',
+            1 => '',
+            2 => '',
+            3 => '',
+            4 => '',
+            5 => '',
         ];
 
         $archivo = $request->file('archivo');
@@ -79,14 +77,14 @@ class UserinstitucionalloteControlador extends Controller
         $lineasCSV = explode(PHP_EOL, $contenidoCSV);
         $datosCSV = [];
         foreach ($lineasCSV as $linea) {
-            $valores  = explode(';', $linea);
-            if($valores[0] !== ""){
+            $valores = explode(';', $linea);
+            if ($valores[0] !== '') {
                 $datosCSV[] = array_slice($valores, 0, 6);
             }
 
         }
         array_shift($datosCSV);
-        $role="";
+        $role = '';
         foreach ($datosCSV as $valores) {
             // Asignar valores de la línea a variables
             $codigo = $valores[0]; // Primer valor: CODIGO
@@ -99,11 +97,11 @@ class UserinstitucionalloteControlador extends Controller
             $this->crearUserinstitucional($role, $codigo, $nombres, $apellido_materno, $apellido_paterno, $escuelaId);
         }
 
-
-        return view('userinstitucional.lote.create',compact('role'));
+        return view('userinstitucional.lote.create', compact('role'));
     }
 
-    public function patron(Request $request){
+    public function patron(Request $request)
+    {
         $request->validate([
             'archivo' => 'required|file|mimes:csv,txt',
         ]);
@@ -113,23 +111,23 @@ class UserinstitucionalloteControlador extends Controller
         $lineasCSV = explode(PHP_EOL, $contenidoCSV);
         $datosCSV = [];
         foreach ($lineasCSV as $linea) {
-            $valores  = explode(',', $linea);
-            if($valores[0] !== ""){
+            $valores = explode(',', $linea);
+            if ($valores[0] !== '') {
                 $datosCSV[] = array_slice($valores, 0, 6);
             }
 
         }
         array_shift($datosCSV);
-        
+
         // Extraer el dato del índice 0
         // Extraer el dato del índice 0
-        $curso = "Escuela Profesional de ".  trim($datosCSV[0][2], '"');
+        $curso = 'Escuela Profesional de '.trim($datosCSV[0][2], '"');
 
         // Convertir todo el texto a minúsculas
-        $curso = mb_strtolower($curso, "UTF-8");
+        $curso = mb_strtolower($curso, 'UTF-8');
 
         // Procesar los datos de los estudiantes
-        $estudiantes = array_map(function($registro) {
+        $estudiantes = array_map(function ($registro) {
             // Verificar si el registro tiene los datos necesarios
             if (isset($registro[1], $registro[2], $registro[3])) {
                 $nombreCompleto = explode(' ', $registro[2]);
@@ -145,14 +143,15 @@ class UserinstitucionalloteControlador extends Controller
                     'correo' => $registro[3],
                 ];
             }
+
             return null; // O devolver un valor predeterminado si el registro no es válido
         }, array_slice($datosCSV, 2));
-        
+
         // Filtrar los valores nulos
         $estudiantes = array_filter($estudiantes);
         array_shift($estudiantes);
-        
-        $role = "estudiante";
+
+        $role = 'estudiante';
         $escuela = Escuela::where('nombre', $curso)->first();
         $escuelaId = $escuela->id;
         $seccionId = $request['seccion_id'];
@@ -164,15 +163,15 @@ class UserinstitucionalloteControlador extends Controller
                 $apellido_paterno = $estudiante['apellido_paterno'];
 
                 // Definir el rol
-                $role = "estudiante";
+                $role = 'estudiante';
 
                 // Llamar a la función para crear el usuario institucional
-                $obj_estudiante=$this->crearUserinstitucional($role, $codigo, $nombres, $apellido_materno, $apellido_paterno, $escuelaId);
+                $obj_estudiante = $this->crearUserinstitucional($role, $codigo, $nombres, $apellido_materno, $apellido_paterno, $escuelaId);
                 if ($obj_estudiante) {
                     Secpersona::create([
                         'seccion_id' => $seccionId,
                         'estudiante_id' => $obj_estudiante->id,
-                        'supervisor_id' => null // Puedes asignar un supervisor_id si lo tienes
+                        'supervisor_id' => null, // Puedes asignar un supervisor_id si lo tienes
                     ]);
                 }
             }
@@ -215,7 +214,6 @@ class UserinstitucionalloteControlador extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

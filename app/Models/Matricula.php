@@ -16,23 +16,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property $record_id
  * @property $created_at
  * @property $updated_at
- *
  * @property Comentario $comentario
  * @property Estado $estado
  * @property File $file
  * @property File $file
  * @property Semestre $semestre
  * @property Userinstitucional $userinstitucional
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Matricula extends Model
 {
-
-    static $rules = [
-		'semestre_id' => 'required',
-		'matricula_id' => 'required',
-		'record_id' => 'required',
+    public static $rules = [
+        'semestre_id' => 'required',
+        'matricula_id' => 'required',
+        'record_id' => 'required',
     ];
 
     protected $perPage = 20;
@@ -42,8 +40,7 @@ class Matricula extends Model
      *
      * @var array
      */
-    protected $fillable = ['userinstitucional_id','semestre_id','estado_id','comentario_id','matricula_id','record_id'];
-
+    protected $fillable = ['userinstitucional_id', 'semestre_id', 'estado_id', 'comentario_id', 'matricula_id', 'record_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -92,6 +89,4 @@ class Matricula extends Model
     {
         return $this->hasOne('App\Models\Userinstitucional', 'id', 'userinstitucional_id');
     }
-
-
 }

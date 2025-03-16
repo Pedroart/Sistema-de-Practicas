@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\ubidepartamento;
-use App\Models\ubiprovincia;
 use App\Models\ubidistrito;
+use App\Models\ubiprovincia;
+use Illuminate\Http\Request;
 
 class UbigeoController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +20,8 @@ class UbigeoController extends Controller
         return response()->json($this->consolidad($id), 200, [], JSON_UNESCAPED_UNICODE);
     }
 
-    public function consolidad($id){
+    public function consolidad($id)
+    {
         $distrito = UbiDistrito::findOrFail($id);
         $provincia = $distrito->ubiprovincia;
         $departamento = $provincia->ubidepartamento;
@@ -51,7 +50,8 @@ class UbigeoController extends Controller
         return ubidepartamento::all();
     }
 
-    public function provincias($id_ubidepartamento){
+    public function provincias($id_ubidepartamento)
+    {
         // Buscar el departamento por su ID
         $departamento = UbiDepartamento::findOrFail($id_ubidepartamento);
 
@@ -62,7 +62,8 @@ class UbigeoController extends Controller
         return response()->json($provincias);
     }
 
-    public function distrito($id_ubiprovincia){
+    public function distrito($id_ubiprovincia)
+    {
         // Buscar el departamento por su ID
         $provincia = ubiprovincia::findOrFail($id_ubiprovincia);
 
@@ -76,7 +77,6 @@ class UbigeoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -98,7 +98,6 @@ class UbigeoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

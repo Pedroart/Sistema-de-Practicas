@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Userinstitucional;
 use Illuminate\Http\Request;
 
 /**
  * Class UserinstitucionalController
- * @package App\Http\Controllers
  */
 class UserinstitucionalController extends Controller
 {
@@ -18,16 +18,16 @@ class UserinstitucionalController extends Controller
      */
     public function index()
     {
-        //$user = Auth::user();
+        // $user = Auth::user();
         $user = auth()->user();
 
         if ($user->hasRole('administrador')) {
             $userinstitucionals = Userinstitucional::all();
+        } else {
+            $id = $user->userinstitucional->escuela_id;
+            $userinstitucionals = Userinstitucional::where('escuela_id', $id)->get();
         }
-        else{
-            $id =  $user->userinstitucional->escuela_id;
-            $userinstitucionals = Userinstitucional::where('escuela_id',$id)->get();
-        }
+
         return view('userinstitucional.index', compact('userinstitucionals'));
     }
 
@@ -38,14 +38,14 @@ class UserinstitucionalController extends Controller
      */
     public function create()
     {
-        $userinstitucional = new Userinstitucional();
+        $userinstitucional = new Userinstitucional;
+
         return view('userinstitucional.create', compact('userinstitucional'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -61,7 +61,7 @@ class UserinstitucionalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +74,7 @@ class UserinstitucionalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,8 +87,6 @@ class UserinstitucionalController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Userinstitucional $userinstitucional
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Userinstitucional $userinstitucional)
@@ -102,8 +100,9 @@ class UserinstitucionalController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)

@@ -14,19 +14,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property $etiqueta
  * @property $created_at
  * @property $updated_at
- *
  * @property Proceso $proceso
- * @package App
+ *
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Archivo extends Model
 {
-
-    static $rules = [
-		'proceso_id' => 'required',
-		'model_type' => 'required',
-		'id_model' => 'required',
-		'etiqueta' => 'required',
+    public static $rules = [
+        'proceso_id' => 'required',
+        'model_type' => 'required',
+        'id_model' => 'required',
+        'etiqueta' => 'required',
     ];
 
     protected $perPage = 20;
@@ -36,8 +34,7 @@ class Archivo extends Model
      *
      * @var array
      */
-    protected $fillable = ['proceso_id','model_type','id_model','etiqueta'];
-
+    protected $fillable = ['proceso_id', 'model_type', 'id_model', 'etiqueta'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -51,5 +48,4 @@ class Archivo extends Model
     {
         return $this->hasOne('App\Models\Userinstitucional', 'id', 'id_model');
     }
-
 }

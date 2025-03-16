@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class ComentarioController
- * @package App\Http\Controllers
  */
 class ComentarioController extends Controller
 {
@@ -31,14 +30,14 @@ class ComentarioController extends Controller
      */
     public function create()
     {
-        $comentario = new Comentario();
+        $comentario = new Comentario;
+
         return view('comentario.create', compact('comentario'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +53,7 @@ class ComentarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +66,7 @@ class ComentarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +79,6 @@ class ComentarioController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Comentario $comentario
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Comentario $comentario)
@@ -95,8 +92,9 @@ class ComentarioController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)

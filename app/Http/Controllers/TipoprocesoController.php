@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 /**
  * Class TipoprocesoController
- * @package App\Http\Controllers
  */
 class TipoprocesoController extends Controller
 {
@@ -31,14 +30,14 @@ class TipoprocesoController extends Controller
      */
     public function create()
     {
-        $tipoproceso = new Tipoproceso();
+        $tipoproceso = new Tipoproceso;
+
         return view('tipoproceso.create', compact('tipoproceso'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +53,7 @@ class TipoprocesoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,7 +66,7 @@ class TipoprocesoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +79,6 @@ class TipoprocesoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Tipoproceso $tipoproceso
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Tipoproceso $tipoproceso)
@@ -95,8 +92,9 @@ class TipoprocesoController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws \Exception
      */
     public function destroy($id)
