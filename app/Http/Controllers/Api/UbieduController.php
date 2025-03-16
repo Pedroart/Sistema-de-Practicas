@@ -13,7 +13,7 @@ class UbieduController extends Controller
     {
         $escuela = escuela::findOrFail($id);
         $departamento = $escuela->departamentoacademico;
-        $facultad = $departamento->facultad;
+        $facultad = $departamento->facultad ?? 1;
 
         // Construir el array asociativo con el formato deseado
         $formattedData = [
@@ -22,12 +22,12 @@ class UbieduController extends Controller
                 'nombre' => $escuela->nombre,
             ],
             'departamento' => [
-                'id' => $departamento->id,
-                'nombre' => $departamento->nombre,
+                'id' => $departamento->id ?? 1,
+                'nombre' => $departamento->nombre ?? '',
             ],
             'facultad' => [
-                'id' => $facultad->id,
-                'nombre' => $facultad->nombre,
+                'id' => $facultad->id ?? 1,
+                'nombre' => $facultad->nombre ?? '',
             ],
         ];
 

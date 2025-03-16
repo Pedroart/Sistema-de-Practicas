@@ -23,18 +23,18 @@
             {!! $errors->first('comentario_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>-->
         <div class="form-group">
-            {{ Form::label('matricula_id') }}
+            {{ Form::label('Ficha Matricula') }}
             <a href="{{ asset('storage/'. $matricula->matricula->path) }}" target="_blank">Abrir Archivo</a>
             {!! $errors->first('matricula_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('record_id') }}
+            {{ Form::label('Record Academico') }}
             <a href="{{ asset('storage/'. $matricula->record->path) }}" target="_blank">Abrir Archivo</a>
             {!! $errors->first('record_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
     </div>
 </div>

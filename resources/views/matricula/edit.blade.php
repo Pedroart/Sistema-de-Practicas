@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ __('Update') }} Matricula
+    {{ __('Actualizar') }} Matricula
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Matricula</span>
+                        <span class="card-title">{{ __('Actualizar') }} Matricula</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('matriculas.update', $matricula->id) }}"  role="form" enctype="multipart/form-data">

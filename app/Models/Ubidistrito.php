@@ -26,6 +26,6 @@ class Ubidistrito extends Model
      */
     public function ubiprovincia(): belongsto
     {
-        return $this->belongsto(ubiprovincia::class);
+        return $this->belongsto(Ubiprovincia::class);
     }
 }

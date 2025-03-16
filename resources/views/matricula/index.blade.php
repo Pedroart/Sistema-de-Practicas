@@ -36,12 +36,13 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Userinstitucional Id</th>
-										<th>Semestre Id</th>
-										<th>Estado Id</th>
+										<th>Estudiante </th>
+										<th>Semestre</th>
+										<th>Estado</th>
+                                        <!--
 										<th>Matricula Id</th>
 										<th>Record Id</th>
-
+                                        -->
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -50,13 +51,16 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $matricula->userinstitucional->codigo }}</td>
+											<td>{{ $matricula->userinstitucional->persona->name ?? 'NAN' }}
+                                                {{ $matricula->userinstitucional->persona->apellido_paterno ?? 'NAN' }}
+                                                {{ $matricula->userinstitucional->persona->apellido_materno ?? 'NAN' }}
+                                            </td>
 											<td>{{ $matricula->semestre->name }}</td>
 											<td>{{ $matricula->estado->name }}</td>
-
+                                            <!--
 											<td>{{ $matricula->matricula_id }}</td>
 											<td>{{ $matricula->record_id }}</td>
-
+                                            -->
                                             <td>
                                                 <form action="{{ route('matriculas.destroy',$matricula->id) }}" method="POST">
                                                     @can('matricula.view')

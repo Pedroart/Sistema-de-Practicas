@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ __('Update') }} Persona
+    {{ __('Actualizar') }} Persona
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Persona</span>
+                        <span class="card-title">{{ __('Actualizar') }} Persona</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('perfil.update',1) }}"  role="form" enctype="multipart/form-data">

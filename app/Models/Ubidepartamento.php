@@ -25,6 +25,6 @@ class Ubidepartamento extends Model
      */
     public function ubiprovincia(): HasMany
     {
-        return $this->hasMany(ubiprovincia::class);
+        return $this->hasMany(Ubiprovincia::class);
     }
 }

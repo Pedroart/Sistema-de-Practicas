@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('title')
-    {{ __('Update') }} Ruta de Archivo
+    {{ __('Actualizar') }} Ruta de Archivo
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Ruta de Archivo</span>
+                        <span class="card-title">{{ __('Actualizar') }} Ruta de Archivo</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('rutafiles.update', $rutafile->id) }}"  role="form" enctype="multipart/form-data">

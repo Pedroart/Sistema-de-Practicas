@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\ubidepartamento;
-use App\Models\ubidistrito;
-use App\Models\ubiprovincia;
+use App\Models\Ubidepartamento;
+use App\Models\Ubidistrito;
+use App\Models\Ubiprovincia;
 use Illuminate\Http\Request;
 
 class UbigeoController extends Controller
@@ -23,8 +23,8 @@ class UbigeoController extends Controller
     public function consolidad($id)
     {
         $distrito = UbiDistrito::findOrFail($id);
-        $provincia = $distrito->ubiprovincia;
-        $departamento = $provincia->ubidepartamento;
+        $provincia = $distrito->Ubiprovincia;
+        $departamento = $provincia->Ubidepartamento;
 
         // Construir el array asociativo con el formato deseado
         $formattedData = [
@@ -47,7 +47,7 @@ class UbigeoController extends Controller
 
     public function departamentos()
     {
-        return ubidepartamento::all();
+        return Ubidepartamento::all();
     }
 
     public function provincias($id_ubidepartamento)
@@ -59,13 +59,17 @@ class UbigeoController extends Controller
         $provincias = $departamento->ubiprovincia;
 
         // Retornar las provincias como respuesta JSON
-        return response()->json($provincias);
+        try {
+            return response()->json($provincias);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function distrito($id_ubiprovincia)
     {
         // Buscar el departamento por su ID
-        $provincia = ubiprovincia::findOrFail($id_ubiprovincia);
+        $provincia = Ubiprovincia::findOrFail($id_ubiprovincia);
 
         // Obtener las provincias asociadas al departamento
         $distrito = $provincia->ubidistrito;

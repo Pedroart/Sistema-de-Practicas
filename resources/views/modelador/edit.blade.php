@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ __('Update') }} Modelador
+    {{ __('Actualizar') }} Modelador
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Modelador</span>
+                        <span class="card-title">{{ __('Actualizar') }} Modelador</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('modeladors.update', $modelador->id) }}"  role="form" enctype="multipart/form-data">

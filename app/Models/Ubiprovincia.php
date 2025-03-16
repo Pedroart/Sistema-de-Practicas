@@ -27,7 +27,7 @@ class Ubiprovincia extends Model
      */
     public function ubidepartamento(): BelongsTo
     {
-        return $this->belongsTo(ubidepartamento::class);
+        return $this->belongsTo(Ubidepartamento::class);
     }
 
     /**
@@ -35,6 +35,6 @@ class Ubiprovincia extends Model
      */
     public function ubidistrito(): HasMany
     {
-        return $this->hasMany(ubidistrito::class);
+        return $this->hasMany(Ubidistrito::class);
     }
 }

@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ __('Update') }} Tipoetapa
+    {{ __('Actualizar') }} Tipoetapa
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Tipoetapa</span>
+                        <span class="card-title">{{ __('Actualizar') }} Tipoetapa</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('tipoetapas.update', $tipoetapa->id) }}"  role="form" enctype="multipart/form-data">

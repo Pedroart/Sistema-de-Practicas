@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ __('Update') }} Enlace
+    {{ __('Actualizar') }} Enlace
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Enlace</span>
+                        <span class="card-title">{{ __('Actualizar') }} Enlace</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('enlaces.update', $enlace->id) }}"  role="form" enctype="multipart/form-data">

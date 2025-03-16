@@ -23,18 +23,18 @@
             {!! $errors->first('comentario_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>-->
         <div class="form-group">
-            {{ Form::label('matricula_id') }}
+            {{ Form::label('Consolidado Matricula') }}
             {{ Form::file('matricula_id', $matricula->matricula_id, ['class' => 'form-control' . ($errors->has('matricula_id') ? ' is-invalid' : ''), 'placeholder' => 'Matricula Id']) }}
             {!! $errors->first('matricula_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('record_id') }}
+            {{ Form::label('Record Académico') }}
             {{ Form::file('record_id', $matricula->record_id, ['class' => 'form-control' . ($errors->has('record_id') ? ' is-invalid' : ''), 'placeholder' => 'Record Id']) }}
             {!! $errors->first('record_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
     </div>
 </div>

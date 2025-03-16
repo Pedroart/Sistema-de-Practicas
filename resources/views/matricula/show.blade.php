@@ -22,22 +22,24 @@
 
                         <div class="form-group">
                             <strong>Userinstitucional Id:</strong>
-                            {{ $matricula->userinstitucional_id }}
+                            {{ $matricula->userinstitucional->persona->name }}
+                                                {{ $matricula->userinstitucional->persona->apellido_paterno }}
+                                                {{ $matricula->userinstitucional->persona->apellido_materno }}
                         </div>
                         <div class="form-group">
-                            <strong>Semestre Id:</strong>
-                            {{ $matricula->semestre_id }}
+                            <strong>Semestre:</strong>
+                            {{ $matricula->semestre->name }}
                         </div>
                         <div class="form-group">
-                            <strong>Estado Id:</strong>
-                            {{ $matricula->estado_id }}
+                            <strong>Estado:</strong>
+                            {{ $matricula->estado->name }}
                         </div>
                         <div class="form-group">
-                            <strong>Matricula Id:</strong>
+                            <strong>Ficha Matricula Id:</strong>
                             <a href="{{ asset('storage/'. $matricula->matricula->path) }}" target="_blank">Abrir Archivo</a>
                         </div>
                         <div class="form-group">
-                            <strong>Record Id:</strong>
+                            <strong>Record Academico Id:</strong>
                             <a href="{{ asset('storage/'. $matricula->record->path) }}" target="_blank">Abrir Archivo</a>
                         </div>
 
