@@ -13,6 +13,6 @@ class Escuela extends Model
 
     public function departamentoacademico()
     {
-        return $this->belongsTo(departamentoacademico::class);
+        return $this->belongsTo(DepartamentoAcademico::class);
     }
 }

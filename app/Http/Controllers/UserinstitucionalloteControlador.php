@@ -120,7 +120,7 @@ class UserinstitucionalloteControlador extends Controller
 
         }
         array_shift($datosCSV);
-
+        
         // Extraer el dato del índice 0
         // Extraer el dato del índice 0
         $curso = "Escuela Profesional de ".  trim($datosCSV[0][2], '"');
@@ -147,10 +147,11 @@ class UserinstitucionalloteControlador extends Controller
             }
             return null; // O devolver un valor predeterminado si el registro no es válido
         }, array_slice($datosCSV, 2));
-
+        
         // Filtrar los valores nulos
         $estudiantes = array_filter($estudiantes);
-
+        array_shift($estudiantes);
+        
         $role = "estudiante";
         $escuela = Escuela::where('nombre', $curso)->first();
         $escuelaId = $escuela->id;

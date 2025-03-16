@@ -34,7 +34,7 @@ class Tipoetapa extends Model
     protected $fillable = ['name','tipoproceso_id'];
 
     public function tipoproceso(){
-      return $this->belongsTo(TipoProceso::class);
+      return $this->belongsTo(Tipoproceso::class);
     }
     
 }

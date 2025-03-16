@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\User;
 use App\Models\Userinstitucional;
 use Illuminate\Http\Request;
@@ -19,8 +18,16 @@ class UserinstitucionalController extends Controller
      */
     public function index()
     {
-        $userinstitucionals = Userinstitucional::all();
+        //$user = Auth::user();
+        $user = auth()->user();
 
+        if ($user->hasRole('administrador')) {
+            $userinstitucionals = Userinstitucional::all();
+        }
+        else{
+            $id =  $user->userinstitucional->escuela_id;
+            $userinstitucionals = Userinstitucional::where('escuela_id',$id)->get();
+        }
         return view('userinstitucional.index', compact('userinstitucionals'));
     }
 

@@ -82,7 +82,12 @@ class SeccionController extends Controller
         $supervisores = Secsuper::where('seccion_id', $seccion->id)->get();
 
         $profesores_ = User::getUsersWithRole('docente supervisor');
-
+        
+        $profesores_ = User::role('docente supervisor') // Use the 'role' method provided by Spatie Permissions
+                    ->whereHas('userinstitucional') // Ensure they have a 'userinstitucional' relationship
+                    ->with('userinstitucional') // Eager load this relationship
+                    ->get();
+        
         $lista_supervisores  = $profesores_->map(function ($profesor) use ($seccion) {
             if( $profesor->userinstitucional->escuela_id == $seccion->docente->escuela_id ){
                 return (object)[

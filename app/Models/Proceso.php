@@ -54,7 +54,7 @@ class Proceso extends Model
     }
 
     public function archivo(){
-        return $this->belongsTo('App\Models\archivo', 'id', 'proceso_id')->where('etiqueta', 'estudiante_id');
+        return $this->belongsTo('App\Models\Archivo', 'id', 'proceso_id')->where('etiqueta', 'estudiante_id');
     }
 
 

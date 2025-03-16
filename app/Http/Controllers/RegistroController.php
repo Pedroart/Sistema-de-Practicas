@@ -50,7 +50,10 @@ class RegistroController extends Controller
         $registro->semestre = Semestre::orderBy('id', 'desc')->first();
         $user = Auth::user();
         $estudiantes = User::getUsersWithRole('docente supervisor');
-
+        $estudiantes = User::role('docente supervisor') // Use the 'role' method provided by Spatie Permissions
+                    ->whereHas('userinstitucional') // Ensure they have a 'userinstitucional' relationship
+                    ->with('userinstitucional') // Eager load this relationship
+                    ->get();
         $listadoInstitucional = $estudiantes->map(function ($estudiante){
             return [
                 'id'=>$estudiante->userinstitucional->id,
@@ -131,7 +134,10 @@ class RegistroController extends Controller
         $registro = Registro::find($id);
         $user = Auth::user();
         $estudiantes = User::getUsersWithRole('docente supervisor');
-
+        $estudiantes = User::role('docente supervisor') // Use the 'role' method provided by Spatie Permissions
+                    ->whereHas('userinstitucional') // Ensure they have a 'userinstitucional' relationship
+                    ->with('userinstitucional') // Eager load this relationship
+                    ->get();
         $listadoInstitucional = $estudiantes->map(function ($estudiante){
             return [
                 'id'=>$estudiante->userinstitucional->id,

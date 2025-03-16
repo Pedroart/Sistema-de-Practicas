@@ -213,6 +213,7 @@ class ProcesoEstudianteController extends Controller
         $semestreactual = $semestre->keys()->first();
         $secciones = Secpersona::where('estudiante_id',$user->userinstitucional->id)->first();
         $docente_id = NULL;
+        
         if($secciones){
             $seccion = Seccion::find($secciones->seccion_id);
             $docente_id = $seccion->docente_id;
