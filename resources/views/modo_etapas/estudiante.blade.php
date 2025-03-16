@@ -14,7 +14,7 @@
                 @csrf
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ $metodo }} - {{ $Etapas->tipoetapa->name}}</span>
+                        <span class="card-title"> {{ $Etapas->tipoetapa->name}}</span>
                         @if( $metodo !== "show" )
                         <div class="float-right">
                             <button type="submit" class="btn btn-primary">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <x-ClassFormComponent :modo="$metodo" :tipoproceso="$Etapas->tipoetapas_id" :global="['proceso'=>$Etapas->proceso_id,'etapa'=>$Etapas->id]" />
-                {{$Etapas}}
+                
             </form>
         </div>
     </div>

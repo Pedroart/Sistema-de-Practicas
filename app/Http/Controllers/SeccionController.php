@@ -34,8 +34,13 @@ class SeccionController extends Controller
             return (object) [
                 'id' => $profesor->userinstitucional->id,
                 'codigo' => $profesor->userinstitucional->codigo,
-                'nombre' => $profesor->name,
-            ];
+                'nombre' => trim(
+                    ($profesor->userinstitucional->persona->name ?? $profesor->name ) . ' ' . 
+                    ($profesor->userinstitucional->persona->apellido_paterno ?? '') . ' ' . 
+                    ($profesor->userinstitucional->persona->apellido_materno ?? '')
+                ),
+
+            ];            
         })->pluck('nombre', 'id');
         $semestres = Semestre::orderByDesc('id')->pluck('name', 'id');
 

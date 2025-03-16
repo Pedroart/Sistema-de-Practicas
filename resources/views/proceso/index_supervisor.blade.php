@@ -50,8 +50,9 @@
 
                                 <td>{{ $proceso->id }}</td>
                                 <td>{{ $proceso->estudiante->codigo }}</td>
-                                <td>{{ $proceso->archivo->estudiante->persona->apellido_paterno ?? 'Sin código' }}
-                                    {{ $proceso->archivo->estudiante->persona->apellido_materno ?? 'Sin código' }}
+                                <td>{{ $proceso->estudiante->persona->name ?? 'Sin codigo' }}
+                                    {{ $proceso->estudiante->persona->apellido_paterno ?? 'NAN' }}
+                                    {{ $proceso->estudiante->persona->apellido_materno ?? 'NAN' }}
                                 </td>
                                 <td>{{ $proceso->semestre->name }}</td>
                                 <td>{{ $proceso->estado->name }}</td>

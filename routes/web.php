@@ -102,7 +102,7 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
 
     Route::resource('registros', App\Http\Controllers\RegistroController::class);
 
-    Route::resource('procesos', App\Http\Controllers\procesoController::class);
+    Route::resource('procesos', App\Http\Controllers\ProcesoController::class);
     Route::get('proceso_estudiante/{id}', [App\Http\Controllers\procesoController::class, 'proceso_estudiante'])->name('datos.view');
     Route::get('validacion', [App\Http\Controllers\procesoController::class, 'index_validacion'])->name('validacion.index');
 

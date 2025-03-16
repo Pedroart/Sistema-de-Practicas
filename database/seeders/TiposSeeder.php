@@ -33,13 +33,15 @@ class TiposSeeder extends Seeder
         }
 
         $nameEtapasDesarrollo = [
-            'Solicitud Formato FUT',
-            'Datos del jefe inmediato',
-            'Constancia o Contrato de trabajo',
-            'Boletas de pago',
-            'Informe Final',
+            'Solicitud de FUT', // 1
+            'Datos del Jefe Inmediato', // 2
+            'Carta de Presentación', // 3
+            'Carta de Aceptación', // 4
+            'Informe de Plan de Prácticas', // 5
+            'Constancia de Cumplimiento de Prácticas', // 6
+            'Informe Final de Prácticas',  // 7
         ];
-
+        
         foreach ($nameEtapasDesarrollo as $nombre) {
             Tipoetapa::create([
                 'name' => $nombre,
@@ -48,13 +50,14 @@ class TiposSeeder extends Seeder
         }
 
         $nameEtapasEfectivas = [
-            'Formato FUT',
-            'Carta Aceptacion',
-            'Datos del jefe inmediato',
-            'Ficha de Actividades',
-            'Ficha de control Mensual',
-            'Informe Final',
+            'Solicitud Formato FUT', //8
+            'Carta de Aceptación', //9
+            'Datos del Jefe Inmediato', //10
+            'Registro de Actividades', //11
+            'Control Mensual de Actividades', //12
+            'Informe Final de Prácticas', //13
         ];
+        
 
         foreach ($nameEtapasEfectivas as $nombre) {
             Tipoetapa::create([
@@ -76,6 +79,10 @@ class TiposSeeder extends Seeder
                 'tipoproceso_id' => 5,
             ]);
         }
+
+        /*
+        * Proceso de Desarrollo 
+        */
 
         $modelo2 = [
             [
@@ -787,7 +794,7 @@ class TiposSeeder extends Seeder
             ],
             [
                 'etiqueta_modelo' => 'proceso',
-                'modelo_tipo' => "App\Models\Proceso",
+                'modelo_tipo' => 'App\\Models\\Proceso',
                 'atributo_busqueda' => [
                     'id' => [
                         'metodo' => 'global',
@@ -797,8 +804,8 @@ class TiposSeeder extends Seeder
                 ],
             ],
             [
-                'etiqueta_modelo' => 'empresa_constancia',
-                'modelo_tipo' => "App\Models\Archivo",
+                'etiqueta_modelo' => 'carta_presentacion',
+                'modelo_tipo' => 'App\\Models\\Archivo',
                 'atributo_busqueda' => [
                     'proceso_id' => [
                         'metodo' => 'ref',
@@ -807,69 +814,40 @@ class TiposSeeder extends Seeder
                     ],
                     'etiqueta' => [
                         'metodo' => 'set',
-                        'valor' => 'empresa_constancia',
+                        'valor' => 'carta_presentacion',
                     ],
                 ],
             ],
             [
-                'etiqueta_modelo' => 'file_constancia',
-                'modelo_tipo' => "App\Models\File",
+                'etiqueta_modelo' => 'file_carta_presentacion',
+                'modelo_tipo' => 'App\\Models\\File',
                 'atributo_busqueda' => [
                     'id' => [
                         'metodo' => 'ref',
-                        'valor' => 'empresa_constancia',
+                        'valor' => 'carta_presentacion',
                         'atributo_ref' => 'id_model',
                     ],
                 ],
             ],
         ];
+        
         $ITEM03 = [
             [
-                'etiqueta_modelo' => 'etapa',
-                'grupo' => 'hidden',
+                'etiqueta_modelo' => 'file_carta_presentacion',
+                'grupo' => 'Documentacion Final',
                 'atributo' => 'id',
-                'desplegar' => 'id_etapa',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'proceso',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_proceso',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_constancia',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_empresa_constancia',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'file_constancia',
-                'grupo' => 'Constancia o Contrato de Trabajo',
-                'atributo' => 'id',
-                'desplegar' => 'Constancia de Trabajo',
+                'desplegar' => 'Carta de Presentación',
                 'tipo' => 'file',
                 'selector' => '',
                 'permiso_ver' => 'estudiante,docente',
                 'permiso_editar' => 'estudiante',
             ],
         ];
+        
         $DEPENDENCIAS03 = [
             [
-                'etiqueta_modelo' => 'file_constancia',
-                'relaciones' => [
-                ],
+                'etiqueta_modelo' => 'file_carta_presentacion',
+                'relaciones' => [],
                 'defecto' => [
                     [
                         'atributo' => 'rutafile_id',
@@ -878,7 +856,339 @@ class TiposSeeder extends Seeder
                 ],
             ],
             [
-                'etiqueta_modelo' => 'empresa_constancia',
+                'etiqueta_modelo' => 'carta_presentacion',
+                'relaciones' => [
+                    ['dependencia' => 'proceso_id',
+                        'modelo_referencia' => 'proceso',
+                        'atributo' => 'id'],
+                    ['dependencia' => 'id_model',
+                        'modelo_referencia' => 'file_carta_presentacion',
+                        'atributo' => 'id'],
+                ],
+                'defecto' => [
+                    [
+                        'atributo' => 'model_type',
+                        'valor' => 'App\Models\File',
+                    ],
+                    [
+                        'atributo' => 'etiqueta',
+                        'valor' => 'carta_presentacion',
+                    ],
+                ],
+            ],
+        ];
+        
+        Modelador::create([
+            'tipoetapa_id' => 3,
+            'modelo' => json_encode($MODELO03),
+            'item' => json_encode($ITEM03),
+            'dependencia_guardado' => json_encode($DEPENDENCIAS03),
+        ]);
+        
+
+        $MODELO04 = [
+            [
+                'etiqueta_modelo' => 'etapa',
+                'modelo_tipo' => "App\Models\Etapa",
+                'atributo_busqueda' => [
+                    'tipoetapas_id' => [
+                        'metodo' => 'global',
+                        'valor' => 'etapa',
+                        'atributo_ref' => '',
+                    ],
+                    'proceso_id' => [
+                        'metodo' => 'global',
+                        'valor' => 'proceso',
+                        'atributo_ref' => '',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'proceso',
+                'modelo_tipo' => 'App\\Models\\Proceso',
+                'atributo_busqueda' => [
+                    'id' => [
+                        'metodo' => 'global',
+                        'valor' => 'proceso',
+                        'atributo_ref' => '',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'carta_aceptacion',
+                'modelo_tipo' => 'App\\Models\\Archivo',
+                'atributo_busqueda' => [
+                    'proceso_id' => [
+                        'metodo' => 'ref',
+                        'valor' => 'proceso',
+                        'atributo_ref' => 'id',
+                    ],
+                    'etiqueta' => [
+                        'metodo' => 'set',
+                        'valor' => 'carta_aceptacion',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'file_carta_aceptacion',
+                'modelo_tipo' => 'App\\Models\\File',
+                'atributo_busqueda' => [
+                    'id' => [
+                        'metodo' => 'ref',
+                        'valor' => 'carta_aceptacion',
+                        'atributo_ref' => 'id_model',
+                    ],
+                ],
+            ],
+        ];
+        
+        $ITEM04 = [
+            [
+                'etiqueta_modelo' => 'file_carta_aceptacion',
+                'grupo' => 'Documentacion Final',
+                'atributo' => 'id',
+                'desplegar' => 'Carta de Aceptación',
+                'tipo' => 'file',
+                'selector' => '',
+                'permiso_ver' => 'estudiante,docente',
+                'permiso_editar' => 'estudiante',
+            ],
+        ];
+        
+        $DEPENDENCIAS04 = [
+            [
+                'etiqueta_modelo' => 'file_carta_aceptacion',
+                'relaciones' => [],
+                'defecto' => [
+                    [
+                        'atributo' => 'rutafile_id',
+                        'valor' => '2',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'carta_aceptacion',
+                'relaciones' => [
+                    ['dependencia' => 'proceso_id',
+                        'modelo_referencia' => 'proceso',
+                        'atributo' => 'id'],
+                    ['dependencia' => 'id_model',
+                        'modelo_referencia' => 'file_carta_aceptacion',
+                        'atributo' => 'id'],
+                ],
+                'defecto' => [
+                    [
+                        'atributo' => 'model_type',
+                        'valor' => 'App\Models\File',
+                    ],
+                    [
+                        'atributo' => 'etiqueta',
+                        'valor' => 'carta_aceptacion',
+                    ],
+                ],
+            ],
+        ];
+        
+        Modelador::create([
+            'tipoetapa_id' => 4,
+            'modelo' => json_encode($MODELO04),
+            'item' => json_encode($ITEM04),
+            'dependencia_guardado' => json_encode($DEPENDENCIAS04),
+        ]);
+
+        $MODELO05 = [
+            [
+                'etiqueta_modelo' => 'etapa',
+                'modelo_tipo' => "App\Models\Etapa",
+                'atributo_busqueda' => [
+                    'tipoetapas_id' => [
+                        'metodo' => 'global',
+                        'valor' => 'etapa',
+                        'atributo_ref' => '',
+                    ],
+                    'proceso_id' => [
+                        'metodo' => 'global',
+                        'valor' => 'proceso',
+                        'atributo_ref' => '',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'proceso',
+                'modelo_tipo' => 'App\\Models\\Proceso',
+                'atributo_busqueda' => [
+                    'id' => [
+                        'metodo' => 'global',
+                        'valor' => 'proceso',
+                        'atributo_ref' => '',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'informe_plan_practicas',
+                'modelo_tipo' => 'App\\Models\\Archivo',
+                'atributo_busqueda' => [
+                    'proceso_id' => [
+                        'metodo' => 'ref',
+                        'valor' => 'proceso',
+                        'atributo_ref' => 'id',
+                    ],
+                    'etiqueta' => [
+                        'metodo' => 'set',
+                        'valor' => 'informe_plan_practicas',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'file_plan_practicas',
+                'modelo_tipo' => 'App\\Models\\File',
+                'atributo_busqueda' => [
+                    'id' => [
+                        'metodo' => 'ref',
+                        'valor' => 'informe_plan_practicas',
+                        'atributo_ref' => 'id_model',
+                    ],
+                ],
+            ],
+        ];
+        
+        $ITEM05 = [
+            [
+                'etiqueta_modelo' => 'file_plan_practicas',
+                'grupo' => 'Documentacion Final',
+                'atributo' => 'id',
+                'desplegar' => 'Informe de Plan de Prácticas',
+                'tipo' => 'file',
+                'selector' => '',
+                'permiso_ver' => 'estudiante,docente',
+                'permiso_editar' => 'estudiante',
+            ],
+        ];
+        
+        $DEPENDENCIAS05 = [
+            [
+                'etiqueta_modelo' => 'file_plan_practicas',
+                'relaciones' => [],
+                'defecto' => [
+                    [
+                        'atributo' => 'rutafile_id',
+                        'valor' => '2',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'informe_plan_practicas',
+                'relaciones' => [
+                    ['dependencia' => 'proceso_id',
+                        'modelo_referencia' => 'proceso',
+                        'atributo' => 'id'],
+                    ['dependencia' => 'id_model',
+                        'modelo_referencia' => 'file_plan_practicas',
+                        'atributo' => 'id'],
+                ],
+                'defecto' => [
+                    [
+                        'atributo' => 'model_type',
+                        'valor' => 'App\Models\File',
+                    ],
+                    [
+                        'atributo' => 'etiqueta',
+                        'valor' => 'informe_plan_practicas',
+                    ],
+                ],
+            ],
+        ];
+        
+        Modelador::create([
+            'tipoetapa_id' => 5,
+            'modelo' => json_encode($MODELO05),
+            'item' => json_encode($ITEM05),
+            'dependencia_guardado' => json_encode($DEPENDENCIAS05),
+        ]);
+        
+
+        $MODELO06 = [
+            [
+                'etiqueta_modelo' => 'etapa',
+                'modelo_tipo' => "App\Models\Etapa",
+                'atributo_busqueda' => [
+                    'tipoetapas_id' => [
+                        'metodo' => 'global',
+                        'valor' => 'etapa',
+                        'atributo_ref' => '',
+                    ],
+                    'proceso_id' => [
+                        'metodo' => 'global',
+                        'valor' => 'proceso',
+                        'atributo_ref' => '',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'proceso',
+                'modelo_tipo' => 'App\\Models\\Proceso',
+                'atributo_busqueda' => [
+                    'id' => [
+                        'metodo' => 'global',
+                        'valor' => 'proceso',
+                        'atributo_ref' => '',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'constancia_practicas',
+                'modelo_tipo' => 'App\\Models\\Archivo',
+                'atributo_busqueda' => [
+                    'proceso_id' => [
+                        'metodo' => 'ref',
+                        'valor' => 'proceso',
+                        'atributo_ref' => 'id',
+                    ],
+                    'etiqueta' => [
+                        'metodo' => 'set',
+                        'valor' => 'constancia_practicas',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'file_constancia',
+                'modelo_tipo' => 'App\\Models\\File',
+                'atributo_busqueda' => [
+                    'id' => [
+                        'metodo' => 'ref',
+                        'valor' => 'constancia_practicas',
+                        'atributo_ref' => 'id_model',
+                    ],
+                ],
+            ],
+        ];
+        
+        $ITEM06 = [
+            [
+                'etiqueta_modelo' => 'file_constancia',
+                'grupo' => 'Documentacion Final',
+                'atributo' => 'id',
+                'desplegar' => 'Constancia de Cumplimiento de Prácticas',
+                'tipo' => 'file',
+                'selector' => '',
+                'permiso_ver' => 'estudiante,docente',
+                'permiso_editar' => 'estudiante',
+            ],
+        ];
+        
+        $DEPENDENCIAS06 = [
+            [
+                'etiqueta_modelo' => 'file_constancia',
+                'relaciones' => [],
+                'defecto' => [
+                    [
+                        'atributo' => 'rutafile_id',
+                        'valor' => '2',
+                    ],
+                ],
+            ],
+            [
+                'etiqueta_modelo' => 'constancia_practicas',
                 'relaciones' => [
                     ['dependencia' => 'proceso_id',
                         'modelo_referencia' => 'proceso',
@@ -894,19 +1204,21 @@ class TiposSeeder extends Seeder
                     ],
                     [
                         'atributo' => 'etiqueta',
-                        'valor' => 'empresa_constancia',
+                        'valor' => 'constancia_practicas',
                     ],
                 ],
             ],
         ];
+        
         Modelador::create([
-            'tipoetapa_id' => 3,
-            'modelo' => json_encode($MODELO03),
-            'item' => json_encode($ITEM03),
-            'dependencia_guardado' => json_encode($DEPENDENCIAS03),
+            'tipoetapa_id' => 6,
+            'modelo' => json_encode($MODELO06),
+            'item' => json_encode($ITEM06),
+            'dependencia_guardado' => json_encode($DEPENDENCIAS06),
         ]);
+        
 
-        $MODELO04 = [
+        $MODELO07 = [
             [
                 'etiqueta_modelo' => 'etapa',
                 'modelo_tipo' => "App\Models\Etapa",
@@ -935,7 +1247,7 @@ class TiposSeeder extends Seeder
                 ],
             ],
             [
-                'etiqueta_modelo' => 'empresa_boleta1',
+                'etiqueta_modelo' => 'informe_practicas',
                 'modelo_tipo' => 'App\\Models\\Archivo',
                 'atributo_busqueda' => [
                     'proceso_id' => [
@@ -945,410 +1257,40 @@ class TiposSeeder extends Seeder
                     ],
                     'etiqueta' => [
                         'metodo' => 'set',
-                        'valor' => 'empresa_boleta1',
+                        'valor' => 'informe_practicas',
                     ],
                 ],
             ],
             [
-                'etiqueta_modelo' => 'file_boleta1',
+                'etiqueta_modelo' => 'file_practicas',
                 'modelo_tipo' => 'App\\Models\\File',
                 'atributo_busqueda' => [
                     'id' => [
                         'metodo' => 'ref',
-                        'valor' => 'empresa_boleta1',
-                        'atributo_ref' => 'id_model',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta2',
-                'modelo_tipo' => 'App\\Models\\Archivo',
-                'atributo_busqueda' => [
-                    'proceso_id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'proceso',
-                        'atributo_ref' => 'id',
-                    ],
-                    'etiqueta' => [
-                        'metodo' => 'set',
-                        'valor' => 'empresa_boleta2',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'file_boleta2',
-                'modelo_tipo' => 'App\\Models\\File',
-                'atributo_busqueda' => [
-                    'id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'empresa_boleta2',
-                        'atributo_ref' => 'id_model',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta3',
-                'modelo_tipo' => 'App\\Models\\Archivo',
-                'atributo_busqueda' => [
-                    'proceso_id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'proceso',
-                        'atributo_ref' => 'id',
-                    ],
-                    'etiqueta' => [
-                        'metodo' => 'set',
-                        'valor' => 'empresa_boleta3',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'file_boleta3',
-
-                'modelo_tipo' => 'App\\Models\\File',
-                'atributo_busqueda' => [
-                    'id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'empresa_boleta3',
+                        'valor' => 'informe_practicas',
                         'atributo_ref' => 'id_model',
                     ],
                 ],
             ],
         ];
-        $ITEM04 = [
+        
+        $ITEM07 = [
             [
-                'etiqueta_modelo' => 'etapa',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_etapa',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'proceso',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_proceso',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta1',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_empresa_boleta1',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta2',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_empresa_boleta2',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta3',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_empresa_boleta3',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'file_boleta1',
-                'grupo' => 'Constancia de Pago',
-                'atributo' => 'id',
-                'desplegar' => 'Constancia de Pago #1',
-                'tipo' => 'file',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => 'estudiante',
-            ],
-            [
-                'etiqueta_modelo' => 'file_boleta2',
-                'grupo' => 'Constancia de Pago',
-                'atributo' => 'id',
-                'desplegar' => 'Constancia de Pago #2',
-                'tipo' => 'file',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => 'estudiante',
-            ],
-            [
-                'etiqueta_modelo' => 'file_boleta3',
-                'grupo' => 'Constancia de Pago',
-                'atributo' => 'id',
-                'desplegar' => 'Constancia de Pago #3',
-                'tipo' => 'file',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => 'estudiante',
-            ],
-        ];
-        $DEPENDENCIAS04 = [
-            [
-                'etiqueta_modelo' => 'file_boleta1',
-                'relaciones' => [
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'rutafile_id',
-                        'valor' => '2',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta1',
-                'relaciones' => [
-                    ['dependencia' => 'proceso_id',
-                        'modelo_referencia' => 'proceso',
-                        'atributo' => 'id'],
-                    ['dependencia' => 'id_model',
-                        'modelo_referencia' => 'file_boleta1',
-                        'atributo' => 'id'],
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'model_type',
-                        'valor' => 'App\Models\File',
-                    ],
-                    [
-                        'atributo' => 'etiqueta',
-                        'valor' => 'empresa_boleta1',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'file_boleta2',
-                'relaciones' => [
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'rutafile_id',
-                        'valor' => '2',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta2',
-                'relaciones' => [
-                    ['dependencia' => 'proceso_id',
-                        'modelo_referencia' => 'proceso',
-                        'atributo' => 'id'],
-                    ['dependencia' => 'id_model',
-                        'modelo_referencia' => 'file_boleta2',
-                        'atributo' => 'id'],
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'model_type',
-                        'valor' => 'App\Models\File',
-                    ],
-                    [
-                        'atributo' => 'etiqueta',
-                        'valor' => 'empresa_boleta2',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'file_boleta3',
-                'relaciones' => [
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'rutafile_id',
-                        'valor' => '2',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_boleta3',
-                'relaciones' => [
-                    ['dependencia' => 'proceso_id',
-                        'modelo_referencia' => 'proceso',
-                        'atributo' => 'id'],
-                    ['dependencia' => 'id_model',
-                        'modelo_referencia' => 'file_boleta3',
-                        'atributo' => 'id'],
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'model_type',
-                        'valor' => 'App\Models\File',
-                    ],
-                    [
-                        'atributo' => 'etiqueta',
-                        'valor' => 'empresa_boleta3',
-                    ],
-                ],
-            ],
-        ];
-        Modelador::create([
-            'tipoetapa_id' => 4,
-            'modelo' => json_encode($MODELO04),
-            'item' => json_encode($ITEM04),
-            'dependencia_guardado' => json_encode($DEPENDENCIAS04),
-        ]);
-
-        $MODELO04 = [
-            [
-                'etiqueta_modelo' => 'etapa',
-                'modelo_tipo' => "App\Models\Etapa",
-                'atributo_busqueda' => [
-                    'tipoetapas_id' => [
-                        'metodo' => 'global',
-                        'valor' => 'etapa',
-                        'atributo_ref' => '',
-                    ],
-                    'proceso_id' => [
-                        'metodo' => 'global',
-                        'valor' => 'proceso',
-                        'atributo_ref' => '',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'proceso',
-                'modelo_tipo' => 'App\\Models\\Proceso',
-                'atributo_busqueda' => [
-                    'id' => [
-                        'metodo' => 'global',
-                        'valor' => 'proceso',
-                        'atributo_ref' => '',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_informe',
-                'modelo_tipo' => 'App\\Models\\Archivo',
-                'atributo_busqueda' => [
-                    'proceso_id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'proceso',
-                        'atributo_ref' => 'id',
-                    ],
-                    'etiqueta' => [
-                        'metodo' => 'set',
-                        'valor' => 'empresa_informe',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'file_informe',
-                'modelo_tipo' => 'App\\Models\\File',
-                'atributo_busqueda' => [
-                    'id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'empresa_informe',
-                        'atributo_ref' => 'id_model',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_constan',
-                'modelo_tipo' => 'App\\Models\\Archivo',
-                'atributo_busqueda' => [
-                    'proceso_id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'proceso',
-                        'atributo_ref' => 'id',
-                    ],
-                    'etiqueta' => [
-                        'metodo' => 'set',
-                        'valor' => 'empresa_constan',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'file_constan',
-                'modelo_tipo' => 'App\\Models\\File',
-                'atributo_busqueda' => [
-                    'id' => [
-                        'metodo' => 'ref',
-                        'valor' => 'empresa_constan',
-                        'atributo_ref' => 'id_model',
-                    ],
-                ],
-            ],
-        ];
-        $ITEM04 = [
-            [
-                'etiqueta_modelo' => 'etapa',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_etapa',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'proceso',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_proceso',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_informe',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_empresa_informe',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_constan',
-                'grupo' => 'hidden',
-                'atributo' => 'id',
-                'desplegar' => 'id_empresa_constan',
-                'tipo' => 'hidden',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => '',
-            ],
-            [
-                'etiqueta_modelo' => 'file_informe',
+                'etiqueta_modelo' => 'file_practicas',
                 'grupo' => 'Documentacion Final',
                 'atributo' => 'id',
-                'desplegar' => 'Informe Final',
-                'tipo' => 'file',
-                'selector' => '',
-                'permiso_ver' => 'estudiante,docente',
-                'permiso_editar' => 'estudiante',
-            ],
-            [
-                'etiqueta_modelo' => 'file_constan',
-                'grupo' => 'Documentacion Final',
-                'atributo' => 'id',
-                'desplegar' => 'Constancia de Practicas',
+                'desplegar' => 'Informe Final de Prácticas Preprofesionales',
                 'tipo' => 'file',
                 'selector' => '',
                 'permiso_ver' => 'estudiante,docente',
                 'permiso_editar' => 'estudiante',
             ],
         ];
-        $DEPENDENCIAS04 = [
+        
+        $DEPENDENCIAS07 = [
             [
-                'etiqueta_modelo' => 'file_informe',
-                'relaciones' => [
-                ],
+                'etiqueta_modelo' => 'file_practicas',
+                'relaciones' => [],
                 'defecto' => [
                     [
                         'atributo' => 'rutafile_id',
@@ -1357,13 +1299,13 @@ class TiposSeeder extends Seeder
                 ],
             ],
             [
-                'etiqueta_modelo' => 'empresa_informe',
+                'etiqueta_modelo' => 'informe_practicas',
                 'relaciones' => [
                     ['dependencia' => 'proceso_id',
                         'modelo_referencia' => 'proceso',
                         'atributo' => 'id'],
                     ['dependencia' => 'id_model',
-                        'modelo_referencia' => 'file_informe',
+                        'modelo_referencia' => 'file_practicas',
                         'atributo' => 'id'],
                 ],
                 'defecto' => [
@@ -1373,49 +1315,19 @@ class TiposSeeder extends Seeder
                     ],
                     [
                         'atributo' => 'etiqueta',
-                        'valor' => 'empresa_informe',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'file_constan',
-                'relaciones' => [
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'rutafile_id',
-                        'valor' => '2',
-                    ],
-                ],
-            ],
-            [
-                'etiqueta_modelo' => 'empresa_constan',
-                'relaciones' => [
-                    ['dependencia' => 'proceso_id',
-                        'modelo_referencia' => 'proceso',
-                        'atributo' => 'id'],
-                    ['dependencia' => 'id_model',
-                        'modelo_referencia' => 'file_constan',
-                        'atributo' => 'id'],
-                ],
-                'defecto' => [
-                    [
-                        'atributo' => 'model_type',
-                        'valor' => 'App\Models\File',
-                    ],
-                    [
-                        'atributo' => 'etiqueta',
-                        'valor' => 'empresa_constan',
+                        'valor' => 'informe_practicas',
                     ],
                 ],
             ],
         ];
+        
         Modelador::create([
-            'tipoetapa_id' => 5,
-            'modelo' => json_encode($MODELO04),
-            'item' => json_encode($ITEM04),
-            'dependencia_guardado' => json_encode($DEPENDENCIAS04),
+            'tipoetapa_id' => 7,
+            'modelo' => json_encode($MODELO07),
+            'item' => json_encode($ITEM07),
+            'dependencia_guardado' => json_encode($DEPENDENCIAS07),
         ]);
+        
 
         // -----------------------------------------------------
         // Proceso de Efectivas
@@ -1880,7 +1792,7 @@ class TiposSeeder extends Seeder
             ],
         ];
         Modelador::create([
-            'tipoetapa_id' => 6,
+            'tipoetapa_id' => 8,
             'modelo' => json_encode($efectivas_modelos_01),
             'item' => json_encode($efectivas_items_01),
             'dependencia_guardado' => json_encode($efectivas_dependencias_01),
@@ -2018,7 +1930,7 @@ class TiposSeeder extends Seeder
             ],
         ];
         Modelador::create([
-            'tipoetapa_id' => 7,
+            'tipoetapa_id' => 9,
             'modelo' => json_encode($efectivas_modelos_02),
             'item' => json_encode($efectivas_items_02),
             'dependencia_guardado' => json_encode($efectivas_dependencias_02),
@@ -2243,7 +2155,7 @@ class TiposSeeder extends Seeder
             ],
         ];
         Modelador::create([
-            'tipoetapa_id' => 8,
+            'tipoetapa_id' => 10,
             'modelo' => json_encode($MODELO02),
             'item' => json_encode($ITEM02),
             'dependencia_guardado' => json_encode($DEPENDENCIAS02),
@@ -2381,7 +2293,7 @@ class TiposSeeder extends Seeder
             ],
         ];
         Modelador::create([
-            'tipoetapa_id' => 9,
+            'tipoetapa_id' => 11,
             'modelo' => json_encode($MODELO03),
             'item' => json_encode($ITEM03),
             'dependencia_guardado' => json_encode($DEPENDENCIAS03),
@@ -2676,7 +2588,7 @@ class TiposSeeder extends Seeder
             ],
         ];
         Modelador::create([
-            'tipoetapa_id' => 10,
+            'tipoetapa_id' => 12,
             'modelo' => json_encode($MODELO04),
             'item' => json_encode($ITEM04),
             'dependencia_guardado' => json_encode($DEPENDENCIAS04),
@@ -2892,7 +2804,7 @@ class TiposSeeder extends Seeder
             ],
         ];
         Modelador::create([
-            'tipoetapa_id' => 11,
+            'tipoetapa_id' => 13,
             'modelo' => json_encode($MODELO04),
             'item' => json_encode($ITEM04),
             'dependencia_guardado' => json_encode($DEPENDENCIAS04),
@@ -3194,18 +3106,6 @@ class TiposSeeder extends Seeder
 
         // Guardar el nuevo modelo en la base de datos
         Modelador::create([
-            'tipoetapa_id' => 12,
-            'modelo' => json_encode($MODELO04),
-            'item' => json_encode($ITEM04),
-            'dependencia_guardado' => json_encode($DEPENDENCIAS04),
-        ]);
-        Modelador::create([
-            'tipoetapa_id' => 13,
-            'modelo' => json_encode($MODELO04),
-            'item' => json_encode($ITEM04),
-            'dependencia_guardado' => json_encode($DEPENDENCIAS04),
-        ]);
-        Modelador::create([
             'tipoetapa_id' => 14,
             'modelo' => json_encode($MODELO04),
             'item' => json_encode($ITEM04),
@@ -3213,6 +3113,18 @@ class TiposSeeder extends Seeder
         ]);
         Modelador::create([
             'tipoetapa_id' => 15,
+            'modelo' => json_encode($MODELO04),
+            'item' => json_encode($ITEM04),
+            'dependencia_guardado' => json_encode($DEPENDENCIAS04),
+        ]);
+        Modelador::create([
+            'tipoetapa_id' => 16,
+            'modelo' => json_encode($MODELO04),
+            'item' => json_encode($ITEM04),
+            'dependencia_guardado' => json_encode($DEPENDENCIAS04),
+        ]);
+        Modelador::create([
+            'tipoetapa_id' => 17,
             'modelo' => json_encode($MODELO04),
             'item' => json_encode($ITEM04),
             'dependencia_guardado' => json_encode($DEPENDENCIAS04),

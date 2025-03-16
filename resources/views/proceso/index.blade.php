@@ -48,8 +48,14 @@
                             <tr>
 
                                 <td>{{ $proceso->id }}</td>
-                                <td>{{ $proceso->docente->codigo ?? 'Sin código' }}</td>
-                                <td>{{ $proceso->estudiante->codigo }}</td>
+                                <td>{{ $proceso->docente->persona->name ?? 'NAN' }}
+                                    {{ $proceso->docente->persona->apellido_paterno ?? 'NAN' }}
+                                    {{ $proceso->docente->persona->apellido_materno ?? 'NAN' }}
+                                </td>
+                                <td>{{ $proceso->estudiante->persona->name ?? 'Sin codigo' }}
+                                    {{ $proceso->estudiante->persona->apellido_paterno ?? 'NAN' }}
+                                    {{ $proceso->estudiante->persona->apellido_materno ?? 'NAN' }}
+                                </td>
                                 <td>{{ $proceso->semestre->name }}</td>
                                 <td>{{ $proceso->estado->name }}</td>
                                 <td>{{ $proceso->tipoproceso->name }}</td>

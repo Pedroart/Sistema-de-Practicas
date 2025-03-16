@@ -58,11 +58,12 @@
                 ['url' =>  route('proceso.index',['nombre'=>'desarrollo']) , 'text' => 'Desarrollo'],
                 ['url' =>  route('proceso.index',['nombre'=>'convalidacion']) , 'text' => 'Convalidacion'],
             ]" />
+            <!--
             <x-nav-dropdown :permiso="'proceso.view'" :title="'Procesos Registro'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('proceso.index',['nombre'=>'emprendimiento']) , 'text' => 'Emprendimiento'],
                 ['url' =>  route('proceso.index',['nombre'=>'complementarias']) , 'text' => 'Complementarias'],
             ]" />
-
+            -->
             <x-nav-dropdown :permiso="'registro.create'" :title="'Supervisión'" :icon="'fas fa-book'" :links="[
                 ['url' =>  route('validacion.index',['nombre'=>'Registro de Supervicion']) , 'text' => 'Registro de Supervicion'],
             ]" />

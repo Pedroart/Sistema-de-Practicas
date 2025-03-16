@@ -22,7 +22,7 @@
             {!! $errors->first('estado_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('tipoproceso_id') }}
+            {{ Form::label('Tipo Proceso') }}
             {{ Form::select('tipoproceso_id',$tipoprocesos, $proceso->tipoproceso_id, ['class' => 'form-control' . ($errors->has('tipoproceso_id') ? ' is-invalid' : ''), 'placeholder' => 'Tipoproceso Id','readonly'=>'readonly']) }}
             {!! $errors->first('tipoproceso_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
