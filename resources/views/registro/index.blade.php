@@ -50,7 +50,11 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $registro->userinstitucional->codigo }}</td>
+											<td>
+                                                {{ $registro->userinstitucional?->persona?->name ?? 'NAN'}}
+                                                {{ $registro->userinstitucional?->persona?->apellido_paterno ?? 'NAN'}} 
+                                                {{ $registro->userinstitucional?->persona?->apellido_materno ?? 'NAN'}}</p>
+                                            </td>
 											<td>{{ $registro->semestre->name }}</td>
 											<td>{{ $registro->estado->name }}</td>
 
