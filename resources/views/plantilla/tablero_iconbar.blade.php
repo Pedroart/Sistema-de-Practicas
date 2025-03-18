@@ -12,7 +12,7 @@
             <a class="dropdown-item" href="route('logout')"
                     onclick="event.preventDefault();
                                 this.closest('form').submit();">
-                Log Out
+                Cerrar la sesión
             <a>
         </form>
         <div class="dropdown-divider"></div>
