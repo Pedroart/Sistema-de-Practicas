@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $registro->name ?? "{{ __('Show') Registro de Validación" }}
+    {{ $registro->name ?? "{{ __('Mostrar') Registro de Validación" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Mostrar') }} registro</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('registros.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('registros.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 

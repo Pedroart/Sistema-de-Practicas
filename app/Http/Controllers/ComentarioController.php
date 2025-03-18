@@ -47,7 +47,7 @@ class ComentarioController extends Controller
         $comentario = Comentario::create($request->all());
 
         return redirect()->route('comentarios.index')
-            ->with('success', 'Comentario created successfully.');
+            ->with('success', 'Comentario creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class ComentarioController extends Controller
         $comentario = Comentario::find($id)->delete();
 
         return redirect()->route('comentarios.index')
-            ->with('success', 'Comentario deleted successfully');
+            ->with('success', 'Comentario eliminado exitosamente');
     }
 }

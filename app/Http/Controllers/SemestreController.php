@@ -47,7 +47,7 @@ class SemestreController extends Controller
         $semestre = Semestre::create($request->all());
 
         return redirect()->route('semestres.index')
-            ->with('success', 'Semestre created successfully.');
+            ->with('success', 'Semestre creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class SemestreController extends Controller
         $semestre = Semestre::find($id)->delete();
 
         return redirect()->route('semestres.index')
-            ->with('success', 'Semestre deleted successfully');
+            ->with('success', 'Semestre eliminado exitosamente');
     }
 }

@@ -47,7 +47,7 @@ class TipoprocesoController extends Controller
         $tipoproceso = Tipoproceso::create($request->all());
 
         return redirect()->route('tipoprocesos.index')
-            ->with('success', 'Tipoproceso created successfully.');
+            ->with('success', 'Tipoproceso creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class TipoprocesoController extends Controller
         $tipoproceso = Tipoproceso::find($id)->delete();
 
         return redirect()->route('tipoprocesos.index')
-            ->with('success', 'Tipoproceso deleted successfully');
+            ->with('success', 'Tipoproceso eliminado exitosamente');
     }
 }

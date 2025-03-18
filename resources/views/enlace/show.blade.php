@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $enlace->name ?? "{{ __('Show') Enlace" }}
+    {{ $enlace->name ?? "{{ __('Mostrar') Enlace" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Mostrar') }} Enlace</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('enlaces.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('enlaces.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 

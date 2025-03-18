@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $comentario->name ?? "{{ __('Show') Comentario" }}
+    {{ $comentario->name ?? "{{ __('Mostrar') Comentario" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Mostrar') }} Comentario</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('comentarios.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('comentarios.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 

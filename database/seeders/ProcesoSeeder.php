@@ -15,7 +15,7 @@ class ProcesoSeeder extends Seeder
      */
     public function run()
     {
-        $Desempeno = Proceso::create([
+        /*$Desempeno = Proceso::create([
             'docente_id' => 5,
             'estudiante_id' => 1,
             'semestre_id' => 1,
@@ -27,6 +27,6 @@ class ProcesoSeeder extends Seeder
             'proceso_id' => $Desempeno->id,
             'tipoetapas_id' => 1,
             'estado_id' => 3,
-        ]);
+        ]);*/
     }
 }

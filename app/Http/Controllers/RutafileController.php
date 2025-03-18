@@ -47,7 +47,7 @@ class RutafileController extends Controller
         $rutafile = Rutafile::create($request->all());
 
         return redirect()->route('rutafiles.index')
-            ->with('success', 'Rutafile created successfully.');
+            ->with('success', 'Rutafile creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class RutafileController extends Controller
         $rutafile = Rutafile::find($id)->delete();
 
         return redirect()->route('rutafiles.index')
-            ->with('success', 'Rutafile deleted successfully');
+            ->with('success', 'Rutafile eliminado exitosamente');
     }
 }

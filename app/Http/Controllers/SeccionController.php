@@ -77,7 +77,7 @@ class SeccionController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'supervisores created successfully.');
+        return redirect()->back()->with('success', 'supervisores creado exitosamente.');
     }
 
     public function show($id)
@@ -156,7 +156,7 @@ class SeccionController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Grupos created successfully.');
+        return redirect()->back()->with('success', 'Grupos creado exitosamente.');
     }
 
     public function edit($id)

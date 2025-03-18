@@ -57,7 +57,7 @@ class EnlaceController extends Controller
         $enlace = Enlace::create($request->all());
 
         return redirect()->route('enlaces.index')
-            ->with('success', 'Enlace created successfully.');
+            ->with('success', 'Enlace creado exitosamente.');
     }
 
     /**
@@ -113,6 +113,6 @@ class EnlaceController extends Controller
         $enlace = Enlace::find($id)->delete();
 
         return redirect()->route('enlaces.index')
-            ->with('success', 'Enlace deleted successfully');
+            ->with('success', 'Enlace eliminado exitosamente');
     }
 }

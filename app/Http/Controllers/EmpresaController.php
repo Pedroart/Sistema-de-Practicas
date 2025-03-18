@@ -47,7 +47,7 @@ class EmpresaController extends Controller
         $empresa = Empresa::create($request->all());
 
         return redirect()->route('empresas.index')
-            ->with('success', 'Empresa created successfully.');
+            ->with('success', 'Empresa creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class EmpresaController extends Controller
         $empresa = Empresa::find($id)->delete();
 
         return redirect()->route('empresas.index')
-            ->with('success', 'Empresa deleted successfully');
+            ->with('success', 'Empresa eliminado exitosamente');
     }
 }

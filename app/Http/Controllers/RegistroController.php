@@ -105,7 +105,7 @@ class RegistroController extends Controller
         ]);
 
         return redirect()->route('registros.index')
-            ->with('success', 'Registro created successfully.');
+            ->with('success', 'Registro creado exitosamente.');
     }
 
     /**
@@ -189,6 +189,6 @@ class RegistroController extends Controller
         $record->delete();
 
         return redirect()->route('Registros.index')
-            ->with('success', 'Registro deleted successfully');
+            ->with('success', 'Registro eliminado exitosamente');
     }
 }

@@ -24,6 +24,8 @@ class AdminUserSeeder extends Seeder
 
         $adminUser->assignRole('administrador');
 
+        /*
+
         $sistemaUser = User::create([
             'name' => 'Sistema',
             'email' => 'Sistema@admin.com',
@@ -75,5 +77,7 @@ class AdminUserSeeder extends Seeder
 
         // Asignar el rol al usuario
         $usuario->assignRole($rol);
+        */
     }
+        
 }

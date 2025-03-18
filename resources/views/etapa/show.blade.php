@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $etapa->name ?? "{{ __('Show') Etapa" }}
+    {{ $etapa->name ?? "{{ __('Mostrar') Etapa" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Mostrar') }} Etapa</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('etapas.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('etapas.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 

@@ -54,7 +54,7 @@ class FileController extends Controller
         }
 
         return redirect()->route('files.index')
-            ->with('success', 'File created successfully.');
+            ->with('success', 'File creado exitosamente.');
     }
 
     /**
@@ -122,6 +122,6 @@ class FileController extends Controller
         $file->delete();
 
         return redirect()->route('files.index')
-            ->with('success', 'File deleted successfully');
+            ->with('success', 'File eliminado exitosamente');
     }
 }

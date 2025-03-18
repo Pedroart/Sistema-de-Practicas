@@ -87,9 +87,9 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
     Route::resource('enlaces', App\Http\Controllers\EnlaceController::class);
     Route::get('enlacesrapidos', [App\Http\Controllers\EnlaceController::class, 'indexado'])->name('indexado');
 
-    Route::resource('semestres', App\Http\Controllers\semestreController::class);
-    Route::resource('tipoprocesos', App\Http\Controllers\tipoprocesoController::class);
-    Route::resource('tipoetapas', App\Http\Controllers\tipoetapaController::class);
+    Route::resource('semestres', App\Http\Controllers\SemestreController::class);
+    Route::resource('tipoprocesos', App\Http\Controllers\TipoprocesoController::class);
+    Route::resource('tipoetapas', App\Http\Controllers\TipoetapaController::class);
     Route::resource('estados', App\Http\Controllers\EstadoController::class);
 
     Route::resource('userinstitucionals', App\Http\Controllers\UserinstitucionalController::class);
@@ -103,18 +103,18 @@ Route::middleware(['auth', 'verified', 'can:UseDashboard'])->prefix('dashboard')
     Route::resource('registros', App\Http\Controllers\RegistroController::class);
 
     Route::resource('procesos', App\Http\Controllers\ProcesoController::class);
-    Route::get('proceso_estudiante/{id}', [App\Http\Controllers\procesoController::class, 'proceso_estudiante'])->name('datos.view');
-    Route::get('validacion', [App\Http\Controllers\procesoController::class, 'index_validacion'])->name('validacion.index');
+    Route::get('proceso_estudiante/{id}', [App\Http\Controllers\ProcesoController::class, 'proceso_estudiante'])->name('datos.view');
+    Route::get('validacion', [App\Http\Controllers\ProcesoController::class, 'index_validacion'])->name('validacion.index');
 
-    Route::get('validacion/{id}/view', [App\Http\Controllers\procesoController::class, 'procesar'])->name('validacion.view');
+    Route::get('validacion/{id}/view', [App\Http\Controllers\ProcesoController::class, 'procesar'])->name('validacion.view');
 
-    Route::get('validacion/{id}/edit', [App\Http\Controllers\procesoController::class, 'edit_titular'])->name('procesos.edit_titular');
-    Route::post('validacion/{id}/update', [App\Http\Controllers\procesoController::class, 'update_titular'])->name('procesos.save_titular');
+    Route::get('validacion/{id}/edit', [App\Http\Controllers\ProcesoController::class, 'edit_titular'])->name('procesos.edit_titular');
+    Route::post('validacion/{id}/update', [App\Http\Controllers\ProcesoController::class, 'update_titular'])->name('procesos.save_titular');
 
-    Route::get('procesos/{id}/{etapa}/{metodo}', [App\Http\Controllers\procesoController::class, 'ver_metodo'])->name('procesos.conf');
-    Route::post('procesos/estado/{id_etapa}', [App\Http\Controllers\procesoController::class, 'estado'])->name('eestado');
+    Route::get('procesos/{id}/{etapa}/{metodo}', [App\Http\Controllers\ProcesoController::class, 'ver_metodo'])->name('procesos.conf');
+    Route::post('procesos/estado/{id_etapa}', [App\Http\Controllers\ProcesoController::class, 'estado'])->name('eestado');
 
-    Route::get('supervicion', [App\Http\Controllers\procesoController::class, 'proceso_supervicion'])->name('procesos.supervicion');
+    Route::get('supervicion', [App\Http\Controllers\ProcesoController::class, 'proceso_supervicion'])->name('procesos.supervicion');
 
     Route::get('proceso/{nombre}', [App\Http\Controllers\ProcesoEstudianteController::class, 'procesar'])->name('proceso.index');
     Route::get('proceso/{nombre}/{etapa}/{metodo}', [App\Http\Controllers\ProcesoEstudianteController::class, 'procesar'])->name('proceso.conf');

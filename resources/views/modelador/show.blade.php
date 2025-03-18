@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $modelador->name ?? "{{ __('Show') Modelador" }}
+    {{ $modelador->name ?? "{{ __('Mostrar') Modelador" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Mostrar') }} Modelador</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('modeladors.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('modeladors.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 

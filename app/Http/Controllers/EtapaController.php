@@ -172,7 +172,7 @@ class EtapaController extends Controller
         $etapa = Etapa::create($request->all());
 
         return redirect()->route('etapas.index')
-            ->with('success', 'Etapa created successfully.');
+            ->with('success', 'Etapa creado exitosamente.');
     }
 
     /**
@@ -265,7 +265,7 @@ class EtapaController extends Controller
         $modelos['etapa']->delete();
 
         return redirect()->route('proceso.index', ['nombre' => $modeladorRaw->tipoetapa->tipoproceso->name])
-            ->with('success', 'Etapa deleted successfully');
+            ->with('success', 'Etapa eliminado exitosamente');
     }
 
     /**
@@ -279,6 +279,6 @@ class EtapaController extends Controller
         $etapa = Etapa::find($id)->delete();
 
         return redirect()->route('etapas.index')
-            ->with('success', 'Etapa deleted successfully');
+            ->with('success', 'Etapa eliminado exitosamente');
     }
 }

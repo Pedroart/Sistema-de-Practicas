@@ -47,7 +47,7 @@ class TipoetapaController extends Controller
         $tipoetapa = Tipoetapa::create($request->all());
 
         return redirect()->route('tipoetapas.index')
-            ->with('success', 'Tipoetapa created successfully.');
+            ->with('success', 'Tipoetapa creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class TipoetapaController extends Controller
         $tipoetapa = Tipoetapa::find($id)->delete();
 
         return redirect()->route('tipoetapas.index')
-            ->with('success', 'Tipoetapa deleted successfully');
+            ->with('success', 'Tipoetapa eliminado exitosamente');
     }
 }

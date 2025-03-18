@@ -50,7 +50,9 @@
                                                     @if ($estudiante->grupo_id == $grupo->id)
                                                         <div class="student-card" data-id="{{ $estudiante->id }}">
                                                             {{ $estudiante->nombre }} {{ $estudiante->apellido }}
+                                                            @if($estudiantes_sin_grupo != 0)
                                                             <button class="btn btn-sm btn-danger float-right remove-student">Eliminar</button>
+                                                            @endif
                                                         </div>
                                                     @endif
                                                 @endforeach

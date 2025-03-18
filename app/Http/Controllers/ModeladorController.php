@@ -47,7 +47,7 @@ class ModeladorController extends Controller
         $modelador = Modelador::create($request->all());
 
         return redirect()->route('modeladors.index')
-            ->with('success', 'Modelador created successfully.');
+            ->with('success', 'Modelador creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class ModeladorController extends Controller
         $modelador = Modelador::find($id)->delete();
 
         return redirect()->route('modeladors.index')
-            ->with('success', 'Modelador deleted successfully');
+            ->with('success', 'Modelador eliminado exitosamente');
     }
 }

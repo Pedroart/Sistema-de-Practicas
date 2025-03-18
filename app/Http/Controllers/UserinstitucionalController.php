@@ -55,7 +55,7 @@ class UserinstitucionalController extends Controller
         $userinstitucional = Userinstitucional::create($request->all());
 
         return redirect()->route('userinstitucionals.index')
-            ->with('success', 'Userinstitucional created successfully.');
+            ->with('success', 'Userinstitucional creado exitosamente.');
     }
 
     /**
@@ -111,6 +111,6 @@ class UserinstitucionalController extends Controller
         $user = User::find($userinstitucional->user_id)->delete();
 
         return redirect()->route('userinstitucionals.index')
-            ->with('success', 'Userinstitucional deleted successfully');
+            ->with('success', 'Userinstitucional eliminado exitosamente');
     }
 }

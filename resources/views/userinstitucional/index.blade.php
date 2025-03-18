@@ -10,7 +10,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center;">
 
                 <span id="card_title">
-                    {{ __('Userinstitucional') }}
+                    {{ __('Usuarios Institucionales') }}
                 </span>
 
                 <div class="float-right">
@@ -105,6 +105,9 @@
         $(document).ready(function() {
             // Inicializa DataTable
             var table = $("#formulario").DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": true,

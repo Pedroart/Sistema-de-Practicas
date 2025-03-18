@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $tipoproceso->name ?? "{{ __('Show') Tipoproceso" }}
+    {{ $tipoproceso->name ?? "{{ __('Mostrar') Tipoproceso" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Mostrar') }} Tipoproceso</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('tipoprocesos.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('tipoprocesos.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 

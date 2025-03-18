@@ -1,7 +1,7 @@
 @extends('plantilla.tablero')
 
 @section('template_title')
-    {{ $archivo->name ?? "{{ __('Show') Archivo" }}
+    {{ $archivo->name ?? "{{ __('Mostrar') Archivo" }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('Mostrar') }} Archivo</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('archivos.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('archivos.index') }}"> {{ __('Regresar') }}</a>
                         </div>
                     </div>
 

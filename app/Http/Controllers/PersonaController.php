@@ -47,7 +47,7 @@ class PersonaController extends Controller
         $persona = Persona::create($request->all());
 
         return redirect()->route('personas.index')
-            ->with('success', 'Persona created successfully.');
+            ->with('success', 'Persona creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class PersonaController extends Controller
         $persona = Persona::find($id)->delete();
 
         return redirect()->route('personas.index')
-            ->with('success', 'Persona deleted successfully');
+            ->with('success', 'Persona eliminado exitosamente');
     }
 }

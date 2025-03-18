@@ -266,7 +266,7 @@ class ProcesoController extends Controller
         $etapa->update(['estado_id' => $request->estado_id]);
 
         return redirect()->route('procesos.index')
-            ->with('success', 'Proceso created successfully.');
+            ->with('success', 'Proceso creado exitosamente.');
     }
 
     /**
@@ -281,7 +281,7 @@ class ProcesoController extends Controller
         $proceso = Proceso::create($request->all());
 
         return redirect()->route('procesos.index')
-            ->with('success', 'Proceso created successfully.');
+            ->with('success', 'Proceso creado exitosamente.');
     }
 
     /**
@@ -408,6 +408,6 @@ class ProcesoController extends Controller
         $proceso = Proceso::find($id)->delete();
 
         return redirect()->route('procesos.index')
-            ->with('success', 'Proceso deleted successfully');
+            ->with('success', 'Proceso eliminado exitosamente');
     }
 }

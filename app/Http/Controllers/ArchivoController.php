@@ -47,7 +47,7 @@ class ArchivoController extends Controller
         $archivo = Archivo::create($request->all());
 
         return redirect()->route('archivos.index')
-            ->with('success', 'Archivo created successfully.');
+            ->with('success', 'Archivo creado exitosamente.');
     }
 
     /**
@@ -102,6 +102,6 @@ class ArchivoController extends Controller
         $archivo = Archivo::find($id)->delete();
 
         return redirect()->route('archivos.index')
-            ->with('success', 'Archivo deleted successfully');
+            ->with('success', 'Archivo eliminado exitosamente');
     }
 }

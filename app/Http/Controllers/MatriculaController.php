@@ -102,7 +102,7 @@ class MatriculaController extends Controller
         ]);
 
         return redirect()->route('matriculas.index')
-            ->with('success', 'Matricula created successfully.');
+            ->with('success', 'Matricula creado exitosamente.');
     }
 
     /**
@@ -183,6 +183,6 @@ class MatriculaController extends Controller
         $record->delete();
 
         return redirect()->route('matriculas.index')
-            ->with('success', 'Matricula deleted successfully');
+            ->with('success', 'Matricula eliminado exitosamente');
     }
 }

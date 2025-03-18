@@ -184,7 +184,7 @@ class UserinstitucionalloteControlador extends Controller
         ];
         */
 
-        return redirect()->back()->with('success', 'Tipoetapa created successfully.');
+        return redirect()->back()->with('success', 'Tipoetapa creado exitosamente.');
     }
 
     /**
