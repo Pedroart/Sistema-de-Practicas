@@ -85,11 +85,10 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.4.0
+                <b>Version</b> 1.4.5
             </div>
-            <strong>Copyright &copy; 2023-2024 <a
-                    href="{{ route('index.welcome') }}">{{ config('temaweb.creditos', 'Laravel') }}</a>.</strong> All
-            rights reserved.
+            <strong>Copyright &copy; 2023-2025 <a
+                    href="{{ route('index.welcome') }}">{{ config('temaweb.creditos', 'Laravel') }}</a>.</strong> Reservados todos los derechos.
         </footer>
 
         <!-- Control Sidebar -->
