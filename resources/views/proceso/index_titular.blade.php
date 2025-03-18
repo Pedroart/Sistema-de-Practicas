@@ -57,7 +57,14 @@
                                     {{ $proceso->estudiante->persona->apellido_paterno ?? 'NAN' }}
                                     {{ $proceso->estudiante->persona->apellido_materno ?? 'NAN' }}
                                 </td>
-                                <td>{{ app('App\Models\Userinstitucional')::find($proceso->archivo?->id_model)?->codigo }}</td>
+                                <td>
+                                    @php
+                                        $userInstitucional = app('App\Models\Userinstitucional')::find($proceso->archivo?->id_model);
+                                    @endphp
+                                    {{ $userInstitucional?->persona->name ?? 'NAN' }}
+                                    {{ $userInstitucional?->persona->apellido_paterno ?? 'NAN' }}
+                                    {{ $userInstitucional?->persona->apellido_materno ?? 'NAN' }}
+                                </td>
                                 <td>{{ $proceso->semestre->name }}</td>
                                 <td>{{ $proceso->estado->name }}</td>
                                 <td>{{ $proceso->tipoproceso->name }}</td>
