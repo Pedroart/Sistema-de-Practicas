@@ -30,10 +30,11 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table id="formulario" class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>ID</th>
+                                        <th>Profesor</th>
                                         <th>Semestre</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -43,6 +44,12 @@
                                         <tr>
 
                                             <td>{{ $seccion->id }}</td>
+                                            <td>
+                                            <p id="profesor_apellido">
+                                                {{ $seccion->docente?->persona?->name ?? 'NAN'}}
+                                                {{ $seccion->docente?->persona?->apellido_paterno ?? 'NAN'}} 
+                                                {{ $seccion->docente?->persona?->apellido_materno ?? 'NAN'}}</p>
+                                            </td>
                                             <td>{{ $seccion->semestre->name }}</td>
                                             <td>
                                                 <form action="{{ route('secciones.destroy', $seccion->id) }}" method="POST">
@@ -63,4 +70,42 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('style')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ url("/") }}/tablero/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ url("/") }}/tablero/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ url("/") }}/tablero/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+@endsection
+
+
+@section('script')
+    <!-- DataTables  & Plugins -->
+    <script src="{{ url('/') }}/tablero/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/jszip/jszip.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="{{ url('/') }}/tablero/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#formulario").DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": true,
+                "buttons": ["excel", "colvis"]
+            }).buttons().container().appendTo('#formulario_wrapper .col-md-6:eq(0)');
+        });
+    </script>
 @endsection
