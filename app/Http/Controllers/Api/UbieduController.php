@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\DepartamentoAcademico;
 use App\Models\Escuela;
-use App\Models\facultad;
+use App\Models\Facultad;
 
 class UbieduController extends Controller
 {
