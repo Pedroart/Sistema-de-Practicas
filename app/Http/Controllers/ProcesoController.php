@@ -61,7 +61,7 @@ class ProcesoController extends Controller
             $procesos = Proceso::where('semestre_id', $semestre->id)
             ->whereHas('estudiante', function ($query) use ($user) {
                 $query->whereHas('escuela', function ($query) use ($user) {
-                    $query->where('departamentoacademico_id', $user->Userinstitucional->escuela->departamentoacademico_id);
+                    $query->where('DepartamentoAcademico_id', $user->Userinstitucional->escuela->DepartamentoAcademico_id);
                 });
             })
             ->where('tipoproceso_id', 5) // Ignorar procesos con tipoproceso_id = 5
@@ -87,7 +87,7 @@ class ProcesoController extends Controller
                 $query->where('semestre_id', $semestre->id)
                       ->whereHas('estudiante', function ($query) use ($user) {
                           $query->whereHas('escuela', function ($query) use ($user) {
-                              $query->where('departamentoacademico_id', $user->Userinstitucional->escuela->departamentoacademico_id);
+                              $query->where('DepartamentoAcademico_id', $user->Userinstitucional->escuela->DepartamentoAcademico_id);
                           });
                       })
                       ->where('tipoproceso_id', 5); // Incluir solo procesos con tipoproceso_id = 5
@@ -137,7 +137,7 @@ class ProcesoController extends Controller
             $procesos = Proceso::where('semestre_id', $semestre->id)
             ->whereHas('estudiante', function ($query) use ($user) {
                 $query->whereHas('escuela', function ($query) use ($user) {
-                    $query->where('departamentoacademico_id', $user->Userinstitucional->escuela->departamentoacademico_id);
+                    $query->where('DepartamentoAcademico_id', $user->Userinstitucional->escuela->DepartamentoAcademico_id);
                 });
             })
             ->where('tipoproceso_id', 5) // Ignorar procesos con tipoproceso_id = 5
@@ -155,7 +155,7 @@ class ProcesoController extends Controller
                 $query->where('semestre_id', $semestre->id)
                       ->whereHas('estudiante', function ($query) use ($user) {
                           $query->whereHas('escuela', function ($query) use ($user) {
-                              $query->where('departamentoacademico_id', $user->Userinstitucional->escuela->departamentoacademico_id);
+                              $query->where('DepartamentoAcademico_id', $user->Userinstitucional->escuela->DepartamentoAcademico_id);
                           });
                       })
                       ->where('tipoproceso_id', 5); // Incluir solo procesos con tipoproceso_id = 5

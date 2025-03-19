@@ -12,7 +12,7 @@ class UbieduController extends Controller
     public function consolidado($id)
     {
         $escuela = escuela::findOrFail($id);
-        $departamento = $escuela->departamentoacademico;
+        $departamento = $escuela->DepartamentoAcademico;
         $facultad = $departamento->facultad ?? 1;
 
         // Construir el array asociativo con el formato deseado

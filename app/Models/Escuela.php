@@ -9,9 +9,9 @@ class Escuela extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'departamentoacademico_id'];
+    protected $fillable = ['nombre', 'DepartamentoAcademico_id'];
 
-    public function departamentoacademico()
+    public function DepartamentoAcademico()
     {
         return $this->belongsTo(DepartamentoAcademico::class);
     }
