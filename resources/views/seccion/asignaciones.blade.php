@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <script src="http://127.0.0.1:8000/tablero/plugins/jquery/jquery.min.js"></script>
+    <script src="/tablero/plugins/jquery/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
             // Función para hacer que los estudiantes sean arrastrables
